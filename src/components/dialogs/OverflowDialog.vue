@@ -7,7 +7,7 @@
     :height="height"
   >
     <div
-      class="rounded custom-dailog-style"
+      class="rounded custom-dialog-style"
       style="
         max-height: 300vh;
         max-width: 90vw;
@@ -99,7 +99,7 @@
 
 <script>
 export default {
-  name: "FleetOverflowDailog",
+  name: "OverflowDialog",
   props: {
     modelValue: { type: Boolean, default: false },
     title: { type: String, default: () => "Dialog" },
@@ -141,7 +141,7 @@ export default {
 div .v-dialog {
   box-shadow: none !important;
 }
-.custom-dailog-style {
+.custom-dialog-style {
   .header {
     position: absolute;
     right: 0;
@@ -174,8 +174,11 @@ div .v-dialog {
   .content-container {
     flex-grow: 1;
     background-color: #ffffff;
-    width: 100%;
-    height: 100% !important;
+    width: calc(100% - 40px);
+    height: calc(100% - 150px);
+    @media screen and (max-width: 768px) {
+        padding: 0.5rem;
+    }
   }
 }
 </style>
