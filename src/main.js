@@ -18,6 +18,7 @@ import UaePlate from '@/components/plates/UaePlate.vue';
 import Chip from '@/components/ui/Chip.vue';
 
 import OverflowDialog from '@/components/dialogs/OverflowDialog.vue';
+import Skeleton from '@/components/Skeleton.vue'; // Skeleton
 // Styles
 import "@mdi/font/css/materialdesignicons.css";  // Material Design CSS For (Icons)
 import 'leaflet/dist/leaflet.css';  // Leaflet CSS
@@ -46,6 +47,7 @@ app.use(i18n);
 app.component('SubSidebar', SubSidebar);
 app.component('location-map', LocationMap);
 app.component('uae-plate', UaePlate);
+app.component('skeleton', Skeleton);  // skeleton
 
 //Dialog
 app.component('overflow-dialog', OverflowDialog)

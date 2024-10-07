@@ -18,11 +18,13 @@
       :width="'800'"
       :height="'900px'"
       :SaveLabel="'Save'"
+      :showsaveBtn="false"
     >
       <!-- Dialog Content -->
       <template v-slot:content>
         <div class="container">
          Osamah Kenawy
+          
         </div>
       </template>
     </overflow-dialog>
