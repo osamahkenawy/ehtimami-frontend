@@ -1,10 +1,23 @@
 <template>
-  <div>
+  <v-app>
     <v-btn class="text-white terminate-btn" color="#E11900" @click="onClick">
       <div class="text-capitalize" style="display: flex; align-items: center">
         Click Me
       </div>
     </v-btn>
+    <v-row>
+      <v-col>
+    <span>
+      <fuel-guage  :val="50" :tooltip="'50 %'" class="px-1" /> 
+    </span>
+
+      </v-col>
+    </v-row>
+   <!-- <v-row>
+    <v-col>
+      <range-slider></range-slider>
+    </v-col>
+   </v-row> -->
     <overflow-dialog
       :key="`fleet-overflow-dailog-salary-assistant`"
       :noPadding="true"
@@ -28,7 +41,7 @@
         </div>
       </template>
     </overflow-dialog>
-  </div>
+  </v-app>
 </template>
 
 <script setup>
