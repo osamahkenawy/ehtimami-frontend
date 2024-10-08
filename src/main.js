@@ -16,12 +16,16 @@ import SubSidebar from './components/sidebars/SubSidebar.vue';
 import LocationMap from './components/maps/LocationMap.vue';
 import UaePlate from '@/components/plates/UaePlate.vue';
 import Chip from '@/components/ui/Chip.vue';
+import RangeSlider from '@/components/ui/RangeSlider.vue'; // Range Slider
 
 import OverflowDialog from '@/components/dialogs/OverflowDialog.vue';
 import Skeleton from '@/components/Skeleton.vue'; // Skeleton
+import FuelGuage from '@/components/ui/FuelGuage.vue';
+
 // Styles
 import "@mdi/font/css/materialdesignicons.css";  // Material Design CSS For (Icons)
 import 'leaflet/dist/leaflet.css';  // Leaflet CSS
+
 
 // Set up Vue I18n
 const i18n = createI18n({
@@ -51,10 +55,11 @@ app.component('skeleton', Skeleton);  // skeleton
 
 //Dialog
 app.component('overflow-dialog', OverflowDialog)
+app.component('fuel-guage', FuelGuage); // Fuel Guage
 
 // UI
 app.component('chip', Chip);  // chip
-
+app.component('range-slider', RangeSlider); // RangeSlider
 
 
 // Mount the app
