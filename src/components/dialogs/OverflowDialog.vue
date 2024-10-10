@@ -65,7 +65,6 @@
             tile
             style="
               margin: 0;
-              padding: 0.5rem 1rem;
               padding-left: 0;
               font-weight: bold;
               width: 100%;
