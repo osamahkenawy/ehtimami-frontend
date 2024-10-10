@@ -6,18 +6,16 @@
       </div>
     </v-btn>
     <v-row>
-      <v-col>
-    <span>
-      <fuel-guage  :val="50" :tooltip="'50 %'" class="px-1" /> 
-    </span>
-
+      <v-col class="d-flex text-center">
+        <span>
+          <fuel-guage  :val="50" :tooltip="'50 %'" class="px-1" /> 
+        </span>
+       <v-card height="100%">
+       
+       </v-card>
       </v-col>
     </v-row>
-   <!-- <v-row>
-    <v-col>
-      <range-slider></range-slider>
-    </v-col>
-   </v-row> -->
+
     <overflow-dialog
       :key="`fleet-overflow-dailog-salary-assistant`"
       :noPadding="true"
@@ -31,13 +29,19 @@
       :width="'800'"
       :height="'900px'"
       :SaveLabel="'Save'"
-      :showsaveBtn="false"
+      :showsaveBtn="true"
     >
       <!-- Dialog Content -->
       <template v-slot:content>
         <div class="container">
          Osamah Kenawy
-          
+         <route-info :item="{
+          source: ' Emirates Driving Company, Street 17, ICAD I, Musaffah, Abu Dhabi, Abu Dhabi Emirate, United Arab Emirates ',
+          destination: ' Street 16, Musaffah Industrial Area, Musaffah, Abu Dhabi, Abu Dhabi Emirate, United Arab Emirates ',
+          stops: 4,
+          distance: 5000,
+          duration: 251541,
+        }" />
         </div>
       </template>
     </overflow-dialog>
