@@ -20,11 +20,14 @@ import RangeSlider from '@/components/ui/RangeSlider.vue'; // Range Slider
 
 import OverflowDialog from '@/components/dialogs/OverflowDialog.vue';
 import Skeleton from '@/components/Skeleton.vue'; // Skeleton
-import FuelGuage from '@/components/ui/FuelGuage.vue';
+import FuelGuage from '@/components/ui/FuelGuage.vue'; // Fuel Guage
+import RouteInfo from '@/components/ui/RouteInfo.vue';
 
 // Styles
 import "@mdi/font/css/materialdesignicons.css";  // Material Design CSS For (Icons)
 import 'leaflet/dist/leaflet.css';  // Leaflet CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import only Bootstrap CSS
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 
 // Set up Vue I18n
@@ -46,7 +49,6 @@ app.use(vuetify);
 // Use I18n
 app.use(i18n);
 
-
 // Globally register components
 app.component('SubSidebar', SubSidebar);
 app.component('location-map', LocationMap);
@@ -61,6 +63,7 @@ app.component('fuel-guage', FuelGuage); // Fuel Guage
 app.component('chip', Chip);  // chip
 app.component('range-slider', RangeSlider); // RangeSlider
 
+app.component('route-info', RouteInfo); // RangeSlider
 
 // Mount the app
 app.mount('#app');
