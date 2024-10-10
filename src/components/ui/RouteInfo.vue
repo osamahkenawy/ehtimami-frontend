@@ -27,7 +27,7 @@
               <!-- Distance -->
               <span class="mr-1"></span> 
               <v-icon>mdi-speedometer</v-icon> 
-              <span class="mx-3">{{ distanceInKm }} <sup class="mr-1">Km</sup></span>
+              <span class="mx-3">{{ globalDistanceInKm(item.distance) }} <sup class="mr-1">Km</sup></span>
               
               <!-- Duration -->
               <v-icon>mdi-camera-timer</v-icon>
@@ -53,7 +53,7 @@
   </template>
   
   <script>
-  import { computed } from "vue";
+  import { toHoursAndMinutes, distanceInKm as globalDistanceInKm } from '@/helpers/utils.js'; // Import global helper functions
   
   export default {
     props: {
@@ -78,21 +78,9 @@
       },
     },
     setup(props) {
-      const toHoursAndMinutes = (duration) => {
-        const hours = Math.floor(duration / 3600);
-        const minutes = Math.floor((duration % 3600) / 60);
-        return {
-          timeHtml: `${hours}<sup>h</sup> ${minutes}<sup>m</sup>`,
-        };
-      };
-  
-      const distanceInKm = computed(() =>
-        props.item.distance ? (props.item.distance / 1000).toFixed(2) : 0
-      );
-  
       return {
-        toHoursAndMinutes,
-        distanceInKm,
+        toHoursAndMinutes, // Globally available
+        globalDistanceInKm, // Globally available
       };
     },
   };
