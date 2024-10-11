@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+import pinia from '@/stores'; // import the pinia instance
+
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
 
@@ -30,6 +32,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import only Bootstrap CSS
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 
+
 // Set up Vue I18n
 const i18n = createI18n({
   legacy: false,
@@ -48,6 +51,9 @@ app.use(vuetify);
 
 // Use I18n
 app.use(i18n);
+
+// Use Pinia
+app.use(pinia)
 
 // Globally register components
 app.component('SubSidebar', SubSidebar);

@@ -20,6 +20,7 @@
     "leaflet.markercluster": "^1.5.3",
     "lord-icon-element": "^4.1.2",
     "lottie-web": "^5.12.2",
+    "pinia": "^2.2.4",
     "sass": "^1.79.2",
     "sass-loader": "^16.0.1",
     "vite-plugin-vuetify": "^2.0.4",
@@ -28,8 +29,7 @@
     "vue-router": "4",
     "vue2-leaflet": "^2.7.1",
     "vue2-leaflet-geosearch": "^1.0.6",
-    "vuetify": "^3.7.0-beta.1",
-    "vuex": "^4.0.2"
+    "vuetify": "^3.7.0-beta.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
