@@ -4,93 +4,61 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import "leaflet/dist/leaflet.css";
+import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import "leaflet.markercluster";
-import { addressPoints } from '@/fakeData/fakeSavedPlaces.js'; // Sample data
+import 'leaflet.markercluster';
+import { addressPoints } from '@/fakeData/fakeSavedPlaces';
 import icon from '@/assets/images/map/marker-of-no-marker.png';
 import markerShadow from '@/assets/images/map/markers/marker-shadow.png';
-import mapConfig from '@/config/map'; // Importing the map configurations
+import mapConfig from '@/config/map';
 
-const initialMap = ref(null);
+const initialMap = ref<L.Map | null>(null);
 
 const myIcon = L.icon({
   iconUrl: icon,
-  ...mapConfig.iconSettings, // Using icon settings from config
+  ...mapConfig.iconSettings,
   shadowUrl: markerShadow
 });
 
 onMounted(() => {
-  // Initialize the map
   initialMap.value = L.map('map', {
-    zoomControl: false, // Disable default zoom control to add custom controls
+    zoomControl: false,
     zoom: mapConfig.zoom,
     zoomAnimation: false,
     fadeAnimation: true,
     markerZoomAnimation: true
   }).setView([mapConfig.center.lat, mapConfig.center.lng], mapConfig.zoom);
 
-  // Add tile layer from config
-  L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions)
-    .addTo(initialMap.value);
+  L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions).addTo(initialMap.value!);
 
-  // Create marker cluster group
   const markers = L.markerClusterGroup();
 
-  // Add markers
   addressPoints.forEach((element, index) => {
-    const each_marker = new L.marker(
-      [element.latitude, element.longitude], { icon: myIcon }
-    ).bindPopup(`
-      <strong>Location ${index + 1}</strong><br>
-      Latitude: ${element.latitude}<br>
-      Longitude: ${element.longitude}
-    `);
+    const each_marker = L.marker([element.latitude, element.longitude], { icon: myIcon })
+      .bindPopup(`
+        <strong>Location ${index + 1}</strong><br>
+        Latitude: ${element.latitude}<br>
+        Longitude: ${element.longitude}
+      `);
     markers.addLayer(each_marker);
   });
 
-  // Add the marker cluster group to the map
-  initialMap.value.addLayer(markers);
+  initialMap.value!.addLayer(markers);
 
-  // Fit the map view to show all markers
   const bounds = L.latLngBounds(addressPoints.map(point => [point.latitude, point.longitude]));
-  initialMap.value.fitBounds(bounds);
+  initialMap.value!.fitBounds(bounds);
 
-  // Add custom zoom controls
-  L.control.zoom({ position: 'topright' }).addTo(initialMap.value);
+  L.control.zoom({ position: 'topright' }).addTo(initialMap.value!);
+});
 
-  // Handle map resizing when window size changes
-  const handleResize = () => {
-    initialMap.value.invalidateSize();
-  };
-  window.addEventListener('resize', handleResize);
-
-  // Listen for the address input event
-  document.addEventListener('move-map', (event) => {
-    const { lat, lon } = event.detail;
-    initialMap.value.setView([lat, lon], mapConfig.zoom);
-    // L.marker([lat, lon], { icon: myIcon }).addTo(initialMap.value);
-  });
-
-  // Cleanup on component unmount
-  onUnmounted(() => {
-    window.removeEventListener('resize', handleResize);
-    if (initialMap.value) {
-      initialMap.value.remove();
-    }
-  });
+onUnmounted(() => {
+  if (initialMap.value) {
+    initialMap.value.remove();
+  }
 });
 </script>
 
-<style scoped>
-.full-map {
-  width: 100%;
-  height: 100%; /* Full height for the map */
-  margin: 0;
-  padding: 0;
-}
-</style>
