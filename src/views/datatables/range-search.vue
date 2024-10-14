@@ -572,7 +572,7 @@
                 age: 32,
                 company: 'PHARMACON',
             },
-        ] || []
+        ] 
     );
     const rows = ref(allRows.value);
 

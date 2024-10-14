@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import { LocationMap, UAEPlate, BreadCrumb } from '@/components'; // Import all components here
+import { LocationMap, UAEPlate, BreadCrumb, Datatable } from '@/components'; // Import all components here
 
 
 const app = createApp(App);
@@ -58,5 +58,6 @@ app.use(vue3JsonExcel);
 app.component('LocationMap', LocationMap);
 app.component('UAEPlate', UAEPlate);
 app.component('BreadCrumb', BreadCrumb);
+app.component('Datatable', Datatable);
 
 app.mount('#app');
