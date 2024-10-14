@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
+import { LocationMap, UAEPlate, BreadCrumb } from '@/components'; // Import all components here
+
 
 const app = createApp(App);
 
@@ -51,5 +53,10 @@ app.component('Popper', Popper);
 // json to excel
 import vue3JsonExcel from 'vue3-json-excel';
 app.use(vue3JsonExcel);
+
+// Globally register the components
+app.component('LocationMap', LocationMap);
+app.component('UAEPlate', UAEPlate);
+app.component('BreadCrumb', BreadCrumb);
 
 app.mount('#app');
