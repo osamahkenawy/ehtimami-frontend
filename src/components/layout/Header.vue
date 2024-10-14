@@ -286,7 +286,7 @@
                             <button type="button" class="relative group block">
                                 <img
                                     class="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                    src="/assets/images/user-profile.jpeg"
+                                    src="/src/assets/images/staff/osama.jpeg"
                                     alt=""
                                 />
                             </button>
@@ -295,7 +295,7 @@
                                     <li>
                                         <div class="flex items-center px-4 py-4">
                                             <div class="flex-none">
-                                                <img class="rounded-md w-10 h-10 object-cover" src="/assets/images/user-profile.jpeg" alt="" />
+                                                <img class="rounded-md w-10 h-10 object-cover" src="/src/assets/images/staff/osama.jpeg" alt="" />
                                             </div>
                                             <div class="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 class="text-base">
