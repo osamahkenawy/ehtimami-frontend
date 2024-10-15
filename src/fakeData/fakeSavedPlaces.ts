@@ -13,4 +13,3 @@ export interface AddressPoint {
     { latitude: 24.8053, longitude: 55.0621 },
     { latitude: 24.9145, longitude: 54.9320 }
   ];
-  
