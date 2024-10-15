@@ -1,6 +1,32 @@
 <template>
   <div>
     <div class="panel pb-0 mt-6">
+      <!-- Container for search filter aligned to the right -->
+      <div class="flex justify-between items-center p-4">
+        <!-- Left side empty (could contain other controls if needed) -->
+        <div></div>
+        
+        <!-- Search Filter aligned to the right -->
+        <div v-if="searchFilter" class="w-full sm:w-auto ">
+          <form class="flex items-center">
+            <div class="relative">
+              <input
+                type="text"
+                :placeholder="searchPlaceHolder"
+                class="form-input shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] bg-white rounded-full h-11 placeholder:tracking-wider ltr:pr-11 rtl:pl-11"
+                v-model="search"
+              />
+              <button
+                type="button"
+                class="btn btn-primary hover:aspect-square absolute ltr:right-1 rtl:left-1 inset-y-0 m-auto rounded-full w-9 h-9 p-0 flex items-center justify-center"
+              >
+                <icon-search class="mx-auto" />
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
       <div class="datatable">
         <vue3-datatable
           :rows="props.data"
@@ -14,9 +40,10 @@
           lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
           previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
           nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
-        >
+         :noDataContent="noDataContent"
+          >
           <template #id="data">
-            <strong class="text-info">#{{ data.value.id }}</strong>
+            <strong class="text-info">#{{ data.value.id }}</strong> 
           </template>
           <template #firstName="data">
             <div class="flex items-center gap-2">
@@ -98,18 +125,42 @@ import { useI18n } from "vue-i18n";
 import { useAppStore } from "@/stores/index";
 import { useMeta } from "@/composables/use-meta";
 import IconStar from "@/components/icon/icon-star.vue";
+import IconSearch from '@/components/icon/icon-search.vue';
 
 useMeta({ title: "Advanced Table" });
 const store = useAppStore();
 // Props
 const props = defineProps({
-  headers: Array, // Headers for table columns
-  data: Array, // Data for table rows
-  searchFilter: Boolean,
-
-  modelValue: String, // For v-model (filter text)
-  onRefresh: Function, // Method for refreshing data
+  headers: {
+    type: Array as () => any[],
+    required: true
+  },
+  data: {
+    type: Array as () => any[],
+    required: true
+  },
+  searchFilter: {
+    type: Boolean,
+    default: false  // Default is false (no search filter)
+  },
+  searchPlaceHolder: {
+    type: String,
+    default: 'Search...'  // Default search placeholder
+  },
+  modelValue: {
+    type: String,
+    default: ''  // Default empty string for filter text
+  },
+  onRefresh: {
+    type: Function,
+    required: false  // Optional refresh function
+  },
+  noDataContent: {
+    type: String,
+    default: 'No data available'  // Default content for no data state
+  }
 });
+
 // multi language
 const i18n = reactive(useI18n());
 const search = ref("");

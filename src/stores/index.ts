@@ -10,10 +10,10 @@ export const useAppStore = defineStore('app', {
         menu: 'vertical',
         layout: 'full',
         rtlClass: 'ltr',
-        animation: '',
+        animation: 'animate__fadeIn',
         navbar: 'navbar-sticky',
         locale: 'en',
-        sidebar: false,
+        sidebar: true,
         languageList: [
             { code: 'zh', name: 'Chinese' },
             { code: 'da', name: 'Danish' },
