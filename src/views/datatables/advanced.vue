@@ -606,7 +606,7 @@
                 age: 32,
                 company: 'PHARMACON',
             },
-        ] || []
+        ]
     );
 
     const countryList = [

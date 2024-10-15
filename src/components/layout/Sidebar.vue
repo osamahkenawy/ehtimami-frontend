@@ -4,7 +4,7 @@
             <div class="bg-white dark:bg-[#0e1726] h-full">
                 <div class="flex justify-between items-center px-4 py-3">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
-                        <img class="w-8 ml-[5px] flex-none" src="/assets/images/logo.svg" alt="" />
+                        <img class="w-8 ml-[5px] flex-none" src="/assets/images/wathiq-logo.ico" alt="" />
                         <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">WIOT360</span>
                     </router-link>
                     <a
@@ -79,10 +79,20 @@
                                 <li class="nav-item">
                                     <router-link to="/apps/livemap" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
-                                            <icon-menu-chat class="group-hover:!text-primary shrink-0" />
+                                            <icon-menu-contacts class="group-hover:!text-primary shrink-0" />
 
                                             <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
                                                 $t('livemap') 
+                                            }}</span>
+                                        </div>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/apps/staff" class="group" @click="toggleMobileMenu">
+                                        <div class="flex items-center">
+                                            <icon-menu-users class="group-hover:!text-primary shrink-0" />
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('staff') 
                                             }}</span>
                                         </div>
                                     </router-link>
@@ -710,7 +720,7 @@
 
     import { useAppStore } from '@/stores/index';
     import VueCollapsible from 'vue-height-collapsible/vue3';
-
+    import IconMapPin from '@/components/icon/icon-map-pin.vue';
     import IconCaretsDown from '@/components/icon/icon-carets-down.vue';
     import IconMenuDashboard from '@/components/icon/menu/icon-menu-dashboard.vue';
     import IconMinus from '@/components/icon/icon-minus.vue';

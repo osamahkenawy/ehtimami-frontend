@@ -4,7 +4,7 @@
             <div class="relative bg-white flex w-full items-center px-5 py-2.5 dark:bg-[#0e1726]">
                 <div class="horizontal-logo flex lg:hidden justify-between items-center ltr:mr-2 rtl:ml-2">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
-                        <img class="w-8 ltr:-ml-1 rtl:-mr-1 inline" src="/assets/images/logo.svg" alt="" />
+                        <img class="w-8 ltr:-ml-1 rtl:-mr-1 inline" src="/assets/images/wathiq-logo.ico" alt="" />
                         <span
                             class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle hidden md:inline dark:text-white-light transition-all duration-300"
                             >WIOT360</span
@@ -286,7 +286,7 @@
                             <button type="button" class="relative group block">
                                 <img
                                     class="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                    src="/assets/images/user-profile.jpeg"
+                                    src="/src/assets/images/staff/osama.jpeg"
                                     alt=""
                                 />
                             </button>
@@ -295,7 +295,7 @@
                                     <li>
                                         <div class="flex items-center px-4 py-4">
                                             <div class="flex-none">
-                                                <img class="rounded-md w-10 h-10 object-cover" src="/assets/images/user-profile.jpeg" alt="" />
+                                                <img class="rounded-md w-10 h-10 object-cover" src="/src/assets/images/staff/osama.jpeg" alt="" />
                                             </div>
                                             <div class="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 class="text-base">
