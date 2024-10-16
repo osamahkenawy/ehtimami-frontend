@@ -851,7 +851,7 @@
                             <router-link to="/widgets">{{ $t('widgets') }}</router-link>
                         </li>
                         <li>
-                            <a href="https://vristo.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
+                            <a href="https://WIOT360.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
                         </li>
                     </ul>
                 </li>
