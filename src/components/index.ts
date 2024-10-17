@@ -5,3 +5,6 @@ export { default as LocationMap } from './maps/LocationMap.vue';
 export { default as UAEPlate } from './plates/UAEPlate.vue';
 export { default as BreadCrumb } from './BreadCrumb.vue';
 export { default as Datatable } from './tables/Datatable.vue';
+export { default as ShadowCard } from './HeaderCards/ShadowCard.vue';
+export { default as ListAssetTable } from './tables/ListAssetTable.vue';
+export { default as VehicleRow } from './vehicles/VehicleRow.vue';
