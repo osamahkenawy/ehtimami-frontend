@@ -8,3 +8,4 @@ export { default as Datatable } from './tables/Datatable.vue';
 export { default as ShadowCard } from './HeaderCards/ShadowCard.vue';
 export { default as ListAssetTable } from './tables/ListAssetTable.vue';
 export { default as VehicleRow } from './vehicles/VehicleRow.vue';
+export { default as Chip } from './Chip.vue';
