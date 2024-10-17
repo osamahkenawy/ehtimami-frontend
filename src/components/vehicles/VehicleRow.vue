@@ -1,5 +1,5 @@
 <template>
-  <div v-if="asset" class="w-full grid grid-cols-3 gap-4 items-center">
+  <div v-if="asset" class="w-full grid space-x-1 rtl:space-x-reverse grid-cols-3 gap-4 items-center">
     <!-- Asset Image -->
     <div class="flex justify-center">
       <img
@@ -14,7 +14,7 @@
       <div class="flex items-center">
         <!-- Vehicle Color Bar -->
         <div class="vehicle-color-bar" :style="{ background: asset.color }"></div>
-        <div class="font-weight-medium ml-2">
+        <div class="font-weight-medium ml-2 rtl:mr-2">
           <!-- Vehicle Year and Asset Type -->
           <div>{{ `${asset.year} ${asset.vtype_name}` }}</div>
           <!-- Vehicle Make and Model -->

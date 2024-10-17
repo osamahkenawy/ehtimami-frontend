@@ -1103,48 +1103,6 @@
                                 </button>
                             </li>
                         </ul>
-                        <ul class="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto">
-                            <li>
-                                <button
-                                    type="button"
-                                    class="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                                >
-                                    <icon-caret-down class="w-5 h-5 rotate-90 rtl:-rotate-90" />
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                                >
-                                    1
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-primary text-white dark:text-white-light dark:bg-primary"
-                                >
-                                    2
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                                >
-                                    3
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                                >
-                                    <icon-caret-down class="w-5 h-5 -rotate-90 rtl:rotate-90" />
-                                </button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <template v-if="codeArr.includes('code4')">
