@@ -698,7 +698,7 @@
                         </h2>
 
                         <li class="menu nav-item">
-                            <a href="https://vristo.sbthemes.com" target="_blank" class="nav-link group">
+                            <a href="https://WIOT360.sbthemes.com" target="_blank" class="nav-link group">
                                 <div class="flex items-center">
                                     <icon-menu-documentation class="group-hover:!text-primary shrink-0" />
 
