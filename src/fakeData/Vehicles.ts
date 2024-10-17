@@ -46,7 +46,7 @@ export interface Address {
       "name": "Unicorn",
       "year": 2018,
       "make": "Honda",
-      "image": "https://wiot-fleet-prod.wiot360.com/741-1708947747796.png",
+      "image": "",
       "driving_status": 0,
       "idling_status": 1,
       "color": "red",

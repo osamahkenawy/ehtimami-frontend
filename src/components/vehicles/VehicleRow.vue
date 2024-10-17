@@ -5,25 +5,29 @@
       <img
         :src="asset.image"
         alt=""
+        v-if="asset.image"
         class="w-10 h-10 rounded-full object-cover"
       />
+      <div class="flex items-center justify-center gap-2 text-white flex-wrap" v-else>
+        <span  class=" justify-center items-center w-10 h-10 text-center rounded-full object-cover bg-info lmSm">{{ asset && asset.vtype_name ? getNameInitials(asset.vtype_name) : '-'}}</span>
+      </div>
     </div>
 
     <!-- Asset Details and Plate Number -->
-    <div class="flex items-center">
+    <div class="flex items-center"> 
       <div class="flex items-center">
         <!-- Vehicle Color Bar -->
         <div class="vehicle-color-bar" :style="{ background: asset.color }"></div>
         <div class="font-weight-medium ml-2 rtl:mr-2">
           <!-- Vehicle Year and Asset Type -->
-          <div>{{ `${asset.year} ${asset.vtype_name}` }}</div>
+          <div class="font-weight-large-bold">{{ `${asset.year} ${asset.vtype_name}` }}</div>
           <!-- Vehicle Make and Model -->
           <div class="grey--text text-capitalize">
             {{ `${asset.make} ${asset.name}` }}
-          </div>
+          </div> 
         </div>
       </div>
-    </div>
+    </div> 
 
     <!-- UAE Plate Component -->
     <div class="flex justify-start">
@@ -45,6 +49,7 @@
 
 <script lang="ts" setup>
 import { defineProps } from "vue";
+import { getNameInitials } from "@/helpers/helper";
 
 // Define a type for the asset prop
 interface Asset {
@@ -93,5 +98,12 @@ const props = defineProps<{
 
 .ml-7 {
   margin-left: 28px;
+}
+
+.lmSm {
+  line-height: 3 !important;
+}
+.font-weight-large-bold {
+  font-weight: 900 !important;
 }
 </style>
