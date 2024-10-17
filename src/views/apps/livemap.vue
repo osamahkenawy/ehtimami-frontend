@@ -10,11 +10,24 @@
         <div
           class="flex items-center justify-between dark:text-white-light mb-5 border-b border-white-light dark:border-white/10"
         >
-          <div class="flex items-center ">
+        <div class="flex items-center">
+            <!-- Vehicle Icon -->
             <IconVehicle />
-            <span class="ml-2 text-l font-bold dark:text-white md:text-l"
-              >All Assets</span
-            >
+
+            <!-- All Assets and Chip Wrapper -->
+            <div class="ml-2 flex items-center text-l font-bold dark:text-white md:text-l">
+              <!-- All Assets Text -->
+              <span>All Assets</span>
+              
+              <!-- Custom Chip Component -->
+              <Chip
+                class="ml-2 rtl:mr-2"
+                :content="`390`"
+                :textColor="'#175CD3'"
+                :borderColor="'#B2DDFF'"
+                :headerBackgroundColor="'#EFF8FF'"
+              />
+            </div>
           </div>
           <!-- Add the switch button on the same row, aligned to the end -->
           <div class="ml-auto">

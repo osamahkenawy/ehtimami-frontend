@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import { LocationMap, UAEPlate, BreadCrumb, Datatable, ShadowCard, ListAssetTable , VehicleRow} from '@/components'; // Import all components here
+import { LocationMap, UAEPlate, BreadCrumb, Datatable, ShadowCard, ListAssetTable , VehicleRow , Chip} from '@/components'; // Import all components here
 
 
 const app = createApp(App);
@@ -61,5 +61,6 @@ app.component('BreadCrumb', BreadCrumb);
 app.component('Datatable', Datatable);
 app.component('ShadowCard', ShadowCard);
 app.component('ListAssetTable', ListAssetTable); // ListAssetTable
-app.component('VehicleRow', VehicleRow); // ListAssetTable
+app.component('VehicleRow', VehicleRow); // VehicleRow
+app.component('Chip', Chip); // VehicleRow
 app.mount('#app');
