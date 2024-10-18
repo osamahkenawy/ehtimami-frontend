@@ -3,7 +3,7 @@
       <!-- Conditionally render Drivers and Assets based on RTL mode -->
       <template v-if="!isRtl">
         <!-- LTR: Drivers on the left, Assets on the right -->
-        <span :class="{'font-bold': !modelValue}" class="relative ltr:mr-2 rtl:ml-2">Drivers</span>
+        <span :class="{'font-bold': !modelValue}" class="relative ltr:mr-2 rtl:ml-2">{{$t('drivers')}}</span>
         <label class="w-12 h-6 relative">
           <input
             type="checkbox"
@@ -17,11 +17,11 @@
             class="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"
           ></span>
         </label>
-        <span :class="{'font-bold': modelValue}" class="relative ltr:ml-2 rtl:mr-2">Assets</span>
+        <span :class="{'font-bold': modelValue}" class="relative ltr:ml-2 rtl:mr-2">{{$t('assets')}}</span>
       </template>
       <template v-else>
-        <!-- RTL: Assets on the left, Drivers on the right with extra spacing -->
-        <span :class="{'font-bold': modelValue}" class="relative rtl:mr-4">Assets</span>
+        <!-- RTL: Assets on the left, Drivers on the right  -->
+        <span :class="{'font-bold': modelValue}" class="relative rtl:mr-4">{{$t('assets')}}</span>
         <label class="w-12 h-6 relative rtl:mr-4">
           <input
             type="checkbox"
@@ -35,7 +35,7 @@
             class="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"
           ></span>
         </label>
-        <span :class="{'font-bold': !modelValue}" class="relative rtl:mr-4">Drivers</span>
+        <span :class="{'font-bold': !modelValue}" class="relative rtl:mr-4">{{$t('drivers')}}</span>
       </template>
     </div>
   </template>
