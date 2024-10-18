@@ -10,7 +10,7 @@
             <IconVehicle />
             <div :class="{'ml-2': !isRtl, 'mr-2': isRtl}" class="flex items-center text-l font-bold dark:text-white md:text-l">
               <span>All Assets</span>
-              <Chip :class="{'ml-2 rtl:mr-2': !isRtl, 'mr-2 rtl:ml-2': isRtl}" :content="`390`" :textColor="'#175CD3'" :borderColor="'#B2DDFF'" :headerBackgroundColor="'#EFF8FF'" />
+              <Chip :class="{'ml-2 rtl:mr-2': !isRtl, 'mr-2 rtl:ml-2': isRtl}" :content="vehicles.length" :textColor="'#175CD3'" :borderColor="'#B2DDFF'" :headerBackgroundColor="'#EFF8FF'" />
             </div>
           </div>
           <SwitchLivemapList v-model="isAssetsSelected" :isRtl="isRtl" />
