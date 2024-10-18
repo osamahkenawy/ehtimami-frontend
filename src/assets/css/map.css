@@ -3,3 +3,6 @@
     height: 80vh; /* Full viewport height */
     z-index: 0;
   }
+.font-weight-large-bold {
+    font-weight: 900 !important;
+  }
