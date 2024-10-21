@@ -3,18 +3,18 @@
     <!-- Breadcrumb for the Livemap Page -->
     <BreadCrumb :items="breadcrumbItems" />
 
-    <button
-      type="button"
-      class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
-    >
-      <icon-full-screen />
-    </button>
-    <button
-      type="button"
-      class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
-    >
-      <icon-full-screen />
-    </button>
+    <!-- Fullscreen Button followed by HeaderSensor aligned on the right -->
+    <div class="flex justify-end items-center mt-4 space-x-4 rtl:space-x-reverse">
+     
+      <HeaderSensor />
+      <button
+        type="button"
+        class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
+      >
+        <icon-full-screen />
+      </button>
+    </div>
+
     <div class="grid xl:grid-cols-3 gap-2 mb-6 mt-5">
       <div class="panel h-full flex-none">
         <div
@@ -56,7 +56,6 @@
 import { ref, computed } from "vue";
 import IconHome from "@/components/icon/icon-home.vue";
 import IconFullScreen from "@/components/icon/icon-full-screen.vue";
-// import IconXCircle from '@/components/icon/icon-x-circle.vue';
 
 import { useAppStore } from "@/stores/index";
 import IconVehicle from "@/components/icon/icon-vehicle-grey.vue";
