@@ -686,6 +686,6 @@
     import IconMenuWidgets from '@/components/icon/menu/icon-menu-widgets.vue';
     import IconCaretsDown from '@/components/icon/icon-carets-down.vue';
     import IconXCircle from '@/components/icon/icon-x-circle.vue';
-
+    import IconFullScreen from '@/components/icon/icon-full-screen.vue';
     useMeta({ title: 'Font Icons' });
 </script>
