@@ -6,11 +6,13 @@
         <div
           ref="iconList"
           class="flex items-center space-x-4 overflow-x-auto scrollbar-hide w-full px-4"
-          @scroll="handleScroll"
+          @scroll="handleScroll" 
         >
           <!-- Icons (Placeholder SVGs) -->
-          <div v-for="(icon, index) in icons" :key="index" class="flex-shrink-0 w-12 h-12">
-            <svg
+          <div v-for="(icon, index) in items" :key="index" class="flex-shrink-0 w-12 h-12">
+
+            <FuelGuage  :val="20"  :tooltip="'Osama | 200'" class="px-1" />
+            <!-- <svg
               class="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -21,7 +23,7 @@
               stroke-linejoin="round"
             >
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
+            </svg> -->
           </div>
         </div>
 
@@ -31,9 +33,12 @@
   
   <script lang="ts">
   import { defineComponent, ref, reactive, onMounted } from 'vue';
-  
+  import FuelGuage from './FuelGuage.vue';
   export default defineComponent({
     name: 'ResponsiveIconScroller',
+    components: {
+      FuelGuage
+    },
     setup() {
       const iconList = ref<HTMLElement | null>(null);
       const state = reactive({
@@ -42,7 +47,7 @@
       });
   
       // Dummy icons (for demonstration)
-      const icons = Array(20).fill(null); // Array of 20 placeholder icons
+      const items = Array(1).fill(null); // Array of 20 placeholder icons
   
       const handleScroll = () => {
         if (!iconList.value) return;
@@ -77,7 +82,7 @@
       });
   
       return {
-        icons,
+        items,
         iconList,
         ...state,
         scrollLeft,
