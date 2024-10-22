@@ -15,6 +15,7 @@
 
     import { useAppStore } from '@/stores/index';
     import { useMeta } from '@/composables/use-meta';
+    import 'https://cdn.lordicon.com/lordicon.js';
 
     const store = useAppStore();
 
