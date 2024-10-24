@@ -10,3 +10,4 @@ export { default as ListAssetTable } from './tables/ListAssetTable.vue';
 export { default as VehicleRow } from './vehicles/VehicleRow.vue';
 export { default as Chip } from './Chip.vue';
 export { default as HeaderSensor } from './sensors/HeaderSensor.vue';
+export { default as PopperActions } from './tables/components/PopperActions.vue';
