@@ -1,13 +1,6 @@
 <template>
     <div>
-        <ul class="flex space-x-2 rtl:space-x-reverse">
-            <li>
-                <a href="javascript:;" class="text-primary hover:underline">Users</a>
-            </li>
-            <li class="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                <span>Profile</span>
-            </li>
-        </ul>
+        <BreadCrumb :items="breadcrumbItems" />
         <div class="pt-5">
             <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-5">
                 <div class="panel">
@@ -372,6 +365,8 @@
     import { useAppStore } from '@/stores/index';
     import { useMeta } from '@/composables/use-meta';
 
+    import IconHome from "@/components/icon/icon-home.vue";
+
     import IconPencilPaper from '@/components/icon/icon-pencil-paper.vue';
     import IconCoffee from '@/components/icon/icon-coffee.vue';
     import IconCalendar from '@/components/icon/icon-calendar.vue';
@@ -389,4 +384,8 @@
 
     useMeta({ title: 'User Profile' });
     const store = useAppStore();
+    const breadcrumbItems = [
+        { label: "Home", link: "/", icon: IconHome },
+        { label: "Live Map" },
+        ];
 </script>
