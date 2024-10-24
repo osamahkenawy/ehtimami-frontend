@@ -111,8 +111,8 @@
               >{{ randomStatus() }}</span
             >
           </template>
-          <template #action="{ data }">
-            <slot name="action" :data="data"></slot>
+          <template #action="data">
+            <slot name="action" :data="toRaw(data.value)"></slot>
           </template>
         </vue3-datatable>
       </div>
@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, toRaw } from "vue";
 import Vue3Datatable from "@bhplugin/vue3-datatable";
 import apexchart from "vue3-apexcharts";
 import { useI18n } from "vue-i18n";
