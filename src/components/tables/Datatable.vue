@@ -111,6 +111,9 @@
               >{{ randomStatus() }}</span
             >
           </template>
+          <template #action="{ data }">
+            <slot name="action" :data="data"></slot>
+          </template>
         </vue3-datatable>
       </div>
     </div>
