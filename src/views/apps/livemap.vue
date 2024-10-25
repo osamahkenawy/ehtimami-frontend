@@ -4,15 +4,18 @@
     <BreadCrumb :items="breadcrumbItems" />
 
     <!-- Fullscreen Button followed by HeaderSensor aligned on the right -->
-    <div class="flex justify-end items-center mt-4 space-x-4 rtl:space-x-reverse">
+    <div
+      class="flex justify-end items-center mt-4 space-x-4 rtl:space-x-reverse"
+    >
       <HeaderSensor />
-      
-      <!-- Use AnimatedIcon for fullscreen button -->
-      <AnimatedIcon :name="fullScreenIcon"  />
+
+      <button v-tippy="'Full Screen'" type="button" class="btn btn-light w-10 h-10 p-0 rounded-full">
+        <AnimatedIcon :name="fullScreenIcon" />
+      </button>
     </div>
 
-    <div class="grid xl:grid-cols-3 gap-2 mb-6 mt-5"> 
-      <div class="panel h-full flex-none"> 
+    <div class="grid xl:grid-cols-3 gap-2 mb-6 mt-5">
+      <div class="panel h-full flex-none">
         <div
           class="flex items-center justify-between dark:text-white-light mb-5 border-b border-white-light dark:border-white/10"
         >
@@ -28,7 +31,7 @@
                 :content="vehicles.length"
                 :textColor="'#175CD3'"
                 :borderColor="'#B2DDFF'"
-                :headerBackgroundColor="'#EFF8FF'" 
+                :headerBackgroundColor="'#EFF8FF'"
               />
             </div>
           </div>
@@ -54,7 +57,7 @@ import IconVehicle from "@/components/icon/icon-vehicle-grey.vue";
 import { useAppStore } from "@/stores/index";
 import { vehicles } from "@/fakeData/Vehicles"; // Use the vehicles data
 import SwitchLivemapList from "@/components/SwitchLivemapList.vue";
-import { AnimatedIcon, ICONS } from '@/components/icon/animatedIcon';
+import { AnimatedIcon, ICONS , } from "@/components/icon/animatedIcon";
 
 const store = useAppStore();
 const isRtl = computed(() => store.rtlClass === "rtl");
@@ -65,9 +68,13 @@ const breadcrumbItems = [
 ];
 
 // Setup for the AnimatedIcon
-const fullScreenIcon = ref('iufcwnvq'); // FULL_SCREEN icon from ICONS
-const trigger = ref('hover');
-const stroke = ref(50);
+const fullScreenIcon = ref("iufcwnvq"); // FULL_SCREEN icon from ICONS
 
 const isAssetsSelected = ref(true);
 </script>
+
+<style lang="css" scoped>
+.btn {
+  box-shadow: none !important;
+}
+</style>
