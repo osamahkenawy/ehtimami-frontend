@@ -1,14 +1,14 @@
 <template>
     <AnimatedIconWrapper class="flex items-center">
       <template v-slot:default="scope">
-        <div >
+        <div class="flex m-2">
           <!-- Tooltip with dynamic background color using Tippy.js and content from props -->
           <div  class="inline-block">
             <p v-if="showPercentage" class="m-0 text-center font-bold" :style="{ color: currentColor }">
               {{ percent }} %
             </p>
           </div>
-          <div v-tippy="tooltipOptions" class="flex items-center ltr:gap-1 rtl:gap-1" :class="{ 'flex-col-reverse': vertical }">
+          <div class="flex items-center ltr:gap-1 rtl:gap-1" :class="{ 'flex-col-reverse': vertical }">
             <AnimatedIcon v-if="!noIcon" :name="ICONS.FUEL" />
             <div class="font-bold" :style="{ color: emptyColor }" :class="vertical ? 'mt-1' : 'ltr:mr-1 rtl:ml-1'">E</div>
             <!-- Fuel Gauge -->
@@ -83,25 +83,9 @@
           right: '0',
         };
       },
-      tooltipOptions(): any {
-        const backgroundColor = this.currentColor; // Capture currentColor in the same scope
-        return {
-          content: this.tooltip || `${this.percent}%`, // Tooltip content from props or default to percentage
-          theme: 'custom', // Custom theme
-          allowHTML: true,
-          arrow: true,
-          interactive: true,
-          placement: 'top',
-          onMount(instance) {
-            instance.popper.style.backgroundColor = backgroundColor; // Set background color
-            instance.popper.style.color = '#fff'; // Set the text color to white for readability
-          },
-        };
-      },
     },
   });
   </script>
-  
   <style scoped>
   .fuel-guage {
     width: 61px;
