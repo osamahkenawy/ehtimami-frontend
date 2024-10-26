@@ -21,7 +21,7 @@
                 <FuelGuage v-tippy="item.value + '%'" :val="80" class="px-1" />
               </template>
               <template v-else>
-                <AnimatedIcon :name="item.icon" :trigger="TRIGGER.LOOP" />
+                <AnimatedIcon :name="item.icon" :trigger="TRIGGER.HOVER" />
                 <!-- Display value next to the icon with appropriate spacing -->
                 <span class="ml-2" v-if="item.name === 'drive_time' || item.name === 'on_time'" v-html="formatTime(item.value)"></span>
                 <span class="ml-2" v-else-if="item.name === 'co2'">{{ formatCo2(item.value) }}</span>
