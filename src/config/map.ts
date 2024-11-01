@@ -16,7 +16,7 @@ const mapConfig = {
     popupAnchor: [-3, -30],
     shadowSize: [60, 30],
   },
-  defaultIconUrl: '@/assets/images/map/vehicles/sedan/grey.png', // Add your default icon URL here
+  defaultIconUrl: '@/assets/images/map/vehicles/default/grey.png', // Add your default icon URL here
 };
 
 export default mapConfig;
