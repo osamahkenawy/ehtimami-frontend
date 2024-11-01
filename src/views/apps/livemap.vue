@@ -44,7 +44,7 @@
 
       <!-- Pass the vehicles prop to LocationMap -->
       <div class="col-span-2">
-        <LocationMap :vehicles="vehicles" />
+        <Livemap :vehicles="vehicles" />
       </div>
     </div>
   </div>
@@ -53,7 +53,6 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import IconHome from "@/components/icon/icon-home.vue";
-import IconVehicle from "@/components/icon/icon-vehicle-grey.vue";
 import { useAppStore } from "@/stores/index";
 import { vehicles } from "@/fakeData/Vehicles"; // Use the vehicles data
 import SwitchLivemapList from "@/components/SwitchLivemapList.vue";

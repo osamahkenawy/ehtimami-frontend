@@ -15,7 +15,7 @@ import mapConfig from '@/config/map';
 import markerShadow from '@/assets/images/map/markers/marker-shadow.png';
 
 // Import the default vehicle icon directly
-import defaultVehicleIcon from '@/assets/images/map/vehicles/motorscyels/motor-cycle-blue.svg';
+import defaultVehicleIcon from '@/assets/images/map/vehicles/motorcycle/grey.svg';
 
 // Props to accept vehicles array
 const props = defineProps({
