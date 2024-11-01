@@ -13,11 +13,8 @@
   import 'leaflet.markercluster';
   import mapConfig from '@/config/map';
   import markerShadow from '@/assets/images/map/markers/marker-shadow.png';
-  import defaultVehicleIcon from '@/assets/images/map/vehicles/motorcycle/grey.svg';
+  import defaultVehicleIcon from '@/assets/images/map/vehicles/default/green.svg';
   
-  
-
-
   // Define a TypeScript interface for vehicle objects
   interface Vehicle {
     id: number;
@@ -60,8 +57,12 @@
     // Add tile layer
     L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions).addTo(initialMap.value);
   
-    // Initialize marker cluster group
-    markersLayer.value = L.markerClusterGroup();
+    // Initialize marker cluster group with clustering disabled at a specified zoom level
+    markersLayer.value = L.markerClusterGroup({
+      disableClusteringAtZoom: 15 // Disable clustering at zoom level 15 and beyond
+    });
+  
+    // Add the cluster layer to the map
     initialMap.value.addLayer(markersLayer.value);
   
     // Add zoom control
@@ -71,13 +72,12 @@
   // Function to add vehicle markers to the map
   const addVehicleMarkers = (vehicles: Vehicle[]) => {
     if (!markersLayer.value) return;
-  
+    
     // Clear existing markers
     markersLayer.value.clearLayers();
   
     // Add new markers for each vehicle
     vehicles.forEach((vehicle) => {
-        console.log('vehicles', vehicle)
       const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: myIcon })
         .bindPopup(`
           <strong>${vehicle.name}</strong><br>
