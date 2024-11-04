@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import { LocationMap, UAEPlate, BreadCrumb, Datatable, ShadowCard, ListAssetTable , VehicleRow , Chip, HeaderSensor, PopperActions} from '@/components'; // Import all components here
+import { LocationMap, UAEPlate, BreadCrumb, Datatable, ShadowCard, ListAssetTable , VehicleRow , Chip, HeaderSensor, PopperActions , Livemap , DraggableTable} from '@/components'; // Import all components here
 
 
 const app = createApp(App);
@@ -56,6 +56,7 @@ app.use(vue3JsonExcel);
 
 // Globally register the components
 app.component('LocationMap', LocationMap);
+app.component('Livemap', Livemap);
 app.component('UAEPlate', UAEPlate);
 app.component('BreadCrumb', BreadCrumb);
 app.component('Datatable', Datatable);
@@ -65,4 +66,6 @@ app.component('VehicleRow', VehicleRow); // VehicleRow
 app.component('Chip', Chip); // VehicleRow
 app.component('HeaderSensor', HeaderSensor); // HeaderSensor
 app.component('PopperActions', PopperActions); // PopperActions
+app.component('DraggableTable', DraggableTable); // PopperActions
+
 app.mount('#app');
