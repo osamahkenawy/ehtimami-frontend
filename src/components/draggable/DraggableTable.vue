@@ -83,7 +83,7 @@
   }
   </style>
   
-  How To Call
+  <!-- How To Call -->
 
   <!-- <div class="panel">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
