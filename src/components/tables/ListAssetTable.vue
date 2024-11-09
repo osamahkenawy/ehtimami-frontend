@@ -103,8 +103,13 @@ const handlePageChange = (page: number) => {
 
 // Handle click on an asset
 const handleAssetClick = (asset: any) => {
-  selectedAsset.value = asset; // Set the selected asset
-  emit("assetClicked", asset); // Emit asset click event to parent component
+  // Toggle selection on double-click
+  if (selectedAsset.value && selectedAsset.value.id === asset.id) {
+    selectedAsset.value = null; // Deselect if already selected
+  } else {
+    selectedAsset.value = asset; // Select the clicked asset
+  }
+  emit("assetClicked", selectedAsset.value); // Emit the selected or deselected asset
 };
 </script>
 
