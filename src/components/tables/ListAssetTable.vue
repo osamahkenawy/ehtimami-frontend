@@ -22,8 +22,11 @@
       <!-- List of Assets -->
       <div class="w-full space-y-2">
         <template v-for="(asset, i) in paginatedAssets" :key="i">
+
           <div
-            class="bg-white dark:bg-[#1b2e4b] rounded-xl shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] p-4 flex flex-col md:flex-row justify-between items-center text-gray-500 font-semibold w-full hover:text-primary transition-all duration-300 hover:scale-[1.01]"
+            @click="handleAssetClick(asset)"
+            :class="['asset-item', { 'selected-asset': selectedAsset && selectedAsset.id === asset.id }]"
+            class="bg-white dark:bg-[#1b2e4b] rounded-xl shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] p-4 flex flex-col md:flex-row justify-between items-center text-gray-500 font-semibold w-full hover:text-primary transition-all duration-300 hover:scale-[1.01] cursor-pointer"
             :style="{ borderLeft: '10px solid ' + getBorderColor(asset) }"
           >
             <VehicleRow :asset="asset" />
@@ -42,38 +45,38 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, defineProps, watch } from "vue";
+import { ref, computed, defineProps, watch, defineEmits } from "vue";
 import IconSearch from "@/components/icon/icon-search.vue";
 import VehicleRow from "../vehicles/VehicleRow.vue";
 import Pagination from "@/components/tables/components/Pagination.vue";
 
-// Define props for assets
-const props = defineProps({
-  assets: Array,
-});
+const props = defineProps<{
+  assets: Array<Record<string, any>>;
+}>();
 
-// Search state
+const emit = defineEmits(["assetClicked"]);
+
 const search = ref("");
 const currentPage = ref(1);
-const itemsPerPage = ref(7); // Customize the number of items per page
+const itemsPerPage = ref(7);
 
-// Calculate the total number of pages
+// Track the selected asset
+const selectedAsset = ref<Record<string, any> | null>(null);
+
 const totalPages = computed(() => {
   return Math.ceil(filteredAssets.value.length / itemsPerPage.value);
 });
 
-// Method to compute the border color based on ignition and driving_status
 const getBorderColor = (asset: any) => {
   if (asset.driving_status === 1) {
-    return "green"; // Driving status is 1, set green border
+    return "green";
   } else if (asset.ignition === 1) {
-    return "orange"; // Ignition is 1, set orange border
+    return "orange";
   } else {
-    return "grey"; // Default to grey if neither condition is met
+    return "grey";
   }
 };
 
-// Filter assets based on the search query
 const filteredAssets = computed(() => {
   return props.assets.filter((asset: any) => {
     return (
@@ -84,29 +87,35 @@ const filteredAssets = computed(() => {
   });
 });
 
-// Paginated assets based on current page and items per page
 const paginatedAssets = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
   return filteredAssets.value.slice(start, end);
 });
 
-// Watch the search value and reset currentPage to 1 when search changes
 watch(search, () => {
   currentPage.value = 1;
 });
 
-// Handle page change event
 const handlePageChange = (page: number) => {
   currentPage.value = page;
+};
+
+// Handle click on an asset
+const handleAssetClick = (asset: any) => {
+  selectedAsset.value = asset; // Set the selected asset
+  emit("assetClicked", asset); // Emit asset click event to parent component
 };
 </script>
 
 <style scoped>
-/* Ensure the flex layout is responsive */
-@media (max-width: 640px) {
-  .form-input {
-    width: 100%;
-  }
+.btn {
+  @apply shadow-none;
+}
+
+/* Styling for selected asset */
+.selected-asset {
+  background-color: #f0f4ff; /* Example background color */
+ 
 }
 </style>

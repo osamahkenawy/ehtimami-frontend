@@ -32,7 +32,7 @@
           </div>
           <SwitchLivemapList v-model="isAssetsSelected" :isRtl="isRtl" />
         </div>
-        <ListAssetTable :assets="vehicles" />
+        <ListAssetTable :assets="vehicles" @assetClicked="handleAssetClick" />
       </div>
 
       <!-- Pass the vehicles prop to LocationMap -->
@@ -59,10 +59,15 @@ const breadcrumbItems = [
   { label: "Live Map" },
 ];
 
-// Setup for the AnimatedIcon
 const fullScreenIcon = ref("iufcwnvq");
 
 const isAssetsSelected = ref(true);
+
+// Handle the asset click event from ListAssetTable
+const handleAssetClick = (asset: any) => {
+  console.log("Asset clicked in main component:", asset);
+  // Add further functionalities here, such as setting a selected asset, updating the map, etc.
+};
 </script>
 
 <style scoped>
