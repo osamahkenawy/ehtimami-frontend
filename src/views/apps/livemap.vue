@@ -1,16 +1,14 @@
 <template>
   <div>
-    <!-- Breadcrumb for the Livemap Page -->
-    <BreadCrumb :items="breadcrumbItems" />
-
-    <!-- Fullscreen Button and HeaderSensor aligned on the right -->
-    <div class="flex justify-end items-center mt-4 space-x-4 rtl:space-x-reverse">
-      <HeaderSensor />
+    <!-- Breadcrumb and Fullscreen Button on the same row -->
+    <div class="flex justify-between items-center mb-4">
+      <BreadCrumb :items="breadcrumbItems" />
       <button v-tippy="'Full Screen'" type="button" class="btn btn-light w-10 h-10 p-0 rounded-full">
         <AnimatedIcon :name="fullScreenIcon" />
       </button>
     </div>
 
+    <!-- Main Grid Layout -->
     <div class="grid md:grid-cols-1 xl:grid-cols-3 gap-4 mb-6 mt-5">
       <div class="panel h-full flex-none">
         <div class="flex items-center justify-between mb-5 border-b border-gray-300 dark:border-gray-700">
@@ -35,9 +33,15 @@
         <ListAssetTable :assets="vehicles" @assetClicked="handleAssetClick" />
       </div>
 
-      <!-- Pass the vehicles prop to LocationMap -->
+      <!-- Render Livemap with HeaderSensor based on selected asset -->
       <div class="col-span-2">
-        <Livemap :vehicles="vehicles" />
+        <div v-if="selectedAsset">
+          <HeaderSensor />
+          <Livemap :vehicles="vehicles" :focusedVehicle="selectedAsset" />
+        </div>
+        <div v-else>
+          <Livemap :vehicles="vehicles" />
+        </div>
       </div>
     </div>
   </div>
@@ -50,6 +54,19 @@ import { useAppStore } from "@/stores/index";
 import { vehicles } from "@/fakeData/Vehicles";
 import SwitchLivemapList from "@/components/SwitchLivemapList.vue";
 import { AnimatedIcon, ICONS } from "@/components/icon/animatedIcon";
+import Livemap from "@/components/maps/livemap/Livemap.vue";
+
+// Define the Vehicle interface with the required properties
+interface Vehicle {
+  id: number;
+  name: string;
+  plate: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  // Add other properties here as needed
+}
 
 const store = useAppStore();
 const isRtl = computed(() => store.rtlClass === "rtl");
@@ -60,13 +77,13 @@ const breadcrumbItems = [
 ];
 
 const fullScreenIcon = ref("iufcwnvq");
-
 const isAssetsSelected = ref(true);
+const selectedAsset = ref<Vehicle | null>(null); // Specify the type of selectedAsset as Vehicle or null
 
 // Handle the asset click event from ListAssetTable
-const handleAssetClick = (asset: any) => {
-  console.log("Asset clicked in main component:", asset);
-  // Add further functionalities here, such as setting a selected asset, updating the map, etc.
+const handleAssetClick = (asset: Vehicle) => {
+  // Toggle between selected and unselected states
+  selectedAsset.value = asset && selectedAsset.value?.id === asset.id ? null : asset || null;
 };
 </script>
 
