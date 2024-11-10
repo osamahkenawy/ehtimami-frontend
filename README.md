@@ -1,16 +1,64 @@
-# Vue 3 + TypeScript + Vite
+# AutoMovCa IoT Platform
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+AutoMovCa is a powerful IoT platform designed to streamline the management and monitoring of fleets, inventory, and HR operations for automotive companies. Built using Vue 3, Vite, and Tailwind CSS, AutoMovCa combines performance with a modern user interface, providing a seamless experience across various modules.
 
-## Recommended IDE Setup
+## Table of Contents
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- [Modules](#modules)
+  - [LiveMap](#livemap)
+  - [Human Resource Management (HRM)](#human-resource-management-hrm)
+  - [Inventory](#inventory)
+  - [Workshop](#workshop)
+- [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+- [Usage](#usage)
 
-## Type Support For `.vue` Imports in TS
+## Modules
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+### LiveMap
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+The **LiveMap** module offers real-time monitoring of fleet vehicles, enabling users to view all vehicles' locations on a map or focus on a specific vehicle for detailed sensor data. Key features include:
+- **Full Fleet View**: Shows the locations of all vehicles, providing a comprehensive overview of the fleet's current status.
+- **Vehicle Focus**: Focus on a specific vehicle to view detailed information like speed, location, and various sensor readings.
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+### Human Resource Management (HRM)
+
+The **HRM** module is designed to manage employee details, attendance, and performance. This module helps streamline HR operations, keeping track of employee data, shift schedules, and performance metrics.
+
+### Inventory
+
+The **Inventory** module keeps track of all assets, equipment, and parts. It offers functionalities like stock management, parts tracking, and order processing, helping ensure efficient inventory management across multiple locations.
+
+### Workshop
+
+The **Workshop** module supports the management of vehicle service and maintenance schedules, work orders, and repairs. This module enables technicians to record maintenance activities, track parts used, and document repairs.
+
+## Technologies Used
+
+AutoMovCa is built with the following technologies:
+
+- **Vue 3**: A progressive framework for building user interfaces.
+- **Vite**: A fast build tool that serves as a front-end build system.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
+
+## Screenshots
+
+### LiveMap Module
+
+1. **LiveMap - Whole Fleet View**  
+   This screen shows all vehicles in the fleet on a single map.
+   
+   ![LiveMap - Whole Fleet View](screenshots/livemap-1.png)
+
+2. **LiveMap - Vehicle Details with Sensors**  
+   When focusing on a specific vehicle, this view displays detailed sensor data and vehicle information.
+   
+   ![LiveMap - Vehicle with Sensors](screenshots/livemap-2.png)
+
+## Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/automovca-iot-platform.git
+   cd automovca-iot-platform
