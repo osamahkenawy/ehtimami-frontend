@@ -32,16 +32,19 @@
         </div>
         <ListAssetTable :assets="vehicles" @assetClicked="handleAssetClick" />
       </div>
-
+     
       <!-- Render Livemap with HeaderSensor based on selected asset -->
       <div class="col-span-2">
+        <!-- <SkeletonLoader type="list" /> -->
         <div v-if="selectedAsset">
           <HeaderSensor />
           <Livemap :vehicles="vehicles" :focusedVehicle="selectedAsset" />
         </div>
         <div v-else>
           <Livemap :vehicles="vehicles" />
-        </div>
+        </div> 
+       
+
       </div>
     </div>
   </div>

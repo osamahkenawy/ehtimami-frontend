@@ -13,3 +13,4 @@ export { default as Chip } from './Chip.vue';
 export { default as HeaderSensor } from './sensors/HeaderSensor.vue';
 export { default as PopperActions } from './tables/components/PopperActions.vue';
 export { default as DraggableTable } from './draggable/DraggableTable.vue';
+export { default as SkeletonLoader } from './SkeletonLoader.vue';
