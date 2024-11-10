@@ -60,5 +60,5 @@ AutoMovCa is built with the following technologies:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/automovca-iot-platform.git
-   cd automovca-iot-platform
+   git clone https://github.com/osamahkenawy/automovca-frontend.git
+   cd automovca-frontend
