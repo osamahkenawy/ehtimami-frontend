@@ -35,16 +35,13 @@
      
       <!-- Render Livemap with HeaderSensor based on selected asset -->
       <div class="col-span-2">
-        <!-- <SkeletonLoader type="list" /> -->
-        <div v-if="selectedAsset">
+        <div v-if="selectedAsset"> 
           <HeaderSensor />
-          <Livemap :vehicles="vehicles" :focusedVehicle="selectedAsset" />
+          <Livemap :vehicles="vehicles" :focusedVehicle="selectedAsset" @vehicleClicked="clickOnVehicleFromMap" />
         </div>
         <div v-else>
-          <Livemap :vehicles="vehicles" />
+          <Livemap :vehicles="vehicles" @vehicleClicked="handleAssetClick" />
         </div> 
-       
-
       </div>
     </div>
   </div>
@@ -83,10 +80,15 @@ const fullScreenIcon = ref("iufcwnvq");
 const isAssetsSelected = ref(true);
 const selectedAsset = ref<Vehicle | null>(null); // Specify the type of selectedAsset as Vehicle or null
 
-// Handle the asset click event from ListAssetTable
+// Handle the asset click event from ListAssetTable and Livemap
 const handleAssetClick = (asset: Vehicle) => {
   // Toggle between selected and unselected states
   selectedAsset.value = asset && selectedAsset.value?.id === asset.id ? null : asset || null;
+};
+const clickOnVehicleFromMap  = (asset: Vehicle) => {
+  // Toggle between selected and unselected states
+  console.log('clickOnVehicleFromMap', asset)
+  // selectedAsset.value = asset && selectedAsset.value?.id === asset.id ? null : asset || null;
 };
 </script>
 

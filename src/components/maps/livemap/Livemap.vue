@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch, defineEmits } from 'vue';
 import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -12,7 +12,7 @@ import 'leaflet.markercluster';
 import mapConfig from '@/config/map';
 import defaultVehicleIcon from '@/assets/images/map/vehicles/default/green.svg';
 
-// Define the Vehicle interface if not already done
+// Define the Vehicle interface
 interface Vehicle {
   id: number;
   name: string;
@@ -24,11 +24,13 @@ interface Vehicle {
   // Add other properties as needed
 }
 
-// Define props with correct types for vehicles and focusedVehicle
+// Define props with types for vehicles and focusedVehicle
 const props = defineProps<{
-  vehicles: Vehicle[];            // vehicles is an array of Vehicle
-  focusedVehicle?: Vehicle | null; // focusedVehicle can be a Vehicle, null, or undefined
+  vehicles: Vehicle[];            
+  focusedVehicle?: Vehicle | null; 
 }>();
+
+const emit = defineEmits(['vehicleClicked']); // Define the emit for 'vehicleClicked'
 
 const mapInstance = ref<L.Map | null>(null);
 const markersLayer = ref<L.MarkerClusterGroup | null>(null);
@@ -62,7 +64,7 @@ const initializeMap = () => {
   }
 };
 
-// Function to update markers
+// Function to update markers with hover popup and click emit
 const updateMarkers = () => {
   if (!markersLayer.value) return;
 
@@ -71,15 +73,31 @@ const updateMarkers = () => {
   const vehiclesToDisplay = props.focusedVehicle ? [props.focusedVehicle] : props.vehicles;
 
   vehiclesToDisplay.forEach((vehicle) => {
-    const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: customIcon })
-      .bindPopup(`
+    const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: customIcon });
+
+    // Show popup on hover
+    marker.on('mouseover', () => {
+      marker.bindPopup(`
         <strong>${vehicle.name}</strong><br>
         Plate: ${vehicle.plate}<br>
         Location: ${vehicle.location.lat}, ${vehicle.location.lng}
-      `);
+      `).openPopup();
+    });
+
+    // Hide popup when not hovering
+    marker.on('mouseout', () => {
+      marker.closePopup();
+    });
+
+    // Emit 'vehicleClicked' with the vehicle data when the marker is clicked
+    marker.on('click', () => {
+      emit('vehicleClicked', vehicle);
+    });
+
     markersLayer.value.addLayer(marker);
   });
 
+  // Adjust map bounds if displaying multiple vehicles
   if (!props.focusedVehicle && props.vehicles.length > 0) {
     const bounds = L.latLngBounds(props.vehicles.map((v) => [v.location.lat, v.location.lng]));
     mapInstance.value?.fitBounds(bounds);
