@@ -1,122 +1,117 @@
 <template>
-    <div>
-      <div class="full-map" id="map"></div>
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref, onMounted, onUnmounted, watch } from 'vue';
-  import 'leaflet/dist/leaflet.css';
-  import * as L from 'leaflet';
-  import 'leaflet.markercluster/dist/MarkerCluster.css';
-  import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-  import 'leaflet.markercluster';
-  import mapConfig from '@/config/map';
-  import markerShadow from '@/assets/images/map/markers/marker-shadow.png';
-  import defaultVehicleIcon from '@/assets/images/map/vehicles/default/green.svg';
-  
-  // Define a TypeScript interface for vehicle objects
-  interface Vehicle {
-    id: number;
-    name: string;
-    plate: string;
-    speed: {
-      value: number;
-      unit: string;
-    };
-    driving_status: boolean;
-    location: {
-      lat: number;
-      lng: number;
-    };
-  }
-  
-  // Props to accept vehicles array
-  const props = defineProps<{ vehicles: Vehicle[] }>();
-  
-  const initialMap = ref<L.Map | null>(null);
-  const markersLayer = ref<L.MarkerClusterGroup | null>(null);
-  
-  // Custom icon
-  const myIcon = L.icon({
-    iconUrl: defaultVehicleIcon,
-    ...mapConfig.iconSettings,
-    shadowUrl: markerShadow,
-  });
-  
-  // Function to initialize the map
-  const initializeMap = () => {
-    initialMap.value = L.map('map', {
-      zoomControl: false,
-      zoom: mapConfig.zoom,
-      zoomAnimation: false,
-      fadeAnimation: true,
-      markerZoomAnimation: true,
-    }).setView([mapConfig.center.lat, mapConfig.center.lng], mapConfig.zoom);
-  
-    // Add tile layer
-    L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions).addTo(initialMap.value);
-  
-    // Initialize marker cluster group with clustering disabled at a specified zoom level
+  <div class="full-map" id="map"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import * as L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.markercluster';
+import mapConfig from '@/config/map';
+import defaultVehicleIcon from '@/assets/images/map/vehicles/default/green.svg';
+
+// Define the Vehicle interface if not already done
+interface Vehicle {
+  id: number;
+  name: string;
+  plate: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  // Add other properties as needed
+}
+
+// Define props with correct types for vehicles and focusedVehicle
+const props = defineProps<{
+  vehicles: Vehicle[];            // vehicles is an array of Vehicle
+  focusedVehicle?: Vehicle | null; // focusedVehicle can be a Vehicle, null, or undefined
+}>();
+
+const mapInstance = ref<L.Map | null>(null);
+const markersLayer = ref<L.MarkerClusterGroup | null>(null);
+
+const customIcon = L.icon({
+  iconUrl: defaultVehicleIcon,
+  ...mapConfig.iconSettings,
+});
+
+// Function to initialize the map
+const initializeMap = () => {
+  if (!mapInstance.value) {
+    mapInstance.value = L.map('map', {
+      center: props.focusedVehicle
+        ? [props.focusedVehicle.location.lat, props.focusedVehicle.location.lng]
+        : [mapConfig.center.lat, mapConfig.center.lng],
+      zoom: props.focusedVehicle ? 15 : mapConfig.zoom,
+      zoomControl: true,
+    });
+
+    L.tileLayer(mapConfig.tileLayerUrl, {
+      attribution: mapConfig.tileLayerOptions.attribution,
+      minZoom: mapConfig.tileLayerOptions.minZoom,
+      maxZoom: mapConfig.tileLayerOptions.maxZoom,
+    }).addTo(mapInstance.value);
+
     markersLayer.value = L.markerClusterGroup({
-      disableClusteringAtZoom: 15 // Disable clustering at zoom level 15 and beyond
+      disableClusteringAtZoom: 15,
     });
-  
-    // Add the cluster layer to the map
-    initialMap.value.addLayer(markersLayer.value);
-  
-    // Add zoom control
-    L.control.zoom({ position: 'topright' }).addTo(initialMap.value);
-  };
-  
-  // Function to add vehicle markers to the map
-  const addVehicleMarkers = (vehicles: Vehicle[]) => {
-    if (!markersLayer.value) return;
-    
-    // Clear existing markers
-    markersLayer.value.clearLayers();
-  
-    // Add new markers for each vehicle
-    vehicles.forEach((vehicle) => {
-      const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: myIcon })
-        .bindPopup(`
-          <strong>${vehicle.name}</strong><br>
-          Plate: ${vehicle.plate}<br>
-          Speed: ${vehicle.speed.value} ${vehicle.speed.unit}<br>
-          Status: ${vehicle.driving_status ? 'Driving' : 'Idle'}
-        `);
-      markersLayer.value.addLayer(marker); // Add marker to marker cluster group
-    });
-  
-    // Fit map to show all markers
-    if (vehicles.length > 0) {
-      const bounds = L.latLngBounds(vehicles.map((vehicle) => [vehicle.location.lat, vehicle.location.lng]));
-      initialMap.value?.fitBounds(bounds);
-    }
-  };
-  
-  onMounted(() => {
-    initializeMap();
-  
-    // Add initial vehicle markers
-    addVehicleMarkers(props.vehicles);
-  
-    // Watch for changes in the vehicles array and update the markers dynamically
-    watch(
-      () => props.vehicles,
-      (newVehicles) => {
-        addVehicleMarkers(newVehicles);
-      },
-      { immediate: true }
-    );
+    mapInstance.value.addLayer(markersLayer.value);
+  }
+};
+
+// Function to update markers
+const updateMarkers = () => {
+  if (!markersLayer.value) return;
+
+  markersLayer.value.clearLayers();
+
+  const vehiclesToDisplay = props.focusedVehicle ? [props.focusedVehicle] : props.vehicles;
+
+  vehiclesToDisplay.forEach((vehicle) => {
+    const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: customIcon })
+      .bindPopup(`
+        <strong>${vehicle.name}</strong><br>
+        Plate: ${vehicle.plate}<br>
+        Location: ${vehicle.location.lat}, ${vehicle.location.lng}
+      `);
+    markersLayer.value.addLayer(marker);
   });
-  
-  // Clean up on unmount
-  onUnmounted(() => {
-    if (initialMap.value) {
-      initialMap.value.remove();
-    }
-    markersLayer.value?.clearLayers();
-  });
-  </script>
-  
+
+  if (!props.focusedVehicle && props.vehicles.length > 0) {
+    const bounds = L.latLngBounds(props.vehicles.map((v) => [v.location.lat, v.location.lng]));
+    mapInstance.value?.fitBounds(bounds);
+  }
+};
+
+// Initialize map and update markers on mount
+onMounted(() => {
+  initializeMap();
+  updateMarkers();
+
+  watch(
+    () => [props.focusedVehicle, props.vehicles],
+    () => {
+      updateMarkers();
+    },
+    { immediate: true, deep: true }
+  );
+});
+
+// Clean up map on unmount
+onUnmounted(() => {
+  if (mapInstance.value) {
+    mapInstance.value.remove();
+  }
+  markersLayer.value?.clearLayers();
+});
+</script>
+
+<style scoped>
+.full-map {
+  height: 100vh;
+  width: 100%;
+}
+</style>
