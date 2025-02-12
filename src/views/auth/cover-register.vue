@@ -166,7 +166,7 @@
                             </router-link>
                         </div>
                     </div>
-                    <p class="absolute bottom-6 w-full text-center dark:text-white">© {{ new Date().getFullYear() }}.WIOT360 All Rights Reserved.</p>
+                    <p class="absolute bottom-6 w-full text-center dark:text-white">© {{ new Date().getFullYear() }}.AutoMovCa All Rights Reserved.</p>
                 </div>
             </div>
         </div>

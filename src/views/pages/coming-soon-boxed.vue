@@ -117,7 +117,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="dark:text-white">© {{ new Date().getFullYear() }}. WIOT360 All Rights Reserved.</p>
+                        <p class="dark:text-white">© {{ new Date().getFullYear() }}. AutoMovCa All Rights Reserved.</p>
                     </div>
                 </div>
             </div>

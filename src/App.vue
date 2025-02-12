@@ -20,7 +20,7 @@
     const store = useAppStore();
 
     // meta
-    useMeta({ title: 'Sales Admin' });
+    useMeta({ title: 'AutoMovCa' });
 
     const mainLayout = computed(() => {
         return store.mainLayout === 'auth' ? authLayout : appLayout;

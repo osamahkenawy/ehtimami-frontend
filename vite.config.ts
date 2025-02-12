@@ -23,6 +23,6 @@ export default defineConfig({
     },
     optimizeDeps: {
         // Pre-bundle specific dependencies for faster development
-        include: ['quill'],
+        include: ['quill', 'd3'],
     },
 });
