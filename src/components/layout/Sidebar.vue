@@ -77,6 +77,17 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
+                                    <router-link to="/apps/trip-dispatch" class="group" @click="toggleMobileMenu">
+                                        <div class="flex items-center">
+                                            <IconTripDispatch class="group-hover:!text-primary shrink-0" />
+
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('trip-dispatch') 
+                                            }}</span>
+                                        </div>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
                                     <router-link to="/apps/livemap" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-contacts class="group-hover:!text-primary shrink-0" />
@@ -730,6 +741,7 @@
     import IconMenuNotes from '@/components/icon/menu/icon-menu-notes.vue';
     import IconMenuScrumboard from '@/components/icon/menu/icon-menu-scrumboard.vue';
     import IconMenuContacts from '@/components/icon/menu/icon-menu-contacts.vue';
+    import IconTripDispatch from '@/components/icon/menu/icon-trip-dispatch.vue';
     import IconMenuInvoice from '@/components/icon/menu/icon-menu-invoice.vue';
     import IconCaretDown from '@/components/icon/icon-caret-down.vue';
     import IconMenuCalendar from '@/components/icon/menu/icon-menu-calendar.vue';
