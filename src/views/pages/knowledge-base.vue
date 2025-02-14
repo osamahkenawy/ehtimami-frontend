@@ -197,7 +197,7 @@
                             :class="{ 'bg-primary-light dark:bg-[#1B2E4B] !text-primary': active1 === 1 }"
                             @click="active1 === 1 ? (active1 = null) : (active1 = 1)"
                         >
-                            <span>How to install WIOT360 Admin</span>
+                            <span>How to install AutoMovCa Admin</span>
                             <span v-if="active1 !== 1" class="shrink-0">
                                 <icon-plus-circle :duotone="false" />
                             </span>
@@ -251,7 +251,7 @@
                             :class="{ 'bg-primary-light dark:bg-[#1B2E4B] !text-primary': active1 === 3 }"
                             @click="active1 === 3 ? (active1 = null) : (active1 = 3)"
                         >
-                            <span>How to install WIOT360 Admin</span>
+                            <span>How to install AutoMovCa Admin</span>
                             <span v-if="active1 !== 3" class="shrink-0">
                                 <icon-plus-circle :duotone="false" />
                             </span>
@@ -278,7 +278,7 @@
                             :class="{ 'bg-primary-light dark:bg-[#1B2E4B] !text-primary': active1 === 5 }"
                             @click="active1 === 5 ? (active1 = null) : (active1 = 5)"
                         >
-                            <span>How to install WIOT360 Admin</span>
+                            <span>How to install AutoMovCa Admin</span>
                             <span v-if="active1 !== 5" class="shrink-0">
                                 <icon-plus-circle :duotone="false" />
                             </span>
