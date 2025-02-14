@@ -14,6 +14,7 @@ import {
   Livemap,
   DraggableTable,
   SkeletonLoader,
+  AddButton
 } from "@/components"; // Import all components here
 
 const app = createApp(App);
@@ -81,4 +82,5 @@ app.component("HeaderSensor", HeaderSensor); // HeaderSensor
 app.component("PopperActions", PopperActions); // PopperActions
 app.component("DraggableTable", DraggableTable); // PopperActions
 app.component("SkeletonLoader", SkeletonLoader); // SkeletonLoader
+app.component("AddButton", AddButton); // SkeletonLoader
 app.mount("#app");

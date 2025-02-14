@@ -30,10 +30,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/chat.vue'),
     },
     {
+        path: '/apps/trip-dispatch', 
+        name: 'trip-dispatch',
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/trip-dispatch.vue'),
+    },
+    {
         path: '/apps/livemap', 
         name: 'livemap',
         component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/livemap.vue'),
     },
+    
     {
         path: '/apps/staff', 
         name: 'staff',
