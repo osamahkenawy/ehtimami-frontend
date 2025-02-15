@@ -130,5 +130,6 @@
     "assets": "Assets",
     "drivers": "Drivers",
     "trip-dispatch": "Trips & Dispatch",
-    "add-new": "Add New"
+    "add-new": "Add New",
+    "settings_configurations": "Settings & Configurations"
 }

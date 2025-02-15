@@ -128,5 +128,9 @@
     "assets": "الأصول",
     "drivers": "السائقين",
     "trip-dispatch": "الرحلات والإرسال",
-    "add-new": "آضف المزيد"
+    "add-new": "آضف المزيد",
+    "settings_configurations": "الإعدادات والتكوينات",
+    "organization_chart": "الهيكل التنظيمي"
+
+
 }
