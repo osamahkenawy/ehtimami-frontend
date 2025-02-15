@@ -33,7 +33,6 @@
     "preview": "معاينة",
     "add": "يضيف",
     "edit": "يحرر",
-    "calendar": "تقويم",
     "tabs": "نوافذ التبويب",
     "accordions": "الأكورديونات",
     "modals": "الوسائط",
@@ -130,7 +129,17 @@
     "trip-dispatch": "الرحلات والإرسال",
     "add-new": "آضف المزيد",
     "settings_configurations": "الإعدادات والتكوينات",
-    "organization_chart": "الهيكل التنظيمي"
+    "organization": "المؤسسة",
+    "organization-chart": "الهيكل التنظيمي",
+    "regions": "المناطق",
+    "sites": "المواقع",
+    "regions-sites": "المناطق والمواقع",
+    "service-hours": "ساعات الخدمة",
+    "office-hours": "ساعات العمل",
+    "calendar": "التقويم",
+    "timezone": "المنطقة الزمنية",
+    "HR": "الموارد البشرية"
+
 
 
 }

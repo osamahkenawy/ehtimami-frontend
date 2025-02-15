@@ -23,6 +23,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import(/* webpackChunkName: "crypto" */ '../views/crypto.vue'),
     },
 
+    // Settings and configurations
+    {
+        path: '/settings-configuration/org-chart', 
+        name: 'organization-chart',
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/settings/organization/permissions/org-chart/Index.vue'),
+    },
+
+
     // apps
     {
         path: '/apps/chat', 
@@ -168,6 +176,8 @@ const routes: RouteRecordRaw[] = [
         name: 'lightbox',
         component: () => import(/* webpackChunkName: "components-lightbox" */ '../views/components/lightbox.vue'),
     },
+
+
 
     //elements
     {

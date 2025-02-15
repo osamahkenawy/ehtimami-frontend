@@ -216,6 +216,51 @@
 
                         <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
                             <icon-minus class="w-4 h-5 flex-none hidden" />
+                            <span>{{ $t('settings_configurations') }}</span>
+                        </h2>
+                     
+                        <li class="menu nav-item">
+                                    <button
+                                        type="button"
+                                        class="nav-link group w-full"
+                                        :class="{ active: activeDropdown === 'organization' }"
+                                        @click="activeDropdown === 'organization' ? (activeDropdown = null) : (activeDropdown = 'organization')">
+                                        <div class="flex items-center">
+                                            <icon-menu-organization class="group-hover:!text-primary shrink-0" />
+            
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('organization')
+                                            }}</span>
+
+                                        </div>
+
+                                        <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'organization' }">
+                                            <icon-caret-down />
+                                        </div>
+                                    </button>
+
+                                    <vue-collapsible :isOpen="activeDropdown === 'organization'">
+                                        <ul class="sub-menu text-gray-500">
+                                            <li>
+                                                <router-link to="/settings-configuration/org-chart" @click="toggleMobileMenu">{{ $t('regions-sites') }}</router-link>
+                                            </li>
+                                            <li>
+                                                <router-link to="/settings-configuration/org-chart" @click="toggleMobileMenu">{{ $t('organization-chart') }}</router-link>
+                                            </li>    
+                                            <li>
+                                                <router-link to="/settings-configuration/org-chart" @click="toggleMobileMenu">{{ $t('timezone') }}</router-link>
+                                            </li>
+                                            <li>
+                                                <router-link to="/settings-configuration/org-chart" @click="toggleMobileMenu">{{ $t('HR') }}</router-link>
+                                            </li>
+                                            <li>
+                                                <router-link to="/settings-configuration/org-chart" @click="toggleMobileMenu">{{ $t('calendar') }}</router-link>
+                                            </li>
+                                        </ul>
+                                    </vue-collapsible>
+                                </li>
+                        <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
+                            <icon-minus class="w-4 h-5 flex-none hidden" />
                             <span>{{ $t('user_interface') }}</span>
                         </h2>
 
@@ -728,7 +773,7 @@
 
 <script lang="ts" setup>
     import { ref, onMounted } from 'vue';
-
+    
     import { useAppStore } from '@/stores/index';
     import VueCollapsible from 'vue-height-collapsible/vue3';
     import IconMapPin from '@/components/icon/icon-map-pin.vue';
@@ -758,7 +803,7 @@
     import IconMenuPages from '@/components/icon/menu/icon-menu-pages.vue';
     import IconMenuAuthentication from '@/components/icon/menu/icon-menu-authentication.vue';
     import IconMenuDocumentation from '@/components/icon/menu/icon-menu-documentation.vue';
-
+    import iconMenuOrganization from '../icon/menu/icon-menu-organization.vue';
     const store = useAppStore();
     const activeDropdown: any = ref('');
     const subActive: any = ref('');

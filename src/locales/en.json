@@ -35,7 +35,6 @@
     "preview": "Preview",
     "add": "Add",
     "edit": "Edit",
-    "calendar": "Calendar",
     "tabs": "Tabs",
     "accordions": "Accordions",
     "modals": "Modals",
@@ -131,6 +130,16 @@
     "drivers": "Drivers",
     "trip-dispatch": "Trips & Dispatch",
     "add-new": "Add New",
-    "settings_configurations": "Settings & Configurations",
-    "organization_chart": "Organization"
+    "settings_configurations": "Settings",
+   "organization": "Organization",
+    "organization-chart": "Organization Chart",
+    "regions": "Regions",
+    "sites": "Sites",
+    "regions-sites": "Regions & Sites",
+    "service-hours": "Service Hours",
+    "office-hours": "Office Hours",
+    "calendar": "Calendar",
+    "timezone": "Timezone",
+    "HR": "Human Resources"
+
 }

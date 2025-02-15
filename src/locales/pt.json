@@ -33,7 +33,6 @@
     "preview": "Visualizar",
     "add": "Adicionar",
     "edit": "Editar",
-    "calendar": "Calendário",
     "tabs": "abas",
     "accordions": "acordeão",
     "modals": "modal",
@@ -128,5 +127,15 @@
     "assets": "Ativos",
     "drivers": "Motoristas",
     "settings_configurations": "Configurações & Configurações",
-    "organization_chart": "Organograma"
+    "organization": "Organização",
+    "organization-chart": "Organograma",
+    "regions": "Regiões",
+    "sites": "Sítios",
+    "regions-sites": "Regiões e Sítios",
+    "service-hours": "Horas de Serviço",
+    "office-hours": "Horário de Expediente",
+    "calendar": "Calendário",
+    "timezone": "Fuso Horário",
+    "HR": "Recursos Humanos"
+
 }
