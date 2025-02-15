@@ -131,5 +131,6 @@
     "drivers": "Drivers",
     "trip-dispatch": "Trips & Dispatch",
     "add-new": "Add New",
-    "settings_configurations": "Settings & Configurations"
+    "settings_configurations": "Settings & Configurations",
+    "organization_chart": "Organization"
 }
