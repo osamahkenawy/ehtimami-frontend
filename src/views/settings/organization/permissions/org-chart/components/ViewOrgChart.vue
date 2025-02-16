@@ -100,7 +100,7 @@ const renderNodeContent = (node: any) => {
     if (mountPoint) {
       const app = createApp(OrgChartCard, {
         showHeadquarter: node.data.level === 0,
-        headquarterTitle: "Main Office",
+        headquarterTitle: "Headquarter",
         superAdminTitle: node.data.name,
         country: "UAE",
         state: "Abu Dhabi",
@@ -133,9 +133,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="flex bg-white border">
+  <div class="flex bg-white border p-4">
     <div ref="chartContainer" class="chart-container w-full"></div>
-    <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md mr-2 mt-2 p-1 max-h-20 items-center justify-center gap-1">
+    <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md p-1 max-h-20 items-center justify-center gap-2 ml-4">
       <button @click="zoomIn" class="p-1 text-sm rounded hover:bg-gray-200 transition">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

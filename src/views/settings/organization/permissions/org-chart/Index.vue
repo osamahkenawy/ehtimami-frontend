@@ -27,7 +27,7 @@
   // ✅ Ensure `orgChartData.levels` exists
   const orgChartData = ref({
     levels: [
-      { id: "1", name: "CEO", level: 0, color: "#2097F3", parentId: null },
+      { id: "1", name: "Superadmin", level: 0, color: "#2097F3", parentId: null },
       { id: "2", name: "VP of Operations", level: 1, color: "#98A2B3", parentId: "1" },
       { id: "3", name: "VP of Finance", level: 1, color: "#98A2B3", parentId: "1" },
       { id: "4", name: "Operations Manager", level: 2, color: "#FFC107", parentId: "2" },

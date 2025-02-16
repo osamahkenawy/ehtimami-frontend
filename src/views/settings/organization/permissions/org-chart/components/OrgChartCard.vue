@@ -39,7 +39,7 @@ const handleUndoClick = (type: string) => {
     <div class="w-full h-1 bg-white"></div>
 
     <!-- Super Admin -->
-    <div class="w-full flex justify-center p-2" style="background-color: #98A2B3;">
+    <div v-if="props.superAdminTitle" class="w-full flex justify-center p-2" style="background-color: #98A2B3;">
       <span class="text-white font-bold px-4 py-2 text-center text-xl">{{ props.superAdminTitle }}</span>
     </div>
 
