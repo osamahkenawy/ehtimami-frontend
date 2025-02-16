@@ -133,17 +133,17 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex bg-white border">
     <div ref="chartContainer" class="chart-container w-full"></div>
-    <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md p-2">
-      <button @click="zoomIn" class="p-2 rounded hover:bg-gray-200 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+    <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md mr-2 mt-2 p-1 max-h-20 items-center justify-center gap-1">
+      <button @click="zoomIn" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
-      <hr class="my-2 border-gray-300" />
-      <button @click="zoomOut" class="p-2 rounded hover:bg-gray-200 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+      <hr class="w-8 border-gray-300" />
+      <button @click="zoomOut" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
