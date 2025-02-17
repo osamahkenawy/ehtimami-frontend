@@ -59,13 +59,15 @@
     "vue3-number-spinner": "^0.0.9",
     "vue3-perfect-scrollbar": "1.6.1",
     "vue3-popper": "^1.5.0",
-    "vue3-quill": "^0.3.1"
+    "vue3-quill": "^0.3.1",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^7.0.0",
     "@rollup/plugin-alias": "^5.1.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/vuedraggable": "^2.24.0",
     "@vitejs/plugin-vue": "^5.1.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",

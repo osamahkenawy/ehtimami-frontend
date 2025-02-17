@@ -2,7 +2,6 @@
 import { onMounted, ref, defineProps, watchEffect, nextTick } from "vue";
 import { OrgChart } from "d3-org-chart";
 import { createApp } from "vue";
-import { VueDraggableNext } from "vue-draggable-next";
 import OrgChartCard from "./OrgChartCard.vue";
 
 interface OrgChartNode {
@@ -16,8 +15,7 @@ interface OrgChartNode {
 const props = defineProps<{ data: { levels: OrgChartNode[] } }>();
 
 const chartContainer = ref<HTMLElement | null>(null);
-let chart: OrgChart | null = null;
-const draggedNode = ref<OrgChartNode | null>(null);
+let chart: OrgChart | null = null; 
 
 const zoomIn = () => chart?.zoomIn();
 const zoomOut = () => chart?.zoomOut();
@@ -33,25 +31,6 @@ const handleNodeClick = (node: any) => {
   });
 };
 
-// ✅ Check if a node has children
-const hasChildren = (nodeId: string) => {
-  return props.data.levels.some((node) => node.parentId === nodeId);
-};
-
-// ✅ Update Parent on Drag Drop
-const updateParentNode = (childId: string, newParentId: string) => {
-  const nodeToUpdate = props.data.levels.find((node) => node.id === childId);
-  if (nodeToUpdate) {
-    nodeToUpdate.parentId = newParentId;
-    console.log(`✅ Updated ${nodeToUpdate.id}'s parent to ${nodeToUpdate.parentId}`);
-
-    setTimeout(() => {
-      initializeChart();
-    }, 500);
-  }
-};
-
-// ✅ Initialize the Chart
 const initializeChart = async () => {
   await nextTick();
 
@@ -71,7 +50,6 @@ const initializeChart = async () => {
   }
 };
 
-// ✅ Create Chart
 const createChart = () => {
   if (!chartContainer.value) return;
 
@@ -89,11 +67,11 @@ const createChart = () => {
   }
 
   const chartData = props.data.levels.map((level) => ({
-    id: level.id,
+    id: `level-${level.id}`,
     name: level.name,
     level: level.level,
     color: level.color,
-    parentId: level.parentId || null,
+    parentId: level.parentId ? `level-${level.parentId}` : null,
   }));
 
   console.log("🛠 Formatted Chart Data for D3:", chartData);
@@ -106,17 +84,16 @@ const createChart = () => {
     .childrenMargin(() => 100)
     .compactMarginBetween(() => 75)
     .compactMarginPair(() => 80)
-    .onNodeClick(handleNodeClick)
+    .onNodeClick(handleNodeClick) // ✅ Added Click Event
     .nodeContent(renderNodeContent)
     .render();
 };
 
-// ✅ Render Node Content
 const renderNodeContent = (node: any) => {
   const container = document.createElement("div");
   const nodeId = `node-${node.data.id}`;
 
-  container.innerHTML = `<div id="${nodeId}"></div>`;
+  container.innerHTML = `<div id="${nodeId}"></div>`; 
 
   setTimeout(() => {
     const mountPoint = document.getElementById(nodeId);
@@ -156,42 +133,20 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="flex flex-col bg-white border p-4">
-    <div class="flex justify-between">
-      <!-- Zoom Controls inside the main container -->
-      <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md p-1 max-h-20 items-center justify-center gap-2 mb-4">
-        <button @click="zoomIn" class="p-1 text-sm rounded hover:bg-gray-200 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <hr class="w-8 border-gray-300" />
-        <button @click="zoomOut" class="p-1 text-sm rounded hover:bg-gray-200 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Chart Container with Drag and Drop -->
-    <div ref="chartContainer" class="chart-container w-full">
-      <VueDraggableNext
-        v-model="props.data.levels"
-        :group="{ name: 'nodes', pull: 'clone', put: true }"
-        item-key="id"
-        class="flex flex-wrap gap-2 p-2"
-        @end="updateParentNode(draggedNode?.id, draggedNode?.parentId)"
-      >
-        <template #item="{ element }">
-          <div
-            class="cursor-pointer bg-blue-500 text-white p-2 rounded-md"
-            @mousedown="draggedNode = element"
-          >
-            {{ element.name }}
-          </div>
-        </template>
-      </VueDraggableNext>
+  <div class="flex bg-white border p-4">
+    <div ref="chartContainer" class="chart-container w-full"></div>
+    <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md p-1 max-h-20 items-center justify-center gap-2 ml-4">
+      <button @click="zoomIn" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <hr class="w-8 border-gray-300" />
+      <button @click="zoomOut" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
     </div>
   </div>
 </template>
