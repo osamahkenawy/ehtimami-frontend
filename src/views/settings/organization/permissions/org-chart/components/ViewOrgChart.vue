@@ -19,7 +19,10 @@ let chart: OrgChart | null = null;
 
 const zoomIn = () => chart?.zoomIn();
 const zoomOut = () => chart?.zoomOut();
-
+const editOrgChart = () => {
+  console.log('editOrgChart', props.data.levels)
+  
+}
 // ✅ Handles node click event
 const handleNodeClick = (node: any) => {
   console.log("📌 Node Clicked:", {
@@ -147,13 +150,19 @@ watchEffect(() => {
           <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
+      
     </div>
+    <button @click="editOrgChart" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+        <path d="M11.9268 6.52L12.8468 7.44L3.78676 16.5H2.86676V15.58L11.9268 6.52ZM15.5268 0.5C15.2768 0.5 15.0168 0.6 14.8268 0.79L12.9968 2.62L16.7468 6.37L18.5768 4.54C18.9668 4.15 18.9668 3.52 18.5768 3.13L16.2368 0.79C16.0368 0.59 15.7868 0.5 15.5268 0.5ZM11.9268 3.69L0.86676 14.75V18.5H4.61676L15.6768 7.44L11.9268 3.69Z" fill="#9E9E9E"/>
+      </svg>
+    </button>
   </div>
 </template>
 
 <style scoped>
 .chart-container {
-  height: 600px;
+  height: auto;
   background-color: #fff;
 }
 </style>
