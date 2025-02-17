@@ -29,11 +29,10 @@
     levels: [
       { id: "1", name: "Superadmin", level: 0, color: "#2097F3", parentId: null },
       { id: "2", name: "VP of Operations", level: 1, color: "#98A2B3", parentId: "1" },
-      { id: "3", name: "VP of Finance", level: 1, color: "#98A2B3", parentId: "1" },
+      // { id: "3", name: "VP of Finance", level: 1, color: "#98A2B3", parentId: "1" },
       { id: "4", name: "Operations Manager", level: 2, color: "#FFC107", parentId: "2" },
-      { id: "5", name: "Finance Manager", level: 2, color: "#FFC107", parentId: "3" },
-      { id: "6", name: "Team Lead - Operations", level: 3, color: "#F79009", parentId: "4" },
-      { id: "7", name: "Accountant", level: 3, color: "#F44336", parentId: "5" },
+      // { id: "5", name: "Finance Manager", level: 2, color: "#FFC107", parentId: "3" },
+      { id: "7", name: "Accountant", level: 3, color: "#F44336", parentId: "2" },
     ],
   });
   </script>

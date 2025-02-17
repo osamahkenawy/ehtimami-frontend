@@ -5,7 +5,7 @@
                 <div class="flex justify-between items-center px-4 py-3">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
                         <img class="w-8 ml-[5px] flex-none" src="/assets/images/wathiq-logo.ico" alt="" />
-                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">AutoMovCa</span>
+                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">WIOT360</span>
                     </router-link>
                     <a
                         href="javascript:;"
@@ -754,7 +754,7 @@
                         </h2>
 
                         <li class="menu nav-item">
-                            <a href="https://AutoMovCa.sbthemes.com" target="_blank" class="nav-link group">
+                            <a href="https://WIOT360.sbthemes.com" target="_blank" class="nav-link group">
                                 <div class="flex items-center">
                                     <icon-menu-documentation class="group-hover:!text-primary shrink-0" />
 

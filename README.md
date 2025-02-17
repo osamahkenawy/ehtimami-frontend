@@ -1,6 +1,6 @@
-# AutoMovCa IoT Platform
+# WIOT360 IoT Platform
 
-AutoMovCa is a powerful IoT platform designed to streamline the management and monitoring of fleets, inventory, and HR operations for automotive companies. Built using Vue 3, Vite, and Tailwind CSS, AutoMovCa combines performance with a modern user interface, providing a seamless experience across various modules.
+WIOT360 is a powerful IoT platform designed to streamline the management and monitoring of fleets, inventory, and HR operations for automotive companies. Built using Vue 3, Vite, and Tailwind CSS, WIOT360 combines performance with a modern user interface, providing a seamless experience across various modules.
 
 ## Table of Contents
 
@@ -36,7 +36,7 @@ The **Workshop** module supports the management of vehicle service and maintenan
 
 ## Technologies Used
 
-AutoMovCa is built with the following technologies:
+WIOT360 is built with the following technologies:
 
 - **Vue 3**: A progressive framework for building user interfaces.
 - **Vite**: A fast build tool that serves as a front-end build system.
@@ -60,5 +60,5 @@ AutoMovCa is built with the following technologies:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/osamahkenawy/automovca-frontend.git
-   cd automovca-frontend
+   git clone https://github.com/osamahkenawy/WIOT360-frontend.git
+   cd WIOT360-frontend

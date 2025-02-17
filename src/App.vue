@@ -20,7 +20,7 @@
     const store = useAppStore();
 
     // meta
-    useMeta({ title: 'AutoMovCa' });
+    useMeta({ title: 'WIOT360' });
 
     const mainLayout = computed(() => {
         return store.mainLayout === 'auth' ? authLayout : appLayout;

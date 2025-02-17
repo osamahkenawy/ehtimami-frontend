@@ -7,7 +7,7 @@
                         <!-- <img class="w-8 ltr:-ml-1 rtl:-mr-1 inline" src="/assets/images/wathiq-logo.ico" alt="" />
                         <span
                             class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle hidden md:inline dark:text-white-light transition-all duration-300"
-                            >AutoMovCa</span
+                            >WIOT360</span
                         > -->
                     </router-link>
 
@@ -851,7 +851,7 @@
                             <router-link to="/widgets">{{ $t('widgets') }}</router-link>
                         </li>
                         <li>
-                            <a href="https://AutoMovCa.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
+                            <a href="https://WIOT360.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
                         </li>
                     </ul>
                 </li>
