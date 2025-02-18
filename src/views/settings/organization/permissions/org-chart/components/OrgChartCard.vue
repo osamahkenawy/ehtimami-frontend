@@ -46,7 +46,7 @@ const handleUndoClick = (type: string) => {
     <div class="w-full h-1 bg-white"></div>
 
     <!-- Country And Action -->
-    <div class="w-full flex justify-between items-center bg-gray-700 text-white p-4">
+    <div class="w-full flex justify-between items-center bg-gray-700 text-white p-4" style="background-color: #17B26A;">
       <span class="bg-white text-gray-700 font-bold px-3 py-1 rounded-md border border-gray-300">Country: {{ props.country }}</span>
       <span class="bg-white text-gray-700 font-bold px-3 py-1 rounded-md border flex items-center border-gray-300">
         Default
