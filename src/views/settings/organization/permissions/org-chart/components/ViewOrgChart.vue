@@ -179,23 +179,36 @@ watchEffect(() => {
     <div ref="chartContainer" class="chart-container w-full"></div>
 
     <!-- Controls Wrapper (Aligned to Top) -->
-    <div class="flex flex-col items-start gap-2 ml-4">
+      <!-- Controls Wrapper (Aligned to Top) -->
+      <div class="flex flex-col items-start gap-2 ml-4">
       <!-- Zoom Controls + Edit Button -->
-      <div class="flex items-start gap-2 mr-4">
-        <!-- Edit Org Chart Button -->
-        <button
-          v-tippy="$t('edit-chart')"
-          @click="editOrgChart"
-          class="p-1 text-sm rounded-full border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-100 transition"
-        >
+      <div class="flex items-start gap-2 mr-4"
+      > 
+       <!-- Edit Org Chart Button -->
+       <button  v-tippy="$t('edit-chart')" @click="editOrgChart" class="p-1 text-sm rounded-full border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-100 transition">
           <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-            <path
-              d="M11.9268 6.52L12.8468 7.44L3.78676 16.5H2.86676V15.58L11.9268 6.52ZM15.5268 0.5C15.2768 0.5 15.0168 0.6 14.8268 0.79L12.9968 2.62L16.7468 6.37L18.5768 4.54C18.9668 4.15 18.9668 3.52 18.5768 3.13L16.2368 0.79C16.0368 0.59 15.7868 0.5 15.5268 0.5ZM11.9268 3.69L0.86676 14.75V18.5H4.61676L15.6768 7.44L11.9268 3.69Z"
-              fill="#9E9E9E"
-            />
-          </svg>
-        </button>
+            <path d="M11.9268 6.52L12.8468 7.44L3.78676 16.5H2.86676V15.58L11.9268 6.52ZM15.5268 0.5C15.2768 0.5 15.0168 0.6 14.8268 0.79L12.9968 2.62L16.7468 6.37L18.5768 4.54C18.9668 4.15 18.9668 3.52 18.5768 3.13L16.2368 0.79C16.0368 0.59 15.7868 0.5 15.5268 0.5ZM11.9268 3.69L0.86676 14.75V18.5H4.61676L15.6768 7.44L11.9268 3.69Z" fill="#9E9E9E"/>
+          </svg> 
+        </button> 
+        <!-- Zoom Controls --> 
+        <div class="zoom-controls flex flex-col bg-white border border-gray-300 rounded-md p-1 items-center justify-center gap-2">
+          <button @click="zoomIn" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <hr class="w-8 border-gray-300" />
+          <button @click="zoomOut" class="p-1 text-sm rounded hover:bg-gray-200 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+       
       </div>
+
+      <!-- Placeholder for Future Controls Below -->
     </div>
 
     <!-- Hover Popup (Fixed at Top-Right of Node) -->
@@ -232,11 +245,9 @@ watchEffect(() => {
 
 
       <!-- Delete Button -->
-      <button
-  
+      <button 
         class="w-8 h-8 flex items-center justify-center rounded-full border border-white bg-[#F44436] text-white hover:bg-red-600 ml-2"
-        title="Delete"
-      >
+        title="Delete" >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 6h18" />
           <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
