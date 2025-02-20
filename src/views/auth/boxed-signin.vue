@@ -54,21 +54,21 @@
                     </div>
                     <div class="mx-auto w-full max-w-[440px]">
                         <div class="mb-10">
-                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Sign in</h1>
-                            <p class="text-base font-bold leading-normal text-white-dark">Enter your email and password to login</p>
+                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">{{ $t('sign_in') }}</h1>
+                            <p class="text-base font-bold leading-normal text-white-dark">{{ $t('enter_email_password') }}</p>
                         </div>
                         <form class="space-y-5 dark:text-white" @submit.prevent="router.push('/')">
                             <div>
-                                <label for="Email">Email</label>
+                                <label for="Email">{{ $t('email') }}</label>
                                 <div class="relative text-white-dark">
                                     <input v-model="email" id="Email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" />
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                         <icon-mail :fill="true" />
                                     </span>
-                                </div>
+                                </div> 
                             </div>
                             <div>
-                                <label for="Password">Password</label>
+                                <label for="Password">{{ $t('password') }}</label>
                                 <div class="relative text-white-dark">
                                     <input v-model="password" id="Password" type="password" placeholder="Enter Password" class="form-input ps-10 placeholder:text-white-dark" />
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
@@ -78,17 +78,17 @@
                             </div>
                          
                             <button type="button" @click="login" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                                Sign in
+                                {{ $t('sign_in') }}
                             </button>
                         </form>
                         <div class="relative my-7 text-center md:mb-9">
                             <span class="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-white-light dark:bg-white-dark"></span>
-                            <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">or</span>
+                            <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">{{ $t('or') }}</span>
                         </div>
                         <div class="text-center dark:text-white">
-                            Don't have an account ?
+                            {{ $t('no_account') }}
                             <router-link to="/auth/boxed-signup" class="uppercase text-primary underline transition hover:text-black dark:hover:text-white">
-                                SIGN UP
+                                {{ $t('sign_up') }}
                             </router-link>
                         </div>
                     </div>
@@ -113,14 +113,16 @@
     import IconTwitter from '@/components/icon/icon-twitter.vue';
     import IconGoogle from '@/components/icon/icon-google.vue';
     import { useAuthStore } from '@/stores/auth';
+    
     useMeta({ title: 'Login Boxed' });
     const email = ref<string>('');
-const password = ref<string>('');
+    const password = ref<string>('');
     const router = useRouter();
     const authStore = useAuthStore();
     const store = useAppStore();
     // multi language
     const i18n = reactive(useI18n());
+    const { t } = useI18n();
     const changeLanguage = (item: any) => {
         i18n.locale = item.code;
         appSetting.toggleLanguage(item);
