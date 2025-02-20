@@ -3,7 +3,8 @@ import { onMounted, ref, defineProps, watchEffect, nextTick } from "vue";
 import { OrgChart } from "d3-org-chart";
 import { createApp } from "vue";
 import OrgChartCard from "./OrgChartCard.vue";
-
+import EditOrgChart from "@/views/settings/organization/permissions/org-chart/components/EditOrgChart.vue";
+import iconOrganizationSidebar from "@/components/icon/icon-organization-sidebar.vue";
 interface OrgChartNode {
   id: string;
   name: string;
@@ -15,6 +16,8 @@ interface OrgChartNode {
 const props = defineProps<{ data: { levels: OrgChartNode[] } }>();
 
 const chartContainer = ref<HTMLElement | null>(null);
+const isEditSidebarOpen = ref(false);
+
 let chart: OrgChart | null = null;
 
 // State to track hovered node and popup visibility
@@ -23,10 +26,15 @@ const isPopupVisible = ref(false);
 
 const zoomIn = () => chart?.zoomIn();
 const zoomOut = () => chart?.zoomOut();
+
 const editOrgChart = () => {
   console.log("editOrgChart", props.data.levels);
+  isEditSidebarOpen.value = true;
 };
 
+const closeSidebar = () => {
+  isEditSidebarOpen.value = false;
+};
 // ✅ Handles node click event
 const handleNodeClick = (node: any) => {
   console.log("📌 Node Clicked:", {
@@ -207,6 +215,25 @@ watchEffect(() => {
 
        
       </div>
+      <teleport to="body">
+        <div v-if="isEditSidebarOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
+          <!-- Sidebar -->
+          <div class="w-full h-full bg-white shadow-lg border-l">
+            <div class="flex justify-between items-center p-4 border-b">
+              <div class="flex">
+                <iconOrganizationSidebar />
+                <h2 class="text-lg font-semibold">Organization Hierarchy</h2>
+              </div>
+              <button @click="closeSidebar" class="text-gray-600 hover:text-gray-800">
+                ✖
+              </button>
+            </div>
+            <div class="p-4">
+              <EditOrgChart :data="props.data.levels" />
+            </div>
+          </div>
+        </div>
+      </teleport> 
 
       <!-- Placeholder for Future Controls Below -->
     </div>
