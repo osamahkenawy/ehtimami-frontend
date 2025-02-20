@@ -3,10 +3,8 @@
         <div class="absolute inset-0">
             <img src="/assets/images/auth/bg-gradient.png" alt="image" class="h-full w-full object-cover" />
         </div>
-
         <div
-            class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16"
-        >
+            class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
             <img src="/assets/images/auth/coming-soon-object1.png" alt="image" class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
             <img src="/assets/images/auth/coming-soon-object2.png" alt="image" class="absolute left-24 top-0 h-40 md:left-[30%]" />
             <img src="/assets/images/auth/coming-soon-object3.png" alt="image" class="absolute right-0 top-0 h-[300px]" />
@@ -63,7 +61,7 @@
                             <div>
                                 <label for="Email">Email</label>
                                 <div class="relative text-white-dark">
-                                    <input id="Email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" />
+                                    <input v-model="email" id="Email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" />
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                         <icon-mail :fill="true" />
                                     </span>
@@ -72,65 +70,20 @@
                             <div>
                                 <label for="Password">Password</label>
                                 <div class="relative text-white-dark">
-                                    <input id="Password" type="password" placeholder="Enter Password" class="form-input ps-10 placeholder:text-white-dark" />
+                                    <input v-model="password" id="Password" type="password" placeholder="Enter Password" class="form-input ps-10 placeholder:text-white-dark" />
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                         <icon-lock-dots :fill="true" />
                                     </span>
                                 </div>
                             </div>
-                            <div>
-                                <label class="flex cursor-pointer items-center">
-                                    <input type="checkbox" class="form-checkbox bg-white dark:bg-black" />
-                                    <span class="text-white-dark">Subscribe to weekly newsletter</span>
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
+                         
+                            <button type="button" @click="login" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
                                 Sign in
                             </button>
                         </form>
                         <div class="relative my-7 text-center md:mb-9">
                             <span class="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-white-light dark:bg-white-dark"></span>
                             <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">or</span>
-                        </div>
-                        <div class="mb-10 md:mb-[60px]">
-                            <ul class="flex justify-center gap-3.5 text-white">
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-instagram />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-facebook-circle />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-twitter :fill="true" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-google />
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                         <div class="text-center dark:text-white">
                             Don't have an account ?
@@ -151,7 +104,7 @@
     import { useAppStore } from '@/stores/index';
     import { useRouter } from 'vue-router';
     import { useMeta } from '@/composables/use-meta';
-
+    import { ref } from 'vue';
     import IconCaretDown from '@/components/icon/icon-caret-down.vue';
     import IconMail from '@/components/icon/icon-mail.vue';
     import IconLockDots from '@/components/icon/icon-lock-dots.vue';
@@ -159,10 +112,12 @@
     import IconFacebookCircle from '@/components/icon/icon-facebook-circle.vue';
     import IconTwitter from '@/components/icon/icon-twitter.vue';
     import IconGoogle from '@/components/icon/icon-google.vue';
-
+    import { useAuthStore } from '@/stores/auth';
     useMeta({ title: 'Login Boxed' });
+    const email = ref<string>('');
+const password = ref<string>('');
     const router = useRouter();
-
+    const authStore = useAuthStore();
     const store = useAppStore();
     // multi language
     const i18n = reactive(useI18n());
@@ -173,4 +128,14 @@
     const currentFlag = computed(() => {
         return `/assets/images/flags/${i18n.locale.toUpperCase()}.svg`;
     });
+    const login = async (): Promise<void> => {
+    try {
+        const success = await authStore.login(email.value, password.value);
+        if (success) {
+            router.push('/');
+        }
+    } catch (error) {
+        console.error("Login failed:", error);
+    }
+};
 </script>

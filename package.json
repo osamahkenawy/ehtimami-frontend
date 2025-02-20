@@ -32,6 +32,7 @@
     "easymde": "^2.18.0",
     "file-upload-with-preview": "4.3.0",
     "highlight.js": "^11.10.0",
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "lord-icon-element": "^4.1.2",
