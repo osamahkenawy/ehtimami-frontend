@@ -143,7 +143,7 @@
                         </div>
                         <div class="text-center dark:text-white">
                             Already have an account ?
-                            <router-link to="/auth/boxed-signin" class="uppercase text-primary underline transition hover:text-black dark:hover:text-white">
+                            <router-link to="/auth/ehtimami-signin" class="uppercase text-primary underline transition hover:text-black dark:hover:text-white">
                                 SIGN IN
                             </router-link>
                         </div>

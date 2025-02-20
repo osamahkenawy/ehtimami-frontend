@@ -529,9 +529,9 @@ const routes: RouteRecordRaw[] = [
 
     // authentication
     {
-        path: '/auth/boxed-signin',
-        name: 'boxed-signin',
-        component: () => import(/* webpackChunkName: "auth-boxed-signin" */ '../views/auth/boxed-signin.vue'),
+        path: '/auth/ehtimami-signin',
+        name: 'ehtimami-signin',
+        component: () => import(/* webpackChunkName: "auth-ehtimami-signin" */ '../views/auth/boxed-signin.vue'),
         meta: { layout: 'auth' },
     },
     {

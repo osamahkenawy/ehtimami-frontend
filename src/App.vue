@@ -20,7 +20,7 @@
     const store = useAppStore();
 
     // meta
-    useMeta({ title: 'WIOT360' });
+    useMeta({ title: 'Ehtimami' });
 
     const mainLayout = computed(() => {
         return store.mainLayout === 'auth' ? authLayout : appLayout;

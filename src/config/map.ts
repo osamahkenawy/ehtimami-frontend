@@ -8,7 +8,7 @@ const mapConfig = {
   tileLayerOptions: {
     minZoom: 6,
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">Wiot360</a>',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">Ehtimami</a>',
   },
   iconSettings: {
     iconSize: [40, 40],

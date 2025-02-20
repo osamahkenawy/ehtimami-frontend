@@ -7,7 +7,7 @@
                         <!-- <img class="w-8 ltr:-ml-1 rtl:-mr-1 inline" src="/assets/images/wathiq-logo.ico" alt="" />
                         <span
                             class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle hidden md:inline dark:text-white-light transition-all duration-300"
-                            >WIOT360</span
+                            >Ehtimami</span
                         > -->
                     </router-link>
 
@@ -329,7 +329,7 @@
                                         </router-link>
                                     </li>
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                        <router-link to="/auth/boxed-signin" class="text-danger !py-3" @click="close()">
+                                        <router-link to="/auth/ehtimami-signin" class="text-danger !py-3" @click="close()">
                                             <icon-logout class="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
 
                                             Sign Out
@@ -766,7 +766,7 @@
                                     <router-link to="/auth/cover-login" target="_blank">{{ $t('login_cover') }}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/auth/boxed-signin" target="_blank">{{ $t('login_boxed') }}</router-link>
+                                    <router-link to="/auth/ehtimami-signin" target="_blank">{{ $t('login_boxed') }}</router-link>
                                 </li>
                             </ul>
                         </li>
@@ -851,7 +851,7 @@
                             <router-link to="/widgets">{{ $t('widgets') }}</router-link>
                         </li>
                         <li>
-                            <a href="https://WIOT360.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
+                            <a href="https://Ehtimami.sbthemes.com" target="_blank">{{ $t('documentation') }}</a>
                         </li>
                     </ul>
                 </li>
