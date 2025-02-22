@@ -5,7 +5,7 @@
                 <div class="flex justify-between flex-wrap px-4">
                     <div class="mb-6 lg:w-1/2 w-full">
                         <div class="flex items-center text-black dark:text-white shrink-0">
-                            <img src="/assets/images/wathiq-logo.ico" alt="" class="w-14" />
+                            <img src="/assets/images/ehtimamiIcon.ico" alt="" class="w-14" />
                         </div>
                         <div class="space-y-1 mt-6 text-gray-500 dark:text-gray-400">
                             <div>13 Tetrick Road, Cypress Gardens, Florida, 33884, US</div>

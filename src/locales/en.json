@@ -2,7 +2,7 @@
     "dashboard": "Dashboard",
     "sales": "Sales",
     "analytics": "Analytics",
-    "apps": "Company",
+    "apps": "Ehtimami",
     "components": "Components",
     "elements": "Elements",
     "font_icons": "Font Icons",
@@ -24,7 +24,7 @@
     "crypto": "Crypto",
     "chat": "Chat",
     "livemap": "Livemap",
-    "staff": "Staff",
+    
     "mailbox": "Mailbox",
     "todo_list": "Todo List",
     "notes": "Notes",
@@ -141,6 +141,23 @@
     "calendar": "Calendar",
     "timezone": "Timezone",
     "HR": "Human Resources",
-    "edit-chart": "Edit Org Chart"
+    "edit-chart": "Edit Org Chart",
+    "login_success_title": "Login Successful",
+    "login_success_message": "You have successfully logged in!",
+    "login_failed_title": "Login Failed",
+    "error_occurred": "An error occurred.",
+    "try_again": "Try Again",
+    "ok": "OK",
+    "email": "Email",
+    "password": "Password",
+    "enter_email_password": "Enter your email and password to login",
+    "sign_in": "Sign in",
+    "no_account": "Don't have an account?",
+    "or": "Or",
+    "sign_up": "Sign up",
+    "project_name": "Ehtimami",
+    "staff": "Staff",
+    "schools": "Schools"
+
 
 }

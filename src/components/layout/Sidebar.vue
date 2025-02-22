@@ -4,8 +4,8 @@
             <div class="bg-white dark:bg-[#0e1726] h-full">
                 <div class="flex justify-between items-center px-4 py-3">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
-                        <img class="w-8 ml-[5px] flex-none" src="/assets/images/wathiq-logo.ico" alt="" />
-                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">Ehtimami</span>
+                        <img class="w-20 ml-[5px] flex-none" src="/assets/images/ehtimamiLogo.svg" alt="" />
+                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{{ $t('project_name') }}</span>
                     </router-link>
                     <a
                         href="javascript:;"
@@ -65,6 +65,17 @@
 
                         <li class="nav-item">
                             <ul>
+                                <li class="nav-item">
+                                    <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
+                                        <div class="flex items-center">
+                                            <icon-menu-scrumboard class="group-hover:!text-primary shrink-0" />
+
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('schools')
+                                            }}</span>
+                                        </div>
+                                    </router-link>
+                                </li>
                                 <li class="nav-item">
                                     <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">

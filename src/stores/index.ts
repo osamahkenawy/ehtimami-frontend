@@ -30,7 +30,7 @@ export const useAppStore = defineStore('app', {
             { code: 'es', name: 'Spanish' },
             { code: 'sv', name: 'Swedish' },
             { code: 'tr', name: 'Turkish' },
-            { code: 'ae', name: 'Arabic' },
+            { code: 'sa', name: 'Arabic' },
         ],
         isShowMainLoader: true,
         semidark: false,
@@ -101,7 +101,7 @@ export const useAppStore = defineStore('app', {
             i18n.global.locale.value = payload;
             localStorage.setItem('i18n_locale', payload);
             this.locale = payload;
-            if(this.locale?.toLowerCase() === 'ae') {
+            if(this.locale?.toLowerCase() === 'sa') {
                 this.toggleRTL('rtl');
             } else {
                 this.toggleRTL('ltr');

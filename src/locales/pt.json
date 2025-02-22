@@ -136,6 +136,20 @@
     "office-hours": "Horário de Expediente",
     "calendar": "Calendário",
     "timezone": "Fuso Horário",
-    "HR": "Recursos Humanos"
+    "HR": "Recursos Humanos",
+    "login_success_title": "Login bem-sucedido",
+    "login_success_message": "Você fez login com sucesso!",
+    "login_failed_title": "Falha no login",
+    "error_occurred": "Ocorreu um erro.",
+    "try_again": "Tente novamente",
+    "ok": "OK",
+    "email": "Email",
+    "password": "Senha",
+    "enter_email_password": "Digite seu e-mail e senha para fazer login",
+    "sign_in": "Entrar",
+    "no_account": "Não tem uma conta?",
+    "or": "Ou",
+    "sign_up": "Cadastrar-se",
+    "schools": "Escolas"
 
 }
