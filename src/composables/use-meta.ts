@@ -12,5 +12,5 @@ export const usePageTitle = (pageTitle: any) =>
     );
 
 export const useMeta = (data: any) => {
-    return useHead({ ...data, title: `${data.title} | Ehtimami Fleet Management System` });
+    return useHead({ ...data, title: `${data.title} | Ehtimami School Management System` });
 };

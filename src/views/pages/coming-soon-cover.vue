@@ -32,7 +32,7 @@
                 <div class="relative w-full px-4 pb-16 pt-6 sm:px-6 lg:max-w-[667px]">
                     <div class="mx-auto mt-5 w-full max-w-[550px] lg:mt-16">
                         <router-link to="/" class="mb-8 block lg:hidden">
-                            <img src="/assets/images/wathiq-logo.ico" alt="Logo" class="mx-auto w-10" />
+                            <img src="/assets/images/ehtimamiIcon.ico" alt="Logo" class="mx-auto w-10" />
                         </router-link>
                         <div class="mb-12">
                             <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Coming Soon</h1>

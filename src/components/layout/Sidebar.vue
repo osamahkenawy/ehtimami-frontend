@@ -4,8 +4,8 @@
             <div class="bg-white dark:bg-[#0e1726] h-full">
                 <div class="flex justify-between items-center px-4 py-3">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
-                        <img class="w-8 ml-[5px] flex-none" src="/assets/images/wathiq-logo.ico" alt="" />
-                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">Ehtimami</span>
+                        <img class="w-20 ml-[5px] flex-none" src="/assets/images/ehtimamiLogo.svg" alt="" />
+                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{{ $t('project_name') }}</span>
                     </router-link>
                     <a
                         href="javascript:;"
