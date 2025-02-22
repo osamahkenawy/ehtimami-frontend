@@ -8,7 +8,7 @@
                             <icon-trash-lines />
                             Delete
                         </button>
-                        <router-link to="/apps/invoice/add" class="btn btn-primary gap-2">
+                        <router-link to="/ehtimami/invoice/add" class="btn btn-primary gap-2">
                             <icon-plus />
                             Add New
                         </router-link>
@@ -33,7 +33,7 @@
                     nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
                 >
                     <template #invoice="data">
-                        <router-link to="/apps/invoice/preview" class="text-primary underline font-semibold hover:no-underline"
+                        <router-link to="/ehtimami/invoice/preview" class="text-primary underline font-semibold hover:no-underline"
                             >#{{ data.value.invoice }}</router-link
                         >
                     </template>
@@ -55,10 +55,10 @@
                     </template>
                     <template #actions="data">
                         <div class="flex gap-4 items-center justify-center">
-                            <router-link to="/apps/invoice/edit" class="hover:text-info">
+                            <router-link to="/ehtimami/invoice/edit" class="hover:text-info">
                                 <icon-edit class="w-4.5 h-4.5" />
                             </router-link>
-                            <router-link to="/apps/invoice/preview" class="hover:text-primary">
+                            <router-link to="/ehtimami/invoice/preview" class="hover:text-primary">
                                <icon-eye />
                             </router-link>
                             <button type="button" class="hover:text-danger" @click="deleteRow(`${data.value.id}`)">

@@ -23,7 +23,7 @@
                     <ul class="flex items-center space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
                         <li>
                             <router-link
-                                to="/apps/calendar"
+                                to="/ehtimami/calendar"
                                 class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                             >
                                 <icon-calendar />
@@ -31,7 +31,7 @@
                         </li>
                         <li>
                             <router-link
-                                to="/apps/todolist"
+                                to="/ehtimami/todolist"
                                 class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                             >
                                 <icon-edit />
@@ -39,7 +39,7 @@
                         </li>
                         <li>
                             <router-link
-                                to="/apps/chat"
+                                to="/ehtimami/chat"
                                 class="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                             >
                                 <icon-chat-notification />
@@ -315,7 +315,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/apps/mailbox" class="dark:hover:text-white" @click="close()">
+                                        <router-link to="/ehtimami/mailbox" class="dark:hover:text-white" @click="close()">
                                             <icon-mail class="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
 
                                             Inbox
@@ -385,22 +385,22 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <router-link to="/apps/chat">{{ $t('chat') }}</router-link>
+                            <router-link to="/ehtimami/chat">{{ $t('chat') }}</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/mailbox">{{ $t('mailbox') }}</router-link>
+                            <router-link to="/ehtimami/mailbox">{{ $t('mailbox') }}</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/todolist">{{ $t('todo_list') }}</router-link>
+                            <router-link to="/ehtimami/todolist">{{ $t('todo_list') }}</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/notes">{{ $t('notes') }}</router-link>
+                            <router-link to="/ehtimami/notes">{{ $t('notes') }}</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/scrumboard">{{ $t('scrumboard') }}</router-link>
+                            <router-link to="/ehtimami/scrumboard">{{ $t('scrumboard') }}</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/contacts">{{ $t('contacts') }}</router-link>
+                            <router-link to="/ehtimami/contacts">{{ $t('contacts') }}</router-link>
                         </li>
                         <li class="relative">
                             <a href="javascript:;"
@@ -413,21 +413,21 @@
                                 class="rounded absolute top-0 ltr:left-[95%] rtl:right-[95%] min-w-[180px] bg-white z-[10] text-dark dark:text-white-dark dark:bg-[#1b2e4b] shadow p-0 py-2 hidden"
                             >
                                 <li>
-                                    <router-link to="/apps/invoice/list">{{ $t('list') }}</router-link>
+                                    <router-link to="/ehtimami/invoice/list">{{ $t('list') }}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/apps/invoice/preview">{{ $t('preview') }}</router-link>
+                                    <router-link to="/ehtimami/invoice/preview">{{ $t('preview') }}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/apps/invoice/add">{{ $t('add') }}</router-link>
+                                    <router-link to="/ehtimami/invoice/add">{{ $t('add') }}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/apps/invoice/edit">{{ $t('edit') }}</router-link>
+                                    <router-link to="/ehtimami/invoice/edit">{{ $t('edit') }}</router-link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <router-link to="/apps/calendar">{{ $t('calendar') }}</router-link>
+                            <router-link to="/ehtimami/calendar">{{ $t('calendar') }}</router-link>
                         </li>
                     </ul>
                 </li>
