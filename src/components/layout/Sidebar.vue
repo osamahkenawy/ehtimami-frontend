@@ -68,6 +68,17 @@
                                 <li class="nav-item">
                                     <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
+                                            <icon-menu-scrumboard class="group-hover:!text-primary shrink-0" />
+
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('schools')
+                                            }}</span>
+                                        </div>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
+                                        <div class="flex items-center">
                                             <icon-menu-chat class="group-hover:!text-primary shrink-0" />
 
                                             <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{

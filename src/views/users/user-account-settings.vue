@@ -62,7 +62,7 @@
                                 <h6 class="text-lg font-bold mb-5">General Information</h6>
                                 <div class="flex flex-col sm:flex-row">
                                     <div class="ltr:sm:mr-4 rtl:sm:ml-4 w-full sm:w-2/12 mb-5">
-                                        <img src="/assets//images/profile-34.jpeg" alt="" class="w-20 h-20 md:w-32 md:h-32 rounded-full object-cover mx-auto" />
+                                        <img src="/assets/images/profile-34.jpeg" alt="" class="w-20 h-20 md:w-32 md:h-32 rounded-full object-cover mx-auto" />
                                     </div>
                                     <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
                                         <div>

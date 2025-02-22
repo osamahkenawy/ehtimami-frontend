@@ -2,7 +2,7 @@
     "dashboard": "Dashboard",
     "sales": "Sales",
     "analytics": "Analytics",
-    "apps": "Company",
+    "apps": "Ehtimami",
     "components": "Components",
     "elements": "Elements",
     "font_icons": "Font Icons",
@@ -24,7 +24,7 @@
     "crypto": "Crypto",
     "chat": "Chat",
     "livemap": "Livemap",
-    "staff": "Staff",
+    
     "mailbox": "Mailbox",
     "todo_list": "Todo List",
     "notes": "Notes",
@@ -155,7 +155,9 @@
     "no_account": "Don't have an account?",
     "or": "Or",
     "sign_up": "Sign up",
-    "project_name": "Ehtimami"
+    "project_name": "Ehtimami",
+    "staff": "Staff",
+    "schools": "Schools"
 
 
 }
