@@ -57,6 +57,50 @@
               </div>
             </div>
           </template>
+          <template #school_name="data">
+            <div class="flex items-center gap-2">
+              <img
+                :src="`/assets/images/profile-${getRandomNumber(1, 34)}.jpeg`"
+                class="w-9 h-9 rounded-full max-w-none"
+                alt="user-profile"
+              />
+              <div class="font-semibold">
+                {{ data.value.school_name  }}
+              </div>
+            </div>
+          </template>
+          <template #school_address="data">
+            <div class="flex items-center gap-2">
+              <AnimatedIcon :name="'vvyxyrur'" />
+              <div class="font-semibold">
+                {{ data.value.school_address  }}
+              </div>
+            </div>
+          </template>
+          <template #school_email="data">
+            <div class="flex items-center gap-2">
+              <AnimatedIcon :name="'lsdujvto'" />
+              <div class="font-semibold">
+                <a
+              :href="`mailto:${data.value.school_email}`"
+              class="text-primary hover:underline"
+              >{{ data.value.school_email }}</a
+            >
+              </div>
+            </div>
+          </template>
+          <template #school_phone="data">
+            <div class="flex items-center gap-2">
+              <AnimatedIcon :name="'xrdkdttl'" />
+              <div class="font-semibold">
+                <a
+              :href="`mailto:${data.value.school_phone}`"
+              class="text-primary hover:underline"
+              >{{ data.value.school_phone }}</a
+            >
+              </div>
+            </div>
+          </template>
           <template #country>
             <div class="flex items-center gap-2">
               <img
@@ -112,7 +156,7 @@
             >
           </template>
           <template #action="data">
-            <slot name="action" :data="toRaw(data.value)"></slot>
+            <slot name="action"  :data="toRaw(data.value)"></slot>
           </template>
         </vue3-datatable>
       </div>
@@ -129,7 +173,7 @@ import { useAppStore } from "@/stores/index";
 import { useMeta } from "@/composables/use-meta";
 import IconStar from "@/components/icon/icon-star.vue";
 import IconSearch from '@/components/icon/icon-search.vue';
-
+import { AnimatedIcon, ICONS } from "@/components/icon/animatedIcon";
 useMeta({ title: "Advanced Table" });
 const store = useAppStore();
 // Props

@@ -51,7 +51,9 @@
                     </div>
                     <div class="mx-auto w-full max-w-[440px]">
                         <div class="mb-10">
-                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">{{ $t('sign_in') }}</h1>
+                            <!-- add Logo Here  -->
+                            <img src="/assets/images/ehtimamiLogo.svg" alt="image" class="h-full w-full object-cover" />
+                            <h1 class="text-2xl font-extrabold uppercase !leading-snug text-primary md:text-4xl mt-2">{{ $t('sign_in') }}</h1>
                             <p class="text-base font-bold leading-normal text-white-dark">{{ $t('enter_email_password') }}</p>
                         </div>
                         <form class="space-y-5 dark:text-white" @submit.prevent="router.push('/')">
