@@ -532,7 +532,7 @@
                                     </div>
                                 </td>
                                 <td class="text-primary">Headphone</td>
-                                <td><router-link to="/apps/invoice/preview">#46894</router-link></td>
+                                <td><router-link to="/ehtimami/invoice/preview">#46894</router-link></td>
                                 <td>$56.07</td>
                                 <td><span class="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span></td>
                             </tr>
@@ -544,7 +544,7 @@
                                     </div>
                                 </td>
                                 <td class="text-info">Nike Sport</td>
-                                <td><router-link to="/apps/invoice/preview">#76894</router-link></td>
+                                <td><router-link to="/ehtimami/invoice/preview">#76894</router-link></td>
                                 <td>$126.04</td>
                                 <td><span class="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span></td>
                             </tr>
@@ -556,7 +556,7 @@
                                     </div>
                                 </td>
                                 <td class="text-warning">Sunglasses</td>
-                                <td><router-link to="/apps/invoice/preview">#66894</router-link></td>
+                                <td><router-link to="/ehtimami/invoice/preview">#66894</router-link></td>
                                 <td>$56.07</td>
                                 <td><span class="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span></td>
                             </tr>
@@ -568,7 +568,7 @@
                                     </div>
                                 </td>
                                 <td class="text-danger">Sport</td>
-                                <td><router-link to="/apps/invoice/preview">#75844</router-link></td>
+                                <td><router-link to="/ehtimami/invoice/preview">#75844</router-link></td>
                                 <td>$110.00</td>
                                 <td><span class="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span></td>
                             </tr>
@@ -580,7 +580,7 @@
                                     </div>
                                 </td>
                                 <td class="text-secondary">Speakers</td>
-                                <td><router-link to="/apps/invoice/preview">#46894</router-link></td>
+                                <td><router-link to="/ehtimami/invoice/preview">#46894</router-link></td>
                                 <td>$56.07</td>
                                 <td><span class="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span></td>
                             </tr>

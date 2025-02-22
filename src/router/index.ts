@@ -33,76 +33,81 @@ const routes: RouteRecordRaw[] = [
 
     // apps
     {
-        path: '/apps/chat', 
+        path: '/ehtimami/chat', 
         name: 'chat',
-        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/chat.vue'),
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/chat.vue'),
     },
     {
-        path: '/apps/trip-dispatch', 
+        path: '/ehtimami/schools', 
+        name: 'schools',
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/schools/index.vue'),
+    },
+    {
+        path: '/ehtimami/trip-dispatch', 
         name: 'trip-dispatch',
-        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/trip-dispatch.vue'),
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/trip-dispatch.vue'),
     },
     {
-        path: '/apps/livemap', 
+        path: '/ehtimami/livemap', 
         name: 'livemap',
-        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/livemap.vue'),
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/livemap.vue'),
     },
     
     {
-        path: '/apps/staff', 
+        path: '/ehtimami/staff', 
         name: 'staff',
-        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/apps/staff.vue'),
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/staff.vue'),
     },
     {
-        path: '/apps/mailbox',
+        path: '/ehtimami/mailbox',
         name: 'mailbox',
-        component: () => import(/* webpackChunkName: "apps-mailbox" */ '../views/apps/mailbox.vue'),
+        component: () => import(/* webpackChunkName: "apps-mailbox" */ '../views/ehtimami/mailbox.vue'),
     },
     {
-        path: '/apps/todolist',
+        path: '/ehtimami/todolist',
         name: 'todolist',
-        component: () => import(/* webpackChunkName: "apps-todolist" */ '../views/apps/todolist.vue'),
+        component: () => import(/* webpackChunkName: "apps-todolist" */ '../views/ehtimami/todolist.vue'),
     },
     {
-        path: '/apps/notes',
+        path: '/ehtimami/notes',
         name: 'notes',
-        component: () => import(/* webpackChunkName: "apps-notes" */ '../views/apps/notes.vue'),
+        component: () => import(/* webpackChunkName: "apps-notes" */ '../views/ehtimami/notes.vue'),
     },
     {
-        path: '/apps/scrumboard',
+        path: '/ehtimami/scrumboard',
         name: 'scrumboard',
-        component: () => import(/* webpackChunkName: "apps-scrumboard" */ '../views/apps/scrumboard.vue'),
+        component: () => import(/* webpackChunkName: "apps-scrumboard" */ '../views/ehtimami/scrumboard.vue'),
     },
     {
-        path: '/apps/contacts',
+        path: '/ehtimami/contacts',
         name: 'contacts',
-        component: () => import(/* webpackChunkName: "apps-contacts" */ '../views/apps/contacts.vue'),
+        component: () => import(/* webpackChunkName: "apps-contacts" */ '../views/ehtimami/contacts.vue'),
     },
     // invoice
     {
-        path: '/apps/invoice/list',
+        path: '/ehtimami/invoice/list',
         name: 'invoice-list',
-        component: () => import(/* webpackChunkName: "apps-invoice-list" */ '../views/apps/invoice/list.vue'),
+        component: () => import(/* webpackChunkName: "apps-invoice-list" */ '../views/ehtimami/invoice/list.vue'),
     },
     {
-        path: '/apps/invoice/preview',
+        path: '/ehtimami/invoice/preview',
         name: 'invoice-preview',
-        component: () => import(/* webpackChunkName: "apps-invoice-preview" */ '../views/apps/invoice/preview.vue'),
+        component: () => import(/* webpackChunkName: "apps-invoice-preview" */ '../views/ehtimami/invoice/preview.vue'),
     },
     {
-        path: '/apps/invoice/add',
+        path: '/ehtimami/invoice/add',
         name: 'invoice-add',
-        component: () => import(/* webpackChunkName: "apps-invoice-add" */ '../views/apps/invoice/add.vue'),
+        component: () => import(/* webpackChunkName: "apps-invoice-add" */ '../views/ehtimami/invoice/add.vue'),
     },
     {
-        path: '/apps/invoice/edit',
+        path: '/ehtimami/invoice/edit',
         name: 'invoice-edit',
-        component: () => import(/* webpackChunkName: "apps-invoice-edit" */ '../views/apps/invoice/edit.vue'),
+        component: () => import(/* webpackChunkName: "apps-invoice-edit" */ '../views/ehtimami/invoice/edit.vue'),
     },
     {
-        path: '/apps/calendar',
+        path: '/ehtimami/calendar',
         name: 'calendar',
-        component: () => import(/* webpackChunkName: "apps-calendar" */ '../views/apps/calendar.vue'),
+        component: () => import(/* webpackChunkName: "apps-calendar" */ '../views/ehtimami/calendar.vue'),
     },
 
     // components

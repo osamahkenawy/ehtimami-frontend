@@ -365,12 +365,12 @@
                                             <input type="text" class="form-input min-w-[200px]" placeholder="Enter Item Name" v-model="item.title" />
                                             <textarea class="form-textarea mt-4" placeholder="Enter Description" v-model="item.description"></textarea>
                                         </td>
-                                        <td><input type="number" class="form-input w-32" placeholder="Quantity" v-model="item.quantity" min="0" /></td>
-                                        <td><input type="number" class="form-input w-32" placeholder="Price" v-model="item.amount" min="0" /></td>
+                                        <td><input type="number" class="form-input w-32" placeholder="Quantity" v-model="item.quantity" min="0"/></td>
+                                        <td><input type="number" class="form-input w-32" placeholder="Price" v-model="item.amount" min="0"/></td>
                                         <td>${{ item.amount * item.quantity }}</td>
                                         <td>
                                             <button type="button" @click="removeItem(item)">
-                                                <icon-x class="w-5 h-5" />
+                                                <icon-x class="w-5 h-5"/>
                                             </button>
                                         </td>
                                     </tr>
@@ -385,7 +385,7 @@
                         <div class="sm:w-2/5">
                             <div class="flex items-center justify-between">
                                 <div>Subtotal</div>
-                                <div>$0.00</div>
+                                <div>$265.00</div>
                             </div>
                             <div class="flex items-center justify-between mt-4">
                                 <div>Tax(%)</div>
@@ -401,7 +401,7 @@
                             </div>
                             <div class="flex items-center justify-between mt-4 font-semibold">
                                 <div>Total</div>
-                                <div>$0.00</div>
+                                <div>$265.00</div>
                             </div>
                         </div>
                     </div>
@@ -470,13 +470,13 @@
                             Send Invoice
                         </button>
 
-                        <router-link to="/apps/invoice/preview" class="btn btn-primary w-full gap-2">
-                            <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
+                        <router-link to="/ehtimami/invoice/preview" class="btn btn-primary w-full gap-2">
+                           <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
                             Preview
                         </router-link>
 
                         <button type="button" class="btn btn-secondary w-full gap-2">
-                            <icon-download class="ltr:mr-2 rtl:ml-2 shrink-0" />
+                            <icon-download  class="ltr:mr-2 rtl:ml-2 shrink-0" />
                             Download
                         </button>
                     </div>
@@ -486,7 +486,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, reactive } from 'vue';
     import { useMeta } from '@/composables/use-meta';
 
     import IconX from '@/components/icon/icon-x.vue';
@@ -495,30 +495,30 @@
     import IconEye from '@/components/icon/icon-eye.vue';
     import IconDownload from '@/components/icon/icon-download.vue';
 
-    useMeta({ title: 'Invoice Add' });
+    useMeta({ title: 'Invoice Edit' });
 
     const items: any = ref([]);
     const selectedFile = ref(null);
-    const params = ref({
-        title: '',
-        invoiceNo: '',
+    const params = reactive({
+        title: 'Tailwind',
+        invoiceNo: '#0001',
         to: {
-            name: '',
-            email: '',
-            address: '',
-            phone: '',
+            name: 'Jesse Cory',
+            email: 'redq@company.com',
+            address: '405 Mulberry Rd. Mc Grady, NC, 28649',
+            phone: '(128) 666 070',
         },
 
-        invoiceDate: '',
+        invoiceDate: new Date().toString(),
         dueDate: '',
         bankInfo: {
-            no: '',
-            name: '',
-            swiftCode: '',
-            country: '',
-            ibanNo: '',
+            no: '1234567890',
+            name: 'Bank of America',
+            swiftCode: 'VS70134',
+            country: 'United States',
+            ibanNo: 'K456G',
         },
-        notes: '',
+        notes: 'It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!',
     });
     const currencyList = ref([
         'USD - US Dollar',
@@ -533,18 +533,34 @@
     const tax = ref<number>(0);
     const discount = ref<number>(0);
     const shippingCharge = ref<number>(0);
-    const paymentMethod = ref('');
+    const paymentMethod = ref('bank');
 
     onMounted(() => {
         //set default data
-        items.value.push({
-            id: 1,
-            title: '',
-            description: '',
-            rate: 0,
-            quantity: 0,
-            amount: 0,
-        });
+        items.value.push(
+            {
+                id: 1,
+                title: 'Calendar App Customization',
+                description: 'Make Calendar App Dynamic',
+                quantity: 2,
+                amount: 120,
+                isTax: false,
+            },
+            {
+                id: 2,
+                title: 'Chat App Customization',
+                description: 'Customized Chat Application to resolve some Bug Fixes',
+                quantity: 1,
+                amount: 25,
+                isTax: false,
+            }
+        );
+
+        let dt: Date = new Date();
+        const month = dt.getMonth() + 1 < 10 ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
+        let date = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate();
+        params.invoiceDate = dt.getFullYear() + '-' + month + '-' + date;
+        params.dueDate = dt.getFullYear() + '-' + month + '-' + date;
     });
 
     const addItem = () => {

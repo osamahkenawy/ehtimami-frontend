@@ -66,7 +66,7 @@
                         <li class="nav-item">
                             <ul>
                                 <li class="nav-item">
-                                    <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/schools" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-scrumboard class="group-hover:!text-primary shrink-0" />
 
@@ -77,7 +77,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/chat" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/chat" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-chat class="group-hover:!text-primary shrink-0" />
 
@@ -88,7 +88,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/trip-dispatch" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/trip-dispatch" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <IconTripDispatch class="group-hover:!text-primary shrink-0" />
 
@@ -99,7 +99,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/livemap" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/livemap" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-contacts class="group-hover:!text-primary shrink-0" />
 
@@ -110,7 +110,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/staff" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/staff" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-users class="group-hover:!text-primary shrink-0" />
                                             <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
@@ -120,7 +120,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/mailbox" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/mailbox" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-mailbox class="group-hover:!text-primary shrink-0" />
 
@@ -131,7 +131,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/todolist" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/todolist" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-todo class="group-hover:!text-primary shrink-0" />
 
@@ -142,7 +142,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/notes" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/notes" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-notes class="group-hover:!text-primary shrink-0" />
 
@@ -153,7 +153,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/scrumboard" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/scrumboard" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-scrumboard class="group-hover:!text-primary shrink-0" />
 
@@ -164,7 +164,7 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/apps/contacts" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/contacts" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-contacts class="group-hover:!text-primary shrink-0" />
 
@@ -196,23 +196,23 @@
                                     <vue-collapsible :isOpen="activeDropdown === 'invoice'">
                                         <ul class="sub-menu text-gray-500">
                                             <li>
-                                                <router-link to="/apps/invoice/list" @click="toggleMobileMenu">{{ $t('list') }}</router-link>
+                                                <router-link to="/ehtimami/invoice/list" @click="toggleMobileMenu">{{ $t('list') }}</router-link>
                                             </li>
                                             <li>
-                                                <router-link to="/apps/invoice/preview" @click="toggleMobileMenu">{{ $t('preview') }}</router-link>
+                                                <router-link to="/ehtimami/invoice/preview" @click="toggleMobileMenu">{{ $t('preview') }}</router-link>
                                             </li>
                                             <li>
-                                                <router-link to="/apps/invoice/add" @click="toggleMobileMenu">{{ $t('add') }}</router-link>
+                                                <router-link to="/ehtimami/invoice/add" @click="toggleMobileMenu">{{ $t('add') }}</router-link>
                                             </li>
                                             <li>
-                                                <router-link to="/apps/invoice/edit" @click="toggleMobileMenu">{{ $t('edit') }}</router-link>
+                                                <router-link to="/ehtimami/invoice/edit" @click="toggleMobileMenu">{{ $t('edit') }}</router-link>
                                             </li>
                                         </ul>
                                     </vue-collapsible>
                                 </li>
 
                                 <li class="nav-item">
-                                    <router-link to="/apps/calendar" class="group" @click="toggleMobileMenu">
+                                    <router-link to="/ehtimami/calendar" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
                                             <icon-menu-calendar class="group-hover:!text-primary shrink-0" />
 

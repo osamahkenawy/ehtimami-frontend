@@ -17,12 +17,12 @@
                 Download
             </button>
 
-            <router-link to="/apps/invoice/add" class="btn btn-secondary gap-2">
+            <router-link to="/ehtimami/invoice/add" class="btn btn-secondary gap-2">
                 <icon-plus />
                 Create
             </router-link>
 
-            <router-link to="/apps/invoice/edit" class="btn btn-warning gap-2">
+            <router-link to="/ehtimami/invoice/edit" class="btn btn-warning gap-2">
                 <icon-edit />
                 Edit
             </router-link>
