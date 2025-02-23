@@ -158,7 +158,14 @@
     "project_name": "Ehtimami",
     "staff": "Staff",
     "schools": "Schools",
-    "add-school": "Add School"
+    "add-school": "Add School",
+    "loading": "Loading...",
+  "location": {
+    "enterSchoolLocation": "Enter School Location",
+    "unknownLocation": "Unknown Location",
+    "school": "School",
+    "movedLocation": "Moved Location"
+  }
 
 
 }

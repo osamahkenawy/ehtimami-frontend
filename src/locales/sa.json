@@ -155,7 +155,14 @@
      "sign_up": "إنشاء حساب",
      "project_name": "أهتمامي",
      "staff": "المستخدمين",
-     "schools": "المدارس" 
-
+     "schools": "المدارس" ,
+     "add-school": "إضافة مدرسة",
+     "loading": "جارٍ التحميل...",
+     "location": {
+       "enterSchoolLocation": "أدخل موقع المدرسة",
+       "unknownLocation": "موقع غير معروف",
+       "school": "المدرسة",
+       "movedLocation": "الموقع المنقول"
+     }
 
 }

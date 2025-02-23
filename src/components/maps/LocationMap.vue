@@ -6,9 +6,9 @@
       @input="debounceFetchLocations"
       type="text"
       class="form-input px-4 py-2 border rounded-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out"
-      placeholder="Enter School Location"
+      :placeholder="$t('location.enterSchoolLocation')" 
     />
-    <div v-if="isLoading" class="loading">Loading...</div>
+    <div v-if="isLoading" class="loading">{{ $t("loading") }}</div> 
     
     <ul v-if="locations.length" class="location-list">
       <li v-for="location in locations" :key="location.place_id" @click="() => selectLocation(location)">
@@ -22,10 +22,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, defineEmits, watch, nextTick } from "vue";
+import { useI18n } from "vue-i18n"; // ✅ Import Vue I18n
 import "leaflet/dist/leaflet.css";
 import { AnimatedIcon } from "@/components/icon/animatedIcon";
 import * as L from "leaflet";
 import mapConfig from "@/config/map";
+
+// ✅ Initialize Vue I18n
+const { t, locale } = useI18n(); // Get current locale
 
 // Props
 const props = defineProps({
@@ -61,7 +65,7 @@ const fetchLocations = () => {
     return;
   }
   isLoading.value = true;
-  let url = `https://nominatim.openstreetmap.org/search?format=json&q=${searchQuery.value}`;
+  let url = `https://nominatim.openstreetmap.org/search?format=json&q=${searchQuery.value}&accept-language=${locale.value}`; // ✅ Add localization
   if (props.country) {
     url += `&countrycodes=${props.country}`;
   }
@@ -84,21 +88,28 @@ const schoolIcon = L.icon({
   popupAnchor: [0, -32] 
 });
 
-// Reverse Geocode Function
+// ✅ Reverse Geocode Function with Localization Support
 const reverseGeocode = async (lat: number, lon: number) => {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+  const lang = locale.value; // ✅ Get current language
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=${lang}`; // ✅ Request translated data
+  
   try {
     const res = await fetch(url);
     const data = await res.json();
     
     return {
-      address: data.display_name || "Unknown Location",
+      address: data.display_name || t("location.unknownLocation"), // ✅ Localized "Unknown Location"
       school_region: data.address?.state || "",
       school_city: data.address?.city || data.address?.town || data.address?.village || "",
       school_country: data.address?.country || ""
     };
   } catch (error) {
-    return { address: "Unknown Location", school_region: "", school_city: "", school_country: "" };
+    return { 
+      address: t("location.unknownLocation"), // ✅ Localized fallback
+      school_region: "", 
+      school_city: "", 
+      school_country: "" 
+    };
   }
 };
 
@@ -117,7 +128,7 @@ const selectLocation = async (location: { lat: string; lon: string; display_name
     draggable: true
   })
     .addTo(map.value)
-    .bindPopup(`<b>School:</b> ${location.display_name}`)
+    .bindPopup(`<b>${t("location.school")}:</b> ${location.display_name}`) // ✅ Localized "School"
     .openPopup();
 
   map.value.setView([parseFloat(location.lat), parseFloat(location.lon)], 15);
@@ -139,7 +150,7 @@ const selectLocation = async (location: { lat: string; lon: string; display_name
     if (newPos) {
       const newGeoData = await reverseGeocode(newPos.lat, newPos.lng);
       searchQuery.value = newGeoData.address;
-      marker.value?.setPopupContent(`${newGeoData.address}`).openPopup();
+      marker.value?.setPopupContent(`<b>${t("location.movedLocation")}:</b> ${newGeoData.address}`).openPopup(); // ✅ Localized "Moved Location"
       emit("locationSelected", { 
         lat: newPos.lat, 
         lon: newPos.lng, 
