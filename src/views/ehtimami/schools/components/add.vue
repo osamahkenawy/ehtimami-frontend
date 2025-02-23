@@ -6,7 +6,12 @@
           <button type="button" class="btn btn-outline-primary">
             {{ $t("cancel") }}
           </button>
-          <button type="submit" form="schoolForm" class="btn btn-primary ltr:ml-2 rtl:mr-2" :disabled="isSubmitting">
+          <button 
+            type="submit" 
+            form="schoolForm" 
+            class="btn btn-primary ltr:ml-2 rtl:mr-2" 
+            :disabled="isSubmitting"
+          >
             {{ isSubmitting ? $t("loading") : $t("submit") }}
           </button>
         </div>
@@ -15,6 +20,7 @@
       <div class="flex flex-col lg:flex-row gap-6">
         <div class="xl:w-[30rem] w-full">
           <form id="schoolForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
+            <!-- School Info -->
             <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
               <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
                 {{ $t("school_form.schoolInfo") }}
@@ -56,6 +62,7 @@
               </div>
             </div>
   
+            <!-- Contact Details -->
             <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
               <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
                 {{ $t("school_form.contactDetails") }}
@@ -86,6 +93,7 @@
           </form>
         </div>
   
+        <!-- School Location -->
         <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
           <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
             {{ $t("school_form.schoolLocation") }}
@@ -142,7 +150,7 @@
   ];
   
   const submitForm = async () => {
-    if (isSubmitting.value) return; // Prevent multiple submissions
+    if (isSubmitting.value) return;
     isSubmitting.value = true;
   
     try {
