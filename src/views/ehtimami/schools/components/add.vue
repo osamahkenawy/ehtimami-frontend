@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center mb-4">
       <BreadCrumb :items="breadcrumbItems" />
     </div>
-    <div class="xl:w-96 w-full xl:mt-0 mt-6">
+    <div class="xl:w-[30rem] w-full xl:mt-0 mt-6">
       <div class="panel mb-5">
         <div
           class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
@@ -94,11 +94,12 @@
             Contact Details
           </div>
           <div class="p-5">
-            <label for="school_phone">Phone</label>
+            <div>
+                <label for="school_phone">Phone</label>
             <div class="flex">
               <select
                 v-model="params.school_phone_country"
-                class="form-select w-24"
+                class="form-select w-24 text-start"
               >
                 <option
                   v-for="country in countryList"
@@ -117,8 +118,8 @@
                 placeholder="Enter School Phone"
               />
             </div>
-          </div>
-          <div class="mt-4">
+            </div>
+            <div class="mt-4">
             <label for="school_email">Email</label>
             <input
               id="school_email"
@@ -129,6 +130,8 @@
               placeholder="Enter School Email"
             />
           </div>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -140,7 +143,7 @@ import { useMeta } from "@/composables/use-meta";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
-import "vue3-tel-input/dist/vue3-tel-input.css";
+import { countryList } from "@/fakeData/countryList";
 
 useMeta({ title: "Add School" });
 const { t } = useI18n();
@@ -163,34 +166,9 @@ const params = ref({
   education_level: "",
   school_logo: "",
   curriculum: "",
-  school_phone_country: "",
+  school_phone_country: "+966",
 });
-const countryList = ref([
-  { name: "United Arab Emirates", code: "AE", dial_code: "+971", flag: "🇦🇪" },
-  { name: "Saudi Arabia", code: "SA", dial_code: "+966", flag: "🇸🇦" },
-  { name: "Egypt", code: "EG", dial_code: "+20", flag: "🇪🇬" },
-  { name: "United States", code: "US", dial_code: "+1", flag: "🇺🇸" },
-  { name: "United Kingdom", code: "GB", dial_code: "+44", flag: "🇬🇧" },
-  { name: "India", code: "IN", dial_code: "+91", flag: "🇮🇳" },
-  { name: "Canada", code: "CA", dial_code: "+1", flag: "🇨🇦" },
-  { name: "Germany", code: "DE", dial_code: "+49", flag: "🇩🇪" },
-  { name: "France", code: "FR", dial_code: "+33", flag: "🇫🇷" },
-  { name: "Australia", code: "AU", dial_code: "+61", flag: "🇦🇺" },
-  { name: "Japan", code: "JP", dial_code: "+81", flag: "🇯🇵" },
-  { name: "Brazil", code: "BR", dial_code: "+55", flag: "🇧🇷" },
-  { name: "South Africa", code: "ZA", dial_code: "+27", flag: "🇿🇦" },
-  { name: "Russia", code: "RU", dial_code: "+7", flag: "🇷🇺" },
-  { name: "China", code: "CN", dial_code: "+86", flag: "🇨🇳" },
-  { name: "Mexico", code: "MX", dial_code: "+52", flag: "🇲🇽" },
-  { name: "Italy", code: "IT", dial_code: "+39", flag: "🇮🇹" },
-  { name: "South Korea", code: "KR", dial_code: "+82", flag: "🇰🇷" },
-  { name: "Spain", code: "ES", dial_code: "+34", flag: "🇪🇸" },
-  { name: "Argentina", code: "AR", dial_code: "+54", flag: "🇦🇷" },
-  { name: "Turkey", code: "TR", dial_code: "+90", flag: "🇹🇷" },
-  { name: "Indonesia", code: "ID", dial_code: "+62", flag: "🇮🇩" },
-  { name: "Netherlands", code: "NL", dial_code: "+31", flag: "🇳🇱" },
-  { name: "Sweden", code: "SE", dial_code: "+46", flag: "🇸🇪" },
-]);
+
 </script>
 
 <style scoped></style>
