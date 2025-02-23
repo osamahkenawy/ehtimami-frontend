@@ -85,7 +85,7 @@
               </div>
             </div>
           </div>
-          <div class="panel">
+          <div class="panel mb-5">
             <div
               class="grid xl:grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4"
             >
