@@ -13,7 +13,7 @@
           @submit.prevent="validateForm"
           class="w-full xl:mt-0 mt-6"
         >
-          <div class="panel mb-5">
+          <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
             <div
               class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
             >
@@ -85,7 +85,7 @@
               </div>
             </div>
           </div>
-          <div class="panel mb-5">
+          <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
             <div
               class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
             >
@@ -137,7 +137,13 @@
           </div>
         </form>
       </div>
-      <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">Osama</div>
+      <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+        <div
+              class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
+            >
+              School Location
+            </div>
+      </div>
     </div>
   </div>
 </template>
