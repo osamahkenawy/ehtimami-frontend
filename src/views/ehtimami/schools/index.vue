@@ -8,7 +8,7 @@
       <!-- DataTable Component -->
       <Datatable
         :headers="headers"
-        :data="rows"
+        :data="schoolStore.schools"
         searchPlaceHolder="Search..."
         :searchFilter="true"
         :noDataContent="'No Schools Available'"
@@ -16,7 +16,6 @@
         <!-- Receive raw data in the action slot -->
         <template #action="{ data }"> 
           <PopperActions
-            
             :actions="popperActions"
             :onActionSelected="handleActionSelected(data)"
           />
@@ -26,27 +25,30 @@
   </template>
   
   <script setup lang="ts">
-  import { computed } from "vue";
+  import { computed, onBeforeMount } from "vue";
   import { useI18n } from "vue-i18n";
   import IconHome from "@/components/icon/icon-home.vue";
-  import { schools, School } from "@/fakeData/schools";
-  import { useAppStore } from "@/stores/index";
   import { useRouter } from "vue-router";
-
-  const { t } = useI18n();
+  import { useSchoolStore } from "@/stores/school";
   
+  const { t } = useI18n();
+  const router = useRouter();
+  const schoolStore = useSchoolStore();
+  
+  onBeforeMount(() => {
+    schoolStore.fetchSchools(); // ✅ Fetch schools on page load
+  });
+   
   const breadcrumbItems = computed(() => [
     { label: "Home", link: "/", icon: IconHome },
     { label: t("schools") },
   ]);
   
   const handleAddClickSchool = (): void => {
-    console.log("Button clicked! Perform action here.");
     router.push("/ehtimami/schools/add"); // ✅ Redirects to add school page
-
   };
-  const router = useRouter(); 
-  // Define headers correctly mapped to School model
+  
+  // Define headers correctly mapped to API model
   const headers = [
     { field: "school_unique_id", title: "ID", isUnique: true },
     { field: "school_name", title: "School Name" },
@@ -69,11 +71,8 @@
     { label: "Delete", value: "delete" },
   ];
   
-  // Use the imported School type for rows
-  const rows = schools as School[];
-  
   // Function to handle the action selected by the user
-  const handleActionSelected = (data: School) => (action: string) => {
+  const handleActionSelected = (data: any) => (action: string) => {
     console.log(`Action '${action}' selected for`, data);
     switch (action) {
       case "download":
@@ -92,7 +91,7 @@
   };
   
   // Function to handle the delete action with raw data
-  const deleteSchool = (data: School) => {
+  const deleteSchool = (data: any) => {
     console.log("Deleting school:", data);
   };
   </script>

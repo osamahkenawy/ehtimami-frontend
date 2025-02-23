@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { ref, onMounted } from "vue";
-import { createNewSchool } from "@/services/school";
+import { createNewSchool, getAllSchools } from "@/services/school";
 
 export const useSchoolStore = defineStore("school", () => {
   // 🔹 Generate a unique school ID
   const generateSchoolId = () => {
     return `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`;
   };
-
+  const schools = ref([]); // Store all schools
   // 🔹 School Data
   const schoolData = ref({
     school_unique_id: generateSchoolId(), // ✅ Include Unique School ID
@@ -43,9 +43,19 @@ export const useSchoolStore = defineStore("school", () => {
       throw error;
     }
   };
+  const fetchSchools = async () => {
+    try {
+      const response = await getAllSchools();
+      schools.value = response.data; // ✅ Store the fetched schools
+    } catch (error) {
+      console.error("Error fetching school list:", error);
+    }
+  };
 
   return {
     schoolData,
     submitSchoolData,
+    fetchSchools,
+    schools
   };
 });

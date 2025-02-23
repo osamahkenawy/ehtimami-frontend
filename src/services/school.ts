@@ -11,3 +11,12 @@ export const createNewSchool = async (schoolData: any) => {
     throw error;
   }
 };
+export const getAllSchools = async () => {
+  try {
+    const response = await api.get(`${API_URL}/get-all-schools`);
+    return response.data; // ✅ Return school data
+  } catch (error) {
+    console.error("Error fetching schools:", error);
+    throw error;
+  }
+};
