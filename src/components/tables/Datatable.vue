@@ -59,24 +59,31 @@
           </template>
           <template #school_name="data">
             <div class="flex items-center gap-2">
-              <img
-                :src="`/assets/images/profile-${getRandomNumber(1, 34)}.jpeg`"
-                class="w-9 h-9 rounded-full max-w-none"
-                alt="user-profile"
-              />
+              
               <div class="font-semibold">
                 {{ data.value.school_name  }}
               </div>
             </div>
           </template>
-          <template #school_address="data">
+          <template #school_address="{ value }">
             <div class="flex items-center gap-2">
               <AnimatedIcon :name="'vvyxyrur'" />
-              <div class="font-semibold">
-                {{ data.value.school_address  }}
+              <div 
+                class="font-semibold truncate max-w-[200px]" 
+                v-tippy="value.school_address"
+              >
+                {{ truncateAddress(value.school_address) }}
               </div>
             </div>
           </template>
+          <template #school_type="{ value }">
+            <div class="flex items-center gap-2">
+              <div class="font-semibold">
+                {{ formatSchoolType(value.school_type) }}
+              </div>
+            </div>
+          </template>
+
           <template #school_email="data">
             <div class="flex items-center gap-2">
               <AnimatedIcon :name="'lsdujvto'" />
@@ -211,7 +218,15 @@ const props = defineProps({
 // multi language
 const i18n = reactive(useI18n());
 const search = ref("");
-
+const truncateAddress = (address: string): string => {
+  return address.length > 30 ? address.substring(0, 30) + "..." : address;
+};
+const formatSchoolType = (type: string): string => {
+  return type
+    .toLowerCase() // Convert to lowercase
+    .replace(/_/g, " ") // Replace underscores with spaces
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+};
 const countryList = [
   { code: "AE", name: "United Arab Emirates" },
   { code: "AR", name: "Argentina" },

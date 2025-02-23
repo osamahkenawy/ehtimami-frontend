@@ -58,7 +58,6 @@
     { field: "school_email", title: "Email" },
     { field: "school_phone", title: "Phone" },
     { field: "school_type", title: "School Type" },
-    { field: "curriculum", title: "Curriculum", sort: false },
     { field: "status", title: "Status", sort: false },
     { field: "action", title: "Action", sort: false },
   ];
