@@ -1,100 +1,127 @@
 <template>
   <div>
-    <div class="full-map" id="map"></div>
+     
+    <input id="location_search" v-model="searchQuery" @input="debounceFetchLocations" type="text" class="form-input px-4 py-2 border rounded-md focus:outline-none focus:ring-2  transition duration-200 ease-in-out"  placeholder="Enter Location" />
+    <div v-if="isLoading" class="loading">Loading...</div>
+    <ul v-if="locations.length" class="location-list">
+      <li v-for="location in locations" :key="location.place_id" @click="selectLocation(location)">
+        <AnimatedIcon :name="'onmwuuox'" /> {{ location.display_name }}
+      </li>
+    </ul>
+    <div class="full-map mt-4" id="map"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
-import 'leaflet/dist/leaflet.css';
-import * as L from 'leaflet';
-import 'leaflet.markercluster/dist/MarkerCluster.css';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import 'leaflet.markercluster';
-import mapConfig from '@/config/map';
-import markerShadow from '@/assets/images/map/markers/marker-shadow.png';
+import { ref, onMounted, defineProps, defineEmits, watch } from "vue";
+import "leaflet/dist/leaflet.css";
+import { AnimatedIcon } from "@/components/icon/animatedIcon";
+import * as L from "leaflet";
+import mapConfig from "@/config/map";
 
-// Import the default vehicle icon directly
-import defaultVehicleIcon from '@/assets/images/map/vehicles/motorcycle/grey.svg';
-
-// Props to accept vehicles array
 const props = defineProps({
-  vehicles: {
-    type: Array,
-    required: true
+  country: {
+    type: String,
+    required: false,
+    default: ""
   }
 });
 
-const initialMap = ref<L.Map | null>(null);
-const markersLayer = ref<L.MarkerClusterGroup | null>(null);
+const searchQuery = ref("");
+const locations = ref<Array<{ place_id: string; lat: string; lon: string; display_name: string }>>([]);
+const map = ref<L.Map | null>(null);
+const marker = ref<L.Marker | null>(null);
+const isLoading = ref(false);
+const emit = defineEmits(["locationSelected"]);
+let debounceTimeout: ReturnType<typeof setTimeout>;
 
-// Custom icon
-const myIcon = L.icon({
-  iconUrl: defaultVehicleIcon, // Use the imported image
-  ...mapConfig.iconSettings,
-  shadowUrl: markerShadow
-});
-
-// Function to add vehicle markers to the map
-const addVehicleMarkers = (vehicles) => {
-  if (!markersLayer.value) return;
-
-  // Clear existing markers
-  markersLayer.value.clearLayers();
-
-  // Add new markers for each vehicle
-  vehicles.forEach(vehicle => {
-    const marker = L.marker([vehicle.location.lat, vehicle.location.lng], { icon: myIcon })
-      .bindPopup(`
-        <strong>${vehicle.name}</strong><br>
-        Plate: ${vehicle.plate}<br>
-        Speed: ${vehicle.speed.value} ${vehicle.speed.unit}<br>
-        Status: ${vehicle.driving_status ? 'Driving' : 'Idle'}
-      `);
-    markersLayer.value!.addLayer(marker); // Add marker to marker cluster group
-  });
-
-  // Fit map to show all markers
-  if (vehicles.length > 0) {
-    const bounds = L.latLngBounds(vehicles.map(vehicle => [vehicle.location.lat, vehicle.location.lng]));
-    initialMap.value!.fitBounds(bounds);
-  }
+const debounceFetchLocations = () => {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    fetchLocations();
+  }, 500);
 };
 
-onMounted(() => {
-  // Initialize the map
-  initialMap.value = L.map('map', {
-    zoomControl: false,
-    zoom: mapConfig.zoom,
-    zoomAnimation: false,
-    fadeAnimation: true,
-    markerZoomAnimation: true
-  }).setView([mapConfig.center.lat, mapConfig.center.lng], mapConfig.zoom);
+const fetchLocations = () => {
+  if (!searchQuery.value) {
+    locations.value = [];
+    return;
+  }
+  isLoading.value = true;
+  let url = `https://nominatim.openstreetmap.org/search?format=json&q=${searchQuery.value}`;
+  if (props.country) {
+    url += `&countrycodes=${props.country}`;
+  }
+  
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.length === 0 && props.country) {
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${searchQuery.value}`)
+          .then((res) => res.json())
+          .then((globalData) => {
+            locations.value = globalData;
+          });
+      } else {
+        locations.value = data;
+      }
+    })
+    .finally(() => {
+      isLoading.value = false;
+    });
+};
 
-  // Add tile layer
-  L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions).addTo(initialMap.value);
+const selectLocation = (location: { lat: string; lon: string; display_name: string }) => {
+  if (!map.value) return;
+  if (marker.value) marker.value.remove();
+  marker.value = L.marker([parseFloat(location.lat), parseFloat(location.lon)])
+    .addTo(map.value)
+    .bindPopup(location.display_name)
+    .openPopup();
+  map.value.setView([parseFloat(location.lat), parseFloat(location.lon)], 15);
+  emit("locationSelected", { lat: parseFloat(location.lat), lon: parseFloat(location.lon), address: location.display_name });
+  locations.value = [];
+};
 
-  // Initialize marker cluster group
-  markersLayer.value = L.markerClusterGroup();
-  initialMap.value.addLayer(markersLayer.value);
-
-  // Add initial vehicle markers
-  addVehicleMarkers(props.vehicles);
-
-  // Watch for changes in the vehicles array and update the markers dynamically
-  watch(() => props.vehicles, (newVehicles) => {
-    addVehicleMarkers(newVehicles);
-  }, { immediate: true });
-
-  // Add zoom control
-  L.control.zoom({ position: 'topright' }).addTo(initialMap.value);
-});
-
-// Clean up on unmount
-onUnmounted(() => {
-  if (initialMap.value) {
-    initialMap.value.remove();
+// Watch for clearing input
+watch(searchQuery, (newValue) => {
+  if (!newValue) {
+    locations.value = [];
   }
 });
+
+onMounted(() => {
+  map.value = L.map("map").setView([mapConfig.center.lat, mapConfig.center.lng], mapConfig.zoom);
+  L.tileLayer(mapConfig.tileLayerUrl, mapConfig.tileLayerOptions).addTo(map.value);
+});
+
 </script>
 
+<style scoped>
+.full-map {
+  height: 300px;
+  width: 100%;
+}
+.location-list {
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+}
+.location-list li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+.location-list li:hover {
+  background: #f0f0f0;
+}
+.loading {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+</style>

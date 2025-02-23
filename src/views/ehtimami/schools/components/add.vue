@@ -19,7 +19,7 @@
             >
               School Info
             </div>
-            <div class="p-5">
+            <div class="p-5"> 
               <div>
                 <label for="school_name">Name</label>
                 <input
@@ -142,6 +142,9 @@
               class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
             >
               School Location
+            </div>
+            <div class="p-5">
+                <LocationMap />
             </div>
       </div>
     </div>
