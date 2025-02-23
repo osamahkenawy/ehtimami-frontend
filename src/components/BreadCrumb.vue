@@ -6,7 +6,7 @@
         :to="item.link"
         class="flex items-center hover:text-gray-500/70 dark:hover:text-white-dark/70"
       >
-        <component :is="item.icon" v-if="item.icon" class="w-4 h-4 mr-2"></component>
+        <component :is="item.icon" v-if="item.icon" class="w-4 h-4 ltr:mr-2 rtl:ml-2"></component>
         {{ item.label }}
       </router-link>
       <span v-else class="text-black dark:text-white-light">{{ item.label }}</span>

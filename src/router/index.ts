@@ -43,6 +43,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/schools/index.vue'),
     },
     {
+        path: '/ehtimami/schools/add', 
+        name: 'add-school',
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/schools/components/add.vue'),
+    },
+    {
         path: '/ehtimami/trip-dispatch', 
         name: 'trip-dispatch',
         component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/trip-dispatch.vue'),

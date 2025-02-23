@@ -172,7 +172,8 @@ export const ICONS: { [key: string]: string } = {
     WORKSHOP: 'bkkxwxrt',
     DELIVER: 'jiimrvrm',
     INBOX: 'ythhwomo',
-    SETTINGS: 'tmfbpplq'
+    SETTINGS: 'tmfbpplq',
+    SCHOOL: 'vvyxyrur'
   }
   
   export const TRIGGER = {

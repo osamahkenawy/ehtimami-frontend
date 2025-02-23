@@ -157,7 +157,66 @@
     "sign_up": "Sign up",
     "project_name": "Ehtimami",
     "staff": "Staff",
-    "schools": "Schools"
+    "schools": "Schools",
+    "add-school": "Add School",
+    "loading": "Loading...",
+  "location": {
+    "enterSchoolLocation": "Enter School Location",
+    "unknownLocation": "Unknown Location",
+    "school": "School",
+    "movedLocation": "Moved Location"
+  },
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "school_form": {
+    "schoolInfo": "School Info",
+    "name": "Name",
+    "enterName": "Enter School Name",
+    "type": "Type",
+    "educationLevel": "Education Level",
+    "curriculum": "Curriculum",
+    "contactDetails": "Contact Details",
+    "phone": "Phone",
+    "enterPhone": "Enter School Phone",
+    "email": "Email",
+    "enterEmail": "Enter School Email",
+    "schoolLocation": "School Location",
+    "selectType": "Select Type",
+    "selectEducationLevel": "Select Education Level",
+    "selectCurriculum": "Select Curriculum",
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "invalidPhone": "Enter a valid phone number.",
+    "schoolTypeOptions": {
+      "PRIVATE": "Private",
+      "PUBLIC": "Public",
+      "INTERNATIONAL": "International",
+      "SPECIAL_NEEDS": "Special Needs"
+    },
+
+    "educationLevelOptions": {
+      "ALL": "All Levels",
+      "PRIMARY": "Primary",
+      "INTERMEDIATE": "Intermediate",
+      "SECONDARY": "Secondary",
+      "KINDERGARTEN": "Kindergarten"
+    },
+
+    "curriculumOptions": {
+      "SAUDI_NATIONAL": "Saudi National",
+      "IB": "IB",
+      "AMERICAN": "American",
+      "BRITISH": "British",
+      "FRENCH": "French",
+      "OTHER": "Other"
+    },
+    "schoolId": "School ID",
+    "successMessage": "School added successfully!",
+    "errorMessage": "Failed to add school. Please try again."
+  }
 
 
 }
