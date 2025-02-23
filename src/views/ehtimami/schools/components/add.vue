@@ -183,6 +183,10 @@
   const submitForm = async () => {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
+
+  // ✅ Merge country code with phone number
+  schoolStore.schoolData.school_phone = `${schoolStore.schoolData.school_phone_country}${schoolStore.schoolData.school_phone}`.replace(/\s+/g, ""); 
+
   const toast: any = Swal.mixin({
             toast: true,
             position: 'top',
