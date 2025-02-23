@@ -3,7 +3,7 @@
       <div class="flex justify-between items-center mb-4">
         <BreadCrumb :items="breadcrumbItems" />
         <div class="flex">
-          <button type="button" class="btn btn-outline-primary">
+          <button type="button" @click="cancelForm" class="btn btn-outline-primary">
             {{ $t("cancel") }}
           </button>
           <button 
@@ -125,11 +125,13 @@
   import { useSchoolStore } from "@/stores/school";
 
   import Swal from 'sweetalert2';
+  import { useRouter } from "vue-router";
+
   useMeta({ title: "Add School" });
   const { t } = useI18n();
   const schoolStore = useSchoolStore();
   const isSubmitting = ref(false);
-  
+  const router = useRouter(); // ✅ Initialize Router
   const breadcrumbItems = computed(() => [
     { label: t("breadcrumb.home"), link: "/", icon: IconHome },
     { label: t("schools"), link: "/ehtimami/schools" },
@@ -159,6 +161,24 @@
     { value: "FRENCH", label: "school_form.curriculumOptions.FRENCH" },
     { value: "OTHER", label: "school_form.curriculumOptions.OTHER" }
   ];
+  const resetForm = () => {
+  schoolStore.schoolData = {
+    school_unique_id: `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
+    school_name: "",
+    school_type: "PRIVATE",
+    education_level: "ALL",
+    curriculum: "SAUDI_NATIONAL",
+    school_phone_country: "+966",
+    school_phone: "",
+    school_email: "",
+    school_address: "",
+    school_lat: 0,
+    school_lng: 0,
+    school_region: "",
+    school_city: "",
+    school_country: "",
+  };
+};
  
   const submitForm = async () => {
   if (isSubmitting.value) return;
@@ -174,9 +194,12 @@
     await schoolStore.submitSchoolData();
     toast.fire({
             icon: "success",
-            title: t("school_form.errorMessage"),
+            title: t("school_form.successMessage"),
             padding: '10px 20px',
-        });
+        }); 
+         // ✅ Reset form and redirect
+    resetForm();
+    router.push("/ehtimami/schools"); // 🚀 Redirect to /ehtimami/schools
   } catch (error) {
         toast.fire({
             icon: "error",
@@ -188,6 +211,10 @@
   }
 };
   
+const cancelForm = () => {
+  resetForm();
+  router.push("/ehtimami/schools"); // 🚀 Redirect on cancel
+};
   const selectLocation = (location) => {
     schoolStore.schoolData.school_address = location.address || "N/A";
     schoolStore.schoolData.school_lat = location.lat || 0;
