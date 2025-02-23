@@ -2,21 +2,20 @@
     <div>
       <div class="flex justify-between items-center mb-4">
         <BreadCrumb :items="breadcrumbItems" />
-        <AddButton @click="handleAddClickSchool" />
+        <AddButton @click="handleAddClickSchool" :label="t('add_school')" />
       </div>
   
       <!-- DataTable Component -->
       <Datatable
         :headers="headers"
-        :data="rows"
-        searchPlaceHolder="Search..."
+        :data="schoolStore.schools"
+        :searchPlaceHolder="t('search_placeholder')"
         :searchFilter="true"
-        :noDataContent="'No Schools Available'"
+        :noDataContent="t('no_schools')"
       >
-        <!-- Receive raw data in the action slot -->
+        <!-- Action Slot -->
         <template #action="{ data }"> 
           <PopperActions
-            
             :actions="popperActions"
             :onActionSelected="handleActionSelected(data)"
           />
@@ -26,54 +25,62 @@
   </template>
   
   <script setup lang="ts">
-  import { computed } from "vue";
+  import { useMeta } from "@/composables/use-meta";
+  import { computed, watchEffect, onBeforeMount } from "vue";
   import { useI18n } from "vue-i18n";
   import IconHome from "@/components/icon/icon-home.vue";
-  import { schools, School } from "@/fakeData/schools";
-  import { useAppStore } from "@/stores/index";
   import { useRouter } from "vue-router";
-
-  const { t } = useI18n();
+  import { useSchoolStore } from "@/stores/school";
   
+  const { t } = useI18n();
+  const router = useRouter();
+  const schoolStore = useSchoolStore();
+  
+  // ✅ Reactively update the page title
+  watchEffect(() => {
+    useMeta({ title: t("schools") });
+  });
+  
+  // ✅ Fetch Schools Before Mount
+  onBeforeMount(() => {
+    schoolStore.fetchSchools();
+  });
+  
+  // 🏫 Breadcrumb Localization (Reactive)
   const breadcrumbItems = computed(() => [
-    { label: "Home", link: "/", icon: IconHome },
+    { label: t("breadcrumb.home"), link: "/", icon: IconHome },
     { label: t("schools") },
   ]);
   
+  // ➕ Redirect to Add School Page
   const handleAddClickSchool = (): void => {
-    console.log("Button clicked! Perform action here.");
-    router.push("/ehtimami/schools/add"); // ✅ Redirects to add school page
-
+    router.push("/ehtimami/schools/add");
   };
-  const router = useRouter(); 
-  // Define headers correctly mapped to School model
-  const headers = [
-    { field: "school_unique_id", title: "ID", isUnique: true },
-    { field: "school_name", title: "School Name" },
-    { field: "school_region", title: "Region", sort: false },
-    { field: "school_city", title: "City", sort: false },
-    { field: "school_address", title: "Address", sort: false },
-    { field: "school_email", title: "Email" },
-    { field: "school_phone", title: "Phone" },
-    { field: "school_type", title: "School Type" },
-    { field: "curriculum", title: "Curriculum", sort: false },
-    { field: "status", title: "Status", sort: false },
-    { field: "action", title: "Action", sort: false },
-  ];
   
-  // Sample actions to be passed to PopperActions
-  const popperActions = [
-    { label: "Download", value: "download" },
-    { label: "Share", value: "share" },
-    { label: "Edit", value: "edit" },
-    { label: "Delete", value: "delete" },
-  ];
+  // 📌 Localized Table Headers (Reactive)
+  const headers = computed(() => [
+    { field: "school_unique_id", title: t("id"), isUnique: true },
+    { field: "school_name", title: t("school_name") },
+    { field: "school_region", title: t("region"), sort: false },
+    { field: "school_city", title: t("city"), sort: false },
+    { field: "school_address", title: t("address"), sort: false },
+    { field: "school_email", title: t("email") },
+    { field: "school_phone", title: t("phone") },
+    { field: "school_type", title: t("school_type") },
+    { field: "status", title: t("status"), sort: false },
+    { field: "action", title: t("action"), sort: false },
+  ]);
   
-  // Use the imported School type for rows
-  const rows = schools as School[];
+  // 🎯 Localized Action Buttons (Reactive)
+  const popperActions = computed(() => [
+    { label: t("actions.download"), value: "download" },
+    { label: t("actions.share"), value: "share" },
+    { label: t("actions.edit"), value: "edit" },
+    { label: t("actions.delete"), value: "delete" },
+  ]);
   
-  // Function to handle the action selected by the user
-  const handleActionSelected = (data: School) => (action: string) => {
+  // 🎯 Handle Action Events
+  const handleActionSelected = (data: any) => (action: string) => {
     console.log(`Action '${action}' selected for`, data);
     switch (action) {
       case "download":
@@ -91,8 +98,8 @@
     }
   };
   
-  // Function to handle the delete action with raw data
-  const deleteSchool = (data: School) => {
+  // ❌ Delete School Function
+  const deleteSchool = (data: any) => {
     console.log("Deleting school:", data);
   };
   </script>

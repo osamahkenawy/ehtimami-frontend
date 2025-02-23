@@ -203,6 +203,7 @@
         }); 
          // ✅ Reset form and redirect
     resetForm();
+    schoolStore.fetchSchools();
     router.push("/ehtimami/schools"); // 🚀 Redirect to /ehtimami/schools
   } catch (error) {
         toast.fire({

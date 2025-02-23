@@ -216,6 +216,25 @@
     "schoolId": "School ID",
     "successMessage": "School added successfully!",
     "errorMessage": "Failed to add school. Please try again."
+  },
+  "home": "Home",
+  "id": "ID",
+  "school_name": "School Name",
+  "region": "Region",
+  "city": "City",
+  "address": "Address",
+  "phone": "Phone",
+  "school_type": "School Type",
+  "status": "Status",
+  "action": "Action",
+  "no_schools": "No Schools Available",
+  "search_placeholder": "Search...",
+  "add_school": "Add School",
+  "actions": {
+    "download": "Download",
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete"
   }
 
 
