@@ -181,7 +181,7 @@ import { useMeta } from "@/composables/use-meta";
 import IconStar from "@/components/icon/icon-star.vue";
 import IconSearch from '@/components/icon/icon-search.vue';
 import { AnimatedIcon, ICONS } from "@/components/icon/animatedIcon";
-useMeta({ title: "Advanced Table" });
+
 const store = useAppStore();
 // Props
 const props = defineProps({
@@ -215,8 +215,6 @@ const props = defineProps({
   }
 });
 
-// multi language
-const i18n = reactive(useI18n());
 const search = ref("");
 const truncateAddress = (address: string): string => {
   return address.length > 30 ? address.substring(0, 30) + "..." : address;

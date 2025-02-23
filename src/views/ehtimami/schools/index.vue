@@ -2,18 +2,18 @@
     <div>
       <div class="flex justify-between items-center mb-4">
         <BreadCrumb :items="breadcrumbItems" />
-        <AddButton @click="handleAddClickSchool" />
+        <AddButton @click="handleAddClickSchool" :label="t('add_school')" />
       </div>
   
       <!-- DataTable Component -->
       <Datatable
         :headers="headers"
         :data="schoolStore.schools"
-        searchPlaceHolder="Search..."
+        :searchPlaceHolder="t('search_placeholder')"
         :searchFilter="true"
-        :noDataContent="'No Schools Available'"
+        :noDataContent="t('no_schools')"
       >
-        <!-- Receive raw data in the action slot -->
+        <!-- Action Slot -->
         <template #action="{ data }"> 
           <PopperActions
             :actions="popperActions"
@@ -25,7 +25,8 @@
   </template>
   
   <script setup lang="ts">
-  import { computed, onBeforeMount } from "vue";
+  import { useMeta } from "@/composables/use-meta";
+  import { computed, watchEffect, onBeforeMount } from "vue";
   import { useI18n } from "vue-i18n";
   import IconHome from "@/components/icon/icon-home.vue";
   import { useRouter } from "vue-router";
@@ -35,42 +36,50 @@
   const router = useRouter();
   const schoolStore = useSchoolStore();
   
-  onBeforeMount(() => {
-    schoolStore.fetchSchools(); // ✅ Fetch schools on page load
+  // ✅ Reactively update the page title
+  watchEffect(() => {
+    useMeta({ title: t("schools") });
   });
-   
+  
+  // ✅ Fetch Schools Before Mount
+  onBeforeMount(() => {
+    schoolStore.fetchSchools();
+  });
+  
+  // 🏫 Breadcrumb Localization (Reactive)
   const breadcrumbItems = computed(() => [
-    { label: "Home", link: "/", icon: IconHome },
+    { label: t("breadcrumb.home"), link: "/", icon: IconHome },
     { label: t("schools") },
   ]);
   
+  // ➕ Redirect to Add School Page
   const handleAddClickSchool = (): void => {
-    router.push("/ehtimami/schools/add"); // ✅ Redirects to add school page
+    router.push("/ehtimami/schools/add");
   };
   
-  // Define headers correctly mapped to API model
-  const headers = [
-    { field: "school_unique_id", title: "ID", isUnique: true },
-    { field: "school_name", title: "School Name" },
-    { field: "school_region", title: "Region", sort: false },
-    { field: "school_city", title: "City", sort: false },
-    { field: "school_address", title: "Address", sort: false },
-    { field: "school_email", title: "Email" },
-    { field: "school_phone", title: "Phone" },
-    { field: "school_type", title: "School Type" },
-    { field: "status", title: "Status", sort: false },
-    { field: "action", title: "Action", sort: false },
-  ];
+  // 📌 Localized Table Headers (Reactive)
+  const headers = computed(() => [
+    { field: "school_unique_id", title: t("id"), isUnique: true },
+    { field: "school_name", title: t("school_name") },
+    { field: "school_region", title: t("region"), sort: false },
+    { field: "school_city", title: t("city"), sort: false },
+    { field: "school_address", title: t("address"), sort: false },
+    { field: "school_email", title: t("email") },
+    { field: "school_phone", title: t("phone") },
+    { field: "school_type", title: t("school_type") },
+    { field: "status", title: t("status"), sort: false },
+    { field: "action", title: t("action"), sort: false },
+  ]);
   
-  // Sample actions to be passed to PopperActions
-  const popperActions = [
-    { label: "Download", value: "download" },
-    { label: "Share", value: "share" },
-    { label: "Edit", value: "edit" },
-    { label: "Delete", value: "delete" },
-  ];
+  // 🎯 Localized Action Buttons (Reactive)
+  const popperActions = computed(() => [
+    { label: t("actions.download"), value: "download" },
+    { label: t("actions.share"), value: "share" },
+    { label: t("actions.edit"), value: "edit" },
+    { label: t("actions.delete"), value: "delete" },
+  ]);
   
-  // Function to handle the action selected by the user
+  // 🎯 Handle Action Events
   const handleActionSelected = (data: any) => (action: string) => {
     console.log(`Action '${action}' selected for`, data);
     switch (action) {
@@ -89,7 +98,7 @@
     }
   };
   
-  // Function to handle the delete action with raw data
+  // ❌ Delete School Function
   const deleteSchool = (data: any) => {
     console.log("Deleting school:", data);
   };

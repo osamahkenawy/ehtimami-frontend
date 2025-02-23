@@ -216,5 +216,24 @@
      "schoolId": "معرف المدرسة",
        "successMessage": "تمت إضافة المدرسة بنجاح!",
     "errorMessage": "فشل في إضافة المدرسة. يرجى المحاولة مرة أخرى."
+  },
+  "home": "الرئيسية",
+  "id": "المعرف",
+  "school_name": "اسم المدرسة",
+  "region": "المنطقة",
+  "city": "المدينة",
+  "address": "العنوان",
+  "phone": "الهاتف",
+  "school_type": "نوع المدرسة",
+  "status": "الحالة",
+  "action": "الإجراء",
+  "no_schools": "لا توجد مدارس متاحة",
+  "search_placeholder": "بحث...",
+  "add_school": "إضافة مدرسة",
+  "actions": {
+    "download": "تحميل",
+    "share": "مشاركة",
+    "edit": "تعديل",
+    "delete": "حذف"
   }
 }
