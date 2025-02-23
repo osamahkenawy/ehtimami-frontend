@@ -22,11 +22,21 @@
           <form id="schoolForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
             <!-- School Info -->
             <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-              <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
+              <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
                 {{ $t("school_form.schoolInfo") }}
               </div>
               <div class="p-5">
                 <div>
+                <label for="school_unique_id">{{ $t("school_form.schoolId") }}</label>
+                <input 
+                  id="school_unique_id" 
+                  v-model="schoolStore.schoolData.school_unique_id" 
+                  type="text" 
+                  class="form-input bg-gray-200 cursor-not-allowed"
+                  disabled
+                />
+              </div>
+                <div class="mt-4">
                   <label for="school_name">{{ $t("school_form.name") }}</label>
                   <input id="school_name" v-model="schoolStore.schoolData.school_name" type="text" class="form-input"
                     :placeholder="$t('school_form.enterName')" required />
@@ -63,8 +73,8 @@
             </div>
   
             <!-- Contact Details -->
-            <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-              <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
+            <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
+              <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
                 {{ $t("school_form.contactDetails") }}
               </div>
               <div class="p-5">
@@ -95,7 +105,7 @@
   
         <!-- School Location -->
         <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-          <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] p-5">
+          <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
             {{ $t("school_form.schoolLocation") }}
           </div>
           <div class="p-5">
@@ -113,7 +123,8 @@
   import IconHome from "@/components/icon/icon-home.vue";
   import { countryList } from "@/fakeData/countryList";
   import { useSchoolStore } from "@/stores/school";
-  
+
+  import Swal from 'sweetalert2';
   useMeta({ title: "Add School" });
   const { t } = useI18n();
   const schoolStore = useSchoolStore();
@@ -148,21 +159,34 @@
     { value: "FRENCH", label: "school_form.curriculumOptions.FRENCH" },
     { value: "OTHER", label: "school_form.curriculumOptions.OTHER" }
   ];
-  
+ 
   const submitForm = async () => {
-    if (isSubmitting.value) return;
-    isSubmitting.value = true;
-  
-    try {
-      const response = await schoolStore.submitSchoolData();
-      alert("School added successfully!");
-      console.log("API Response:", response);
-    } catch (error) {
-      alert("Failed to submit school data.");
-    } finally {
-      isSubmitting.value = false;
-    }
-  };
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
+  const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
+  try {
+    await schoolStore.submitSchoolData();
+    toast.fire({
+            icon: "success",
+            title: t("school_form.errorMessage"),
+            padding: '10px 20px',
+        });
+  } catch (error) {
+        toast.fire({
+            icon: "error",
+            title: t("school_form.errorMessage"),
+            padding: '10px 20px',
+        });
+  } finally {
+    isSubmitting.value = false;
+  }
+};
   
   const selectLocation = (location) => {
     schoolStore.schoolData.school_address = location.address || "N/A";

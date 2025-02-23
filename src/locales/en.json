@@ -212,7 +212,10 @@
       "BRITISH": "British",
       "FRENCH": "French",
       "OTHER": "Other"
-    }
+    },
+    "schoolId": "School ID",
+    "successMessage": "School added successfully!",
+    "errorMessage": "Failed to add school. Please try again."
   }
 
 
