@@ -98,7 +98,6 @@ const reverseGeocode = async (lat: number, lon: number) => {
       school_country: data.address?.country || ""
     };
   } catch (error) {
-    console.error("Reverse geocoding failed:", error);
     return { address: "Unknown Location", school_region: "", school_city: "", school_country: "" };
   }
 };
@@ -140,7 +139,7 @@ const selectLocation = async (location: { lat: string; lon: string; display_name
     if (newPos) {
       const newGeoData = await reverseGeocode(newPos.lat, newPos.lng);
       searchQuery.value = newGeoData.address;
-      marker.value?.setPopupContent(`<b>Moved Location:</b> ${newGeoData.address}`).openPopup();
+      marker.value?.setPopupContent(`${newGeoData.address}`).openPopup();
       emit("locationSelected", { 
         lat: newPos.lat, 
         lon: newPos.lng, 
@@ -180,10 +179,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.full-map {
-  height: 300px;
-  width: 100%;
-}
 .location-list {
   background: white;
   border: 1px solid #ddd;
