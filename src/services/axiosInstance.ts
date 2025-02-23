@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Read API URL from `.env`
-const baseURL = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000";
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const api = axios.create({
   baseURL, // 🔹 Uses env variable
