@@ -3,8 +3,10 @@
     <div class="flex justify-between items-center mb-4">
       <BreadCrumb :items="breadcrumbItems" />
     </div>
-    <div class="xl:w-[30rem] w-full xl:mt-0 mt-6">
-      <div class="panel mb-5">
+    <div class="flex gap-6">
+      <div class="xl:w-[30rem]">
+        <div class="w-full xl:mt-0 mt-6">
+            <div class="panel mb-5">
         <div
           class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
         >
@@ -134,6 +136,9 @@
           
         </div>
       </div>
+        </div>
+      </div>
+      <div class="panel px-0 flex-grow py-6">Osama</div>
     </div>
   </div>
 </template>
@@ -168,7 +173,6 @@ const params = ref({
   curriculum: "",
   school_phone_country: "+966",
 });
-
 </script>
 
 <style scoped></style>
