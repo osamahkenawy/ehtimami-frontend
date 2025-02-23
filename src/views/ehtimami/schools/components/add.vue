@@ -3,18 +3,13 @@
       <div class="flex justify-between items-center mb-4">
         <BreadCrumb :items="breadcrumbItems" />
         <div class="flex">
-        <button type="button" form="schoolForm" class="btn btn-outline-primary">
-          {{ $t("cancel") }}
-        </button>
-        <button
-          type="submit"
-          form="schoolForm"
-          class="btn btn-primary ltr:ml-2 rtl:mr-2"
-          @click="submitForm"
-        >
-          {{ $t("submit") }}
-        </button>
-      </div>
+          <button type="button" class="btn btn-outline-primary">
+            {{ $t("cancel") }}
+          </button>
+          <button type="submit" form="schoolForm" class="btn btn-primary ltr:ml-2 rtl:mr-2" :disabled="isSubmitting">
+            {{ isSubmitting ? $t("loading") : $t("submit") }}
+          </button>
+        </div>
       </div>
   
       <div class="flex flex-col lg:flex-row gap-6">
@@ -105,7 +100,7 @@
   
   <script setup lang="ts">
   import { useMeta } from "@/composables/use-meta";
-  import { computed } from "vue";
+  import { computed, ref } from "vue";
   import { useI18n } from "vue-i18n";
   import IconHome from "@/components/icon/icon-home.vue";
   import { countryList } from "@/fakeData/countryList";
@@ -114,6 +109,7 @@
   useMeta({ title: "Add School" });
   const { t } = useI18n();
   const schoolStore = useSchoolStore();
+  const isSubmitting = ref(false);
   
   const breadcrumbItems = computed(() => [
     { label: t("breadcrumb.home"), link: "/", icon: IconHome },
@@ -146,12 +142,17 @@
   ];
   
   const submitForm = async () => {
+    if (isSubmitting.value) return; // Prevent multiple submissions
+    isSubmitting.value = true;
+  
     try {
       const response = await schoolStore.submitSchoolData();
       alert("School added successfully!");
       console.log("API Response:", response);
     } catch (error) {
       alert("Failed to submit school data.");
+    } finally {
+      isSubmitting.value = false;
     }
   };
   
