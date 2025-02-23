@@ -216,11 +216,16 @@ const validateForm = () => {
   }
   alert("Form submitted successfully!");
 };
-const selectLocation = (va) => {
-    console.log('selectLocation', va)
-    
+const selectLocation = (location) => {
+  console.log("Location Selected:", location);
 
-}
+  params.value.school_address = location.address || "N/A"; // Default to "N/A" if missing
+  params.value.school_lat = location.lat || 0; // Default to 0 if missing
+  params.value.school_lng = location.lon || 0; // Default to 0 if missing
+  params.value.school_region = location.school_region || "N/A";
+  params.value.school_city = location.school_city || "N/A";
+  params.value.school_country = location.school_country || "N/A";
+};
 </script>
 
 <style scoped></style>
