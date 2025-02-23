@@ -31,7 +31,8 @@
   import IconHome from "@/components/icon/icon-home.vue";
   import { schools, School } from "@/fakeData/schools";
   import { useAppStore } from "@/stores/index";
-  
+  import { useRouter } from "vue-router";
+
   const { t } = useI18n();
   
   const breadcrumbItems = computed(() => [
@@ -41,8 +42,10 @@
   
   const handleAddClickSchool = (): void => {
     console.log("Button clicked! Perform action here.");
+    router.push("/ehtimami/schools/add"); // ✅ Redirects to add school page
+
   };
-  
+  const router = useRouter(); 
   // Define headers correctly mapped to School model
   const headers = [
     { field: "school_unique_id", title: "ID", isUnique: true },
