@@ -1,155 +1,112 @@
 <template>
-  <div>
-    <div class="flex justify-between items-center mb-4">
-      <BreadCrumb :items="breadcrumbItems" />
-      <button type="submit" form="schoolForm" class="btn-primary">
-        Submit
-      </button>
-    </div>
-    <div class="flex flex-col lg:flex-row gap-6">
-      <div class="xl:w-[30rem] w-full">
-        <form
-          id="schoolForm"
-          @submit.prevent="validateForm"
-          class="w-full xl:mt-0 mt-6"
-        >
-          <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-            <div
-              class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
-            >
-              School Info
-            </div>
-            <div class="p-5"> 
-              <div>
-                <label for="school_name">Name</label>
-                <input
-                  id="school_name"
-                  v-model="params.school_name"
-                  name="school_name"
-                  type="text"
-                  class="form-input"
-                  placeholder="Enter School Name"
-                  required
-                />
+    <div>
+      <div class="flex justify-between items-center mb-4">
+        <BreadCrumb :items="breadcrumbItems" />
+     
+        <div class="flex">
+           
+             <button type="button" form="schoolForm" class="btn btn-outline-primary">
+                {{ $t("cancel") }}</button>
+                <button type="submit" form="schoolForm"class="btn btn-primary  ltr:ml-2 rtl:mr-2">
+                    {{ $t("submit") }}</button>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-6">
+        <div class="xl:w-[30rem] w-full">
+          <form id="schoolForm" @submit.prevent="validateForm" class="w-full xl:mt-0 mt-6">
+            <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+              <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
+                {{ $t("school_form.schoolInfo") }}
               </div>
-              <div class="mt-4">
-                <label for="school_type">Type</label>
-                <select
-                  id="school_type"
-                  v-model="params.school_type"
-                  class="form-select"
-                  required
-                >
-                  <option
-                    v-for="option in schoolTypeOptions"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </div>
-              <div class="mt-4">
-                <label for="education_level">Education Level</label>
-                <select
-                  id="education_level"
-                  v-model="params.education_level"
-                  class="form-select"
-                  required
-                >
-                  <option
-                    v-for="option in educationLevelOptions"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </div>
-              <div class="mt-4">
-                <label for="curriculum">Curriculum</label>
-                <select
-                  id="curriculum"
-                  v-model="params.curriculum"
-                  class="form-select"
-                  required
-                >
-                  <option
-                    v-for="option in curriculumOptions"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-            <div
-              class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
-            >
-              Contact Details
-            </div>
-            <div class="p-5">
-              <div>
-                <label for="school_phone">Phone</label>
-                <div class="flex">
-                  <select
-                    v-model="params.school_phone_country"
-                    class="form-select w-24 text-start"
+              <div class="p-5"> 
+                <div>
+                  <label for="school_name">{{ $t("school_form.name") }}</label>
+                  <input
+                    id="school_name"
+                    v-model="params.school_name"
+                    type="text"
+                    class="form-input"
+                    :placeholder="$t('school_form.enterName')"
                     required
-                  >
-                    <option
-                      v-for="country in countryList"
-                      :key="country.code"
-                      :value="country.dial_code"
-                    >
-                      {{ country.flag }} {{ country.dial_code }}
+                  />
+                </div>
+                <div class="mt-4">
+                  <label for="school_type">{{ $t("school_form.type") }}</label>
+                  <select id="school_type" v-model="params.school_type" class="form-select" required>
+                    <option v-for="option in schoolTypeOptions" :key="option.value" :value="option.value">
+                      {{ $t(option.label) }}
                     </option>
                   </select>
+                </div>
+                <div class="mt-4">
+                  <label for="education_level">{{ $t("school_form.educationLevel") }}</label>
+                  <select id="education_level" v-model="params.education_level" class="form-select" required>
+                    <option v-for="option in educationLevelOptions" :key="option.value" :value="option.value">
+                      {{ $t(option.label) }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mt-4">
+                  <label for="curriculum">{{ $t("school_form.curriculum") }}</label>
+                  <select id="curriculum" v-model="params.curriculum" class="form-select" required>
+                    <option v-for="option in curriculumOptions" :key="option.value" :value="option.value">
+                      {{ $t(option.label) }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+              <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
+                {{ $t("school_form.contactDetails") }}
+              </div>
+              <div class="p-5">
+                <div>
+                  <label for="school_phone">{{ $t("school_form.phone") }}</label>
+                  <div class="flex">
+                    <select v-model="params.school_phone_country" class="form-select w-24 text-start" required>
+                      <option v-for="country in countryList" :key="country.code" :value="country.dial_code">
+                        {{ country.flag }} {{ country.dial_code }}
+                      </option>
+                    </select>
+                    <input
+                      id="school_phone"
+                      v-model="params.school_phone"
+                      type="tel"
+                      class="form-input flex-grow"
+                      :placeholder="$t('school_form.enterPhone')"
+                      required
+                      pattern="^[0-9]{7,15}$"
+                    />
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <label for="school_email">{{ $t("school_form.email") }}</label>
                   <input
-                    id="school_phone"
-                    v-model="params.school_phone"
-                    name="school_phone"
-                    type="tel"
-                    class="form-input flex-grow"
-                    placeholder="Enter School Phone"
+                    id="school_email"
+                    v-model="params.school_email"
+                    type="email"
+                    class="form-input"
+                    :placeholder="$t('school_form.enterEmail')"
                     required
-                    pattern="^[0-9]{7,15}$"
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                   />
                 </div>
               </div>
-              <div class="mt-4">
-                <label for="school_email">Email</label>
-                <input
-                  id="school_email"
-                  v-model="params.school_email"
-                  type="email"
-                  name="school_email"
-                  class="form-input"
-                  placeholder="Enter School Email"
-                  required
-                  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-                />
-              </div>
             </div>
+          </form>
+        </div>
+        <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+          <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
+            {{ $t("school_form.schoolLocation") }}
           </div>
-        </form>
-      </div>
-      <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-        <div
-              class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
-            >
-              School Location
-            </div>
-            <div class="p-5 ">
-                <LocationMap @locationSelected="selectLocation" />
-            </div>
+          <div class="p-5">
+            <LocationMap @locationSelected="selectLocation" />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</template>
+  </template>
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
@@ -157,11 +114,11 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { countryList } from "@/fakeData/countryList";
-
+import { AnimatedIcon } from "@/components/icon/animatedIcon";
 useMeta({ title: "Add School" });
 const { t } = useI18n();
 const breadcrumbItems = computed(() => [
-  { label: "Home", link: "/", icon: IconHome },
+  { label: t("breadcrumb.home"), link: "/", icon: IconHome },
   { label: t("schools"), link: "/schools" },
   { label: t("add-school") },
 ]);
@@ -182,27 +139,27 @@ const params = ref({
 });
 
 const schoolTypeOptions = [
-  { value: "PRIVATE", label: "Private" },
-  { value: "PUBLIC", label: "Public" },
-  { value: "INTERNATIONAL", label: "International" },
-  { value: "SPECIAL_NEEDS", label: "Special Needs" },
+  { value: "PRIVATE", label: "school_form.schoolTypeOptions.PRIVATE" },
+  { value: "PUBLIC", label: "school_form.schoolTypeOptions.PUBLIC" },
+  { value: "INTERNATIONAL", label: "school_form.schoolTypeOptions.INTERNATIONAL" },
+  { value: "SPECIAL_NEEDS", label: "school_form.schoolTypeOptions.SPECIAL_NEEDS" }
 ];
 
 const educationLevelOptions = [
-  { value: "ALL", label: "All" },
-  { value: "PRIMARY", label: "Primary" },
-  { value: "INTERMEDIATE", label: "Intermediate" },
-  { value: "SECONDARY", label: "Secondary" },
-  { value: "KINDERGARTEN", label: "Kindergarten" },
+  { value: "ALL", label: "school_form.educationLevelOptions.ALL" },
+  { value: "PRIMARY", label: "school_form.educationLevelOptions.PRIMARY" },
+  { value: "INTERMEDIATE", label: "school_form.educationLevelOptions.INTERMEDIATE" },
+  { value: "SECONDARY", label: "school_form.educationLevelOptions.SECONDARY" },
+  { value: "KINDERGARTEN", label: "school_form.educationLevelOptions.KINDERGARTEN" }
 ];
 
 const curriculumOptions = [
-  { value: "SAUDI_NATIONAL", label: "National" },
-  { value: "IB", label: "IB" },
-  { value: "AMERICAN", label: "American" },
-  { value: "BRITISH", label: "British" },
-  { value: "FRENCH", label: "French" },
-  { value: "OTHER", label: "Other" },
+  { value: "SAUDI_NATIONAL", label: "school_form.curriculumOptions.SAUDI_NATIONAL" },
+  { value: "IB", label: "school_form.curriculumOptions.IB" },
+  { value: "AMERICAN", label: "school_form.curriculumOptions.AMERICAN" },
+  { value: "BRITISH", label: "school_form.curriculumOptions.BRITISH" },
+  { value: "FRENCH", label: "school_form.curriculumOptions.FRENCH" },
+  { value: "OTHER", label: "school_form.curriculumOptions.OTHER" }
 ];
 
 const validateForm = () => {
