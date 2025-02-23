@@ -143,8 +143,8 @@
             >
               School Location
             </div>
-            <div class="p-5">
-                <LocationMap />
+            <div class="p-5 ">
+                <LocationMap @locationSelected="selectLocation" />
             </div>
       </div>
     </div>
@@ -173,6 +173,12 @@ const params = ref({
   school_phone_country: "+966",
   school_phone: "",
   school_email: "",
+  school_address: "",
+  school_lat: 0,
+  school_lng: 0,
+  school_region: "",
+  school_city: "",
+  school_country: ""
 });
 
 const schoolTypeOptions = [
@@ -210,6 +216,11 @@ const validateForm = () => {
   }
   alert("Form submitted successfully!");
 };
+const selectLocation = (va) => {
+    console.log('selectLocation', va)
+    
+
+}
 </script>
 
 <style scoped></style>
