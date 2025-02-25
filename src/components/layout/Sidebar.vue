@@ -43,9 +43,9 @@
                             <vue-collapsible :isOpen="activeDropdown === 'dashboard'">
                                 <ul class="sub-menu text-gray-500">
                                     <li>
-                                        <router-link to="/" @click="toggleMobileMenu">{{ $t('sales') }}</router-link>
+                                        <router-link to="/" @click="toggleMobileMenu">{{ $t('admin-dashboard') }}</router-link>
                                     </li>
-                                    <li>
+                                    <li> 
                                         <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('analytics') }}</router-link>
                                     </li>
                                     <li>
