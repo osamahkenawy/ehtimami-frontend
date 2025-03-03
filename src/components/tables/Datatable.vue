@@ -155,6 +155,14 @@
               ></apexchart>
             </div>
           </template>
+          <template #school_status="data">
+            <span
+              class="badge"
+              :class="data.value.statusId === 1 ? 'badge-outline-success' : 'badge-outline-danger'"
+            >
+              {{ data.value.statusId === 1 ? 'Active' : 'Inactive' }}
+            </span>
+          </template>
           <template #status>
             <span
               class="badge"

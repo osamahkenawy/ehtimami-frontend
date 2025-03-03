@@ -236,7 +236,10 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "admin-dashboard": "Admin Dashboard"
+  "admin-dashboard": "Admin Dashboard",
+  "classes": "classes",
+  "add_class": "Add Class",
+  "class_name": "Class Name"
 
 
 }
