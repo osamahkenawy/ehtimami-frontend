@@ -1,23 +1,28 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { createNewClass, getAllClasses, getClassById, updateClass, deleteClass, getClassesBySchoolId } from "@/services/class";
-
+import { getAllSchools } from "@/services/school";
 export const useClassStore = defineStore("class", () => {
   const classes = ref([]); // Store all classes
+  const schools = ref([]); // Store all schools
 
+  const generateSchoolId = () => {
+    return `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`;
+  };
   // Class Data
   const classData = ref({
+    class_unique_id: generateSchoolId(), // ✅ Include Unique School ID
     name: "",
     gradeLevel: "",
     capacity: 0,
-    teacherId: null,
+    teacherId: null, 
     roomNumber: "",
     status: "active",
     schedule: {},
     startDate: "",
     endDate: "",
     schoolId: null
-  });
+  }); 
 
   // Fetch all classes
   const fetchClasses = async () => {
@@ -81,7 +86,14 @@ export const useClassStore = defineStore("class", () => {
       throw error;
     }
   };
-
+  const fetchSchools = async () => {
+    try {
+      const response = await getAllSchools();
+      schools.value = response.data; // ✅ Store the fetched schools
+    } catch (error) {
+      console.error("Error fetching school list:", error);
+    }
+  };
   return {
     classes,
     classData,
@@ -90,6 +102,8 @@ export const useClassStore = defineStore("class", () => {
     fetchClassById,
     createClass,
     updateClassData,
-    deleteClassData
+    deleteClassData,
+    fetchSchools,
+    schools
   };
 });
