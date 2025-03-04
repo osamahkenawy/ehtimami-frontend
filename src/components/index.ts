@@ -15,3 +15,4 @@ export { default as PopperActions } from './tables/components/PopperActions.vue'
 export { default as DraggableTable } from './draggable/DraggableTable.vue';
 export { default as SkeletonLoader } from './SkeletonLoader.vue';
 export { default as AddButton } from './ui/AddButton.vue'; // Global Add Button
+export { default as ProfilePax } from './user/ProfilePax.vue'; // Global Profile Pax

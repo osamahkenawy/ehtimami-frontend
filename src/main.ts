@@ -14,7 +14,8 @@ import {
   Livemap,
   DraggableTable,
   SkeletonLoader,
-  AddButton
+  AddButton,
+  ProfilePax
 } from "@/components"; // Import all components here
 
 const app = createApp(App);
@@ -73,7 +74,7 @@ app.component("LocationMap", LocationMap);
 app.component("Livemap", Livemap);
 app.component("UAEPlate", UAEPlate);
 app.component("BreadCrumb", BreadCrumb);
-app.component("Datatable", Datatable);
+app.component("Datatable", Datatable)
 app.component("ShadowCard", ShadowCard);
 app.component("ListAssetTable", ListAssetTable); // ListAssetTable
 app.component("VehicleRow", VehicleRow); // VehicleRow
@@ -83,4 +84,6 @@ app.component("PopperActions", PopperActions); // PopperActions
 app.component("DraggableTable", DraggableTable); // PopperActions
 app.component("SkeletonLoader", SkeletonLoader); // SkeletonLoader
 app.component("AddButton", AddButton); // SkeletonLoader
+app.component("ProfilePax", ProfilePax); // ProfilePax
+
 app.mount("#app");
