@@ -60,11 +60,12 @@
           <template #responsible_teacher="data">
             <div class="flex items-center gap-2">
              
-              <div class="font-semibold">
-                <ProfilePax :name="data.value.teacher.firstName + ' ' + data.value.teacher.lastName" :email="data.value.teacher.email" />
-                <!-- {{ data.value.teacher.firstName + " " + data.value.teacher.lastName }} -->
+              <div class="font-semibold" v-if="data && data.value && data.value.teacher && data.value.teacher.id">
+                <ProfilePax :name="data.value.teacher?.firstName + ' ' + data.value.teacher?.lastName" :email="data.value.teacher?.email" />
               </div>
-              
+              <div v-else>
+                -
+              </div>
             </div>
           </template>
           
