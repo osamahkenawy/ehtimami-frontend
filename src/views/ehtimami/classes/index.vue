@@ -57,7 +57,7 @@ const breadcrumbItems = computed(() => [
 
 // ➕ Redirect to Add Class Page
 const handleAddClickClass = (): void => {
-  router.push("/classes/add");
+  router.push("/ehtimami/classes/add");
 };
 
 // 📌 Localized Table Headers (Reactive)
