@@ -236,5 +236,14 @@
     "edit": "تعديل",
     "delete": "حذف"
   },
-   "admin-dashboard": "لوحه تحكم المالك"
+   "admin-dashboard": "لوحه تحكم المالك",
+   "classes": "الفصول",
+   "add_class": "إضافة فصل",
+   "search_placeholder_classes": "بحث عن فصول...",
+   "no_classes": "لا توجد فصول متاحة.",
+   "class_name": "اسم الفصل",
+   "grade_level": "المستوى الدراسي",
+   "capacity": "الطاقة الاستيعابية",
+   "room_number": "رقم الغرفة",
+   "responsible_teacher": "المعلم المسؤول"
 }

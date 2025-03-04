@@ -237,9 +237,14 @@
     "delete": "Delete"
   },
   "admin-dashboard": "Admin Dashboard",
-  "classes": "classes",
+  "classes": "Classes",
   "add_class": "Add Class",
-  "class_name": "Class Name"
-
+  "search_placeholder_classes": "Search classes...",
+  "no_classes": "No classes available.",
+  "class_name": "Class Name",
+  "grade_level": "Grade Level",
+  "capacity": "Capacity",
+  "room_number": "Room Number",
+  "responsible_teacher": "Responsible Teacher"
 
 }
