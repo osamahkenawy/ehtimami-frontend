@@ -31,7 +31,7 @@
                                 @click="activeDropdown === 'dashboard' ? (activeDropdown = null) : (activeDropdown = 'dashboard')"
                             >
                                 <div class="flex items-center">
-                                    <icon-menu-dashboard class="group-hover:!text-primary shrink-0" />
+                                    <AnimatedIcon :name="'vlfhomer'" /> 
                                     <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
                                         {{ $t('dashboard') }}
                                     </span>
@@ -43,9 +43,9 @@
                             <vue-collapsible :isOpen="activeDropdown === 'dashboard'">
                                 <ul class="sub-menu text-gray-500">
                                     <li>
-                                        <router-link to="/" @click="toggleMobileMenu">{{ $t('sales') }}</router-link>
+                                        <router-link to="/" @click="toggleMobileMenu">{{ $t('admin-dashboard') }}</router-link>
                                     </li>
-                                    <li>
+                                    <li> 
                                         <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('analytics') }}</router-link>
                                     </li>
                                     <li>
@@ -68,11 +68,21 @@
                                 <li class="nav-item">
                                     <router-link to="/ehtimami/schools" class="group" @click="toggleMobileMenu">
                                         <div class="flex items-center">
-                                            <icon-menu-scrumboard class="group-hover:!text-primary shrink-0" />
-
+                                            <AnimatedIcon :name="'vvyxyrur'" /> 
                                             <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
                                                 $t('schools')
                                             }}</span>
+                                        </div>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/ehtimami/classes" class="group" @click="toggleMobileMenu">
+                                        <div class="flex items-center">
+                                            <AnimatedIcon :name="'amdfceua'" /> 
+
+                                            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
+                                                $t('classes')
+                                            }}</span> 
                                         </div>
                                     </router-link>
                                 </li>
@@ -815,6 +825,9 @@
     import IconMenuAuthentication from '@/components/icon/menu/icon-menu-authentication.vue';
     import IconMenuDocumentation from '@/components/icon/menu/icon-menu-documentation.vue';
     import iconMenuOrganization from '../icon/menu/icon-menu-organization.vue';
+    import iconMenuClass from "../icon/menu/icon-menu-class.vue"
+    import { AnimatedIcon } from "@/components/icon/animatedIcon";
+
     const store = useAppStore();
     const activeDropdown: any = ref('');
     const subActive: any = ref('');

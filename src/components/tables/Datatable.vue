@@ -57,6 +57,19 @@
               </div>
             </div>
           </template>
+          <template #responsible_teacher="data">
+            <div class="flex items-center gap-2">
+              <img
+                :src="`/assets/images/profile-${getRandomNumber(1, 34)}.jpeg`"
+                class="w-9 h-9 rounded-full max-w-none"
+                alt="user-profile"
+              />
+              <div class="font-semibold">
+                {{ data.value.teacher.firstName + " " + data.value.teacher.lastName }}
+              </div>
+            </div>
+          </template>
+          
           <template #school_name="data">
             <div class="flex items-center gap-2">
               
@@ -65,6 +78,15 @@
               </div>
             </div>
           </template>
+          <template #class_school_name="data">
+            <div class="flex items-center gap-2">
+              
+              <div class="font-semibold">
+                {{ data.value.school.school_name  }}
+              </div>
+            </div>
+          </template>
+          
           <template #school_address="{ value }">
             <div class="flex items-center gap-2">
               <AnimatedIcon :name="'vvyxyrur'" />
@@ -155,6 +177,23 @@
               ></apexchart>
             </div>
           </template>
+          <template #school_status="data">
+            <span
+              class="badge"
+              :class="data.value.statusId === 1 ? 'badge-outline-success' : 'badge-outline-danger'"
+            >
+              {{ data.value.statusId === 1 ? 'Active' : 'Inactive' }}
+            </span>
+          </template>
+          <template #class_status="data">
+            <span
+              class="badge"
+              :class="data.value.status === 'active' ? 'badge-outline-success' : 'badge-outline-danger'"
+            >
+              {{ data.value.status === 'active' ? 'Active' : 'Inactive' }}
+            </span>
+          </template>
+          
           <template #status>
             <span
               class="badge"

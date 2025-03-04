@@ -82,8 +82,8 @@ const fetchLocations = () => {
 
 // Custom Marker Icon
 const schoolIcon = L.icon({
-  iconUrl: new URL('@/assets/images/map/marker-of-no-marker.png', import.meta.url).href, 
-  iconSize: [32, 32], 
+  iconUrl: new URL('@/assets/images/map/markers/map-marker.png', import.meta.url).href, 
+  iconSize: [45, 45], 
   iconAnchor: [16, 32], 
   popupAnchor: [0, -32] 
 });
@@ -150,7 +150,7 @@ const selectLocation = async (location: { lat: string; lon: string; display_name
     if (newPos) {
       const newGeoData = await reverseGeocode(newPos.lat, newPos.lng);
       searchQuery.value = newGeoData.address;
-      marker.value?.setPopupContent(`<b>${t("location.movedLocation")}:</b> ${newGeoData.address}`).openPopup(); // ✅ Localized "Moved Location"
+      marker.value?.setPopupContent(`<b>${t("location.school")}:</b> ${newGeoData.address}`).openPopup(); // ✅ Localized "Moved Location"
       emit("locationSelected", { 
         lat: newPos.lat, 
         lon: newPos.lng, 

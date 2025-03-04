@@ -67,7 +67,7 @@
     { field: "school_email", title: t("email") },
     { field: "school_phone", title: t("phone") },
     { field: "school_type", title: t("school_type") },
-    { field: "status", title: t("status"), sort: false },
+    { field: "school_status", title: t("status"), sort: false },
     { field: "action", title: t("action"), sort: false },
   ]);
   
