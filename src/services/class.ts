@@ -1,13 +1,22 @@
 import api from "./axiosInstance";
-
+import { toRaw , unref} from "vue";
 const API_URL = `${import.meta.env.VITE_API_URL}/classes`;
+
 
 export const createNewClass = async (classData: any) => {
   try {
-    const response = await api.post(`${API_URL}/create-new-class`, classData);
+    // ✅ Unwrap the Ref first
+    const unwrappedData = unref(classData);
+
+    // ✅ Convert to raw JavaScript object
+    const rawData = toRaw(unwrappedData);
+
+    // ✅ Deep Clone to remove Vue reactivity
+    const sanitizedData = JSON.parse(JSON.stringify(rawData));
+    // ✅ Send the sanitized data
+    const response = await api.post(`${API_URL}/create-new-class`, sanitizedData);
     return response.data;
   } catch (error) {
-    console.error("API Error:", error);
     throw error;
   }
 };
