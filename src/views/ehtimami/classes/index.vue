@@ -31,6 +31,7 @@ import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useRouter } from "vue-router";
 import { useClassStore } from "@/stores/class";
+import Swal from "sweetalert2";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -72,17 +73,15 @@ const headers = computed(() => [
 // 🎯 Generate Action Buttons Based on Class Status
 const getPopperActions = (data: any) => {
   const actions = [
-    { label: t("actions.download"), value: "download" },
-    { label: t("actions.share"), value: "share" },
     { label: t("actions.edit"), value: "edit" },
     { label: t("actions.delete"), value: "delete" },
   ];
 
   // ✅ Add "Set Active/Inactive" based on status
   if (data.status === "active") {
-    actions.push({ label: t("Set Inactive"), value: "set_inactive" });
+    actions.push({ label: t("set_active"), value: "set_inactive" });
   } else {
-    actions.push({ label: t("Set Active"), value: "set_active" });
+    actions.push({ label: t("set_inactive"), value: "set_active" });
   }
 
   return actions;
@@ -115,27 +114,103 @@ const handleActionSelected = (data: any) => async (action: string) => {
 
 // ❌ Delete Class Function
 const deleteClass = (data: any) => {
-  console.log("Deleting class:", data);
-  classStore
-    .deleteClassData(data.id)
-    .then(() => {
-      classStore.fetchClasses(); // Refresh list after deletion
-    })
-    .catch((error) => {
-      console.error("Error deleting class:", error);
-    });
+  Swal.fire({
+    icon: "warning",
+    title: t("delete_class.confirm_title"),
+    text: t("delete_class.confirm_text"),
+    showCancelButton: true,
+    confirmButtonText: t("delete_class.confirm_button"),
+    cancelButtonText: t("delete_class.cancel_button"),
+    padding: "2em",
+    customClass: {
+      popup: "sweet-alerts",
+      confirmButton: "btn btn-danger",
+      cancelButton: "btn btn-outline-secondary",
+    },
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        console.log("Deleting class:", data);
+        await classStore.deleteClassData(data.id);
+        await classStore.fetchClasses(); // Refresh the list after deletion
+
+        Swal.fire({
+          title: t("delete_class.success_title"),
+          text: t("delete_class.success_text"),
+          icon: "success",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-success",
+          },
+        });
+      } catch (error) {
+        console.error("Error deleting class:", error);
+        Swal.fire({
+          title: t("delete_class.error_title"),
+          text: t("delete_class.error_text"),
+          icon: "error",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-danger",
+          },
+        });
+      }
+    }
+  });
 };
 
-// 🔄 Update Class Status (Active/Inactive)
-const updateClassStatus = async (data: any, newStatus: string) => {
-  console.log(`Updating status of class ${data.id} to ${newStatus}`);
 
-  try {
-    await classStore.updateClassData(data.id, { status: newStatus, schoolId: data.schoolId });
-    await classStore.fetchClasses(); // Refresh the list after update
-  } catch (error) {
-    console.error("Error updating class status:", error);
-  }
+// 🔄 Update Class Status (Active/Inactive)
+
+const updateClassStatus = async (data: any, newStatus: string) => {
+  Swal.fire({
+    icon: "warning",
+    title: t("class_status.confirm_title"),
+    text: t("class_status.confirm_text", { status: newStatus }),
+    showCancelButton: true,
+    confirmButtonText: t("class_status.confirm_button"),
+    cancelButtonText: t("class_status.cancel_button"),
+    padding: "2em",
+    customClass: {
+      popup: "sweet-alerts",
+      confirmButton: "btn btn-primary",
+      cancelButton: "btn btn-outline-secondary",
+    },
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        console.log(`Updating status of class ${data.id} to ${newStatus}`);
+
+        await classStore.updateClassData(data.id, {
+          status: newStatus,
+          schoolId: data.schoolId,
+        });
+
+        await classStore.fetchClasses(); // Refresh the list after update
+
+        Swal.fire({
+          title: t("class_status.success_title"),
+          text: t("class_status.success_text", { status: newStatus }),
+          icon: "success",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-success",
+          },
+        });
+      } catch (error) {
+        console.error("Error updating class status:", error);
+        Swal.fire({
+          title: t("class_status.error_title"),
+          text: t("class_status.error_text"),
+          icon: "error",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-danger",
+          },
+        });
+      }
+    }
+  });
 };
 </script>
 

@@ -277,5 +277,27 @@
    "select_time": "اختر الوقت",
    "errors": {
     "required": "هذا الحقل مطلوب"
+  },
+  "class_status": {
+    "confirm_title": "هل أنت متأكد؟",
+    "confirm_text": "هل تريد حقًا تغيير حالة الفصل إلى {status}؟",
+    "confirm_button": "نعم، قم بالتحديث!",
+    "cancel_button": "إلغاء",
+    "success_title": "تم التحديث!",
+    "success_text": "تم تحديث حالة الفصل إلى {status}.",
+    "error_title": "خطأ",
+    "error_text": "فشل تحديث حالة الفصل. يرجى المحاولة مرة أخرى."
+  },
+  "set_active": "تفعيل",
+  "set_inactive": "إلغاء التفعيل",
+  "delete_class": {
+    "confirm_title": "هل أنت متأكد؟",
+    "confirm_text": "لن تتمكن من التراجع عن هذا!",
+    "confirm_button": "حذف",
+    "cancel_button": "إلغاء",
+    "success_title": "تم الحذف!",
+    "success_text": "تم حذف الصف بنجاح.",
+    "error_title": "خطأ",
+    "error_text": "فشل في حذف الصف. يرجى المحاولة مرة أخرى."
   }
 }

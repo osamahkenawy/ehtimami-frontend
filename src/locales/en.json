@@ -277,6 +277,29 @@
   "select_time": "Select Time",
   "errors": {
     "required": "This field is required"
+  },
+  "class_status": {
+    "confirm_title": "Are you sure?",
+    "confirm_text": "Do you really want to set this class to {status}?",
+    "confirm_button": "Yes, update it!",
+    "cancel_button": "Cancel",
+    "success_title": "Updated!",
+    "success_text": "The class status has been updated to {status}.",
+    "error_title": "Error",
+    "error_text": "Failed to update class status. Please try again."
+  },
+   "set_active": "Set Active",
+  "set_inactive": "Set Inactive",
+  "delete_class": {
+    "confirm_title": "Are you sure?",
+    "confirm_text": "You won't be able to revert this!",
+    "confirm_button": "Delete",
+    "cancel_button": "Cancel",
+    "success_title": "Deleted!",
+    "success_text": "The class has been successfully deleted.",
+    "error_title": "Error",
+    "error_text": "Failed to delete the class. Please try again."
   }
+
 
 }
