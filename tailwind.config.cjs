@@ -61,6 +61,11 @@ module.exports = {
                     light: '#e0e6ed',
                     dark: '#888ea8',
                 },
+                input: {
+                    DEFAULT: '#1e3a8a', // Blue Color (Change if needed)
+                    light: '#bfdbfe', // Light Blue
+                    dark: '#1e40af', // Darker Blue for Dark Mode
+                },
             },
             fontFamily: {
                 nunito: ['Nunito', 'sans-serif'],

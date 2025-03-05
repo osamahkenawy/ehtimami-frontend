@@ -245,5 +245,32 @@
    "grade_level": "المستوى الدراسي",
    "capacity": "الطاقة الاستيعابية",
    "room_number": "رقم الغرفة",
-   "responsible_teacher": "المعلم المسؤول"
+   "responsible_teacher": "المعلم المسؤول",
+   "add-class": "إضافة فصل",
+   "class_form": {
+    "classInfo": "معلومات الصف",
+    "class_schedule": "جدول الحصص",
+     "classId": "معرف الفصل",
+     "school_name": "اسم المدرسة",
+     "class_name": "اسم الفصل",
+     "gradeLevel": "المستوى الدراسي",
+     "another_info": "معلومات إضافية",
+     "capacity": "السعة",
+     "roomNumber": "رقم الغرفة",
+     "schedule": "جدول الحصص",
+     "day": "اليوم",
+     "active": "نشط",
+     "start_time": "وقت البدء",
+     "end_time": "وقت الانتهاء"
+   },
+   "days": {
+     "monday": "الإثنين",
+     "tuesday": "الثلاثاء",
+     "wednesday": "الأربعاء",
+     "thursday": "الخميس",
+     "friday": "الجمعة",
+     "saturday": "السبت",
+     "sunday": "الأحد"
+   },
+   "select_time": "اختر الوقت"
 }

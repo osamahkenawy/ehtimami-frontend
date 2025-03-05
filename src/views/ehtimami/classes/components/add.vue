@@ -12,11 +12,14 @@
       </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-6">
+    <div class="flex flex-col lg:flex-row gap-6"> 
       <div class="xl:w-[30rem] w-full">
         <form id="classForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
           <!-- Class Information -->
           <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+              {{ $t("class_form.classInfo") }}
+            </div>
             <div class="p-5">
               <div>
                 <label for="class_unique_id">{{
@@ -76,9 +79,7 @@
             </div>
           </div>
           <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
-            <div
-              class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
-            >
+            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
               {{ $t("class_form.another_info") }}
             </div>
             <div class="p-5">
@@ -111,26 +112,27 @@
 
       <!-- Schedule Section in Table -->
       <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+        <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+              {{ $t("class_form.class_schedule") }}
+          </div>
         <div class="p-5">
-          <h3 class="text-lg font-medium">{{ $t("class_form.schedule") }}</h3>
-
           <!-- ✅ Table for Schedule -->
           <div class="table-responsive">
-            <table class="w-full border-collapse border border-gray-300">
+            <table class="w-full border-collapse border border-gray-300"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
               <thead>
-                <tr class="bg-gray-100">
-                  <th class="border border-gray-300 px-4 py-2 text-left">{{ $t("class_form.day") }}</th>
-                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.active") }}</th>
-                  <th class="border border-gray-300 px-4 py-2 text-center">{{ $t("class_form.start_time") }}</th>
-                  <th class="border border-gray-300 px-4 py-2 text-center">{{ $t("class_form.end_time") }}</th>
+                <tr class="bg-gray-100"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+                  <th class="border border-gray-300 px-4 py-2 "  :class="{ 'text-left ltr:text-left rtl:text-right': true }">{{ $t("class_form.day") }}</th>
+                  <th class="border border-gray-300 px-4 py-2" >{{ $t("class_form.active") }}</th>
+                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.start_time") }}</th>
+                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.end_time") }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(day, key) in scheduleDays" :key="key" class="text-center">
-                  <td class="border border-gray-300 px-4 py-2 text-left font-medium">{{ day.label }}</td>
-                  <td class="border border-gray-300 px-4 py-2 text-center">
+                <tr v-for="(day, key) in scheduleDays" :key="key"  :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+                  <td class="border border-gray-300 px-4 py-2 font-medium ">{{ day.label }}</td>
+                  <td class="border border-gray-300 px-4 py-2 ">
                     <label class="switch">
-                      <input type="checkbox" :checked="schedule[key].enabled" @change="toggleSchedule(key)" />
+                      <input type="checkbox" v-model="schedule[key].enabled" /> 
                       <span class="slider"></span>
                     </label>
                   </td>
@@ -281,6 +283,51 @@ const cancelForm = () => {
 
 .peer-checked ~ .absolute {
   left: 75%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 22px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #3b82f6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
 }
 </style>
 
