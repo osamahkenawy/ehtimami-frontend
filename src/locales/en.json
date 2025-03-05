@@ -289,6 +289,17 @@
     "error_text": "Failed to update class status. Please try again."
   },
    "set_active": "Set Active",
-  "set_inactive": "Set Inactive"
+  "set_inactive": "Set Inactive",
+  "delete_class": {
+    "confirm_title": "Are you sure?",
+    "confirm_text": "You won't be able to revert this!",
+    "confirm_button": "Delete",
+    "cancel_button": "Cancel",
+    "success_title": "Deleted!",
+    "success_text": "The class has been successfully deleted.",
+    "error_title": "Error",
+    "error_text": "Failed to delete the class. Please try again."
+  }
+
 
 }

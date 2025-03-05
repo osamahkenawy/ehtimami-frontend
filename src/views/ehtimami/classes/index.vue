@@ -73,8 +73,6 @@ const headers = computed(() => [
 // 🎯 Generate Action Buttons Based on Class Status
 const getPopperActions = (data: any) => {
   const actions = [
-    { label: t("actions.download"), value: "download" },
-    { label: t("actions.share"), value: "share" },
     { label: t("actions.edit"), value: "edit" },
     { label: t("actions.delete"), value: "delete" },
   ];
@@ -116,16 +114,51 @@ const handleActionSelected = (data: any) => async (action: string) => {
 
 // ❌ Delete Class Function
 const deleteClass = (data: any) => {
-  console.log("Deleting class:", data);
-  classStore
-    .deleteClassData(data.id)
-    .then(() => {
-      classStore.fetchClasses(); // Refresh list after deletion
-    })
-    .catch((error) => {
-      console.error("Error deleting class:", error);
-    });
+  Swal.fire({
+    icon: "warning",
+    title: t("delete_class.confirm_title"),
+    text: t("delete_class.confirm_text"),
+    showCancelButton: true,
+    confirmButtonText: t("delete_class.confirm_button"),
+    cancelButtonText: t("delete_class.cancel_button"),
+    padding: "2em",
+    customClass: {
+      popup: "sweet-alerts",
+      confirmButton: "btn btn-danger",
+      cancelButton: "btn btn-outline-secondary",
+    },
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        console.log("Deleting class:", data);
+        await classStore.deleteClassData(data.id);
+        await classStore.fetchClasses(); // Refresh the list after deletion
+
+        Swal.fire({
+          title: t("delete_class.success_title"),
+          text: t("delete_class.success_text"),
+          icon: "success",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-success",
+          },
+        });
+      } catch (error) {
+        console.error("Error deleting class:", error);
+        Swal.fire({
+          title: t("delete_class.error_title"),
+          text: t("delete_class.error_text"),
+          icon: "error",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-danger",
+          },
+        });
+      }
+    }
+  });
 };
+
 
 // 🔄 Update Class Status (Active/Inactive)
 
