@@ -15,7 +15,8 @@ import {
   DraggableTable,
   SkeletonLoader,
   AddButton,
-  ProfilePax
+  ProfilePax,
+  TimePickerPopup
 } from "@/components"; // Import all components here
 
 const app = createApp(App);
@@ -85,5 +86,6 @@ app.component("DraggableTable", DraggableTable); // PopperActions
 app.component("SkeletonLoader", SkeletonLoader); // SkeletonLoader
 app.component("AddButton", AddButton); // SkeletonLoader
 app.component("ProfilePax", ProfilePax); // ProfilePax
+app.component("TimePickerPopup", TimePickerPopup); // TimePickerPopup
 
 app.mount("#app");
