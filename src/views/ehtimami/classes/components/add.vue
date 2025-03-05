@@ -259,10 +259,11 @@ const submitForm = async () => {
     resetForm();
     classStore.fetchClasses();
     router.push("/ehtimami/classes"); // 🚀 Redirect to /ehtimami/schools
-  } catch (error) {
+  } catch (error: any) {
+    const errorMessage = error?.response?.data?.message || t("class_form.errorMessage");
         toast.fire({
             icon: "error",
-            title: t("class_form.errorMessage"),
+            title: errorMessage,
             padding: '10px 20px',
         });
   } finally {

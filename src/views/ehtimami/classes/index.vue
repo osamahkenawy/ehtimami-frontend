@@ -14,13 +14,12 @@
       :noDataContent="t('no_classes')"
     >
       <!-- Action Slot -->
-      <template #action="{ data }"> 
+      <template #action="{ data }">
         <PopperActions
-          :actions="popperActions" 
+          :actions="getPopperActions(data)"
           :onActionSelected="handleActionSelected(data)"
         />
       </template>
-     
     </Datatable>
   </div>
 </template>
@@ -70,16 +69,27 @@ const headers = computed(() => [
   { field: "action", title: t("action"), sort: false },
 ]);
 
-// 🎯 Localized Action Buttons (Reactive)
-const popperActions = computed(() => [
-  { label: t("actions.download"), value: "download" },
-  { label: t("actions.share"), value: "share" },
-  { label: t("actions.edit"), value: "edit" },
-  { label: t("actions.delete"), value: "delete" },
-]);
+// 🎯 Generate Action Buttons Based on Class Status
+const getPopperActions = (data: any) => {
+  const actions = [
+    { label: t("actions.download"), value: "download" },
+    { label: t("actions.share"), value: "share" },
+    { label: t("actions.edit"), value: "edit" },
+    { label: t("actions.delete"), value: "delete" },
+  ];
+
+  // ✅ Add "Set Active/Inactive" based on status
+  if (data.status === "active") {
+    actions.push({ label: t("Set Inactive"), value: "set_inactive" });
+  } else {
+    actions.push({ label: t("Set Active"), value: "set_active" });
+  }
+
+  return actions;
+};
 
 // 🎯 Handle Action Events
-const handleActionSelected = (data: any) => (action: string) => {
+const handleActionSelected = (data: any) => async (action: string) => {
   console.log(`Action '${action}' selected for`, data);
   switch (action) {
     case "download":
@@ -94,17 +104,38 @@ const handleActionSelected = (data: any) => (action: string) => {
     case "delete":
       deleteClass(data);
       break;
+    case "set_active":
+      await updateClassStatus(data, "active");
+      break;
+    case "set_inactive":
+      await updateClassStatus(data, "inactive");
+      break;
   }
 };
 
 // ❌ Delete Class Function
 const deleteClass = (data: any) => {
   console.log("Deleting class:", data);
-  classStore.deleteClassData(data.id).then(() => {
-    classStore.fetchClasses(); // Refresh list after deletion
-  }).catch(error => {
-    console.error("Error deleting class:", error);
-  });
+  classStore
+    .deleteClassData(data.id)
+    .then(() => {
+      classStore.fetchClasses(); // Refresh list after deletion
+    })
+    .catch((error) => {
+      console.error("Error deleting class:", error);
+    });
+};
+
+// 🔄 Update Class Status (Active/Inactive)
+const updateClassStatus = async (data: any, newStatus: string) => {
+  console.log(`Updating status of class ${data.id} to ${newStatus}`);
+
+  try {
+    await classStore.updateClassData(data.id, { status: newStatus, schoolId: data.schoolId });
+    await classStore.fetchClasses(); // Refresh the list after update
+  } catch (error) {
+    console.error("Error updating class status:", error);
+  }
 };
 </script>
 
