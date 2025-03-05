@@ -150,6 +150,124 @@
     "no_account": "Não tem uma conta?",
     "or": "Ou",
     "sign_up": "Cadastrar-se",
-    "schools": "Escolas"
+    "schools": "Escolas",
+    "add-school": "Adicionar Escola",
+    "loading": "Carregando...",
+    "location": {
+      "enterSchoolLocation": "Digite a localização da escola",
+      "unknownLocation": "Localização desconhecida",
+      "school": "Escola",
+      "movedLocation": "Localização movida"
+    },
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "breadcrumb": {
+      "home": "Início"
+    },
+    "school_form": {
+      "schoolInfo": "Informações da Escola",
+      "name": "Nome",
+      "enterName": "Digite o nome da escola",
+      "type": "Tipo",
+      "educationLevel": "Nível de Educação",
+      "curriculum": "Currículo",
+      "contactDetails": "Detalhes de Contato",
+      "phone": "Telefone",
+      "enterPhone": "Digite o telefone da escola",
+      "email": "E-mail",
+      "enterEmail": "Digite o e-mail da escola",
+      "schoolLocation": "Localização da Escola",
+      "selectType": "Selecione o tipo",
+      "selectEducationLevel": "Selecione o nível de educação",
+      "selectCurriculum": "Selecione o currículo",
+      "required": "Este campo é obrigatório.",
+      "invalidEmail": "Digite um endereço de e-mail válido.",
+      "invalidPhone": "Digite um número de telefone válido.",
+      "schoolTypeOptions": {
+        "PRIVATE": "Privada",
+        "PUBLIC": "Pública",
+        "INTERNATIONAL": "Internacional",
+        "SPECIAL_NEEDS": "Necessidades Especiais"
+      },
+      "educationLevelOptions": {
+        "ALL": "Todos os níveis",
+        "PRIMARY": "Primário",
+        "INTERMEDIATE": "Intermediário",
+        "SECONDARY": "Secundário",
+        "KINDERGARTEN": "Jardim de Infância"
+      },
+      "curriculumOptions": {
+        "SAUDI_NATIONAL": "Nacional Saudita",
+        "IB": "IB",
+        "AMERICAN": "Americano",
+        "BRITISH": "Britânico",
+        "FRENCH": "Francês",
+        "OTHER": "Outro"
+      },
+      "schoolId": "ID da Escola",
+      "successMessage": "Escola adicionada com sucesso!",
+      "errorMessage": "Falha ao adicionar a escola. Por favor, tente novamente."
+    },
+    "home": "Início",
+    "id": "ID",
+    "school_name": "Nome da Escola",
+    "region": "Região",
+    "city": "Cidade",
+    "address": "Endereço",
+    "phone": "Telefone",
+    "school_type": "Tipo de Escola",
+    "status": "Status",
+    "action": "Ação",
+    "no_schools": "Nenhuma escola disponível",
+    "search_placeholder": "Pesquisar...",
+    "add_school": "Adicionar Escola",
+    "actions": {
+      "download": "Baixar",
+      "share": "Compartilhar",
+      "edit": "Editar",
+      "delete": "Excluir"
+    },
+    "admin-dashboard": "Painel Administrativo",
+    "classes": "Turmas",
+    "add_class": "Adicionar Turma",
+    "search_placeholder_classes": "Pesquisar turmas...",
+    "no_classes": "Nenhuma turma disponível.",
+    "class_name": "Nome da Turma",
+    "grade_level": "Nível Escolar",
+    "capacity": "Capacidade",
+    "room_number": "Número da Sala",
+    "responsible_teacher": "Professor Responsável",
+    "add-class": "Adicionar Turma",
+    "class_form": {
+      "classInfo": "Informações da Turma",
+      "class_schedule": "Horário da Turma",
+      "classId": "ID da Turma",
+      "school_name": "Nome da Escola",
+      "class_name": "Nome da Turma",
+      "gradeLevel": "Nível Escolar",
+      "another_info": "Informações Adicionais",
+      "capacity": "Capacidade",
+      "roomNumber": "Número da Sala",
+      "schedule": "Horário da Turma",
+      "day": "Dia",
+      "active": "Ativo",
+      "start_time": "Hora de Início",
+      "end_time": "Hora de Término",
+      "successMessage": "Turma adicionada com sucesso!",
+      "errorMessage": "Falha ao adicionar turma. Por favor, tente novamente."
+    },
+    "days": {
+      "monday": "Segunda-feira",
+      "tuesday": "Terça-feira",
+      "wednesday": "Quarta-feira",
+      "thursday": "Quinta-feira",
+      "friday": "Sexta-feira",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    },
+    "select_time": "Selecionar Hora",
+    "errors": {
+      "required": "Este campo é obrigatório"
+    }
 
 }

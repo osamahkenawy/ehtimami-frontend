@@ -6,25 +6,27 @@
         <button type="button" @click="cancelForm" class="btn btn-outline-primary">
           {{ $t("cancel") }}
         </button>
-        <button type="submit" form="classForm" class="btn btn-primary ltr:ml-2 rtl:mr-2" :disabled="isSubmitting">
+        <button
+          type="submit"
+          form="classForm"
+          class="btn btn-primary ltr:ml-2 rtl:mr-2"
+          :disabled="isSubmitting"
+        >
           {{ isSubmitting ? $t("loading") : $t("submit") }}
         </button>
       </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-6"> 
+    <div class="flex flex-col lg:flex-row gap-6">
       <div class="xl:w-[30rem] w-full">
         <form id="classForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
-          <!-- Class Information -->
           <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
             <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
               {{ $t("class_form.classInfo") }}
             </div>
             <div class="p-5">
               <div>
-                <label for="class_unique_id">{{
-                  $t("class_form.classId")
-                }}</label>
+                <label for="class_unique_id">{{ $t("class_form.classId") }}</label>
                 <input
                   id="class_unique_id"
                   v-model="classStore.classData.class_unique_id"
@@ -36,45 +38,29 @@
 
               <div class="mt-4">
                 <label for="schoolId">{{ $t("class_form.school_name") }}</label>
-                <select
-                  id="schoolId"
-                  v-model="classStore.classData.schoolId"
-                  class="form-select"
-                  required>
-                  <option
-                    v-for="option in classStore.schools"
-                    :key="option.id"
-                    :value="option.id"
-                  >
-                    {{ $t(option.school_name) }}
+                <select id="schoolId" v-model="classStore.classData.schoolId" class="form-select">
+                  <option v-for="option in classStore.schools" :key="option.id" :value="option.id">
+                    {{ option.school_name }}
                   </option>
                 </select>
+                <p v-if="errors.schoolId" class="text-red-500">{{ errors.schoolId }}</p>
               </div>
+
               <div class="mt-4">
-                <label for="class_name">{{
-                  $t("class_form.class_name")
-                }}</label>
+                <label for="class_name">{{ $t("class_form.class_name") }}</label>
                 <input
                   id="class_name"
                   v-model="classStore.classData.name"
                   type="text"
                   class="form-input"
-                  :placeholder="$t('class_form.class_name')"
-                  required
                 />
+                <p v-if="errors.class_name" class="text-red-500">{{ errors.class_name }}</p>
               </div>
+
               <div class="mt-4">
-                <label for="gradeLevel">{{
-                  $t("class_form.gradeLevel")
-                }}</label>
-                <input
-                  id="gradeLevel"
-                  v-model="classStore.classData.gradeLevel"
-                  type="text"
-                  class="form-input"
-                  :placeholder="$t('class_form.gradeLevel')"
-                  required
-                />
+                <label for="gradeLevel">{{ $t("class_form.gradeLevel") }}</label>
+                <input id="gradeLevel" v-model="classStore.classData.gradeLevel" type="text" class="form-input" />
+                <p v-if="errors.gradeLevel" class="text-red-500">{{ errors.gradeLevel }}</p>
               </div>
             </div>
           </div>
@@ -113,40 +99,40 @@
       <!-- Schedule Section in Table -->
       <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
         <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
-              {{ $t("class_form.class_schedule") }}
-          </div>
+          {{ $t("class_form.class_schedule") }}
+        </div>
         <div class="p-5">
-          <!-- ✅ Table for Schedule -->
           <div class="table-responsive">
-            <table class="w-full border-collapse border border-gray-300"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+            <table class="w-full border-collapse border border-gray-300">
               <thead>
-                <tr class="bg-gray-100"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
-                  <th class="border border-gray-300 px-4 py-2 "  :class="{ 'text-left ltr:text-left rtl:text-right': true }">{{ $t("class_form.day") }}</th>
-                  <th class="border border-gray-300 px-4 py-2" >{{ $t("class_form.active") }}</th>
-                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.start_time") }}</th>
-                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.end_time") }}</th>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.day") }}</th>
+                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.active") }}</th>
+                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.start_time") }}</th>
+                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.end_time") }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(day, key) in scheduleDays" :key="key"  :class="{ 'text-left ltr:text-left rtl:text-right': true }">
-                  <td class="border border-gray-300 px-4 py-2 font-medium ">{{ day.label }}</td>
-                  <td class="border border-gray-300 px-4 py-2 ">
+                <tr v-for="(day, key) in scheduleDays" :key="key">
+                  <td class="border border-gray-300 px-4 py-2">{{ day.label }}</td>
+                  <td class="border border-gray-300 px-4 py-2">
                     <label class="switch">
-                      <input type="checkbox" v-model="schedule[key].enabled" /> 
+                      <input type="checkbox" v-model="schedule[key].enabled" />
                       <span class="slider"></span>
                     </label>
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
                     <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].from" />
+                    <p v-if="errors.schedule[key]?.from" class="text-red-500">{{ errors.schedule[key].from }}</p>
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
                     <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].to" />
+                    <p v-if="errors.schedule[key]?.to" class="text-red-500">{{ errors.schedule[key].to }}</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <!-- ✅ End of Table -->
         </div>
       </div>
     </div>
@@ -155,6 +141,7 @@
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
+import Swal from 'sweetalert2';
 import { ref, computed, onBeforeMount } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
@@ -174,7 +161,7 @@ const breadcrumbItems = computed(() => [
 ]);
 const resetForm = () => {
   classStore.classData = {
-    class_unique_id: `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
+    class_unique_id: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
     name: "",
     gradeLevel: "",
     capacity: 0,
@@ -190,6 +177,13 @@ const resetForm = () => {
 onBeforeMount(() => {
   classStore.fetchSchools();
 });
+const errors = ref({
+  schoolId: "",
+  class_name: "",
+  gradeLevel: "",
+  schedule: {},
+});
+
 // ✅ Initialize schedule structure
 const schedule = ref({
   Monday: { enabled: false, from: "", to: "" },
@@ -201,7 +195,7 @@ const schedule = ref({
   Sunday: { enabled: false, from: "", to: "" },
 });
 
-const scheduleDays = computed(() => ({ 
+const scheduleDays = computed(() => ({
   Monday: { label: t("days.monday") },
   Tuesday: { label: t("days.tuesday") },
   Wednesday: { label: t("days.wednesday") },
@@ -211,28 +205,69 @@ const scheduleDays = computed(() => ({
   Sunday: { label: t("days.sunday") },
 }));
 
-const toggleSchedule = (day) => {
-  schedule.value[day].enabled = !schedule.value[day].enabled;
-  if (!schedule.value[day].enabled) {
-    schedule.value[day].from = "";
-    schedule.value[day].to = "";
-  }
+const validateForm = () => {
+  errors.value.schoolId = classStore.classData.schoolId ? "" : t("errors.required");
+  errors.value.class_name = classStore.classData.name ? "" : t("errors.required");
+  errors.value.gradeLevel = classStore.classData.gradeLevel ? "" : t("errors.required");
+
+  errors.value.schedule = {};
+  Object.keys(schedule.value).forEach((key) => {
+    if (schedule.value[key].enabled) {
+      errors.value.schedule[key] = {
+        from: schedule.value[key].from ? "" : t("errors.required"),
+        to: schedule.value[key].to ? "" : t("errors.required"),
+      };
+    }
+  });
+
+  return (
+    !errors.value.schoolId &&
+    !errors.value.class_name &&
+    !errors.value.gradeLevel &&
+    Object.keys(errors.value.schedule).every(
+      (day) => !errors.value.schedule[day]?.from && !errors.value.schedule[day]?.to
+    )
+  );
 };
 
 const submitForm = async () => {
-  if (isSubmitting.value) return;
-  isSubmitting.value = true;
+  if (!validateForm()) return;
 
-  // ✅ Prepare schedule data
+  isSubmitting.value = true;
+  const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
   const scheduleData = Object.keys(schedule.value).reduce((acc, key) => {
-    acc[key] = schedule.value[key].enabled ? `${schedule.value[key].from} - ${schedule.value[key].to}` : "No Classes";
+    acc[key] = schedule.value[key].enabled ? `${schedule.value[key].from} - ${schedule.value[key].to}` : "";
     return acc;
   }, {});
 
   classStore.classData.schedule = scheduleData;
-
-  await classStore.createClass();
-  isSubmitting.value = false;
+  console.log("scheduleData", scheduleData)
+  try {
+    await classStore.createClass(); 
+        toast.fire({
+            icon: "success",
+            title: t("class_form.successMessage"),
+            padding: '10px 20px',
+        }); 
+         // ✅ Reset form and redirect
+    resetForm();
+    classStore.fetchClasses();
+    router.push("/ehtimami/classes"); // 🚀 Redirect to /ehtimami/schools
+  } catch (error) {
+        toast.fire({
+            icon: "error",
+            title: t("class_form.errorMessage"),
+            padding: '10px 20px',
+        });
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const cancelForm = () => {

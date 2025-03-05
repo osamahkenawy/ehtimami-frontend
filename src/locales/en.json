@@ -261,7 +261,9 @@
     "day": "Day",
     "active": "Active",
     "start_time": "Start Time",
-    "end_time": "End Time"
+    "end_time": "End Time",
+    "successMessage": "Class added successfully!",
+    "errorMessage": "Failed to add class. Please try again."
   },
   "days": {
     "monday": "Monday",
@@ -272,6 +274,9 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "select_time": "Select Time"
+  "select_time": "Select Time",
+  "errors": {
+    "required": "This field is required"
+  }
 
 }
