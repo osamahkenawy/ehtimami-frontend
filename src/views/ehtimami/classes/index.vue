@@ -31,6 +31,7 @@ import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useRouter } from "vue-router";
 import { useClassStore } from "@/stores/class";
+import Swal from "sweetalert2";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -80,9 +81,9 @@ const getPopperActions = (data: any) => {
 
   // ✅ Add "Set Active/Inactive" based on status
   if (data.status === "active") {
-    actions.push({ label: t("Set Inactive"), value: "set_inactive" });
+    actions.push({ label: t("set_active"), value: "set_inactive" });
   } else {
-    actions.push({ label: t("Set Active"), value: "set_active" });
+    actions.push({ label: t("set_inactive"), value: "set_active" });
   }
 
   return actions;
@@ -127,15 +128,56 @@ const deleteClass = (data: any) => {
 };
 
 // 🔄 Update Class Status (Active/Inactive)
-const updateClassStatus = async (data: any, newStatus: string) => {
-  console.log(`Updating status of class ${data.id} to ${newStatus}`);
 
-  try {
-    await classStore.updateClassData(data.id, { status: newStatus, schoolId: data.schoolId });
-    await classStore.fetchClasses(); // Refresh the list after update
-  } catch (error) {
-    console.error("Error updating class status:", error);
-  }
+const updateClassStatus = async (data: any, newStatus: string) => {
+  Swal.fire({
+    icon: "warning",
+    title: t("class_status.confirm_title"),
+    text: t("class_status.confirm_text", { status: newStatus }),
+    showCancelButton: true,
+    confirmButtonText: t("class_status.confirm_button"),
+    cancelButtonText: t("class_status.cancel_button"),
+    padding: "2em",
+    customClass: {
+      popup: "sweet-alerts",
+      confirmButton: "btn btn-primary",
+      cancelButton: "btn btn-outline-secondary",
+    },
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        console.log(`Updating status of class ${data.id} to ${newStatus}`);
+
+        await classStore.updateClassData(data.id, {
+          status: newStatus,
+          schoolId: data.schoolId,
+        });
+
+        await classStore.fetchClasses(); // Refresh the list after update
+
+        Swal.fire({
+          title: t("class_status.success_title"),
+          text: t("class_status.success_text", { status: newStatus }),
+          icon: "success",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-success",
+          },
+        });
+      } catch (error) {
+        console.error("Error updating class status:", error);
+        Swal.fire({
+          title: t("class_status.error_title"),
+          text: t("class_status.error_text"),
+          icon: "error",
+          customClass: {
+            popup: "sweet-alerts",
+            confirmButton: "btn btn-danger",
+          },
+        });
+      }
+    }
+  });
 };
 </script>
 
