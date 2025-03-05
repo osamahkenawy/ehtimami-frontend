@@ -237,9 +237,41 @@
     "delete": "Delete"
   },
   "admin-dashboard": "Admin Dashboard",
-  "classes": "classes",
+  "classes": "Classes",
   "add_class": "Add Class",
-  "class_name": "Class Name"
-
+  "search_placeholder_classes": "Search classes...",
+  "no_classes": "No classes available.",
+  "class_name": "Class Name",
+  "grade_level": "Grade Level",
+  "capacity": "Capacity",
+  "room_number": "Room Number",
+  "responsible_teacher": "Responsible Teacher",
+  "add-class": "Add Class",
+  "class_form": {
+    "classInfo": "Class Info",
+    "class_schedule": "Class Schedule",
+    "classId": "Class ID",
+    "school_name": "School Name",
+    "class_name": "Class Name",
+    "gradeLevel": "Grade Level",
+    "another_info": "Additional Information",
+    "capacity": "Capacity",
+    "roomNumber": "Room Number",
+    "schedule": "Class Schedule",
+    "day": "Day",
+    "active": "Active",
+    "start_time": "Start Time",
+    "end_time": "End Time"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "select_time": "Select Time"
 
 }

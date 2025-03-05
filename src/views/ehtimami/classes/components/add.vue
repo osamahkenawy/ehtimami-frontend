@@ -1,232 +1,333 @@
 <template>
-    <div>
-      <div class="flex justify-between items-center mb-4">
-        <BreadCrumb :items="breadcrumbItems" />
-        <div class="flex">
-          <button type="button" @click="cancelForm" class="btn btn-outline-primary">
-            {{ $t("cancel") }}
-          </button>
-          <button 
-            type="submit" 
-            form="schoolForm" 
-            class="btn btn-primary ltr:ml-2 rtl:mr-2" 
-            :disabled="isSubmitting"
-          >
-            {{ isSubmitting ? $t("loading") : $t("submit") }}
-          </button>
-        </div>
+  <div>
+    <div class="flex justify-between items-center mb-4">
+      <BreadCrumb :items="breadcrumbItems" />
+      <div class="flex">
+        <button type="button" @click="cancelForm" class="btn btn-outline-primary">
+          {{ $t("cancel") }}
+        </button>
+        <button type="submit" form="classForm" class="btn btn-primary ltr:ml-2 rtl:mr-2" :disabled="isSubmitting">
+          {{ isSubmitting ? $t("loading") : $t("submit") }}
+        </button>
       </div>
-  
-      <div class="flex flex-col lg:flex-row gap-6">
-        <div class="xl:w-[30rem] w-full">
-          <form id="schoolForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
-            <!-- School Info -->
-            <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-              <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
-                {{ $t("school_form.schoolInfo") }}
-              </div>
-              <div class="p-5">
-                <div>
-                <label for="school_unique_id">{{ $t("school_form.schoolId") }}</label>
-                <input 
-                  id="school_unique_id" 
-                  v-model="schoolStore.schoolData.school_unique_id" 
-                  type="text" 
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-6"> 
+      <div class="xl:w-[30rem] w-full">
+        <form id="classForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
+          <!-- Class Information -->
+          <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+              {{ $t("class_form.classInfo") }}
+            </div>
+            <div class="p-5">
+              <div>
+                <label for="class_unique_id">{{
+                  $t("class_form.classId")
+                }}</label>
+                <input
+                  id="class_unique_id"
+                  v-model="classStore.classData.class_unique_id"
+                  type="text"
                   class="form-input bg-gray-200 cursor-not-allowed"
                   disabled
                 />
               </div>
-                <div class="mt-4">
-                  <label for="school_name">{{ $t("school_form.name") }}</label>
-                  <input id="school_name" v-model="schoolStore.schoolData.school_name" type="text" class="form-input"
-                    :placeholder="$t('school_form.enterName')" required />
-                </div>
-  
-                <div class="mt-4">
-                  <label for="school_type">{{ $t("school_form.type") }}</label>
-                  <select id="school_type" v-model="schoolStore.schoolData.school_type" class="form-select" required>
-                    <option v-for="option in schoolTypeOptions" :key="option.value" :value="option.value">
-                      {{ $t(option.label) }}
-                    </option>
-                  </select>
-                </div>
-  
-                <div class="mt-4">
-                  <label for="education_level">{{ $t("school_form.educationLevel") }}</label>
-                  <select id="education_level" v-model="schoolStore.schoolData.education_level" class="form-select"
-                    required>
-                    <option v-for="option in educationLevelOptions" :key="option.value" :value="option.value">
-                      {{ $t(option.label) }}
-                    </option>
-                  </select>
-                </div>
-  
-                <div class="mt-4">
-                  <label for="curriculum">{{ $t("school_form.curriculum") }}</label>
-                  <select id="curriculum" v-model="schoolStore.schoolData.curriculum" class="form-select" required>
-                    <option v-for="option in curriculumOptions" :key="option.value" :value="option.value">
-                      {{ $t(option.label) }}
-                    </option>
-                  </select>
-                </div>
+
+              <div class="mt-4">
+                <label for="schoolId">{{ $t("class_form.school_name") }}</label>
+                <select
+                  id="schoolId"
+                  v-model="classStore.classData.schoolId"
+                  class="form-select"
+                  required>
+                  <option
+                    v-for="option in classStore.schools"
+                    :key="option.id"
+                    :value="option.id"
+                  >
+                    {{ $t(option.school_name) }}
+                  </option>
+                </select>
+              </div>
+              <div class="mt-4">
+                <label for="class_name">{{
+                  $t("class_form.class_name")
+                }}</label>
+                <input
+                  id="class_name"
+                  v-model="classStore.classData.name"
+                  type="text"
+                  class="form-input"
+                  :placeholder="$t('class_form.class_name')"
+                  required
+                />
+              </div>
+              <div class="mt-4">
+                <label for="gradeLevel">{{
+                  $t("class_form.gradeLevel")
+                }}</label>
+                <input
+                  id="gradeLevel"
+                  v-model="classStore.classData.gradeLevel"
+                  type="text"
+                  class="form-input"
+                  :placeholder="$t('class_form.gradeLevel')"
+                  required
+                />
               </div>
             </div>
-  
-            <!-- Contact Details -->
-            <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
-              <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
-                {{ $t("school_form.contactDetails") }}
+          </div>
+          <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
+            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+              {{ $t("class_form.another_info") }}
+            </div>
+            <div class="p-5">
+              <div class="mt-4">
+                <label for="capacity">{{ $t("class_form.capacity") }}</label>
+                <input
+                  id="capacity"
+                  v-model="classStore.classData.capacity"
+                  type="number"
+                  class="form-input"
+                  :placeholder="$t('class_form.capacity')"
+                />
               </div>
-              <div class="p-5">
-                <div>
-                  <label for="school_phone">{{ $t("school_form.phone") }}</label>
-                  <div class="flex">
-                    <select v-model="schoolStore.schoolData.school_phone_country" class="form-select w-24 text-start"
-                      required>
-                      <option v-for="country in countryList" :key="country.code" :value="country.dial_code">
-                        {{ country.flag }} {{ country.dial_code }}
-                      </option>
-                    </select>
-                    <input id="school_phone" v-model="schoolStore.schoolData.school_phone" type="tel"
-                      class="form-input flex-grow" :placeholder="$t('school_form.enterPhone')" required
-                      pattern="^[0-9]{7,15}$" />
-                  </div>
-                </div>
-  
-                <div class="mt-4">
-                  <label for="school_email">{{ $t("school_form.email") }}</label>
-                  <input id="school_email" v-model="schoolStore.schoolData.school_email" type="email" class="form-input"
-                    :placeholder="$t('school_form.enterEmail')" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
-                </div>
+              <div class="mt-4">
+                <label for="roomNumber">{{
+                  $t("class_form.roomNumber")
+                }}</label>
+                <input
+                  id="roomNumber"
+                  v-model="classStore.classData.roomNumber"
+                  type="text"
+                  class="form-input"
+                  :placeholder="$t('class_form.roomNumber')"
+                />
               </div>
             </div>
-          </form>
-        </div>
-  
-        <!-- School Location -->
-        <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-          <div class="text-lg font-medium  bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08]  p-5">
-            {{ $t("school_form.schoolLocation") }}
           </div>
-          <div class="p-5">
-            <LocationMap @locationSelected="selectLocation" />
+        </form>
+      </div>
+
+      <!-- Schedule Section in Table -->
+      <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
+        <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+              {{ $t("class_form.class_schedule") }}
           </div>
+        <div class="p-5">
+          <!-- ✅ Table for Schedule -->
+          <div class="table-responsive">
+            <table class="w-full border-collapse border border-gray-300"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+              <thead>
+                <tr class="bg-gray-100"   :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+                  <th class="border border-gray-300 px-4 py-2 "  :class="{ 'text-left ltr:text-left rtl:text-right': true }">{{ $t("class_form.day") }}</th>
+                  <th class="border border-gray-300 px-4 py-2" >{{ $t("class_form.active") }}</th>
+                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.start_time") }}</th>
+                  <th class="border border-gray-300 px-4 py-2 ">{{ $t("class_form.end_time") }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(day, key) in scheduleDays" :key="key"  :class="{ 'text-left ltr:text-left rtl:text-right': true }">
+                  <td class="border border-gray-300 px-4 py-2 font-medium ">{{ day.label }}</td>
+                  <td class="border border-gray-300 px-4 py-2 ">
+                    <label class="switch">
+                      <input type="checkbox" v-model="schedule[key].enabled" /> 
+                      <span class="slider"></span>
+                    </label>
+                  </td>
+                  <td class="border border-gray-300 px-4 py-2">
+                    <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].from" />
+                  </td>
+                  <td class="border border-gray-300 px-4 py-2">
+                    <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].to" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- ✅ End of Table -->
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { useMeta } from "@/composables/use-meta";
-  import { computed, ref } from "vue";
-  import { useI18n } from "vue-i18n";
-  import IconHome from "@/components/icon/icon-home.vue";
-  import { countryList } from "@/fakeData/countryList";
-  import { useSchoolStore } from "@/stores/school";
+  </div>
+</template>
 
-  import Swal from 'sweetalert2';
-  import { useRouter } from "vue-router";
+<script setup lang="ts">
+import { useMeta } from "@/composables/use-meta";
+import { ref, computed, onBeforeMount } from "vue";
+import { useI18n } from "vue-i18n";
+import IconHome from "@/components/icon/icon-home.vue";
+import { useClassStore } from "@/stores/class";
+import { useRouter } from "vue-router";
 
-  useMeta({ title: "Add School" });
-  const { t } = useI18n();
-  const schoolStore = useSchoolStore();
-  const isSubmitting = ref(false);
-  const router = useRouter(); // ✅ Initialize Router
-  const breadcrumbItems = computed(() => [
-    { label: t("breadcrumb.home"), link: "/", icon: IconHome },
-    { label: t("schools"), link: "/ehtimami/schools" },
-    { label: t("add-school") },
-  ]);
-  
-  const schoolTypeOptions = [
-    { value: "PRIVATE", label: "school_form.schoolTypeOptions.PRIVATE" },
-    { value: "PUBLIC", label: "school_form.schoolTypeOptions.PUBLIC" },
-    { value: "INTERNATIONAL", label: "school_form.schoolTypeOptions.INTERNATIONAL" },
-    { value: "SPECIAL_NEEDS", label: "school_form.schoolTypeOptions.SPECIAL_NEEDS" }
-  ];
-  
-  const educationLevelOptions = [
-    { value: "ALL", label: "school_form.educationLevelOptions.ALL" },
-    { value: "PRIMARY", label: "school_form.educationLevelOptions.PRIMARY" },
-    { value: "INTERMEDIATE", label: "school_form.educationLevelOptions.INTERMEDIATE" },
-    { value: "SECONDARY", label: "school_form.educationLevelOptions.SECONDARY" },
-    { value: "KINDERGARTEN", label: "school_form.educationLevelOptions.KINDERGARTEN" }
-  ];
-  
-  const curriculumOptions = [
-    { value: "SAUDI_NATIONAL", label: "school_form.curriculumOptions.SAUDI_NATIONAL" },
-    { value: "IB", label: "school_form.curriculumOptions.IB" },
-    { value: "AMERICAN", label: "school_form.curriculumOptions.AMERICAN" },
-    { value: "BRITISH", label: "school_form.curriculumOptions.BRITISH" },
-    { value: "FRENCH", label: "school_form.curriculumOptions.FRENCH" },
-    { value: "OTHER", label: "school_form.curriculumOptions.OTHER" }
-  ];
-  const resetForm = () => {
-  schoolStore.schoolData = {
-    school_unique_id: `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
-    school_name: "",
-    school_type: "PRIVATE",
-    education_level: "ALL",
-    curriculum: "SAUDI_NATIONAL",
-    school_phone_country: "+966",
-    school_phone: "",
-    school_email: "",
-    school_address: "",
-    school_lat: 0,
-    school_lng: 0,
-    school_region: "",
-    school_city: "",
-    school_country: "",
+useMeta({ title: "Add Class" });
+
+const { t } = useI18n();
+const classStore = useClassStore();
+const isSubmitting = ref(false);
+const router = useRouter();
+const breadcrumbItems = computed(() => [
+  { label: t("breadcrumb.home"), link: "/", icon: IconHome },
+  { label: t("classes"), link: "/ehtimami/classes" },
+  { label: t("add-class") },
+]);
+const resetForm = () => {
+  classStore.classData = {
+    class_unique_id: `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
+    name: "",
+    gradeLevel: "",
+    capacity: 0,
+    teacherId: null,
+    roomNumber: "",
+    status: "active",
+    schedule: {},
+    startDate: "",
+    endDate: "",
+    schoolId: null,
   };
 };
- 
-  const submitForm = async () => {
+onBeforeMount(() => {
+  classStore.fetchSchools();
+});
+// ✅ Initialize schedule structure
+const schedule = ref({
+  Monday: { enabled: false, from: "", to: "" },
+  Tuesday: { enabled: false, from: "", to: "" },
+  Wednesday: { enabled: false, from: "", to: "" },
+  Thursday: { enabled: false, from: "", to: "" },
+  Friday: { enabled: false, from: "", to: "" },
+  Saturday: { enabled: false, from: "", to: "" },
+  Sunday: { enabled: false, from: "", to: "" },
+});
+
+const scheduleDays = computed(() => ({ 
+  Monday: { label: t("days.monday") },
+  Tuesday: { label: t("days.tuesday") },
+  Wednesday: { label: t("days.wednesday") },
+  Thursday: { label: t("days.thursday") },
+  Friday: { label: t("days.friday") },
+  Saturday: { label: t("days.saturday") },
+  Sunday: { label: t("days.sunday") },
+}));
+
+const toggleSchedule = (day) => {
+  schedule.value[day].enabled = !schedule.value[day].enabled;
+  if (!schedule.value[day].enabled) {
+    schedule.value[day].from = "";
+    schedule.value[day].to = "";
+  }
+};
+
+const submitForm = async () => {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
 
-  // ✅ Merge country code with phone number
-  schoolStore.schoolData.school_phone = `${schoolStore.schoolData.school_phone_country}${schoolStore.schoolData.school_phone}`.replace(/\s+/g, ""); 
+  // ✅ Prepare schedule data
+  const scheduleData = Object.keys(schedule.value).reduce((acc, key) => {
+    acc[key] = schedule.value[key].enabled ? `${schedule.value[key].from} - ${schedule.value[key].to}` : "No Classes";
+    return acc;
+  }, {});
 
-  const toast: any = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            customClass: { container: 'toast' },
-        });
-  try {
-    await schoolStore.submitSchoolData();
-    toast.fire({
-            icon: "success",
-            title: t("school_form.successMessage"),
-            padding: '10px 20px',
-        }); 
-         // ✅ Reset form and redirect
-    resetForm();
-    schoolStore.fetchSchools();
-    router.push("/ehtimami/schools"); // 🚀 Redirect to /ehtimami/schools
-  } catch (error) {
-        toast.fire({
-            icon: "error",
-            title: t("school_form.errorMessage"),
-            padding: '10px 20px',
-        });
-  } finally {
-    isSubmitting.value = false;
-  }
+  classStore.classData.schedule = scheduleData;
+
+  await classStore.createClass();
+  isSubmitting.value = false;
 };
-  
+
 const cancelForm = () => {
   resetForm();
-  router.push("/ehtimami/schools"); // 🚀 Redirect on cancel
+  router.push("/ehtimami/classes"); // 🚀 Redirect on cancel
 };
-  const selectLocation = (location) => {
-    schoolStore.schoolData.school_address = location.address || "N/A";
-    schoolStore.schoolData.school_lat = location.lat || 0;
-    schoolStore.schoolData.school_lng = location.lon || 0;
-    schoolStore.schoolData.school_region = location.school_region || "N/A";
-    schoolStore.schoolData.school_city = location.school_city || "N/A";
-    schoolStore.schoolData.school_country = location.school_country || "N/A";
-  };
-  </script>
-  
+</script>
+
+
+<style scoped>
+/* ✅ Ensures Each Row is a Flex Container */
+.schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ✅ Align Switch Button */
+.switch-container {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+/* ✅ Ensure Time Picker is Next to Switch */
+.time-picker-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ✅ Custom Switch */
+.custom_switch {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.peer-checked ~ .bg-gray-300 {
+  background-color: #3b82f6;
+}
+
+.peer-checked ~ .absolute {
+  left: 75%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 22px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #3b82f6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+</style>
+

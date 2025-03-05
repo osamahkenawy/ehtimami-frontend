@@ -59,13 +59,12 @@
           </template>
           <template #responsible_teacher="data">
             <div class="flex items-center gap-2">
-              <img
-                :src="`/assets/images/profile-${getRandomNumber(1, 34)}.jpeg`"
-                class="w-9 h-9 rounded-full max-w-none"
-                alt="user-profile"
-              />
-              <div class="font-semibold">
-                {{ data.value.teacher.firstName + " " + data.value.teacher.lastName }}
+             
+              <div class="font-semibold" v-if="data && data.value && data.value.teacher && data.value.teacher.id">
+                <ProfilePax :name="data.value.teacher?.firstName + ' ' + data.value.teacher?.lastName" :email="data.value.teacher?.email" />
+              </div>
+              <div v-else>
+                -
               </div>
             </div>
           </template>

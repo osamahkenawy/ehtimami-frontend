@@ -9,7 +9,7 @@
                     <div class="flex items-center">
                         <div class="flex-none"><img src="/assets/images/profile-34.jpeg" class="rounded-full h-12 w-12 object-cover" /></div>
                         <div class="mx-3">
-                            <p class="mb-1 font-semibold">Alon Smith</p>
+                            <p class="mb-1 font-semibold">Osama Alaaeldin</p>
                             <p class="text-xs text-white-dark">Software Developer</p>
                         </div>
                     </div>
@@ -483,14 +483,14 @@
     const isShowChatMenu = ref(false);
     const loginUser = ref({
         id: 0,
-        name: 'Alon Smith',
+        name: 'Osama Alaaeldin',
         path: 'profile-34.jpeg',
         designation: 'Software Developer',
     });
     const contactList = ref([
         {
             userId: 1,
-            name: 'Nia Hillyer',
+            name: 'Aysha Student',
             path: 'profile-16.jpeg',
             time: '2:09 PM',
             preview: 'How do you do?',
@@ -525,7 +525,7 @@
         },
         {
             userId: 2,
-            name: 'Sean Freeman',
+            name: 'Khaled Ehtimami',
             path: 'profile-1.jpeg',
             time: '12:09 PM',
             preview: 'I was wondering...',
@@ -550,8 +550,8 @@
         },
         {
             userId: 3,
-            name: 'Alma Clarke',
-            path: 'profile-2.jpeg',
+            name: 'Saad Admin',
+            path: 'profile-3.jpeg',
             time: '1:44 PM',
             preview: 'I’ve forgotten how it felt before',
             messages: [
@@ -578,135 +578,8 @@
             ],
             active: true,
         },
-        {
-            userId: 4,
-            name: 'Alan Green',
-            path: 'profile-3.jpeg',
-            time: '2:06 PM',
-            preview: 'But we’re probably gonna need a new carpet.',
-            messages: [
-                {
-                    fromUserId: 0,
-                    toUserId: 4,
-                    text: 'Hi, collect your check',
-                },
-                {
-                    fromUserId: 4,
-                    toUserId: 0,
-                    text: 'Ok, I will be there in 10 mins',
-                },
-            ],
-            active: true,
-        },
-        {
-            userId: 5,
-            name: 'Shaun Park',
-            path: 'profile-4.jpeg',
-            time: '2:05 PM',
-            preview: 'It’s not that bad...',
-            messages: [
-                {
-                    fromUserId: 0,
-                    toUserId: 3,
-                    text: 'Hi, I am back from vacation',
-                },
-                {
-                    fromUserId: 0,
-                    toUserId: 3,
-                    text: 'How are you?',
-                },
-                {
-                    fromUserId: 0,
-                    toUserId: 5,
-                    text: 'Welcom Back',
-                },
-                {
-                    fromUserId: 0,
-                    toUserId: 5,
-                    text: 'I am all well',
-                },
-                {
-                    fromUserId: 5,
-                    toUserId: 0,
-                    text: 'Coffee?',
-                },
-            ],
-            active: false,
-        },
-        {
-            userId: 6,
-            name: 'Roxanne',
-            path: 'profile-5.jpeg',
-            time: '2:00 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [
-                {
-                    fromUserId: 0,
-                    toUserId: 6,
-                    text: 'Hi',
-                },
-                {
-                    fromUserId: 0,
-                    toUserId: 6,
-                    text: 'Uploaded files to server.',
-                },
-            ],
-            active: false,
-        },
-        {
-            userId: 7,
-            name: 'Ernest Reeves',
-            path: 'profile-6.jpeg',
-            time: '2:09 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: true,
-        },
-        {
-            userId: 8,
-            name: 'Laurie Fox',
-            path: 'profile-7.jpeg',
-            time: '12:09 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: true,
-        },
-        {
-            userId: 9,
-            name: 'Xavier',
-            path: 'profile-8.jpeg',
-            time: '4:09 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: false,
-        },
-        {
-            userId: 10,
-            name: 'Susan Phillips',
-            path: 'profile-9.jpeg',
-            time: '9:00 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: true,
-        },
-        {
-            userId: 11,
-            name: 'Dale Butler',
-            path: 'profile-10.jpeg',
-            time: '5:09 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: false,
-        },
-        {
-            userId: 12,
-            name: 'Grace Roberts',
-            path: 'user-profile.jpeg',
-            time: '8:01 PM',
-            preview: 'Wasup for the third time like is you bling bitch',
-            messages: [],
-            active: true,
-        },
+
+
     ]);
     const searchUser = ref('');
     const textMessage = ref('');

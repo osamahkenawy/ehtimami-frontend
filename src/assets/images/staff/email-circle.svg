@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+  <g id="email-circle" transform="translate(-420 -730)">
+    <g id="Ellipse_21" data-name="Ellipse 21" transform="translate(420 730)" fill="none" stroke="#d0ddf4" stroke-width="1">
+      <circle cx="11.5" cy="11.5" r="11.5" stroke="none"/>
+      <circle cx="11.5" cy="11.5" r="11" fill="none"/>
+    </g>
+    <path id="email" d="M10.626,59.882H1.1a1.1,1.1,0,0,0-1.1,1.1v6.6a1.1,1.1,0,0,0,1.1,1.1h9.527a1.1,1.1,0,0,0,1.1-1.1v-6.6a1.1,1.1,0,0,0-1.1-1.1Zm0,.733a.364.364,0,0,1,.14.028l-4.9,4.25-4.9-4.25a.365.365,0,0,1,.14-.028Zm0,7.328H1.1a.367.367,0,0,1-.366-.366V61.417l4.89,4.238a.367.367,0,0,0,.48,0l4.89-4.238v6.159A.367.367,0,0,1,10.626,67.943Z" transform="translate(425.683 677.222)" fill="#727272"/>
+  </g>
+</svg>

@@ -9,7 +9,7 @@
     <Datatable
       :headers="headers"
       :data="classStore.classes"
-      :searchPlaceHolder="t('search_placeholder')"
+      :searchPlaceHolder="t('search_placeholder_classes')"
       :searchFilter="true"
       :noDataContent="t('no_classes')"
     >
@@ -20,9 +20,7 @@
           :onActionSelected="handleActionSelected(data)"
         />
       </template>
-      <template #school_name="{ data }"> 
-       {{ data.school.school_name }}
-      </template>
+     
     </Datatable>
   </div>
 </template>
@@ -57,7 +55,7 @@ const breadcrumbItems = computed(() => [
 
 // ➕ Redirect to Add Class Page
 const handleAddClickClass = (): void => {
-  router.push("/classes/add");
+  router.push("/ehtimami/classes/add");
 };
 
 // 📌 Localized Table Headers (Reactive)
