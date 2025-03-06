@@ -4,6 +4,8 @@
       <BreadCrumb :items="breadcrumbItems" />
       <AddButton @click="handleAddClickClass" :label="t('add_class')" />
     </div>
+    <FileUploader v-model="imageUrl" label="Profile Picture" platform="user-profile" @change="handleImageUpload" />
+
 
     <!-- DataTable Component -->
     <Datatable
@@ -26,7 +28,7 @@
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
-import { computed, watchEffect, onBeforeMount } from "vue";
+import { computed, watchEffect, onBeforeMount, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useRouter } from "vue-router";
@@ -36,12 +38,17 @@ import Swal from "sweetalert2";
 const { t } = useI18n();
 const router = useRouter();
 const classStore = useClassStore();
+const imageUrl = ref<string>("");
 
 // ✅ Reactively update the page title
 watchEffect(() => {
   useMeta({ title: t("classes") });
 });
 
+const handleImageUpload = (data: { s3: string; base64: string }) => {
+  console.log("Uploaded Image URL:", data.s3);
+  imageUrl.value = data.s3;
+};
 // ✅ Fetch Classes Before Mount
 onBeforeMount(() => {
   classStore.fetchClasses();
