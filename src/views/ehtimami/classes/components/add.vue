@@ -24,7 +24,13 @@
             <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
               {{ $t("class_form.classInfo") }}
             </div>
-            <div class="p-5">
+           
+            <div class="p-5">  
+              <div  class="text-center">
+                <!-- <label for="class_unique_id">{{ 'Class Picture' }}</label> -->
+                <div  v-tippy="$t('class_form.click_to_upload')" class="inline-table text-center"><FileUploader v-model="classStore.classData.class_logo" :label="$t('class_form.class_image')" platform="user-profile" @change="handleImageUpload" /></div>
+
+              </div>
               <div>
                 <label for="class_unique_id">{{ $t("class_form.classId") }}</label>
                 <input
@@ -172,8 +178,11 @@ const resetForm = () => {
     startDate: "",
     endDate: "",
     schoolId: null,
+   class_logo: ""
   };
 };
+const imageUrl = ref<string>("");
+
 onBeforeMount(() => {
   classStore.fetchSchools();
 });
@@ -204,7 +213,9 @@ const scheduleDays = computed(() => ({
   Saturday: { label: t("days.saturday") },
   Sunday: { label: t("days.sunday") },
 }));
-
+const handleImageUpload = (data: { s3: string; base64: string }) => {
+  classStore.classData.class_logo = data.s3;
+};
 const validateForm = () => {
   errors.value.schoolId = classStore.classData.schoolId ? "" : t("errors.required");
   errors.value.class_name = classStore.classData.name ? "" : t("errors.required");

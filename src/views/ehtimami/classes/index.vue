@@ -4,9 +4,6 @@
       <BreadCrumb :items="breadcrumbItems" />
       <AddButton @click="handleAddClickClass" :label="t('add_class')" />
     </div>
-    <FileUploader v-model="imageUrl" label="Profile Picture" platform="user-profile" @change="handleImageUpload" />
-
-
     <!-- DataTable Component -->
     <Datatable
       :headers="headers"
@@ -45,10 +42,6 @@ watchEffect(() => {
   useMeta({ title: t("classes") });
 });
 
-const handleImageUpload = (data: { s3: string; base64: string }) => {
-  console.log("Uploaded Image URL:", data.s3);
-  imageUrl.value = data.s3;
-};
 // ✅ Fetch Classes Before Mount
 onBeforeMount(() => {
   classStore.fetchClasses();
@@ -67,7 +60,7 @@ const handleAddClickClass = (): void => {
 
 // 📌 Localized Table Headers (Reactive)
 const headers = computed(() => [
-  { field: "name", title: t("class_name") },
+  { field: "class_name", title: t("class_name") },
   { field: "class_school_name", title: t("school_name") },
   { field: "gradeLevel", title: t("grade_level") },
   { field: "capacity", title: t("capacity") },

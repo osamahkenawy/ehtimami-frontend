@@ -263,7 +263,9 @@
     "start_time": "Start Time",
     "end_time": "End Time",
     "successMessage": "Class added successfully!",
-    "errorMessage": "Failed to add class. Please try again."
+    "errorMessage": "Failed to add class. Please try again.",
+    "class_image": "Class Image",
+    "click_to_upload": "Click to Upload New Class Image"
   },
   "days": {
     "monday": "Monday",
