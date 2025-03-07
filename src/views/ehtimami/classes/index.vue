@@ -4,7 +4,6 @@
       <BreadCrumb :items="breadcrumbItems" />
       <AddButton @click="handleAddClickClass" :label="t('add_class')" />
     </div>
-
     <!-- DataTable Component -->
     <Datatable
       :headers="headers"
@@ -26,7 +25,7 @@
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
-import { computed, watchEffect, onBeforeMount } from "vue";
+import { computed, watchEffect, onBeforeMount, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useRouter } from "vue-router";
@@ -36,6 +35,7 @@ import Swal from "sweetalert2";
 const { t } = useI18n();
 const router = useRouter();
 const classStore = useClassStore();
+const imageUrl = ref<string>("");
 
 // ✅ Reactively update the page title
 watchEffect(() => {
@@ -60,7 +60,7 @@ const handleAddClickClass = (): void => {
 
 // 📌 Localized Table Headers (Reactive)
 const headers = computed(() => [
-  { field: "name", title: t("class_name") },
+  { field: "class_name", title: t("class_name") },
   { field: "class_school_name", title: t("school_name") },
   { field: "gradeLevel", title: t("grade_level") },
   { field: "capacity", title: t("capacity") },

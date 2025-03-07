@@ -28,6 +28,7 @@ interface Class {
   startDate: string | null;
   endDate: string | null;
   schoolId: number | null;
+  class_logo: string | null;
 }
 
 export const useClassStore = defineStore("class", () => {
@@ -52,6 +53,7 @@ export const useClassStore = defineStore("class", () => {
     startDate: null,
     endDate: null,
     schoolId: null,
+    class_logo: ""
   });
 
   // ✅ Fetch all classes

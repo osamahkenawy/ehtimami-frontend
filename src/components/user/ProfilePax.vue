@@ -1,35 +1,39 @@
 <template>
-    <div class="flex items-center space-x-2">
-      <div class="w-12 h-12 flex justify-center items-center rounded-full border bg-dark text-white font-bold">
-        <img v-if="image" :src="image" class="w-full h-full rounded-full object-cover" />
-        <span v-else>{{ nameChip }}</span>
+ <div class="flex items-center space-x-2">
+    <div
+      class="w-12 h-12 flex justify-center items-center rounded-full border font-bold"
+      :class="compLogo ? 'bg-none text-dark' : 'bg-dark text-white'"
+    >
+      <img v-if="image" :src="image" class="w-full h-full rounded-full object-cover" />
+      <span v-else>{{ nameChip }}</span>
+    </div>
+    <div class="flex flex-col">
+      <div class="truncate max-w-[150px]" v-tippy="name"> 
+        {{ truncatedName }} 
       </div>
-      <div class="flex flex-col">
-        <div class="truncate max-w-[150px]" v-tippy="name"> 
-          {{ truncatedName }} 
-        </div>
-        <div v-if="extraTop" class="italic">{{ extraTop }}</div>
-        <div class="flex items-center space-x-2">
-          <button v-if="payable" class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="@/assets/images/staff/check.svg" alt="Account Payable" class="w-4 h-4" />
-          </button>
-          <img
-            v-if="displayEmail"
-            v-tippy="displayEmail"
-            src="@/assets/images/staff/email-circle.svg"
-            alt="Email"
-            class="w-5 h-5 cursor-pointer"
-          />
-          <img
-            v-if="displayPhone"
-            v-tippy="displayPhone"
-            src="@/assets/images/staff/phone-border.svg"
-            alt="Phone"
-            class="w-5 h-5 cursor-pointer"
-          />
-        </div>
+      <div v-if="extraTop" class="italic">{{ extraTop }}</div>
+      <div class="flex items-center space-x-2">
+        <button v-if="payable" class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-200">
+          <img src="@/assets/images/staff/check.svg" alt="Account Payable" class="w-4 h-4" />
+        </button>
+        <img
+          v-if="displayEmail"
+          v-tippy="displayEmail"
+          src="@/assets/images/staff/email-circle.svg"
+          alt="Email"
+          class="w-5 h-5 cursor-pointer"
+        />
+        <img
+          v-if="displayPhone"
+          v-tippy="displayPhone"
+          src="@/assets/images/staff/phone-border.svg"
+          alt="Phone"
+          class="w-5 h-5 cursor-pointer"
+        />
       </div>
     </div>
+  </div>
+
   </template>
   
   <script setup lang="ts">
@@ -44,6 +48,7 @@
     phone: { type: [String, Array] as PropType<ContactInfo>, default: '' },
     extraTop: { type: String, default: '' },
     payable: { type: Boolean, default: false },
+    compLogo: { type: Boolean, default: false },
   });
   
   const displayPhone = computed(() => {

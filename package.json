@@ -47,6 +47,7 @@
     "vue": "^3.5.12",
     "vue-clipboard3": "^2.0.0",
     "vue-countup-v3": "^1.0.14",
+    "vue-cropperjs": "^5.0.0",
     "vue-draggable-next": "^2.1.1",
     "vue-easy-lightbox": "^1.9.0",
     "vue-flatpickr-component": "^11.0.1",
