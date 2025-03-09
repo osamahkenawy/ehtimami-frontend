@@ -215,7 +215,9 @@
     },
     "schoolId": "School ID",
     "successMessage": "School added successfully!",
-    "errorMessage": "Failed to add school. Please try again."
+    "errorMessage": "Failed to add school. Please try again.",
+    "school_image": "School Image",
+    "click_to_upload": "Click to Upload New School Image"
   },
   "home": "Home",
   "id": "ID",

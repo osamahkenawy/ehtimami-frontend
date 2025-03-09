@@ -73,7 +73,12 @@
             <div class="flex items-center gap-2">
               
               <div class="font-semibold">
-                {{ data.value.school_name  }}
+                <div class="font-semibold" v-if="data && data.value && data.value.school_name">
+                <ProfilePax :name="data.value.school_name"  :image="data?.value?.school_logo || ''"  :compLogo="true" />
+              </div>
+              <div v-else>
+                -
+              </div>
               </div>
             </div>
           </template>

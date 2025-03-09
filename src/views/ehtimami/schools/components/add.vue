@@ -26,8 +26,13 @@
                 {{ $t("school_form.schoolInfo") }}
               </div>
               <div class="p-5">
+                <div  class="text-center">
+                <!-- <label for="class_unique_id">{{ 'Class Picture' }}</label> -->
+                <div  v-tippy="$t('school_form.click_to_upload')" class="inline-table text-center"><FileUploader v-model="schoolStore.schoolData.school_logo" :label="$t('school_form.school_image')" platform="user-profile" @change="handleImageUpload" /></div>
+
+              </div>
                 <div>
-                <label for="school_unique_id">{{ $t("school_form.schoolId") }}</label>
+                <label for="school_unique_id">{{ $t("school_form.schoolId") }}</label> 
                 <input 
                   id="school_unique_id" 
                   v-model="schoolStore.schoolData.school_unique_id" 
@@ -161,6 +166,9 @@
     { value: "FRENCH", label: "school_form.curriculumOptions.FRENCH" },
     { value: "OTHER", label: "school_form.curriculumOptions.OTHER" }
   ];
+  const handleImageUpload = (data: { s3: string; base64: string }) => {
+    schoolStore.schoolData.school_logo = data.s3;
+};
   const resetForm = () => {
   schoolStore.schoolData = {
     school_unique_id: `EHT-SCH-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
@@ -177,45 +185,51 @@
     school_region: "",
     school_city: "",
     school_country: "",
+    school_logo: ""
   };
 };
  
-  const submitForm = async () => {
+const submitForm = async () => {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
 
-  // ✅ Merge country code with phone number
-  schoolStore.schoolData.school_phone = `${schoolStore.schoolData.school_phone_country}${schoolStore.schoolData.school_phone}`.replace(/\s+/g, ""); 
+  // ✅ Ensure country code and phone number are merged correctly
+  const countryCode = schoolStore.schoolData.school_phone_country || ""; // Ensure it's not undefined
+  const phoneNumber = schoolStore.schoolData.school_phone?.trim() || ""; // Ensure it's not undefined and remove spaces
+
+  schoolStore.schoolData.school_phone = `${countryCode}${phoneNumber}`.replace(/\s+/g, ""); 
 
   const toast: any = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            customClass: { container: 'toast' },
-        });
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    customClass: { container: 'toast' },
+  });
+
   try {
     await schoolStore.submitSchoolData();
     toast.fire({
-            icon: "success",
-            title: t("school_form.successMessage"),
-            padding: '10px 20px',
-        }); 
-         // ✅ Reset form and redirect
+      icon: "success",
+      title: t("school_form.successMessage"),
+      padding: '10px 20px',
+    }); 
+    // ✅ Reset form and redirect
     resetForm();
     schoolStore.fetchSchools();
     router.push("/ehtimami/schools"); // 🚀 Redirect to /ehtimami/schools
-  } catch (error) {
-        toast.fire({
-            icon: "error",
-            title: t("school_form.errorMessage"),
-            padding: '10px 20px',
-        });
+  } catch (error: any) {
+    const errorMessage = error?.response?.data?.message || t("school_form.errorMessage");
+    toast.fire({
+      icon: "error",
+      title: errorMessage,
+      padding: '10px 20px',
+    });
   } finally {
     isSubmitting.value = false;
   }
 };
-  
+
 const cancelForm = () => {
   resetForm();
   router.push("/ehtimami/schools"); // 🚀 Redirect on cancel

@@ -24,6 +24,7 @@ export const useSchoolStore = defineStore("school", () => {
     school_region: "",
     school_city: "",
     school_country: "",
+    school_logo: ""
   });
 
   // 🔹 Ensure the school ID is generated only once
