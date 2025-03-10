@@ -241,7 +241,7 @@
     "class_form": {
       "classInfo": "Informações da Turma",
       "class_schedule": "Horário da Turma",
-      "classId": "ID da Turma",
+      "code": "ID da Turma",
       "school_name": "Nome da Escola",
       "class_name": "Nome da Turma",
       "gradeLevel": "Nível Escolar",

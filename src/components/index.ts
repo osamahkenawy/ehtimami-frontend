@@ -18,3 +18,5 @@ export { default as AddButton } from './ui/AddButton.vue'; // Global Add Button
 export { default as TimePickerPopup } from './ui/TimePickerPopup.vue'; // Global Add Button
 export { default as FileUploader } from './ui/FileUploader.vue'; // Global Add Button
 export { default as ProfilePax } from './user/ProfilePax.vue'; // Global Profile Pax
+export { default as GenderSelection } from './ui/GenderSelection.vue'; // Global Profile Pax
+export { default as ActionCard } from './ui/ActionCard.vue'; // ActionCard

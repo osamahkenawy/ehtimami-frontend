@@ -17,7 +17,9 @@ import {
   AddButton,
   ProfilePax,
   TimePickerPopup,
-  FileUploader
+  FileUploader,
+  GenderSelection,
+  ActionCard
 } from "@/components"; // Import all components here
 
 const app = createApp(App);
@@ -89,5 +91,6 @@ app.component("AddButton", AddButton); // SkeletonLoader
 app.component("ProfilePax", ProfilePax); // ProfilePax
 app.component("TimePickerPopup", TimePickerPopup); // TimePickerPopup
 app.component("FileUploader", FileUploader); // FileUploader
-
+app.component("GenderSelection", GenderSelection);  // GenderSelection
+app.component("ActionCard", ActionCard);  // ActionCard
 app.mount("#app");

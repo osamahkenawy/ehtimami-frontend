@@ -252,7 +252,7 @@
   "class_form": {
     "classInfo": "Class Info",
     "class_schedule": "Class Schedule",
-    "classId": "Class ID",
+    "code": "Class Code",
     "school_name": "School Name",
     "class_name": "Class Name",
     "gradeLevel": "Grade Level",
@@ -303,6 +303,55 @@
     "success_text": "The class has been successfully deleted.",
     "error_title": "Error",
     "error_text": "Failed to delete the class. Please try again."
+  },
+  "teachers": "Teachers",
+  "add_teacher": "Add Teacher",
+  "search_placeholder_teachers": "Search teachers...",
+  "no_teachers": "No teachers found.",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "delete_teacher": {
+    "confirm_title": "Are you sure?",
+    "confirm_text": "This will permanently delete the teacher.",
+    "confirm_button": "Yes, delete!",
+    "cancel_button": "Cancel",
+    "success_title": "Deleted!",
+    "success_text": "Teacher has been deleted successfully.",
+    "error_title": "Error",
+    "error_text": "Failed to delete teacher."
+  },
+  "teacher_status": {
+    "confirm_title": "Change Teacher Status",
+    "confirm_text": "Are you sure you want to set this teacher as {status}?",
+    "confirm_button": "Yes, update",
+    "cancel_button": "Cancel",
+    "success_title": "Updated!",
+    "success_text": "Teacher status has been updated successfully.",
+    "error_title": "Error",
+    "error_text": "Failed to update teacher status."
+  },
+  "male": "Male",
+  "female": "Female",
+  "add-teacher": "Add Teacher",
+  "teacher_form": {
+    "teacherInfo": "Teacher Information",
+    "click_to_upload": "Click to upload",
+    "profile_image": "Profile Image",
+    "school_name": "School Name",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "additional_info": "Additional Information",
+    "marital_status": "Marital Status",
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "nationality": "Nationality",
+    "birth_date": "Birth Date",
+    "address": "Address",
+    "successMessage": "Teacher has been added successfully!",
+    "errorMessage": "An error occurred while adding the teacher."
   }
 
 

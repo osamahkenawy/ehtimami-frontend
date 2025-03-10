@@ -31,9 +31,9 @@ export const getAllClasses = async () => {
   }
 };
 
-export const getClassById = async (classId: number) => {
+export const getClassById = async (code: number) => {
   try {
-    const response = await api.get(`${API_URL}/${classId}`);
+    const response = await api.get(`${API_URL}/${code}`);
     return response.data; // ✅ Return specific class data
   } catch (error) {
     console.error("Error fetching class details:", error);
@@ -41,9 +41,9 @@ export const getClassById = async (classId: number) => {
   }
 };
 
-export const updateClass = async (classId: number, updateData: any) => {
+export const updateClass = async (code: number, updateData: any) => {
   try {
-    const response = await api.put(`${API_URL}/${classId}`, updateData);
+    const response = await api.put(`${API_URL}/${code}`, updateData);
     return response.data; // ✅ Return updated class data
   } catch (error) {
     console.error("Error updating class:", error);
@@ -51,9 +51,9 @@ export const updateClass = async (classId: number, updateData: any) => {
   }
 };
 
-export const deleteClass = async (classId: number) => {
+export const deleteClass = async (code: number) => {
   try {
-    const response = await api.delete(`${API_URL}/${classId}`);
+    const response = await api.delete(`${API_URL}/${code}`);
     return response.data; // ✅ Confirm deletion
   } catch (error) {
     console.error("Error deleting class:", error);

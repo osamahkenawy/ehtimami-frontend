@@ -252,7 +252,7 @@
    "class_form": {
     "classInfo": "معلومات الصف",
     "class_schedule": "جدول الحصص",
-     "classId": "معرف الفصل",
+     "code": "معرف الفصل",
      "school_name": "اسم المدرسة",
      "class_name": "اسم الفصل",
      "gradeLevel": "المستوى الدراسي",
@@ -303,5 +303,52 @@
     "success_text": "تم حذف الصف بنجاح.",
     "error_title": "خطأ",
     "error_text": "فشل في حذف الصف. يرجى المحاولة مرة أخرى."
+  },
+  "teachers": "المعلمين",
+  "add_teacher": "إضافة معلم",
+  "search_placeholder_teachers": "ابحث عن المعلمين...",
+  "no_teachers": "لم يتم العثور على معلمين.",
+  "first_name": "الاسم الأول",
+  "last_name": "الاسم الأخير",
+  "delete_teacher": {
+    "confirm_title": "هل أنت متأكد؟",
+    "confirm_text": "سيتم حذف المعلم بشكل دائم.",
+    "confirm_button": "نعم، احذف!",
+    "cancel_button": "إلغاء",
+    "success_title": "تم الحذف!",
+    "success_text": "تم حذف المعلم بنجاح.",
+    "error_title": "خطأ",
+    "error_text": "فشل في حذف المعلم."
+  },
+  "teacher_status": {
+    "confirm_title": "تغيير حالة المعلم",
+    "confirm_text": "هل أنت متأكد أنك تريد تغيير حالة هذا المعلم إلى {status}؟",
+    "confirm_button": "نعم، تحديث",
+    "cancel_button": "إلغاء",
+    "success_title": "تم التحديث!",
+    "success_text": "تم تحديث حالة المعلم بنجاح.",
+    "error_title": "خطأ",
+    "error_text": "فشل في تحديث حالة المعلم."
+  },
+  "add-teacher": "إضافة معلم",
+  "teacher_form": {
+    "teacherInfo": "معلومات المعلم",
+    "click_to_upload": "اضغط للتحميل",
+    "profile_image": "الصورة الشخصية",
+    "school_name": "اسم المدرسة",
+    "first_name": "الاسم الأول",
+    "last_name": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "additional_info": "معلومات إضافية",
+    "marital_status": "الحالة الاجتماعية",
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق",
+    "nationality": "الجنسية",
+    "birth_date": "تاريخ الميلاد",
+    "address": "العنوان",
+    "successMessage": "تمت إضافة المعلم بنجاح!",
+    "errorMessage": "حدث خطأ أثناء إضافة المعلم."
   }
 }

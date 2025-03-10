@@ -218,7 +218,7 @@
   "class_form": {
     "classInfo": "クラス情報",
     "class_schedule": "クラススケジュール",
-    "classId": "クラスID",
+    "code": "クラスID",
     "school_name": "学校名",
     "class_name": "クラス名",
     "gradeLevel": "学年",
