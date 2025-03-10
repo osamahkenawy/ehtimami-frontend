@@ -27,7 +27,7 @@
               </div>
               <div class="p-5">
                 <div  class="text-center">
-                <!-- <label for="class_unique_id">{{ 'Class Picture' }}</label> -->
+                <!-- <label for="code">{{ 'Class Picture' }}</label> -->
                 <div  v-tippy="$t('school_form.click_to_upload')" class="inline-table text-center"><FileUploader v-model="schoolStore.schoolData.school_logo" :label="$t('school_form.school_image')" platform="user-profile" @change="handleImageUpload" /></div>
 
               </div>

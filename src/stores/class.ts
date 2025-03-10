@@ -17,7 +17,7 @@ interface School {
 }
 
 interface Class {
-  class_unique_id: string;
+  code: string;
   name: string;
   gradeLevel: string;
   capacity: number | null;
@@ -42,7 +42,7 @@ export const useClassStore = defineStore("class", () => {
 
   // ✅ Class Data (with correct types)
   const classData = ref<Class>({
-    class_unique_id: generateSchoolId(),
+    code: generateSchoolId(),
     name: "",
     gradeLevel: "",
     capacity: 0,
@@ -77,9 +77,9 @@ export const useClassStore = defineStore("class", () => {
   };
 
   // ✅ Fetch a single class by ID
-  const fetchClassById = async (classId: number) => {
+  const fetchClassById = async (code: number) => {
     try {
-      const response = await getClassById(classId);
+      const response = await getClassById(code);
       classData.value = response.data as Class; // Ensure correct type assertion
     } catch (error) {
       console.error("Error fetching class by ID:", error);
@@ -99,9 +99,9 @@ export const useClassStore = defineStore("class", () => {
   };
 
   // ✅ Update a class
-  const updateClassData = async (classId: number, data: Partial<Class>) => {
+  const updateClassData = async (code: number, data: Partial<Class>) => {
     try {
-      const response = await updateClass(classId, data);
+      const response = await updateClass(code, data);
       return response;
     } catch (error) {
       console.error("Error updating class:", error);
@@ -110,9 +110,9 @@ export const useClassStore = defineStore("class", () => {
   };
 
   // ✅ Delete a class
-  const deleteClassData = async (classId: number) => {
+  const deleteClassData = async (code: number) => {
     try {
-      const response = await deleteClass(classId);
+      const response = await deleteClass(code);
       return response;
     } catch (error) {
       console.error("Error deleting class:", error);

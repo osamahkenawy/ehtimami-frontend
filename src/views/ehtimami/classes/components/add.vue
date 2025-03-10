@@ -27,15 +27,15 @@
            
             <div class="p-5">  
               <div  class="text-center">
-                <!-- <label for="class_unique_id">{{ 'Class Picture' }}</label> -->
+                <!-- <label for="code">{{ 'Class Picture' }}</label> -->
                 <div  v-tippy="$t('class_form.click_to_upload')" class="inline-table text-center"><FileUploader v-model="classStore.classData.class_logo" :label="$t('class_form.class_image')" platform="user-profile" @change="handleImageUpload" /></div>
 
               </div>
               <div>
-                <label for="class_unique_id">{{ $t("class_form.classId") }}</label>
+                <label for="code">{{ $t("class_form.code") }}</label>
                 <input
-                  id="class_unique_id"
-                  v-model="classStore.classData.class_unique_id"
+                  id="code"
+                  v-model="classStore.classData.code"
                   type="text"
                   class="form-input bg-gray-200 cursor-not-allowed"
                   disabled
@@ -167,7 +167,7 @@ const breadcrumbItems = computed(() => [
 ]);
 const resetForm = () => {
   classStore.classData = {
-    class_unique_id: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
+    code: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
     name: "",
     gradeLevel: "",
     capacity: 0,
