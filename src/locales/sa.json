@@ -333,9 +333,11 @@
   "add-teacher": "إضافة معلم",
   "teacher_form": {
     "teacherInfo": "معلومات المعلم",
+    "basicInfo": "معلومات المعلم",
     "click_to_upload": "اضغط للتحميل",
     "profile_image": "الصورة الشخصية",
     "school_name": "اسم المدرسة",
+    "contact_info": "معلومات الاتصال",
     "first_name": "الاسم الأول",
     "last_name": "الاسم الأخير",
     "email": "البريد الإلكتروني",
