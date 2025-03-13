@@ -1,7 +1,6 @@
 export const countryList = [
     { name: 'Saudi Arabia', code: 'SA', dial_code: '+966', flag: '🇸🇦' },
     { name: 'United Arab Emirates', code: 'AE', dial_code: '+971', flag: '🇦🇪' },
-   
     { name: 'Egypt', code: 'EG', dial_code: '+20', flag: '🇪🇬' },
     { name: 'United States', code: 'US', dial_code: '+1', flag: '🇺🇸' },
     { name: 'United Kingdom', code: 'GB', dial_code: '+44', flag: '🇬🇧' },

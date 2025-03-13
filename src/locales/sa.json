@@ -349,6 +349,8 @@
     "birth_date": "تاريخ الميلاد",
     "address": "العنوان",
     "successMessage": "تمت إضافة المعلم بنجاح!",
-    "errorMessage": "حدث خطأ أثناء إضافة المعلم."
+    "errorMessage": "حدث خطأ أثناء إضافة المعلم.",
+    "career_details": "تفاصيل الوظيفة",
+    "career_field": "مجال العمل"
   }
 }

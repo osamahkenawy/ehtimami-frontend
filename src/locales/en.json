@@ -26,7 +26,7 @@
     "livemap": "Livemap",
     
     "mailbox": "Mailbox",
-    "todo_list": "Todo List",
+    "todo_list": "Activity List",
     "notes": "Notes",
     "scrumboard": "Scrumboard",
     "contacts": "Contacts",
@@ -351,7 +351,9 @@
     "birth_date": "Birth Date",
     "address": "Address",
     "successMessage": "Teacher has been added successfully!",
-    "errorMessage": "An error occurred while adding the teacher."
+    "errorMessage": "An error occurred while adding the teacher.",
+    "career_details": "Career Details",
+    "career_field": "Career Field"
   }
 
 

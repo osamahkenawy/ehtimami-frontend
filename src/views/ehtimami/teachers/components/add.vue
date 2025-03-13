@@ -17,92 +17,122 @@
       </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-6">
+    <!-- Layout: Two-Column Form -->
+    <form id="teacherForm" @submit.prevent="submitForm" class="flex flex-col lg:flex-row gap-6">
+      <!-- Column 1: Teacher Info -->
       <div class="xl:w-[30rem] w-full">
-        <form id="teacherForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
-          <ActionCard :title="$t('teacher_form.teacherInfo')">
-            <div class="p-1">
-              <div class="text-center m-2">
-                <GenderSelection v-model="teacherStore.teacherData.profile.gender " />
-              </div>
+        <ActionCard :title="$t('teacher_form.teacherInfo')">
+          <div class="p-1">
+            <div class="text-center m-2">
+              <GenderSelection v-model="teacherStore.teacherData.profile.gender" />
+            </div>
 
-              <div class="text-center">
-                <div v-tippy="$t('teacher_form.click_to_upload')" class="inline-table text-center">
-                  <FileUploader v-model="teacherStore.teacherData.profile.avatar" :label="$t('teacher_form.profile_image')" platform="user-profile" @change="handleImageUpload" />
-                </div>
+            <div class="text-center">
+              <div v-tippy="$t('teacher_form.click_to_upload')" class="inline-table text-center">
+                <FileUploader
+                  v-model="teacherStore.teacherData.profile.avatar"
+                  :label="$t('teacher_form.profile_image')"
+                  platform="user-profile"
+                  @change="handleImageUpload"
+                />
               </div>
+            </div>
 
-              <div class="mt-4">
-                <label for="schoolId">{{ $t("teacher_form.school_name") }}</label>
-                <select id="schoolId" v-model="teacherStore.teacherData.schoolId" class="form-select">
-                  <option v-for="option in teacherStore.schools" :key="option.id" :value="option.id">
-                    {{ option.school_name }}
-                  </option>
-                </select>
-                <p v-if="errors.schoolId" class="text-red-500">{{ errors.schoolId }}</p>
-              </div>
-
-              <div class="mt-4">
+            <div class="mt-4 flex gap-4">
+              <div class="w-1/2">
                 <label for="firstName">{{ $t("teacher_form.first_name") }}</label>
-                <input id="firstName" v-model="teacherStore.teacherData.firstName" type="text" class="form-input" />
+                <input id="firstName" v-model="teacherStore.teacherData.firstName" type="text" class="form-input w-full" />
                 <p v-if="errors.firstName" class="text-red-500">{{ errors.firstName }}</p>
               </div>
 
-              <div class="mt-4">
+              <div class="w-1/2">
                 <label for="lastName">{{ $t("teacher_form.last_name") }}</label>
-                <input id="lastName" v-model="teacherStore.teacherData.lastName" type="text" class="form-input" />
+                <input id="lastName" v-model="teacherStore.teacherData.lastName" type="text" class="form-input w-full" />
                 <p v-if="errors.lastName" class="text-red-500">{{ errors.lastName }}</p>
               </div>
-
-              <div class="mt-4">
-                <label for="email">{{ $t("teacher_form.email") }}</label>
-                <input id="email" v-model="teacherStore.teacherData.email" type="email" class="form-input" />
-                <p v-if="errors.email" class="text-red-500">{{ errors.email }}</p>
-              </div>
-
-              <div class="mt-4">
-                <label for="password">{{ $t("teacher_form.password") }}</label>
-                <input id="password" v-model="teacherStore.teacherData.password" type="password" class="form-input" />
-                <p v-if="errors.password" class="text-red-500">{{ errors.password }}</p>
-              </div>
             </div>
-          </ActionCard>
-          
-          <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
-            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
-              {{ $t("teacher_form.additional_info") }}
+
+            <div class="mt-4">
+              <label for="email">{{ $t("teacher_form.email") }}</label>
+              <input id="email" v-model="teacherStore.teacherData.email" type="email" class="form-input w-full" />
+              <p v-if="errors.email" class="text-red-500">{{ errors.email }}</p>
             </div>
-            <div class="p-5">
-              <div class="mt-4">
+
+            <div class="mt-4">
+              <label for="password">{{ $t("teacher_form.password") }}</label>
+              <input id="password" v-model="teacherStore.teacherData.password" type="password" class="form-input w-full" />
+              <p v-if="errors.password" class="text-red-500">{{ errors.password }}</p>
+            </div>
+          </div>
+        </ActionCard>
+
+        <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
+          <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+            {{ $t("teacher_form.additional_info") }}
+          </div>
+          <div class="p-5">
+            <div class="mt-4 flex gap-4">
+              <div class="w-1/2">
                 <label for="marital_status">{{ $t("teacher_form.marital_status") }}</label>
-                <select id="marital_status" v-model="teacherStore.teacherData.profile.marital_status" class="form-select">
+                <select id="marital_status" v-model="teacherStore.teacherData.profile.marital_status" class="form-select w-full">
                   <option value="SINGLE">{{ $t("teacher_form.single") }}</option>
                   <option value="MARRIED">{{ $t("teacher_form.married") }}</option>
                   <option value="DIVORCED">{{ $t("teacher_form.divorced") }}</option>
                 </select>
               </div>
 
-              <div class="mt-4">
+              <div class="w-1/2">
                 <label for="nationality">{{ $t("teacher_form.nationality") }}</label>
-                <input id="nationality" v-model="teacherStore.teacherData.profile.nationality" type="text" class="form-input" />
+                <input id="nationality" v-model="teacherStore.teacherData.profile.nationality" type="text" class="form-input w-full" />
               </div>
+            </div>
 
-              <div class="mt-4">
-                <label for="birth_date">{{ $t("teacher_form.birth_date") }}</label>
-                <input id="birth_date" v-model="teacherStore.teacherData.profile.birth_date" type="date" class="form-input" />
-              </div>
+            <div class="mt-4">
+              <label for="birth_date">{{ $t("teacher_form.birth_date") }}</label>
+              <input
+                id="birth_date"
+                v-model="formattedBirthDate"
+                type="date"
+                class="form-input w-full"
+                :max="maxBirthDate"
+                :min="minBirthDate"
+                @input="updateBirthDate"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <div class="mt-4">
-                <label for="address">{{ $t("teacher_form.address") }}</label>
-                <input id="address" v-model="teacherStore.teacherData.profile.address" type="text" class="form-input" />
+      <!-- Column 2: School Info --> 
+    
+      <ActionCard :title="$t('teacher_form.career_details')">
+          <div class="p-5">
+            <!-- Occupation Dropdown -->
+            <div class="mt-4">
+              <label for="career_field">{{ $t("teacher_form.career_field") }}</label>
+              <input 
+                id="career_field" 
+                v-model="teacherStore.teacherData.profile.occupation" 
+                type="text" 
+                class="form-input w-full" 
+              />
+            </div>
+
+            <!-- Address & Map -->
+            <div class="mt-4">
+              <label for="address">{{ $t("teacher_form.address") }}</label>
+              <input id="address" v-model="teacherStore.teacherData.profile.address" type="text" class="form-input w-full" />
+              <div class="mt-2">
+                <LocationMap v-model="teacherStore.teacherData.profile.address" />
               </div>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
+      </ActionCard>
+   
+    </form>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
@@ -113,7 +143,7 @@ import IconHome from "@/components/icon/icon-home.vue";
 import { useTeacherStore } from "@/stores/teacher";
 import { useRouter } from "vue-router";
 import GenderSelection from "@/components/ui/GenderSelection.vue";
-
+import moment from "moment";
 useMeta({ title: "Add Teacher" });
 
 const { t } = useI18n();
@@ -126,6 +156,27 @@ const breadcrumbItems = computed(() => [
   { label: t("teachers"), link: "/ehtimami/teachers" },
   { label: t("add-teacher") },
 ]);
+
+// Get today's date in "YYYY-MM-DD" format
+const maxBirthDate = computed(() => moment().format("YYYY-MM-DD"));
+
+// Get minimum allowed date (18 years ago)
+const minBirthDate = computed(() => moment().subtract(18, "years").format("YYYY-MM-DD"));
+// Reactive variable for formatted birth date
+const formattedBirthDate = ref(teacherStore.teacherData.profile.birth_date || "");
+
+const displayBirthDate = computed(() => {
+  return formattedBirthDate.value ? moment(formattedBirthDate.value).format("DD MMMM YYYY") : "";
+});
+// Function to update the date and format it
+const updateBirthDate = (event: Event) => {
+  const inputDate = (event.target as HTMLInputElement).value;
+  teacherStore.teacherData.profile.birth_date = inputDate;
+
+  if (inputDate) {
+    formattedBirthDate.value = moment(inputDate).format("YYYY-MM-DD");
+  }
+};
 
 const errors = ref({
   schoolId: "",

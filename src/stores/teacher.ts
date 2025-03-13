@@ -35,6 +35,8 @@ interface Teacher {
     latitude?: number;
     longitude?: number;
     avatar?: string;
+    occupation?: string;
+    bio?: string;
   };
   classes?: { id: number; name: string }[];
 }
@@ -59,6 +61,8 @@ export const useTeacherStore = defineStore("teacher", () => {
       latitude: 0,
       longitude: 0,
       avatar: "",
+      occupation: "",
+      bio: ""
     },
     classes: [],
   });
