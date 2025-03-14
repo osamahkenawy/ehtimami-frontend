@@ -21,6 +21,8 @@ import {
   GenderSelection,
   ActionCard
 } from "@/components"; // Import all components here
+import VueTelInput from 'vue3-tel-input'
+import 'vue3-tel-input/dist/vue3-tel-input.css'
 
 const app = createApp(App);
 
@@ -72,7 +74,7 @@ app.component("Popper", Popper);
 // json to excel
 import vue3JsonExcel from "vue3-json-excel";
 app.use(vue3JsonExcel);
-
+app.use(VueTelInput);
 // Globally register the components
 app.component("LocationMap", LocationMap);
 app.component("Livemap", Livemap);

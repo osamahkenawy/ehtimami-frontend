@@ -4,14 +4,13 @@
             <div class="bg-white dark:bg-[#0e1726] h-full">
                 <div class="flex justify-between items-center px-4 py-3">
                     <router-link to="/" class="main-logo flex items-center shrink-0">
-                        <img class="w-20 ml-[5px] flex-none" src="/assets/images/ehtimamiLogo.svg" alt="" />
-                        <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{{ $t('project_name') }}</span>
+                        <!-- <img class="w-20 ml-[5px] flex-none" src="/assets/images/ehtimamiLogo.svg" alt="" /> -->
+                        <!-- <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{{ $t('project_name') }}</span> -->
                     </router-link>
                     <a
                         href="javascript:;"
                         class="collapse-icon w-8 h-8 rounded-full flex items-center hover:bg-gray-500/10 dark:hover:bg-dark-light/10 dark:text-white-light transition duration-300 rtl:rotate-180 hover:text-primary"
-                        @click="store.toggleSidebar()"
-                    >
+                        @click="store.toggleSidebar()">
                         <icon-carets-down class="m-auto rotate-90" />
                     </a>
                 </div>
@@ -45,15 +44,7 @@
                                     <li>
                                         <router-link to="/" @click="toggleMobileMenu">{{ $t('admin-dashboard') }}</router-link>
                                     </li>
-                                    <li> 
-                                        <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('analytics') }}</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link to="/finance" @click="toggleMobileMenu">{{ $t('finance') }}</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link to="/crypto" @click="toggleMobileMenu">{{ $t('crypto') }}</router-link>
-                                    </li>
+                                   
                                 </ul>
                             </vue-collapsible>
                         </li>
@@ -290,7 +281,7 @@
                                             </li>
                                         </ul>
                                     </vue-collapsible>
-                                </li>
+                        </li>
                         <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
                             <icon-minus class="w-4 h-5 flex-none hidden" />
                             <span>{{ $t('user_interface') }}</span>
@@ -301,14 +292,12 @@
                                 type="button"
                                 class="nav-link group w-full"
                                 :class="{ active: activeDropdown === 'components' }"
-                                @click="activeDropdown === 'components' ? (activeDropdown = null) : (activeDropdown = 'components')"
-                            >
+                                @click="activeDropdown === 'components' ? (activeDropdown = null) : (activeDropdown = 'components')">
                                 <div class="flex items-center">
                                     <icon-menu-components class="group-hover:!text-primary shrink-0" />
 
-                                    <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{
-                                        $t('components')
-                                    }}</span>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
+                                        {{ $t('components') }}</span>
                                 </div>
                                 <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'components' }">
                                     <icon-caret-down />

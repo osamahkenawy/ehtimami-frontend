@@ -164,7 +164,8 @@
     "enterSchoolLocation": "أدخل موقع المدرسة",
     "unknownLocation": "موقع غير معروف",
     "school": "المدرسة",
-    "movedLocation": "الموقع المنقول"
+    "movedLocation": "الموقع المنقول",
+    "enterTeacherLocation": "أدخل موقع المعلم"
   },
   "submit": "حفظ",
   "cancel": "إلغاء",
@@ -333,9 +334,11 @@
   "add-teacher": "إضافة معلم",
   "teacher_form": {
     "teacherInfo": "معلومات المعلم",
+    "basicInfo": "معلومات المعلم",
     "click_to_upload": "اضغط للتحميل",
     "profile_image": "الصورة الشخصية",
     "school_name": "اسم المدرسة",
+    "contact_info": "معلومات الاتصال",
     "first_name": "الاسم الأول",
     "last_name": "الاسم الأخير",
     "email": "البريد الإلكتروني",
@@ -349,6 +352,9 @@
     "birth_date": "تاريخ الميلاد",
     "address": "العنوان",
     "successMessage": "تمت إضافة المعلم بنجاح!",
-    "errorMessage": "حدث خطأ أثناء إضافة المعلم."
+    "errorMessage": "حدث خطأ أثناء إضافة المعلم.",
+    "career_details": "تفاصيل الوظيفة",
+    "career_field": "مجال العمل",
+    "phone": "رقم الهاتف"
   }
 }

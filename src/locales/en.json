@@ -26,7 +26,7 @@
     "livemap": "Livemap",
     
     "mailbox": "Mailbox",
-    "todo_list": "Todo List",
+    "todo_list": "Activity List",
     "notes": "Notes",
     "scrumboard": "Scrumboard",
     "contacts": "Contacts",
@@ -164,7 +164,8 @@
     "enterSchoolLocation": "Enter School Location",
     "unknownLocation": "Unknown Location",
     "school": "School",
-    "movedLocation": "Moved Location"
+    "movedLocation": "Moved Location",
+    "enterTeacherLocation": "Enter Teacher Location"
   },
   "submit": "Submit",
   "cancel": "Cancel",
@@ -255,6 +256,7 @@
     "code": "Class Code",
     "school_name": "School Name",
     "class_name": "Class Name",
+    "contact_info": "Contact Information",
     "gradeLevel": "Grade Level",
     "another_info": "Additional Information",
     "capacity": "Capacity",
@@ -335,8 +337,10 @@
   "add-teacher": "Add Teacher",
   "teacher_form": {
     "teacherInfo": "Teacher Information",
+    "basicInfo": "Basic Information",
     "click_to_upload": "Click to upload",
     "profile_image": "Profile Image",
+    "contact_info": "Contact Information",
     "school_name": "School Name",
     "first_name": "First Name",
     "last_name": "Last Name",
@@ -351,7 +355,11 @@
     "birth_date": "Birth Date",
     "address": "Address",
     "successMessage": "Teacher has been added successfully!",
-    "errorMessage": "An error occurred while adding the teacher."
+    "errorMessage": "An error occurred while adding the teacher.",
+    "career_details": "Career Details",
+    "career_field": "Career Field",
+    "phone": "Phone Number",
+    "select_school": "Select School"
   }
 
 

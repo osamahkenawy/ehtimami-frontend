@@ -3665,6 +3665,11 @@ leaflet@^1.9.4:
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
   integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
 
+libphonenumber-js@^1.9.6:
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.12.6.tgz#32a211b976dde3ccdf201c3c0b6e60351167c8bf"
+  integrity sha512-PJiS4ETaUfCOFLpmtKzAbqZQjCCKVu2OhTV4SVNNE7c2nu/dACvtCqj4L0i/KWNnIgRv7yrILvBj5Lonv5Ncxw==
+
 lilconfig@^2.0.3, lilconfig@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.1.0.tgz#78e23ac89ebb7e1bfbf25b18043de756548e7f52"
@@ -4980,6 +4985,11 @@ update-browserslist-db@^1.1.0:
     escalade "^3.2.0"
     picocolors "^1.1.0"
 
+user@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/user/-/user-0.0.0.tgz#f27f1b23fc511f2a8efa40db55cfba123824e02a"
+  integrity sha512-eRNM5isOvr6aEFAGi1CqAkmLkYxW2NJ5ThhbD+6IJXYKM1mo7Gtxx4mQIveHz/5K3p/SVnlW9k17ETn+QAu8IQ==
+
 util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -5172,6 +5182,16 @@ vue3-quill@^0.3.1:
     quill "^1.3.7"
     vue "^3.0.11"
 
+vue3-tel-input@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue3-tel-input/-/vue3-tel-input-1.0.4.tgz#ed26cb808d124aebb5073d03f366b23e686804d6"
+  integrity sha512-C60OyAq5ORDErSJ4x7UmJJbF95CDncMswnySmAUtbuBP0pcVcJBu6DOTxKquykvTbJEh9I73DXyqMtDxtLrwJg==
+  dependencies:
+    core-js "^3.6.5"
+    libphonenumber-js "^1.9.6"
+    user "^0.0.0"
+    vue "^3.0.0-beta.1"
+
 vue@^3.0.0, vue@^3.0.11, vue@^3.5.12:
   version "3.5.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.12.tgz#e08421c601b3617ea2c9ef0413afcc747130b36c"
@@ -5183,7 +5203,7 @@ vue@^3.0.0, vue@^3.0.11, vue@^3.5.12:
     "@vue/server-renderer" "3.5.12"
     "@vue/shared" "3.5.12"
 
-vue@^3.2.47:
+vue@^3.0.0-beta.1, vue@^3.2.47:
   version "3.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.13.tgz#9f760a1a982b09c0c04a867903fc339c9f29ec0a"
   integrity sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==
