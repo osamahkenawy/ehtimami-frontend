@@ -26,7 +26,6 @@
       id="teacherForm"
       @submit.prevent="submitForm"
       class="flex flex-col lg:flex-row gap-6">
-      <!-- The validation is in firstName , lastName , password , Email , phone Number, Nationality,   -->
       <!-- Column 1: Teacher Info -->
       <div class="xl:w-[30rem] w-full">
         <ActionCard :title="$t('teacher_form.basicInfo')">
@@ -79,23 +78,9 @@
                   {{ errors.lastName }}
                 </p>
               </div>
+              
             </div>
             <div class="mt-4">
-              <label for="password">{{ $t("teacher_form.password") }}</label>
-              <input
-                id="password"
-                v-model="teacherStore.teacherData.password"
-                type="password"
-                class="form-input w-full"
-              />
-              <p v-if="errors.password" class="text-red-500">
-                {{ errors.password }}
-              </p>
-            </div>
-          </div>
-        </ActionCard>
-        <ActionCard :title="$t('teacher_form.contact_info')">
-          <div class="mt-4">
             <label for="email">{{ $t("teacher_form.email") }}</label>
             <input
               id="email"
@@ -105,7 +90,6 @@
             />
             <p v-if="errors.email" class="text-red-500">{{ errors.email }}</p>
           </div>
-          {{ teacherStore.teacherData.profile.phone }}
           <div class="mt-4">
             <label for="reciever-number" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
               {{ $t("teacher_form.phone") }}
@@ -113,14 +97,16 @@
 
             <vue-tel-input
                 v-model="phoneNumber"
-                class="w-full"
+                class="form-input w-full"
                 mode="international"
                 :default-country="'AE'"
                 :preferred-countries="['AE', 'SA', 'EG']"
                 :auto-format="true"
                 @input="updatePhone"
+                
               />
               <p v-if="errors.phone" class="text-red-500">{{ errors.phone }}</p>
+          </div>
           </div>
         </ActionCard>
         <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
@@ -286,10 +272,15 @@ const selectedSchool: any = ref({
 
 const phoneNumber = ref(teacherStore.teacherData.profile.phone || "");
 
-const updatePhone = (value: string) => {
-  phoneNumber.value = value;
-  teacherStore.teacherData.profile.phone = value;
+const updatePhone = (value: string | Event) => {
+  if (typeof value === "string") {
+    phoneNumber.value = value;
+    teacherStore.teacherData.profile.phone = value;
+  } else {
+    console.warn("Unexpected phone input:", value);
+  }
 };
+
 // Watch for changes in `schoolId` and update `selectedSchool`
 watch(
   () => teacherStore.teacherData.schoolId,
@@ -349,7 +340,6 @@ const errors = ref({
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
   phone: "",
   nationality: "",
 });
@@ -377,11 +367,7 @@ const validateForm = () => {
       : t("errors.invalid_email")
     : t("errors.required");
 
-  errors.value.password = teacherStore.teacherData.password
-    ? teacherStore.teacherData.password.length >= 6
-      ? ""
-      : t("errors.password_length")
-    : t("errors.required");
+
 
   errors.value.phone = teacherStore.teacherData.profile.phone
     ? ""

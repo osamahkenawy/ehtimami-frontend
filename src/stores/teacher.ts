@@ -22,7 +22,6 @@ interface Teacher {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
   schoolId: number | null;
   profile: {
     id?: number;
@@ -51,7 +50,6 @@ export const useTeacherStore = defineStore("teacher", () => {
     lastName: "",
     email: "",
     schoolId: null,
-    password: "",
     profile: {
       marital_status: "",
       nationality: "",
