@@ -112,7 +112,7 @@ const locationIcon = L.icon({
       return {
         address: t("location.unknownLocation"),
         school_region: "",
-        school_city: "",
+        school_city: "", 
         school_country: ""
       };
     }
@@ -120,54 +120,50 @@ const locationIcon = L.icon({
   
   // Select location from search results
   const selectLocation = async (location: { lat: string; lon: string; display_name: string }) => {
-    if (!map.value) return;
-  
-    searchQuery.value = location.display_name;
-  
-    const geoData = await reverseGeocode(parseFloat(location.lat), parseFloat(location.lon));
-  
-    if (searchMarker.value) searchMarker.value.remove();
-  
-    searchMarker.value = L.marker([parseFloat(location.lat), parseFloat(location.lon)], {
-      icon: locationIcon,
-      draggable: true
-    })
-      .addTo(map.value)
-      .bindPopup(`<b>${t("location.selected")}:</b> ${location.display_name}`)
-      .openPopup();
-  
-    adjustMapBounds();
-  
-    emit("locationSelected", {
-      lat: parseFloat(location.lat),
-      lon: parseFloat(location.lon),
-      address: geoData.address,
-      school_region: geoData.school_region,
-      school_city: geoData.school_city,
-      school_country: geoData.school_country
-    });
-  
-    locations.value = [];
-  
-    // Allow dragging for the selected marker
-    searchMarker.value.on("dragend", async () => {
-      const newPos = searchMarker.value?.getLatLng();
-      if (newPos) {
-        const newGeoData = await reverseGeocode(newPos.lat, newPos.lng);
-        searchQuery.value = newGeoData.address;
-        searchMarker.value?.setPopupContent(`<b>${t("location.selected")}:</b> ${newGeoData.address}`).openPopup();
-  
-        emit("locationSelected", {
-          lat: newPos.lat,
-          lon: newPos.lng,
-          address: newGeoData.address,
-          school_region: newGeoData.school_region,
-          school_city: newGeoData.school_city,
-          school_country: newGeoData.school_country
-        });
-      }
-    });
-  };
+  if (!map.value) return;
+
+  searchQuery.value = location.display_name;
+
+  const geoData = await reverseGeocode(parseFloat(location.lat), parseFloat(location.lon));
+
+  if (searchMarker.value) searchMarker.value.remove();
+
+  searchMarker.value = L.marker([parseFloat(location.lat), parseFloat(location.lon)], {
+    icon: locationIcon,
+    draggable: true
+  })
+    .addTo(map.value)
+    .bindPopup(`<b>${t("location.selected")}:</b> ${location.display_name}`)
+    .openPopup();
+
+  adjustMapBounds();
+
+  // **Emit address, latitude, and longitude**
+  emit("locationSelected", {
+    address: geoData.address,
+    lat: parseFloat(location.lat),
+    lon: parseFloat(location.lon),
+  });
+
+  locations.value = [];
+
+  // Allow dragging for the selected marker
+  searchMarker.value.on("dragend", async () => {
+    const newPos = searchMarker.value?.getLatLng();
+    if (newPos) {
+      const newGeoData = await reverseGeocode(newPos.lat, newPos.lng);
+      searchQuery.value = newGeoData.address;
+      searchMarker.value?.setPopupContent(`<b>${t("location.selected")}:</b> ${newGeoData.address}`).openPopup();
+
+      // **Emit new location when marker is dragged**
+      emit("locationSelected", {
+        address: newGeoData.address,
+        lat: newPos.lat,
+        lon: newPos.lng,
+      });
+    }
+  });
+};
   
   // Adjust the map to fit both markers
   const adjustMapBounds = () => {

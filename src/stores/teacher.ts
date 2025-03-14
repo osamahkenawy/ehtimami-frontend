@@ -113,6 +113,7 @@ export const useTeacherStore = defineStore("teacher", () => {
   const createNewTeacher = async () => {
     try {
       const sanitizedData = toRaw(teacherData.value);
+      console.log("createNewTeacher", sanitizedData )
       const response = await createTeacher(sanitizedData);
       return response;
     } catch (error) {

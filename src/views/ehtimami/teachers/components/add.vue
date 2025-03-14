@@ -26,6 +26,7 @@
       id="teacherForm"
       @submit.prevent="submitForm"
       class="flex flex-col lg:flex-row gap-6">
+      <!-- The validation is in firstName , lastName , password , Email , phone Number, Nationality,   -->
       <!-- Column 1: Teacher Info -->
       <div class="xl:w-[30rem] w-full">
         <ActionCard :title="$t('teacher_form.basicInfo')">
@@ -111,13 +112,15 @@
             </label>
 
             <vue-tel-input
-              v-model="teacherStore.teacherData.profile.phone"
-              class="w-full"
-              mode="international"
-              :default-country="'AE'"
-              :preferred-countries="['AE', 'SA', 'EG']"
-              :auto-format="true"
-            ></vue-tel-input>
+                v-model="phoneNumber"
+                class="w-full"
+                mode="international"
+                :default-country="'AE'"
+                :preferred-countries="['AE', 'SA', 'EG']"
+                :auto-format="true"
+                @input="updatePhone"
+              />
+              <p v-if="errors.phone" class="text-red-500">{{ errors.phone }}</p>
           </div>
         </ActionCard>
         <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
@@ -153,12 +156,19 @@
                 <label for="nationality">{{
                   $t("teacher_form.nationality")
                 }}</label>
-                <input
+                <select
                   id="nationality"
                   v-model="teacherStore.teacherData.profile.nationality"
-                  type="text"
                   class="form-input w-full"
-                />
+                >
+                  <option value="" disabled>Select Nationality</option>
+                  <option v-for="nationality in nationalities" :key="nationality.value" :value="nationality.value">
+                    {{ nationality.flag }} {{ nationality.text }}
+                  </option>
+                </select>
+                <p v-if="errors.nationality" class="text-red-500">
+                  {{ errors.nationality }}
+                </p>
               </div>
             </div>
 
@@ -229,7 +239,8 @@
                 :schoolLat="selectedSchool?.school_lat || ''"
                 :schoolLng="selectedSchool?.school_lng || ''"
                 :schoolAddress="selectedSchool.school_address"
-                :country="'sa'"
+                @locationSelected="updateTeacherLocation"
+             
               />
             </div>
           </div>
@@ -250,6 +261,8 @@ import { useRouter } from "vue-router";
 import GenderSelection from "@/components/ui/GenderSelection.vue";
 import moment from "moment";
 import AddressLoc from "@/views/ehtimami/teachers/components/AddressLoc.vue";
+import {nationalities} from "@/fakeData/nationalityList"
+
 useMeta({ title: "Add Teacher" });
 
 const { t } = useI18n();
@@ -271,6 +284,12 @@ const selectedSchool: any = ref({
   school_lng: null,
 });
 
+const phoneNumber = ref(teacherStore.teacherData.profile.phone || "");
+
+const updatePhone = (value: string) => {
+  phoneNumber.value = value;
+  teacherStore.teacherData.profile.phone = value;
+};
 // Watch for changes in `schoolId` and update `selectedSchool`
 watch(
   () => teacherStore.teacherData.schoolId,
@@ -331,6 +350,8 @@ const errors = ref({
   lastName: "",
   email: "",
   password: "",
+  phone: "",
+  nationality: "",
 });
 
 onBeforeMount(() => {
@@ -342,32 +363,39 @@ const handleImageUpload = (data: { s3: string; base64: string }) => {
 };
 
 const validateForm = () => {
-  errors.value.schoolId = teacherStore.teacherData.schoolId
-    ? ""
-    : t("errors.required");
   errors.value.firstName = teacherStore.teacherData.firstName
     ? ""
     : t("errors.required");
+
   errors.value.lastName = teacherStore.teacherData.lastName
     ? ""
     : t("errors.required");
+
   errors.value.email = teacherStore.teacherData.email
-    ? ""
+    ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(teacherStore.teacherData.email)
+      ? ""
+      : t("errors.invalid_email")
     : t("errors.required");
+
   errors.value.password = teacherStore.teacherData.password
+    ? teacherStore.teacherData.password.length >= 6
+      ? ""
+      : t("errors.password_length")
+    : t("errors.required");
+
+  errors.value.phone = teacherStore.teacherData.profile.phone
     ? ""
     : t("errors.required");
 
-  return (
-    !errors.value.schoolId &&
-    !errors.value.firstName &&
-    !errors.value.lastName &&
-    !errors.value.email &&
-    !errors.value.password
-  );
+  errors.value.nationality = teacherStore.teacherData.profile.nationality
+    ? ""
+    : t("errors.required");
+    console.log("validateForm", teacherStore.teacherData.profile.phone , Object.values(errors.value).every((error) => error === ""))
+    return Object.values(errors.value).every((error) => error === "");
 };
 
 const submitForm = async () => {
+  console.log("teacherStore.teacherData", teacherStore.teacherData, validateForm())
   if (!validateForm()) return;
 
   isSubmitting.value = true;
@@ -379,7 +407,7 @@ const submitForm = async () => {
     customClass: { container: "toast" },
   });
 
-  try {
+  try { 
     await teacherStore.createNewTeacher();
     toast.fire({ icon: "success", title: t("teacher_form.successMessage") });
     router.push("/ehtimami/teachers");
@@ -392,7 +420,11 @@ const submitForm = async () => {
     isSubmitting.value = false;
   }
 };
-
+const updateTeacherLocation = (locationData: { address: string; lat: number; lon: number }) => {
+  teacherStore.teacherData.profile.address = locationData.address;
+  teacherStore.teacherData.profile.latitude = locationData.lat;
+  teacherStore.teacherData.profile.longitude = locationData.lon;
+};
 const cancelForm = () => {
   router.push("/ehtimami/teachers");
 };
