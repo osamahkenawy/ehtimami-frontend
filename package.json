@@ -65,6 +65,7 @@
     "vue3-perfect-scrollbar": "1.6.1",
     "vue3-popper": "^1.5.0",
     "vue3-quill": "^0.3.1",
+    "vue3-tel-input": "^1.0.4",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {

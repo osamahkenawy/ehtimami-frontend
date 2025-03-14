@@ -25,8 +25,7 @@
     <form
       id="teacherForm"
       @submit.prevent="submitForm"
-      class="flex flex-col lg:flex-row gap-6"
-    >
+      class="flex flex-col lg:flex-row gap-6">
       <!-- Column 1: Teacher Info -->
       <div class="xl:w-[30rem] w-full">
         <ActionCard :title="$t('teacher_form.basicInfo')">
@@ -105,19 +104,20 @@
             />
             <p v-if="errors.email" class="text-red-500">{{ errors.email }}</p>
           </div>
-
+          {{ teacherStore.teacherData.profile.phone }}
           <div class="mt-4">
-            <label for="reciever-number" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0"
-              >Phone Number</label
-            >
-            <input
-              id="reciever-number"
-              type="text"
-              name="reciever-number"
-              class="form-input flex-1"
-              v-model="teacherStore.teacherData.profile.phone_number"
-              placeholder="Enter Phone number"
-            />
+            <label for="reciever-number" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
+              {{ $t("teacher_form.phone") }}
+            </label>
+
+            <vue-tel-input
+              v-model="teacherStore.teacherData.profile.phone"
+              class="w-full"
+              mode="international"
+              :default-country="'AE'"
+              :preferred-countries="['AE', 'SA', 'EG']"
+              :auto-format="true"
+            ></vue-tel-input>
           </div>
         </ActionCard>
         <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
@@ -181,33 +181,56 @@
       </div>
 
       <!-- Column 2: School Info -->
-
       <ActionCard :title="$t('teacher_form.career_details')">
         <div class="p-5">
-          <!-- Occupation Dropdown -->
-          <div class="mt-4">
-            <label for="career_field">{{
-              $t("teacher_form.career_field")
-            }}</label>
-            <input
-              id="career_field"
-              v-model="teacherStore.teacherData.profile.occupation"
-              type="text"
-              class="form-input w-full"
-            />
-          </div>
+          <!-- First Row: Occupation & Select School -->
+          <div class="mt-4 flex gap-4">
+            <!-- Occupation Input -->
+            <div class="w-1/2">
+              <label for="career_field">{{
+                $t("teacher_form.career_field")
+              }}</label>
+              <input
+                id="career_field"
+                v-model="teacherStore.teacherData.profile.occupation"
+                type="text"
+                class="form-input w-full"
+              />
+            </div>
 
-          <!-- Address & Map -->
-          <div class="mt-4">
+            <!-- Select School Dropdown -->
+            <div class="w-1/2">
+              <label for="school">{{ $t("teacher_form.select_school") }}</label>
+              <select
+                id="school"
+                v-model="teacherStore.teacherData.schoolId"
+                class="form-select w-full"
+              >
+                <option
+                  v-for="school in teacherStore.schools"
+                  :key="school.id"
+                  :value="school.id"
+                >
+                  {{ school.school_name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!-- {{selectedSchool}} -->
+          <!-- Second Row: Address & Map -->
+          <div
+            class="mt-4"
+            v-if="selectedSchool && selectedSchool.school_address"
+          >
             <label for="address">{{ $t("teacher_form.address") }}</label>
-            <input
-              id="address"
-              v-model="teacherStore.teacherData.profile.address"
-              type="text"
-              class="form-input w-full"
-            />
             <div class="mt-2">
-              <LocationMap v-model="teacherStore.teacherData.profile.address" />
+              <AddressLoc
+                :key="updateKey"
+                :schoolLat="selectedSchool?.school_lat || ''"
+                :schoolLng="selectedSchool?.school_lng || ''"
+                :schoolAddress="selectedSchool.school_address"
+                :country="'sa'"
+              />
             </div>
           </div>
         </div>
@@ -219,13 +242,14 @@
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
 import Swal from "sweetalert2";
-import { ref, computed, onBeforeMount } from "vue";
+import { ref, computed, onBeforeMount, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useTeacherStore } from "@/stores/teacher";
 import { useRouter } from "vue-router";
 import GenderSelection from "@/components/ui/GenderSelection.vue";
 import moment from "moment";
+import AddressLoc from "@/views/ehtimami/teachers/components/AddressLoc.vue";
 useMeta({ title: "Add Teacher" });
 
 const { t } = useI18n();
@@ -238,6 +262,41 @@ const breadcrumbItems = computed(() => [
   { label: t("teachers"), link: "/ehtimami/teachers" },
   { label: t("add-teacher") },
 ]);
+const updateKey = ref(0);
+// Default selectedSchool as an empty object instead of null
+const selectedSchool: any = ref({
+  id: null,
+  school_address: "",
+  school_lat: null,
+  school_lng: null,
+});
+
+// Watch for changes in `schoolId` and update `selectedSchool`
+watch(
+  () => teacherStore.teacherData.schoolId,
+  (newSchoolId) => {
+    if (newSchoolId) {
+      const foundSchool = teacherStore.schools.find(
+        (school) => school.id === newSchoolId
+      );
+      selectedSchool.value = foundSchool || {
+        id: null,
+        school_address: "",
+        school_lat: null,
+        school_lng: null,
+      };
+    } else {
+      selectedSchool.value = {
+        id: null,
+        school_address: "",
+        school_lat: null,
+        school_lng: null,
+      };
+    }
+    updateKey.value += 1;
+  },
+  { immediate: true }
+);
 
 // Get today's date in "YYYY-MM-DD" format
 const maxBirthDate = computed(() => moment().format("YYYY-MM-DD"));
@@ -338,3 +397,8 @@ const cancelForm = () => {
   router.push("/ehtimami/teachers");
 };
 </script>
+<style lang="scss" scoped>
+::v-deep .vti__dropdown {
+  z-index: 9999 !important;
+}
+</style>

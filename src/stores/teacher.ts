@@ -37,7 +37,7 @@ interface Teacher {
     avatar?: string;
     occupation?: string;
     bio?: string;
-    phone_number?: string
+    phone?: string
   };
   classes?: { id: number; name: string }[];
 }
@@ -63,7 +63,7 @@ export const useTeacherStore = defineStore("teacher", () => {
       longitude: 0,
       avatar: "",
       occupation: "",
-      phone_number: "",
+      phone: "",
       bio: ""
     },
     classes: [],

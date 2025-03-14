@@ -164,7 +164,8 @@
     "enterSchoolLocation": "أدخل موقع المدرسة",
     "unknownLocation": "موقع غير معروف",
     "school": "المدرسة",
-    "movedLocation": "الموقع المنقول"
+    "movedLocation": "الموقع المنقول",
+    "enterTeacherLocation": "أدخل موقع المعلم"
   },
   "submit": "حفظ",
   "cancel": "إلغاء",
@@ -353,6 +354,7 @@
     "successMessage": "تمت إضافة المعلم بنجاح!",
     "errorMessage": "حدث خطأ أثناء إضافة المعلم.",
     "career_details": "تفاصيل الوظيفة",
-    "career_field": "مجال العمل"
+    "career_field": "مجال العمل",
+    "phone": "رقم الهاتف"
   }
 }

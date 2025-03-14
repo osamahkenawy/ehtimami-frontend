@@ -164,7 +164,8 @@
     "enterSchoolLocation": "Enter School Location",
     "unknownLocation": "Unknown Location",
     "school": "School",
-    "movedLocation": "Moved Location"
+    "movedLocation": "Moved Location",
+    "enterTeacherLocation": "Enter Teacher Location"
   },
   "submit": "Submit",
   "cancel": "Cancel",
@@ -356,7 +357,9 @@
     "successMessage": "Teacher has been added successfully!",
     "errorMessage": "An error occurred while adding the teacher.",
     "career_details": "Career Details",
-    "career_field": "Career Field"
+    "career_field": "Career Field",
+    "phone": "Phone Number",
+    "select_school": "Select School"
   }
 
 
