@@ -10,3 +10,25 @@ export function getNameInitials(name: string): string {
     return value.charAt(0) + "." + value.charAt(1);
   }
   
+  export function getCurrentUser(): Record<string, any> | null {
+    try {
+      const user = localStorage.getItem('user');
+      return user ? JSON.parse(user) : null;
+    } catch (error) {
+      console.error('Error parsing user from localStorage:', error);
+      return null;
+    }
+  }
+
+  export function getUserRoles(): string[] {
+    try {
+      const user = localStorage.getItem('user');
+      if (!user) return [];
+  
+      const parsed = JSON.parse(user);
+      return Array.isArray(parsed.roles) ? parsed.roles : [];
+    } catch (error) {
+      console.error('Error retrieving user roles:', error);
+      return [];
+    }
+  }
