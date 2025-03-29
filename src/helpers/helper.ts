@@ -32,3 +32,9 @@ export function getNameInitials(name: string): string {
       return [];
     }
   }
+  export function formatRoleName(role: string): string {
+    return role
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }

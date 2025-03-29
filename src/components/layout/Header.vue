@@ -301,7 +301,13 @@
                                                 <h4 class="text-base">
                                                     {{ user?.firstName + ' ' + user?.lastName }}
                                                 </h4>
-                                                <span class="text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">{{user?.roles[0]}}</span>
+                                                <span
+                                                    v-for="(role, index) in user?.roles"
+                                                    :key="index"
+                                                    class="text-xs bg-success-light rounded text-success px-1 ltr:ml-1 rtl:ml-1 first:ltr:ml-2 first:rtl:ml-2"
+                                                    >
+                                                    {{ formatRoleName(role) }}
+                                                    </span>
                                             </div>
                                         </div>
                                     </li>
@@ -352,7 +358,7 @@
 
     import { useRoute } from 'vue-router';
     import { useAppStore } from '@/stores/index';
-    import { getCurrentUser } from '@/helpers/helper'
+    import { getCurrentUser, formatRoleName } from '@/helpers/helper'
 
     import IconMenu from '@/components/icon/icon-menu.vue';
     import IconCalendar from '@/components/icon/icon-calendar.vue';
