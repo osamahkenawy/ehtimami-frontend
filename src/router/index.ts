@@ -81,9 +81,9 @@ const routes: RouteRecordRaw[] = [
     },
     
     {
-        path: '/ehtimami/staff', 
-        name: 'staff',
-        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/staff.vue'),
+        path: '/ehtimami/user', 
+        name: 'user',
+        component: () => import(/* webpackChunkName: "apps-chat" */ '../views/ehtimami/user.vue'),
     },
     {
         path: '/ehtimami/mailbox',

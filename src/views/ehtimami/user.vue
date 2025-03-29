@@ -9,7 +9,7 @@
       :data="rows"
       searchPlaceHolder="Search..."
       :searchFilter="true"
-      :noDataContent="'No Staff Available'"
+      :noDataContent="'No Users Available'"
     >
       <!-- Receive raw data in the action slot -->
       <template #action="{ data }">
@@ -34,7 +34,7 @@ const store = useAppStore();
 // Breadcrumb items for the page
 const breadcrumbItems = [
   { label: "Home", link: "/", icon: IconHome },
-  { label: "Staff" },
+  { label: "User" },
 ];
 
 // Define headers and rows for DataTable
