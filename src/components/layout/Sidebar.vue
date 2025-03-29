@@ -827,10 +827,12 @@
     import iconMenuOrganization from '../icon/menu/icon-menu-organization.vue';
     import iconMenuClass from "../icon/menu/icon-menu-class.vue"
     import { AnimatedIcon } from "@/components/icon/animatedIcon";
+    import { getUserRoles } from '@/helpers/helper'
 
     const store = useAppStore();
     const activeDropdown: any = ref('');
     const subActive: any = ref('');
+    const roles = getUserRoles()
 
     onMounted(() => {
         const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
