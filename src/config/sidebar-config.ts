@@ -37,6 +37,12 @@ export const sidebarItems: SidebarItem[] = [
         roles: ['admin']
     },
     {
+        label: 'teachers',
+        icon: 'azdvtwlw',
+        route: '/ehtimami/teachers',
+        roles: ['school_manager']
+    },
+    {
         label: 'chat',
         icon: 'zqhvubpn',
         route: '/ehtimami/chat',
