@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
+import { defineComponent, ref, computed, watch, onMounted, nextTick } from "vue";
 import { TRIGGER } from "./icons";
 
 export default defineComponent({
@@ -31,68 +31,40 @@ export default defineComponent({
     },
     primaryColor: {
       type: String,
-      default: "#121331", // Default primary color
+      default: "#253b5c",
     },
     secondaryColor: {
       type: String,
-      default: "#253b5c", // Default secondary color
+      default: "#6399eb",
     },
   },
   setup(props) {
     const showIcon = ref(true);
-
-    // Computed property to dynamically generate the source URL
-    const source = computed(() => {
-      return `https://cdn.lordicon.com/${props.name}.json`;
-    });
-
-    // Computed property to set colors dynamically
-    const computedColors = computed(() => {
-      return `primary:${props.primaryColor}, secondary:${props.secondaryColor}`;
-    });
-
-    // Watchers for dynamic updates to icon attributes
     const player = ref<HTMLElement | null>(null);
 
-    watch(
-      source,
-      (newSource) => {
-        if (player.value) {
-          player.value.setAttribute("src", newSource);
-        }
-      },
-      { immediate: true }
-    );
+    const source = computed(() => `https://cdn.lordicon.com/${props.name}.json`);
+    const computedColors = computed(() => `primary:${props.primaryColor},secondary:${props.secondaryColor}`);
 
-    watch(
-      () => props.trigger,
-      (newTrigger) => {
-        if (player.value) {
-          player.value.setAttribute("trigger", newTrigger);
-        }
-      },
-      { immediate: true }
-    );
+    const updateAttributes = () => {
+      if (!player.value) return;
 
-    watch(
-      () => props.stroke,
-      (newStroke) => {
-        if (player.value) {
-          player.value.setAttribute("stroke", newStroke.toString());
-        }
-      },
-      { immediate: true }
-    );
+      player.value.setAttribute("src", source.value);
+      player.value.setAttribute("trigger", props.trigger);
+      player.value.setAttribute("stroke", props.stroke.toString());
+      player.value.setAttribute("colors", computedColors.value);
+    };
 
-    watch(
-      computedColors,
-      (newColors) => {
-        if (player.value) {
-          player.value.setAttribute("colors", newColors);
-        }
-      },
-      { immediate: true }
-    );
+    watch(() => props.name, updateAttributes);
+    watch(() => props.trigger, updateAttributes);
+    watch(() => props.stroke, updateAttributes);
+    watch(() => props.primaryColor, updateAttributes);
+    watch(() => props.secondaryColor, updateAttributes);
+
+    onMounted(() => {
+      nextTick(() => {
+        updateAttributes();
+      });
+    });
 
     return {
       showIcon,
@@ -102,6 +74,7 @@ export default defineComponent({
     };
   },
 });
+
 </script>
 
 <style scoped>
