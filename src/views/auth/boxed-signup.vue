@@ -1,16 +1,12 @@
 <template>
     <div>
         <div class="absolute inset-0">
-            <img src="/assets/images/auth/bg-gradient.png" alt="image" class="h-full w-full object-cover" />
+            <img src="/assets/images/auth/heroo-bg.jpg" alt="image" class="h-full w-full object-cover" />
         </div>
 
-        <div
-            class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16"
-        >
-            <img src="/assets/images/auth/coming-soon-object1.png" alt="image" class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
-            <img src="/assets/images/auth/coming-soon-object2.png" alt="image" class="absolute left-24 top-0 h-40 md:left-[30%]" />
-            <img src="/assets/images/auth/coming-soon-object3.png" alt="image" class="absolute right-0 top-0 h-[300px]" />
-            <img src="/assets/images/auth/polygon-object.svg" alt="image" class="absolute bottom-0 end-[28%]" />
+        <div 
+        class="relative flex min-h-screen items-center justify-center  bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
+
             <div
                 class="relative w-full max-w-[870px] rounded-md bg-[linear-gradient(45deg,#fff9f9_0%,rgba(255,255,255,0)_25%,rgba(255,255,255,0)_75%,_#fff9f9_100%)] p-2 dark:bg-[linear-gradient(52.22deg,#0E1726_0%,rgba(14,23,38,0)_18.66%,rgba(14,23,38,0)_51.04%,rgba(14,23,38,0)_80.07%,#0E1726_100%)]"
             >
@@ -31,6 +27,7 @@
                                     </span>
                                 </button>
                                 <template #content="{ close }">
+                                    
                                     <ul class="!px-2 text-dark dark:text-white-dark grid grid-cols-2 gap-2 font-semibold dark:text-white-light/90 w-[280px]">
                                         <template v-for="item in store.languageList" :key="item.code">
                                             <li>
@@ -101,46 +98,7 @@
                             <span class="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-white-light dark:bg-white-dark"></span>
                             <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">or</span>
                         </div>
-                        <div class="mb-10 md:mb-[60px]">
-                            <ul class="flex justify-center gap-3.5 text-white">
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-instagram />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-facebook-circle />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-twitter :fill="true" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="javascript:"
-                                        class="inline-flex h-8 w-8 items-center justify-center rounded-full p-0 transition hover:scale-110"
-                                        style="background: linear-gradient(135deg, rgba(239, 18, 98, 1) 0%, rgba(67, 97, 238, 1) 100%)"
-                                    >
-                                        <icon-google />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                   
                         <div class="text-center dark:text-white">
                             Already have an account ?
                             <router-link to="/auth/ehtimami-signin" class="uppercase text-primary underline transition hover:text-black dark:hover:text-white">
