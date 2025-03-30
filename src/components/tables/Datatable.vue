@@ -5,9 +5,9 @@
       <div class="flex justify-between items-center p-4">
         <!-- Left side empty (could contain other controls if needed) -->
         <div></div>
-        
+
         <!-- Search Filter aligned to the right -->
-        <div v-if="searchFilter" class="w-full sm:w-auto ">
+        <div v-if="searchFilter" class="w-full sm:w-auto">
           <form class="flex items-center">
             <div class="relative">
               <input
@@ -23,7 +23,6 @@
                 <icon-search class="mx-auto" />
               </button>
             </div>
-            
           </form>
         </div>
       </div>
@@ -40,11 +39,15 @@
           lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
           previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
           nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
-         :noDataContent="noDataContent"
-          >
+          :noDataContent="noDataContent"
+        >
           <template #id="data">
-            <strong class="text-info">#{{ data.value.id }}</strong> 
+            <strong class="text-info">#{{ data.value.id }}</strong>
           </template>
+          <template #userId="data">
+            <strong class="text-info">#{{ data.value.userId }}</strong>
+          </template>
+
           <template #firstName="data">
             <div class="flex items-center gap-2">
               <img
@@ -57,56 +60,136 @@
               </div>
             </div>
           </template>
-          <template #responsible_teacher="data">
+          <template #name="data">
             <div class="flex items-center gap-2">
-             
-              <div class="font-semibold" v-if="data && data.value && data.value.teacher && data.value.teacher.id">
-                <ProfilePax :name="data.value.teacher?.firstName + ' ' + data.value.teacher?.lastName" :email="data.value.teacher?.email" />
+              <div
+                class="font-semibold"
+                v-if="
+                  data &&
+                  data.value &&
+                  data.value.userId &&
+                  data.value.firstName
+                "
+              >
+                <ProfilePax
+                  :image="data.value?.profile?.avatar"
+                  :name="data.value?.firstName + ' ' + data.value?.lastName"
+                  :email="data.value?.email"
+                  :phone="data.value?.profile?.phone"
+                />
               </div>
-              <div v-else>
-                -
+              <div v-else>-</div>
+            </div>
+          </template>
+          <template #roles="data">
+            <div class="flex flex-col gap-1">
+              <div
+                v-for="role in data.value.roles"
+                :key="role"
+                class="flex items-center gap-2"
+              >
+                <Chip :content="formatRoleName(role)" />
+                <span
+                  v-if="data.value.school"
+                  v-tippy="'Show School Info'"
+                  class="cursor-pointer text-primary hover:underline"
+                  @click="openSchoolDialog(data.value.school)"
+                >
+                  <icon-arrow-forward class="w-6 h-6" />
+                </span>
               </div>
             </div>
           </template>
-          
+          <template #responsible_teacher="data">
+            <div class="flex items-center gap-2">
+              <div
+                class="font-semibold"
+                v-if="
+                  data &&
+                  data.value &&
+                  data.value.teacher &&
+                  data.value.teacher.id
+                "
+              >
+                <ProfilePax
+                  :name="
+                    data.value.teacher?.firstName +
+                    ' ' +
+                    data.value.teacher?.lastName
+                  "
+                  :email="data.value.teacher?.email"
+                />
+              </div>
+              <div v-else>-</div>
+            </div>
+          </template>
+
           <template #school_name="data">
             <div class="flex items-center gap-2">
-              
               <div class="font-semibold">
-                <div class="font-semibold" v-if="data && data.value && data.value.school_name">
-                <ProfilePax :name="data.value.school_name"  :image="data?.value?.school_logo || ''"  :compLogo="true" />
-              </div>
-              <div v-else>
-                -
-              </div>
+                <div
+                  class="font-semibold"
+                  v-if="data && data.value && data.value.school_name"
+                >
+                  <ProfilePax
+                    :name="data.value.school_name"
+                    :image="data?.value?.school_logo || ''"
+                    :compLogo="true"
+                  />
+                </div>
+                <div v-else>-</div>
               </div>
             </div>
           </template>
           <template #class_name="data">
             <div class="flex items-center gap-2">
-              <div class="font-semibold" v-if="data && data.value && data.value.name">
-                <ProfilePax :name="data.value.name"  :image="data?.value?.class_logo || ''"  :compLogo="true" />
+              <div
+                class="font-semibold"
+                v-if="data && data.value && data.value.name"
+              >
+                <ProfilePax
+                  :name="data.value.name"
+                  :image="data?.value?.class_logo || ''"
+                  :compLogo="true"
+                />
               </div>
-              <div v-else>
-                -
+              <div v-else>-</div>
+            </div>
+          </template>
+          <template #is_verified="data">
+            <!-- {{ data.value }} -->
+            <Chip
+              :content="data.value?.is_verified ? 'Verified' : 'Unverified'"
+              :textColor="data.value?.is_verified ? '#00ab55' : '#e7515a'"
+              :borderColor="data.value?.is_verified ? '#00ab55' : '#e7515a'"
+              :headerBackgroundColor="
+                data.value?.is_verified ? '#e6f9f0' : '#ffecec'
+              "
+            />
+          </template>
+          <template #nationality="data">
+            <div class="flex items-center gap-2">
+              <div class="font-semibold">
+                <span>{{
+                  getFlagForNationality(data.value.profile.nationality)
+                }}</span>
+                {{ data.value.profile.nationality }}
               </div>
-        
             </div>
           </template>
           <template #class_school_name="data">
             <div class="flex items-center gap-2">
-              
               <div class="font-semibold">
-                {{ data.value.school.school_name  }}
+                {{ data.value.school.school_name }}
               </div>
             </div>
           </template>
-          
+
           <template #school_address="{ value }">
             <div class="flex items-center gap-2">
               <AnimatedIcon :name="'vvyxyrur'" />
-              <div 
-                class="font-semibold truncate max-w-[200px]" 
+              <div
+                class="font-semibold truncate max-w-[200px]"
                 v-tippy="value.school_address"
               >
                 {{ truncateAddress(value.school_address) }}
@@ -126,10 +209,10 @@
               <AnimatedIcon :name="'lsdujvto'" />
               <div class="font-semibold">
                 <a
-              :href="`mailto:${data.value.school_email}`"
-              class="text-primary hover:underline"
-              >{{ data.value.school_email }}</a
-            >
+                  :href="`mailto:${data.value.school_email}`"
+                  class="text-primary hover:underline"
+                  >{{ data.value.school_email }}</a
+                >
               </div>
             </div>
           </template>
@@ -138,24 +221,14 @@
               <AnimatedIcon :name="'xrdkdttl'" />
               <div class="font-semibold">
                 <a
-              :href="`mailto:${data.value.school_phone}`"
-              class="text-primary hover:underline"
-              >{{ data.value.school_phone }}</a
-            >
+                  :href="`mailto:${data.value.school_phone}`"
+                  class="text-primary hover:underline"
+                  >{{ data.value.school_phone }}</a
+                >
               </div>
             </div>
           </template>
-          <template #country>
-            <div class="flex items-center gap-2">
-              <img
-                width="24"
-                :src="`/assets/images/flags/${getCountry().code}.svg`"
-                class="max-w-none"
-                alt="user profile"
-              />
-              <div>{{ getCountry().name }}</div>
-            </div>
-          </template>
+
           <template #email="data">
             <a
               :href="`mailto:${data.value.email}`"
@@ -195,20 +268,28 @@
           <template #school_status="data">
             <span
               class="badge"
-              :class="data.value.statusId === 1 ? 'badge-outline-success' : 'badge-outline-danger'"
+              :class="
+                data.value.statusId === 1
+                  ? 'badge-outline-success'
+                  : 'badge-outline-danger'
+              "
             >
-              {{ data.value.statusId === 1 ? 'Active' : 'Inactive' }}
+              {{ data.value.statusId === 1 ? "Active" : "Inactive" }}
             </span>
           </template>
           <template #class_status="data">
             <span
               class="badge"
-              :class="data.value.status === 'active' ? 'badge-outline-success' : 'badge-outline-danger'"
+              :class="
+                data.value.status === 'active'
+                  ? 'badge-outline-success'
+                  : 'badge-outline-danger'
+              "
             >
-              {{ data.value.status === 'active' ? 'Active' : 'Inactive' }}
+              {{ data.value.status === "active" ? "Active" : "Inactive" }}
             </span>
           </template>
-          
+
           <template #status>
             <span
               class="badge"
@@ -217,11 +298,75 @@
             >
           </template>
           <template #action="data">
-            <slot name="action"  :data="toRaw(data.value)"></slot>
+            <slot name="action" :data="toRaw(data.value)"></slot>
           </template>
         </vue3-datatable>
       </div>
     </div>
+    <!-- School Info Dialog -->
+    <TransitionRoot appear :show="modal1" as="template">
+      <Dialog as="div" @close="modal1 = false" class="relative z-[51]">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <DialogOverlay class="fixed inset-0 bg-[black]/60" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div class="flex min-h-full items-start justify-center px-4 py-8">
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+            <DialogPanel class="panel border-0 p-0 rounded-lg overflow-hidden w-[900px] text-black dark:text-white-dark">
+
+                <button
+                  type="button"
+                  class="absolute top-4 ltr:right-4 rtl:left-4 text-gray-400 hover:text-gray-800 dark:hover:text-gray-600 outline-none"
+                  @click="modal1 = false"
+                >
+                  <icon-x />
+                </button>
+                <div
+                  class="text-lg font-bold bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
+                >
+                  School Information
+                </div>
+                <div class="p-5">
+                  <div v-if="selectedSchool">
+                    <div>
+                      <strong>Name:</strong> {{ selectedSchool.school_name }}
+                    </div>
+
+                    <div class="mt-2">
+                      <LocMap
+                        :schoolLat="selectedSchool?.school_lat || 0"
+                        :schoolLng="selectedSchool?.school_lng || 0"
+                        :schoolAddress="selectedSchool.school_address"
+                      />
+                    </div>
+                  </div>
+                  <div v-else>
+                    <p>No school info available.</p>
+                  </div>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
   </div>
 </template>
 
@@ -229,139 +374,90 @@
 import { ref, reactive, computed, toRaw } from "vue";
 import Vue3Datatable from "@bhplugin/vue3-datatable";
 import apexchart from "vue3-apexcharts";
+import LocMap from "./components/LocMap.vue";
+import {
+  Dialog,
+  DialogOverlay,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
+
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "@/stores/index";
 import { useMeta } from "@/composables/use-meta";
 import IconStar from "@/components/icon/icon-star.vue";
-import IconSearch from '@/components/icon/icon-search.vue';
+import IconSearch from "@/components/icon/icon-search.vue";
 import { AnimatedIcon, ICONS } from "@/components/icon/animatedIcon";
+import { nationalities } from "@/fakeData/nationalityList";
+import { formatRoleName } from "@/helpers/helper";
+import IconArrowForward from "@/components/icon/icon-arrow-forward.vue";
+import AddressLoc from "@/views/ehtimami/teachers/components/AddressLoc.vue";
+interface School {
+  school_name: string;
+  school_address: string;
+  school_lat: number;
+  school_lng: number;
+}
 
 const store = useAppStore();
 // Props
 const props = defineProps({
   headers: {
     type: Array as () => any[],
-    required: true
+    required: true,
   },
   data: {
     type: Array as () => any[],
-    required: true
+    required: true,
   },
   searchFilter: {
     type: Boolean,
-    default: false  // Default is false (no search filter)
+    default: false, // Default is false (no search filter)
   },
   searchPlaceHolder: {
     type: String,
-    default: 'Search...'  // Default search placeholder
+    default: "Search...", // Default search placeholder
   },
   modelValue: {
     type: String,
-    default: ''  // Default empty string for filter text
+    default: "", // Default empty string for filter text
   },
   onRefresh: {
     type: Function,
-    required: false  // Optional refresh function
+    required: false, // Optional refresh function
   },
   noDataContent: {
     type: String,
-    default: 'No data available'  // Default content for no data state
-  }
+    default: "No data available", // Default content for no data state
+  },
 });
 
 const search = ref("");
 const truncateAddress = (address: string): string => {
   return address.length > 30 ? address.substring(0, 30) + "..." : address;
 };
+
+const selectedSchool = ref<School | null>(null);
+const modal1 = ref(false);
+const openSchoolDialog = (school) => {
+  selectedSchool.value = school;
+  modal1.value = true;
+};
+
 const formatSchoolType = (type: string): string => {
   return type
     .toLowerCase() // Convert to lowercase
     .replace(/_/g, " ") // Replace underscores with spaces
     .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
 };
-const countryList = [
-  { code: "AE", name: "United Arab Emirates" },
-  { code: "AR", name: "Argentina" },
-  { code: "AT", name: "Austria" },
-  { code: "AU", name: "Australia" },
-  { code: "BE", name: "Belgium" },
-  { code: "BG", name: "Bulgaria" },
-  { code: "BN", name: "Brunei" },
-  { code: "BR", name: "Brazil" },
-  { code: "BY", name: "Belarus" },
-  { code: "CA", name: "Canada" },
-  { code: "CH", name: "Switzerland" },
-  { code: "CL", name: "Chile" },
-  { code: "CN", name: "China" },
-  { code: "CO", name: "Colombia" },
-  { code: "CZ", name: "Czech Republic" },
-  { code: "DE", name: "Germany" },
-  { code: "DK", name: "Denmark" },
-  { code: "DZ", name: "Algeria" },
-  { code: "EC", name: "Ecuador" },
-  { code: "EG", name: "Egypt" },
-  { code: "ES", name: "Spain" },
-  { code: "FI", name: "Finland" },
-  { code: "FR", name: "France" },
-  { code: "GB", name: "United Kingdom" },
-  { code: "GR", name: "Greece" },
-  { code: "HK", name: "Hong Kong" },
-  { code: "HR", name: "Croatia" },
-  { code: "HU", name: "Hungary" },
-  { code: "ID", name: "Indonesia" },
-  { code: "IE", name: "Ireland" },
-  { code: "IL", name: "Israel" },
-  { code: "IN", name: "India" },
-  { code: "IT", name: "Italy" },
-  { code: "JO", name: "Jordan" },
-  { code: "JP", name: "Japan" },
-  { code: "KE", name: "Kenya" },
-  { code: "KH", name: "Cambodia" },
-  { code: "KR", name: "South Korea" },
-  { code: "KZ", name: "Kazakhstan" },
-  { code: "LA", name: "Laos" },
-  { code: "LK", name: "Sri Lanka" },
-  { code: "MA", name: "Morocco" },
-  { code: "MM", name: "Myanmar" },
-  { code: "MO", name: "Macau" },
-  { code: "MX", name: "Mexico" },
-  { code: "MY", name: "Malaysia" },
-  { code: "NG", name: "Nigeria" },
-  { code: "NL", name: "Netherlands" },
-  { code: "NO", name: "Norway" },
-  { code: "NZ", name: "New Zealand" },
-  { code: "PE", name: "Peru" },
-  { code: "PH", name: "Philippines" },
-  { code: "PK", name: "Pakistan" },
-  { code: "PL", name: "Poland" },
-  { code: "PT", name: "Portugal" },
-  { code: "QA", name: "Qatar" },
-  { code: "RO", name: "Romania" },
-  { code: "RS", name: "Serbia" },
-  { code: "RU", name: "Russia" },
-  { code: "SA", name: "Saudi Arabia" },
-  { code: "SE", name: "Sweden" },
-  { code: "SG", name: "Singapore" },
-  { code: "SK", name: "Slovakia" },
-  { code: "TH", name: "Thailand" },
-  { code: "TN", name: "Tunisia" },
-  { code: "TR", name: "Turkey" },
-  { code: "TW", name: "Taiwan" },
-  { code: "UK", name: "Ukraine" },
-  { code: "UG", name: "Uganda" },
-  { code: "US", name: "United States" },
-  { code: "VN", name: "Vietnam" },
-  { code: "ZA", name: "South Africa" },
-  { code: "BA", name: "Bosnia and Herzegovina" },
-  { code: "BD", name: "Bangladesh" },
-  { code: "EE", name: "Estonia" },
-  { code: "IQ", name: "Iraq" },
-  { code: "LU", name: "Luxembourg" },
-  { code: "LV", name: "Latvia" },
-  { code: "MK", name: "North Macedonia" },
-  { code: "SI", name: "Slovenia" },
-  { code: "PA", name: "Panama" },
-];
+
+const getFlagForNationality = (nationality: string): string => {
+  const match = nationalities.find(
+    (n) => n.value.toLowerCase() === nationality?.toLowerCase()
+  );
+  return match?.flag || "🌐"; // fallback globe emoji
+};
 
 const chart_options = computed(() => {
   let option = {
@@ -425,10 +521,5 @@ const randomStatus = () => {
 };
 const getRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getCountry = () => {
-  const random = Math.floor(Math.random() * countryList.length);
-  return countryList[random];
 };
 </script>

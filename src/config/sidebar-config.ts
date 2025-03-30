@@ -61,7 +61,7 @@ export const sidebarItems: SidebarItem[] = [
         roles: ['admin']
     },
     {
-        label: 'user',
+        label: 'user.page_title',
         icon: 'zvgtwjbo',
         route: '/ehtimami/user',
         roles: ['admin']
