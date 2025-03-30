@@ -1,4 +1,6 @@
 {
+  "site_name": "نظام إدارة المدارس إحترامي",
+  "account_not_verified": "لم يتم التحقق من حسابك بعد. يرجى التواصل مع الدعم.",
   "dashboard": "لوحة التحكم",
   "sales": "المبيعات",
   "analytics": "التحليلات",
@@ -156,7 +158,6 @@
   "or": "أو",
   "sign_up": "إنشاء حساب",
   "project_name": "إهتمامي",
-  "user": "الموظفون",
   "schools": "المدارس",
   "add-school": "إضافة مدرسة",
   "loading": "جارٍ التحميل...",
@@ -358,5 +359,34 @@
     "phone": "رقم الهاتف"
   },
   "female": "أنثي",
-  "male": "ذكر"
+  "male": "ذكر",
+  "user": {
+    "id": "المعرف",
+    "name": "الاسم",
+    "nationality": "الجنسية",
+    "roles": "الدور",
+    "is_verified": "تم التحقق",
+    "action": "الإجراء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "verify": "تحقق",
+    "unverify": "إلغاء التحقق",
+    "verify_confirm_title": "هل أنت متأكد؟",
+    "verify_confirm_text": "أنت على وشك التحقق من هذا المستخدم.",
+    "unverify_confirm_text": "أنت على وشك إلغاء التحقق من هذا المستخدم.",
+    "confirm_button": "نعم، تأكيد",
+    "cancel_button": "إلغاء",
+    "verify_success_title": "تم بنجاح",
+    "verify_success_text": "تم التحقق من المستخدم بنجاح.",
+    "unverify_success_text": "تم إلغاء التحقق من المستخدم بنجاح.",
+    "verify_error_title": "خطأ",
+    "verify_error_text": "فشل في تحديث حالة التحقق من المستخدم.",
+    "search_placeholder": "ابحث عن المستخدمين...",
+    "no_data": "لا يوجد مستخدمون",
+    "page_title": "المستخدمون"
+  },
+  "verification": {
+    "verify": "تحقق",
+    "unverify": "إلغاء التحقق"
+  }
 }
