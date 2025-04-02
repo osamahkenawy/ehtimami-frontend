@@ -20,3 +20,5 @@ export { default as FileUploader } from './ui/FileUploader.vue'; // Global Add B
 export { default as ProfilePax } from './user/ProfilePax.vue'; // Global Profile Pax
 export { default as GenderSelection } from './ui/GenderSelection.vue'; // Global Profile Pax
 export { default as ActionCard } from './ui/ActionCard.vue'; // ActionCard
+export { default as EditToggleButtons } from './ui/EditToggleButtons.vue'; // EditToggleButtons
+export { default as UserProfileCard } from './ui/UserProfileCard.vue'; // UserProfileCard

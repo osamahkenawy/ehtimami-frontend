@@ -19,7 +19,9 @@ import {
   TimePickerPopup,
   FileUploader,
   GenderSelection,
-  ActionCard
+  ActionCard,
+  EditToggleButtons,
+  UserProfileCard
 } from "@/components"; // Import all components here
 import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
@@ -95,4 +97,8 @@ app.component("TimePickerPopup", TimePickerPopup); // TimePickerPopup
 app.component("FileUploader", FileUploader); // FileUploader
 app.component("GenderSelection", GenderSelection);  // GenderSelection
 app.component("ActionCard", ActionCard);  // ActionCard
+app.component("EditToggleButtons", EditToggleButtons);  // EditToggleButtons
+app.component("UserProfileCard", UserProfileCard);  // UserProfileCard
+
+
 app.mount("#app");
