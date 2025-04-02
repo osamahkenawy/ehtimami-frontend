@@ -48,6 +48,7 @@ export const useUserStore = defineStore("user", () => {
       const response = await getAllUsers();
       users.value = response.data as User[];
     } catch (error) {
+      users.value = []
       console.error("Error fetching users:", error);
     }
   };
@@ -56,8 +57,11 @@ export const useUserStore = defineStore("user", () => {
     try {
       const response = await getUserById(userId);
       userData.value = response.data as User;
+      return userData.value;
     } catch (error) {
+      userData.value = null;
       console.error("Error fetching user by ID:", error);
+      throw error;
     }
   };
 

@@ -12,7 +12,7 @@
       :noDataContent="t('user.no_data')"
     >
       <!-- Action Slot for Each Row -->
-      <template #action="{ data }">
+      <template #action="{ data }"> 
         <PopperActions
           :actions="getActions(data)"
           :onActionSelected="handleActionSelected(data)"
@@ -29,7 +29,9 @@ import IconHome from "@/components/icon/icon-home.vue";
 import { useI18n } from "vue-i18n";
 import Swal from "sweetalert2";
 import { useUserStore } from "@/stores/users";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const { t } = useI18n();
 const userStore = useUserStore();
 
@@ -59,8 +61,8 @@ const headers = computed(() => [
 
 const getActions = (user) => {
   const baseActions = [
-    { label: t("user.edit"), value: "edit" },
-    { label: t("user.delete"), value: "delete" },
+  { label: t("user.view_details"), value: "view-details" },
+  { label: t("user.delete"), value: "delete" },
   ];
 
   const verifyAction = user.is_verified
@@ -128,8 +130,8 @@ const handleActionSelected = (user) => async (action: string) => {
   }
 
   switch (action) {
-    case "edit":
-      console.log("Edit user:", user);
+    case "view-details":
+      router.push({ path: `/ehtimami/user/profile/${user.userId}` });
       break;
     case "delete":
       console.log("TODO: delete user logic here for", user);
