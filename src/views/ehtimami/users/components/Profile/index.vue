@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-fit">
     <div
       class="bg-black/60 z-[5] w-full h-full absolute rounded-md hidden"
       :class="isShowMenu && '!block xl:!hidden'"
@@ -14,21 +14,21 @@
       </button>
     </div>
     <div
-      class="flex gap-5 relative sm:h-[calc(100vh_-_150px)] h-full sm:min-h-0"
+      class="flex gap-5 relative h-fit sm:min-h-0 "
       :class="{ 'min-h-[999px]': isShowMenu }"
     >
       <div
-        class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4 h-full hidden xl:block overflow-hidden"
+        class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4  hidden xl:block overflow-hidden h-fit"
         :class="isShowMenu && '!block !overflow-y-auto'">
         <div class="flex items-center" v-if="selectedUser">
-            <UserProfileCard
+          <UserProfileCard
                   :image="selectedUser?.profile?.avatar"
                   :name="selectedUser?.firstName + ' ' + selectedUser?.lastName"
                   :gender="selectedUser?.profile?.gender"
                   :first-name="selectedUser?.firstName"
                   :last-name="selectedUser?.lastName"
                   :email="selectedUser?.email"
-                  :profile="selectedUser?.profile?.phone"
+                  :phone="selectedUser?.phone"
                   :dob="selectedUser?.profile?.birth_date"
                   :address="selectedUser?.profile?.address"
               />
@@ -40,7 +40,7 @@
               swipeEasing: true,
               wheelPropagation: false,
             }"
-            class="chat-users relative h-full min-h-[100px] sm:h-[calc(100vh_-_357px)] space-y-0.5 ltr:pr-3.5 rtl:pl-3.5 ltr:-mr-3.5 rtl:-ml-3.5"
+            class="chat-users relative space-y-0.5 ltr:pr-3.5 rtl:pl-3.5 ltr:-mr-3.5 rtl:-ml-3.5 h-fit"
           >
             <div class="space-y-1">
               <button
@@ -64,11 +64,11 @@
         </div>
       </div>
       <div
-        class="bg-black/60 z-[5] w-full h-full absolute rounded-md hidden"
+        class="bg-black/60 z-[5] w-full h-fit absolute rounded-md hidden"
         :class="isShowMenu && '!block xl:!hidden'"
         @click="isShowMenu = !isShowMenu"
       ></div>
-      <div class="panel p-0 flex-1">
+      <div class="panel p-0 flex-1 h-fit">
         <template v-if="activeSection === 'user-info'">
           <div class="p-6">
             <ProfileDetails :user="selectedUser" />
@@ -97,9 +97,6 @@ import IconSchool from "@/components/icon/icon-school.vue";
 import IconOtherInfo from "@/components/icon/icon-other-info.vue";
 import IconHome from "@/components/icon/icon-home.vue";
 import IconMenu from "@/components/icon/icon-menu.vue";
-import IconEdit from "@/components/icon/icon-pencil.vue";
-import IconSave from "@/components/icon/icon-save.vue";
-import IconX from "@/components/icon/icon-x.vue";
 
 const { t } = useI18n();
 const route = useRoute();
