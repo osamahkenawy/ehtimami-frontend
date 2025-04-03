@@ -30,7 +30,6 @@ interface User {
     avatar?: string;
     occupation?: string;
     bio?: string;
-    phone?: string;
     profile_visibility?: string;
     emergency_contacts?: any;
     social_links?: any;
