@@ -1,9 +1,10 @@
 export interface User {
+id?: number;
   userId: number;
   firstName: string;
   lastName: string;
   email: string;
-
+  phone?: string;
   roles?: string[];
   is_verified?: boolean;
   school?: School;
