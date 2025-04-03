@@ -82,10 +82,10 @@
       <div class="md:col-span-2 w-full">
         <div class="w-full h-full overflow-hidden">
           <LocationPicker
-            :initial-lat="form.latitude || 0"
-            :initial-lng="form.longitude || 0"
-            @locationSelected="updateUserLocation"
+            v-model="form.location"
             :editMode="editMode"
+            placeholder="Search for a location"
+            height="400px"
           />
         </div>
       </div>
@@ -111,17 +111,17 @@ const form = ref({
   phone: "",
   address: "",
   latitude: 0,
-  longitude: 0
+  longitude: 0,
+  location: {
+    lat: 0,
+    lng: 0,
+    address: ""
+  }
 });
 
 // Optional: destructure for easier use
 const user = props.user;
-const updateUserLocation = (loc) => {
-  if (!user?.profile) return;
-  user.profile.latitude = loc.lat;
-  user.profile.longitude = loc.lon;
-  user.profile.address = loc.address;
-};
+
 
 // Step 2: Sync when user changes
 watch(
@@ -132,9 +132,11 @@ watch(
       form.value.lastName = user.lastName || "";
       form.value.email = user.email || "";
       form.value.phone = user.profile?.phone || "";
-      form.value.address = user.profile?.address || "";
-      form.value.latitude = user.profile?.latitude || 0;
-      form.value.longitude = user.profile?.longitude || 0;
+      form.value.location = {
+        lat: user.profile?.latitude || 0,
+        lng: user.profile?.longitude || 0,
+        address: user.profile?.address || ""
+      };
       
     }
   },
