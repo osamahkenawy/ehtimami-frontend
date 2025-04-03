@@ -166,7 +166,10 @@
     "unknownLocation": "موقع غير معروف",
     "school": "المدرسة",
     "movedLocation": "الموقع المنقول",
-    "enterTeacherLocation": "أدخل موقع المعلم"
+    "enterTeacherLocation": "أدخل موقع المعلم",
+    "address": "العنوان",
+    "enterUserLocation": "أدخل الموقع",
+    "user": "موقع المستخدم"
   },
   "submit": "حفظ",
   "cancel": "إلغاء",

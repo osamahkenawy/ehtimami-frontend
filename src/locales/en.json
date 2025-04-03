@@ -166,7 +166,10 @@
     "unknownLocation": "Unknown Location",
     "school": "School",
     "movedLocation": "Moved Location",
-    "enterTeacherLocation": "Enter Teacher Location"
+    "enterTeacherLocation": "Enter Teacher Location",
+    "address": "Address",
+    "enterUserLocation": "Enter a location",
+    "user": "User Location"
   },
   "submit": "Submit",
   "cancel": "Cancel",
