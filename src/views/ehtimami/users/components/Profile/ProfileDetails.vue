@@ -1,8 +1,8 @@
 
 <template>
   <div class="mt-1 h-fit">
-    <div class="flex items-center justify-between mb-5 ltr:flex-row rtl:flex-row-reverse h-fit">
-      <h5 class="font-semibold text-lg dark:text-white-light">Profile Details</h5>
+    <div class="flex items-center justify-between mb-5 ltr:flex-row rtl:flex-row h-fit">
+      <h5 class="font-semibold text-lg dark:text-white-light">{{ t('user.editProfile') }}</h5>
       <EditToggleButtons
         v-model="editMode"
         @save="handleSave"
@@ -16,61 +16,61 @@
       <div class="flex flex-col">
         <div class="flex">
           <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-            First Name
+            {{ t('user.firstName') }}
           </div>
           <input
             type="text"
             v-model="form.firstName"
-            placeholder="First Name"
+            :placeholder="t('user.firstName')"
             class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
             :disabled="!editMode"
           />
         </div>
-        <span class="text-red-500 text-sm mt-1" v-if="errors.firstName">{{ errors.firstName }}</span>
+        <span class="text-red-500 text-sm mt-1" v-if="errors.firstName">{{ t('user.firstNameRequired') }}</span>
       </div>
 
       <!-- Last Name -->
       <div class="flex flex-col">
         <div class="flex">
           <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-            Last Name
+            {{ t('user.lastName') }}
           </div>
           <input
             type="text"
             v-model="form.lastName"
-            placeholder="Last Name"
+            :placeholder="t('user.lastName')"
             class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
             :disabled="!editMode"
           />
         </div>
-        <span class="text-red-500 text-sm mt-1" v-if="errors.lastName">{{ errors.lastName }}</span>
+        <span class="text-red-500 text-sm mt-1" v-if="errors.lastName">{{ t('user.lastNameRequired') }}</span>
       </div>
 
-      <!-- Email (always disabled) -->
+      <!-- Email -->
       <div class="flex">
         <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-          Email
+          {{ t('user.email') }}
         </div>
         <input
           type="email"
           v-model="form.email"
-          placeholder="Email"
+          :placeholder="t('user.email')"
           class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
           disabled
         />
       </div>
 
-      <!-- Phone (always disabled) -->
+      <!-- Phone -->
       <div class="flex">
         <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-          Phone
+          {{ t('user.phone') }}
         </div>
         <input
           type="tel"
           v-model="form.phone"
-          placeholder="Phone Number"
+          :placeholder="t('user.phone')"
           class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
-           :disabled="!editMode"
+          :disabled="!editMode"
         />
       </div>
 
@@ -80,7 +80,7 @@
           <LocationPicker
             v-model="form.location"
             :editMode="editMode"
-            placeholder="Search for a location"
+            :placeholder="t('user.location')"
             height="400px"
           />
         </div>
@@ -88,6 +88,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import Swal from "sweetalert2";
 import { ref, watch } from "vue";
@@ -137,8 +138,8 @@ watch(
 );
 
 const validateForm = () => {
-  errors.value.firstName = form.value.firstName.trim() === "" ? "First name is required" : "";
-  errors.value.lastName = form.value.lastName.trim() === "" ? "Last name is required" : "";
+  errors.value.firstName = form.value.firstName.trim() === "" ? t("user.firstNameRequired") : "";
+  errors.value.lastName = form.value.lastName.trim() === "" ? t("user.lastNameRequired") : "";
   return !errors.value.firstName && !errors.value.lastName;
 };
 
@@ -163,27 +164,24 @@ const handleSave = async () => {
       address: form.value.location.address,
       latitude: form.value.location.lat,
       longitude: form.value.location.lng,
-      email: form.value.email, // optional
+      email: form.value.email,
     });
 
     toast.fire({
       icon: "success",
-      title: t("user.profileUpdated") || "Profile updated successfully!",
+      title: t("user.profileUpdated"),
     });
 
     editMode.value = false;
   } catch (error: any) {
     toast.fire({
       icon: "error",
-      title:
-        error?.response?.data?.message ||
-        t("user.profileUpdateFailed") ||
-        "Failed to update profile.",
+      title: error?.response?.data?.message || t("user.profileUpdateFailed"),
     });
   }
 };
 
 const handleCancel = () => {
-  console.log("Cancelled edit.");
+  console.log("Cancelled edit."); 
 };
 </script>
