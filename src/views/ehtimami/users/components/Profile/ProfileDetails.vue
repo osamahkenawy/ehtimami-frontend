@@ -82,6 +82,7 @@
             :editMode="editMode"
             :placeholder="t('user.location')"
             height="400px"
+            :key="locationPickerKey"
           />
         </div>
       </div>
@@ -101,6 +102,12 @@ const { t } = useI18n();
 const userStore = useUserStore();
 const editMode = ref(false);
 const props = defineProps<{ user: User | null }>();
+const emit = defineEmits<{
+  (e: "cancel"): void;
+  (e: "updated"): void;
+}>();
+const locationPickerKey = ref(0);
+
 
 const form = ref({
   firstName: "",
@@ -173,6 +180,8 @@ const handleSave = async () => {
     });
 
     editMode.value = false;
+    emit("updated"); // ✅ Notify parent
+
   } catch (error: any) {
     toast.fire({
       icon: "error",
@@ -182,6 +191,23 @@ const handleSave = async () => {
 };
 
 const handleCancel = () => {
-  console.log("Cancelled edit."); 
+  if (props.user) {
+    form.value.firstName = props.user.firstName || "";
+    form.value.lastName = props.user.lastName || "";
+    form.value.email = props.user.email || "";
+    form.value.phone = props.user.phone || "";
+    form.value.location = {
+      lat: props.user.profile?.latitude || 0,
+      lng: props.user.profile?.longitude || 0,
+      address: props.user.profile?.address || ""
+    };
+
+    // Force re-render of LocationPicker
+    locationPickerKey.value++;
+  }
+
+  editMode.value = false;
+  emit("cancel");
 };
+
 </script>

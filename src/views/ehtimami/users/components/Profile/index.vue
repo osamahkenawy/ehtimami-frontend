@@ -71,7 +71,7 @@
       <div class="panel p-0 flex-1 h-fit">
         <template v-if="activeSection === 'user-info'">
           <div class="p-6">
-            <ProfileDetails :user="selectedUser" />
+            <ProfileDetails :user="selectedUser" @cancel="loadUserProfile"  @updated="loadUserProfile" />
           </div>
         </template>
         <template v-else-if="activeSection === 'other-info'">
