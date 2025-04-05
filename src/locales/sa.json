@@ -370,6 +370,8 @@
     "nationality": "الجنسية",
     "roles": "الدور/الأدوار",
     "is_verified": "تم التحقق",
+    "verified": "موثق",
+    "unverified": "غير موثق",
     "action": "الإجراء",
     "edit": "تعديل",
     "delete": "حذف",
@@ -413,7 +415,9 @@
      "join_date": "تاريخ الانضمام",
      "profileDetails": "تفاصيل الملف الشخصي",
     "additionalDetails": "تفاصيل إضافية",
-    "user-profile": "ملف المستخدم"
+    "user-profile": "ملف المستخدم",
+    "view_details": "عرض التفاصيل"
+
 
 
   },

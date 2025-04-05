@@ -20,7 +20,17 @@
       <div
         class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4  hidden xl:block overflow-hidden h-fit"
         :class="isShowMenu && '!block !overflow-y-auto'">
+        <div class="flex items-center justify-between">
+            <Chip
+              :content="selectedUser?.is_verified ? t('user.verified') : t('user.unverified')"
+              :textColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
+              :borderColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
+              :headerBackgroundColor="selectedUser?.is_verified ? '#e6f9f0' : '#ffecec'"
+              class="ltr:ml-auto rtl:mr-auto"
+            />
+          </div>
         <div class="flex items-center" v-if="selectedUser">
+         
           <UserProfileCard
                   :image="selectedUser?.profile?.avatar"
                   :name="selectedUser?.firstName + ' ' + selectedUser?.lastName"

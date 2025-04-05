@@ -525,3 +525,12 @@ const getRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 </script>
+
+<style lang="scss" scoped>
+.panel,
+.datatable {
+  position: relative; /* Required to ensure z-index stacking works properly */
+  overflow: visible;  /* ✅ This is crucial */
+  z-index: 10;         /* Optional but helpful */
+}
+</style>

@@ -372,6 +372,8 @@
   "nationality": "Nationality",
   "roles": "Role(s)",
   "is_verified": "Verified",
+  "verified": "Verified",
+  "unverified": "Unverified",
   "action": "Action",
   "edit": "Edit",
   "delete": "Delete",
@@ -415,7 +417,9 @@
   "join_date": "Join Date",
    "user-profile": "User Profile",
    "profileDetails": "Profile Details",
-   "additionalDetails": "Additional Details"
+   "additionalDetails": "Additional Details",
+   "view_details": "View Details"
+
 
 
 
