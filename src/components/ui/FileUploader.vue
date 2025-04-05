@@ -17,13 +17,17 @@
       <div
         v-if="previewImage" 
         class="w-full h-full bg-cover bg-center object-cover cursor-pointer"
+        :class="[
+          props.disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+        ]"
         :style="`background-image: url(${previewImage})`"
         @click="triggerFileInput"
       ></div>
   
       <!-- Placeholder Label -->
       <div v-else class="text-center cursor-pointer" @click="triggerFileInput">
-        {{ label || "Upload Image" }}
+        {{ label || t('uploadImage') }}
+
       </div>
       <!-- Image Cropper Modal -->
       <div v-if="newImage" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
@@ -52,8 +56,11 @@
 import { ref, computed, defineProps, defineEmits, watch } from "vue";
 import { useUploaderStore } from "@/stores/uploader";
 import VueCropper from "vue-cropperjs";
+import { useI18n } from "vue-i18n";
 import "cropperjs/dist/cropper.css";
 
+
+const { t } = useI18n();
 // Define Props
 const props = defineProps({
   modelValue: { type: String, default: "" },
@@ -62,6 +69,7 @@ const props = defineProps({
   name: { type: String, default: "profile_image" },
   platform: { type: String, default: "" },
   gender: { type: String, default: "" },
+  disabled: { type: Boolean, default: false },
 });
 
 // Define Emits
@@ -92,8 +100,10 @@ const computedClass = computed(() => {
 });
 
 // Open File Dialog
-const triggerFileInput = () => fileInput.value?.click();
-
+const triggerFileInput = () => {
+  if (props.disabled) return; // ✅ Prevent opening if disabled
+  fileInput.value?.click();
+};
 // Handle File Selection
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;

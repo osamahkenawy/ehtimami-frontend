@@ -135,7 +135,7 @@ const reverseGeocode = async (lat: number, lon: number) => {
 
 const setMarker = async (lat: number, lng: number, popupText: string) => {
   if (!map.value) return;
-
+  console.log("setMarker")
   if (!marker.value) {
     marker.value = L.marker([lat, lng], {
       icon: userIcon,
@@ -177,8 +177,12 @@ const selectLocation = async (location: { lat: string; lon: string; display_name
   const lng = parseFloat(location.lon);
   const geo = await reverseGeocode(lat, lng);
   searchQuery.value = geo.address;
-  setMarker(lat, lng, geo.address);
-  emit("update:modelValue", { lat, lng, ...geo });
+  await setMarker(lat, lng, geo.address);
+  emit("update:modelValue", {
+    lat,
+    lng,
+    ...geo,
+  });
   locations.value = [];
 };
 
@@ -223,6 +227,17 @@ onBeforeUnmount(() => {
   map.value = null;
   marker.value = null;
 });
+watch(
+  () => [map.value, props.modelValue.lat, props.modelValue.lng],
+  async ([mapInstance, lat, lng]) => {
+    if (mapInstance && lat && lng) {
+      const geo = await reverseGeocode(lat, lng);
+      searchQuery.value = geo.address;
+      await setMarker(lat, lng, geo.address);
+    }
+  },
+  { immediate: true }
+);
 
 </script>
 

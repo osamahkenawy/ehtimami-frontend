@@ -79,9 +79,7 @@
             <OtherInformation :user="selectedUser" @cancel="loadUserProfile" @updated="loadUserProfile" />
           </div>
         </template>
-        <template v-else-if="activeSection === 'school-info'"> 
-          <div class="p-6">School Information goes here</div>
-        </template>
+      
       </div>
     </div>
   </div>
@@ -135,15 +133,14 @@ const isShowMenu = ref(false);
 const breadcrumbItems = computed(() => [
   { label: t("breadcrumb.home"), link: "/", icon: IconHome },
   { label: t("user.page_title"), link: "/ehtimami/user", icon: IconUser },
-  { label: t("user-profile") },
+  { label: t("user.user-profile") },
 ]);
 
 const activeSection = ref("user-info");
 
 const profileSections = computed(() => [
-  { id: "user-info", label: "Profile Details", icon: IconUser },
-  { id: "other-info", label: "Additional Details", icon: IconOtherInfo },
-  { id: "school-info", label: "Assigned School", icon: IconSchool },
+{ id: "user-info", label: t("user.profileDetails"), icon: IconUser },
+{ id: "other-info", label: t("user.additionalDetails"), icon: IconOtherInfo },
 ]);
 
 const selectSection = (sectionId: string) => {

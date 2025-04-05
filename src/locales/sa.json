@@ -53,6 +53,7 @@
   "lightbox": "صندوق العرض",
   "alerts": "التنبيهات",
   "avatar": "الصورة الرمزية",
+  "uploadImage": "رفع الصورة",
   "badges": "الشارات",
   "breadcrumbs": "مسار التنقل",
   "buttons": "الأزرار",
@@ -409,7 +410,11 @@
     "divorced": "مطلق",
     "chooseGender": "الجنس",
      "bio": "السيرة الذاتية",
-     "join_date": "تاريخ الانضمام"
+     "join_date": "تاريخ الانضمام",
+     "profileDetails": "تفاصيل الملف الشخصي",
+    "additionalDetails": "تفاصيل إضافية",
+    "user-profile": "ملف المستخدم"
+
 
   },
   "verification": {

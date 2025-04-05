@@ -12,13 +12,13 @@
   
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-fit">
         <!-- Avatar + Gender Row -->
-        <div class="col-span-2">
+        <div class="col-span-2" v-if="editMode">
           <div class="flex flex-col sm:flex-row gap-4 items-center justify-start">
             <!-- Avatar Upload -->
             <div class="w-full sm:w-[200px] text-center">
               <FileUploader
                 v-model="form.avatar"
-                :label="t('user.avatar')"
+                :label="t('avatar')"
                 platform="user-profile"
                 :disabled="!editMode"
               />

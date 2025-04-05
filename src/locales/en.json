@@ -53,6 +53,7 @@
     "lightbox": "Lightbox",
     "alerts": "Alerts",
     "avatar": "Avatar",
+    "uploadImage": "Upload Image",
     "badges": "Badges",
     "breadcrumbs": "Breadcrumbs",
     "buttons": "Buttons",
@@ -411,7 +412,10 @@
   "divorced": "Divorced",
   "chooseGender": "Gender",
   "bio": "Bio",
-  "join_date": "Join Date"
+  "join_date": "Join Date",
+   "user-profile": "User Profile",
+   "profileDetails": "Profile Details",
+   "additionalDetails": "Additional Details"
 
 
 
