@@ -25,7 +25,7 @@
       <p class="text-lg font-semibold mt-3">{{ fullName }}</p>
 
       <!-- Horizontal Icon Info Row -->
-      <div class="flex items-center justify-center space-x-3 mt-4">
+      <div class="flex items-center justify-center mt-4 ltr:space-x-3 rtl:space-x-reverse rtl:space-x-3">
         <button
           v-if="email"
           v-tippy="email"
@@ -36,7 +36,7 @@
 
         <button
           v-if="phone"
-          v-tippy="phone"
+          v-tippy="phoneTooltip"
           class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition"
         >
           <icon-phone class="w-4 h-4 text-gray-600" />
@@ -101,7 +101,10 @@ const genderClass = computed(() => {
 const genderBorderClass = computed(() => {
   return props.gender === 1 ? "border-blue-500" : "border-pink-400";
 });
-
+const phoneTooltip = computed(() => ({
+  content: `<span dir="ltr">${props.phone}</span>`,
+  allowHTML: true,
+}));
 
 </script>
 

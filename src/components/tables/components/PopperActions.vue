@@ -13,13 +13,19 @@
         leave-from-class="transform opacity-100 scale-100"
         leave-to-class="transform opacity-0 scale-95"
       >
-        <MenuItems class="dropdown-menu">
-          <MenuItem v-for="(action, index) in actions" :key="index" v-slot="{ active }">
+        <MenuItems
+          class="dropdown-menu ltr:right-0 rtl:left-0 rtl:text-right ltr:text-left"
+        >
+          <MenuItem
+            v-for="(action, index) in actions"
+            :key="index"
+            v-slot="{ active }"
+          >
             <a
               href="javascript:void(0);"
               :class="[
                 active ? 'bg-gray-100' : '',
-                'block px-4 py-2 text-sm text-gray-700 cursor-pointer'
+                'block px-4 py-2 text-sm text-gray-700 cursor-pointer',
               ]"
               @click="triggerAction(action)"
             >
@@ -32,7 +38,7 @@
   </div>
 </template>
 
-<script lang="ts"  setup>
+<script lang="ts" setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import IconHorizontalDots from "@/components/icon/icon-horizontal-dots.vue";
 import { PropType } from "vue";
@@ -60,13 +66,12 @@ const triggerAction = (action) => {
 <style lang="scss" scoped>
 .dropdown-menu {
   position: absolute;
-  z-index: 9999;
+  z-index: 50; // ✅ Increase this as needed (e.g. 50 or even 100)
   min-width: 150px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   padding: 10px;
-  right: 0; /* Align dropdown to the right */
 }
 </style>

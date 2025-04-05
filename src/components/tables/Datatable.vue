@@ -71,11 +71,13 @@
                   data.value.firstName
                 "
               >
+              
                 <ProfilePax
                   :image="data.value?.profile?.avatar"
                   :name="data.value?.firstName + ' ' + data.value?.lastName"
                   :email="data.value?.email"
-                  :phone="data.value?.profile?.phone"
+                  :phone="data.value?.phone"
+                  :address="data.value?.profile?.address"
                 />
               </div>
               <div v-else>-</div>
@@ -523,3 +525,12 @@ const getRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 </script>
+
+<style lang="scss" scoped>
+.panel,
+.datatable {
+  position: relative; /* Required to ensure z-index stacking works properly */
+  overflow: visible;  /* ✅ This is crucial */
+  z-index: 10;         /* Optional but helpful */
+}
+</style>

@@ -20,7 +20,17 @@
       <div
         class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4  hidden xl:block overflow-hidden h-fit"
         :class="isShowMenu && '!block !overflow-y-auto'">
+        <div class="flex items-center justify-between">
+            <Chip
+              :content="selectedUser?.is_verified ? t('user.verified') : t('user.unverified')"
+              :textColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
+              :borderColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
+              :headerBackgroundColor="selectedUser?.is_verified ? '#e6f9f0' : '#ffecec'"
+              class="ltr:ml-auto rtl:mr-auto"
+            />
+          </div>
         <div class="flex items-center" v-if="selectedUser">
+         
           <UserProfileCard
                   :image="selectedUser?.profile?.avatar"
                   :name="selectedUser?.firstName + ' ' + selectedUser?.lastName"
@@ -71,27 +81,29 @@
       <div class="panel p-0 flex-1 h-fit">
         <template v-if="activeSection === 'user-info'">
           <div class="p-6">
-            <ProfileDetails :user="selectedUser" />
+            <ProfileDetails :user="selectedUser" @cancel="loadUserProfile"  @updated="loadUserProfile" />
           </div>
         </template>
         <template v-else-if="activeSection === 'other-info'">
-          <div class="p-6">Other Information goes here</div>
+          <div class="p-6">
+            <OtherInformation :user="selectedUser" @cancel="loadUserProfile" @updated="loadUserProfile" />
+          </div>
         </template>
-        <template v-else-if="activeSection === 'school-info'"> 
-          <div class="p-6">School Information goes here</div>
-        </template>
+      
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, onMounted, onBeforeMount } from "vue";
+import { ref, computed, onMounted, onBeforeMount, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/stores/users";
 import { useMeta } from "@/composables/use-meta";
 import ProfileDetails from "@/views/ehtimami/users/components/Profile/ProfileDetails.vue";
+import OtherInformation from "@/views/ehtimami/users/components/Profile/OtherInformation.vue";
+
 import IconUser from "@/components/icon/icon-user.vue";
 import IconSchool from "@/components/icon/icon-school.vue";
 import IconOtherInfo from "@/components/icon/icon-other-info.vue";
@@ -131,15 +143,14 @@ const isShowMenu = ref(false);
 const breadcrumbItems = computed(() => [
   { label: t("breadcrumb.home"), link: "/", icon: IconHome },
   { label: t("user.page_title"), link: "/ehtimami/user", icon: IconUser },
-  { label: t("user-profile") },
+  { label: t("user.user-profile") },
 ]);
 
 const activeSection = ref("user-info");
 
 const profileSections = computed(() => [
-  { id: "user-info", label: "Profile Details", icon: IconUser },
-  { id: "other-info", label: "Additional Details", icon: IconOtherInfo },
-  { id: "school-info", label: "Assigned School", icon: IconSchool },
+{ id: "user-info", label: t("user.profileDetails"), icon: IconUser },
+{ id: "other-info", label: t("user.additionalDetails"), icon: IconOtherInfo },
 ]);
 
 const selectSection = (sectionId: string) => {
