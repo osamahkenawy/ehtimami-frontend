@@ -71,11 +71,13 @@
                   data.value.firstName
                 "
               >
+              
                 <ProfilePax
                   :image="data.value?.profile?.avatar"
                   :name="data.value?.firstName + ' ' + data.value?.lastName"
                   :email="data.value?.email"
-                  :phone="data.value?.profile?.phone"
+                  :phone="data.value?.phone"
+                  :address="data.value?.profile?.address"
                 />
               </div>
               <div v-else>-</div>

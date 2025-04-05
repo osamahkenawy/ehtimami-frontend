@@ -398,10 +398,25 @@
     "profileUpdated": "تم تحديث الملف الشخصي بنجاح!",
     "profileUpdateFailed": "فشل في تحديث الملف الشخصي.",
     "firstNameRequired": "الاسم الأول مطلوب",
-    "lastNameRequired": "اسم العائلة مطلوب"
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "otherInformation": "معلومات إضافية",
+    "occupation": "المهنة",
+    "company": "الشركة",
+    "website": "الموقع الإلكتروني",
+    "marital_status": "الحالة الاجتماعية",
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق",
+    "chooseGender": "الجنس",
+     "bio": "السيرة الذاتية",
+     "join_date": "تاريخ الانضمام"
+
   },
   "verification": {
     "verify": "تحقق",
     "unverify": "إلغاء التحقق"
-  }
+  },
+  "edit_click": "انقر للتعديل",
+  "cancel_click": "انقر للإلغاء",
+  "save_click": "انقر للحفظ"
 }

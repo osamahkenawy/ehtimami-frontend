@@ -75,7 +75,9 @@
           </div>
         </template>
         <template v-else-if="activeSection === 'other-info'">
-          <div class="p-6">Other Information goes here</div>
+          <div class="p-6">
+            <OtherInformation :user="selectedUser" @cancel="loadUserProfile" @updated="loadUserProfile" />
+          </div>
         </template>
         <template v-else-if="activeSection === 'school-info'"> 
           <div class="p-6">School Information goes here</div>
@@ -85,13 +87,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, onMounted, onBeforeMount } from "vue";
+import { ref, computed, onMounted, onBeforeMount, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/stores/users";
 import { useMeta } from "@/composables/use-meta";
 import ProfileDetails from "@/views/ehtimami/users/components/Profile/ProfileDetails.vue";
+import OtherInformation from "@/views/ehtimami/users/components/Profile/OtherInformation.vue";
+
 import IconUser from "@/components/icon/icon-user.vue";
 import IconSchool from "@/components/icon/icon-school.vue";
 import IconOtherInfo from "@/components/icon/icon-other-info.vue";

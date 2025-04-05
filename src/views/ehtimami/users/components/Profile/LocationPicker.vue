@@ -10,7 +10,10 @@
         @input="props.editMode && debounceFetchLocations()"
         type="text"
         :disabled="!props.editMode"
-        class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
+        :class="[
+          'form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full',
+          !props.editMode ? 'cursor-not-allowed' : ''
+        ]"
         :placeholder="props.placeholder || $t('location.enterUserLocation')"
       />
     </div>

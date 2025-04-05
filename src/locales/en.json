@@ -400,10 +400,27 @@
   "profileUpdated": "Profile updated successfully!",
   "profileUpdateFailed": "Failed to update profile.",
   "firstNameRequired": "First name is required",
-  "lastNameRequired": "Last name is required"
+  "lastNameRequired": "Last name is required",
+  "otherInformation": "Other Information",
+  "occupation": "Occupation",
+  "company": "Company",
+  "website": "Website",
+  "marital_status": "Marital Status",
+  "single": "Single",
+  "married": "Married",
+  "divorced": "Divorced",
+  "chooseGender": "Gender",
+  "bio": "Bio",
+  "join_date": "Join Date"
+
+
+
 },
   "verification": {
     "verify": "verify",
     "unverify": "unverify"
-  }
+  },
+  "edit_click": "Click to Edit",
+  "cancel_click": "Click to Cancel",
+  "save_click": "Click to Save"
 }

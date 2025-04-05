@@ -1,4 +1,3 @@
-
 <template>
   <div class="mt-1 h-fit">
     <div class="flex items-center justify-between mb-5 ltr:flex-row rtl:flex-row h-fit">
@@ -23,6 +22,7 @@
             v-model="form.firstName"
             :placeholder="t('user.firstName')"
             class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
+            :class="{ 'cursor-not-allowed': !editMode }"
             :disabled="!editMode"
           />
         </div>
@@ -40,6 +40,7 @@
             v-model="form.lastName"
             :placeholder="t('user.lastName')"
             class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
+            :class="{ 'cursor-not-allowed': !editMode }"
             :disabled="!editMode"
           />
         </div>
@@ -55,7 +56,7 @@
           type="email"
           v-model="form.email"
           :placeholder="t('user.email')"
-          class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
+          class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full cursor-not-allowed"
           disabled
         />
       </div>
@@ -70,6 +71,7 @@
           v-model="form.phone"
           :placeholder="t('user.phone')"
           class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
+          :class="{ 'cursor-not-allowed': !editMode }"
           :disabled="!editMode"
         />
       </div>
@@ -180,8 +182,7 @@ const handleSave = async () => {
     });
 
     editMode.value = false;
-    emit("updated"); // ✅ Notify parent
-
+    emit("updated");
   } catch (error: any) {
     toast.fire({
       icon: "error",
@@ -189,6 +190,7 @@ const handleSave = async () => {
     });
   }
 };
+
 
 const handleCancel = () => {
   if (props.user) {
@@ -202,12 +204,10 @@ const handleCancel = () => {
       address: props.user.profile?.address || ""
     };
 
-    // Force re-render of LocationPicker
     locationPickerKey.value++;
   }
 
   editMode.value = false;
   emit("cancel");
 };
-
 </script>
