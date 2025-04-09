@@ -22,3 +22,5 @@ export { default as GenderSelection } from './ui/GenderSelection.vue'; // Global
 export { default as ActionCard } from './ui/ActionCard.vue'; // ActionCard
 export { default as EditToggleButtons } from './ui/EditToggleButtons.vue'; // EditToggleButtons
 export { default as UserProfileCard } from './ui/UserProfileCard.vue'; // UserProfileCard
+export { default as BaseButton } from './ui/BaseButton.vue'; // BaseButton
+export { default as Footer } from './layout/Footer.vue'; // Footer
