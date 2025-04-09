@@ -1,5 +1,7 @@
 {
   "site_name": "Ehtimami School Management System",
+  "footer_text": "Ehtimami All Rights Reserved.",
+  "back_to_login": "Back to Login",
   "account_not_verified": "Your account is not verified yet. Please contact support.",
     "dashboard": "Dashboard",
     "sales": "Sales",
@@ -430,5 +432,14 @@
   },
   "edit_click": "Click to Edit",
   "cancel_click": "Click to Cancel",
-  "save_click": "Click to Save"
+  "save_click": "Click to Save",
+
+  "password_reset": "Password Reset",
+  "enter_email_to_recover": "Enter your email to recover your ID",
+  "recover": "Recover",
+  "please_enter_email": "Please enter your email address.",
+  "email_sent": "Email Sent",
+  "check_your_inbox": "Check your inbox for the reset link.",
+  "something_went_wrong": "Something went wrong. Please try again.",
+  "enter_email_placeholder": "Enter Email"
 }
