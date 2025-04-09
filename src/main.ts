@@ -21,7 +21,9 @@ import {
   GenderSelection,
   ActionCard,
   EditToggleButtons,
-  UserProfileCard
+  UserProfileCard,
+  BaseButton,
+  Footer
 } from "@/components"; // Import all components here
 import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
@@ -99,6 +101,8 @@ app.component("GenderSelection", GenderSelection);  // GenderSelection
 app.component("ActionCard", ActionCard);  // ActionCard
 app.component("EditToggleButtons", EditToggleButtons);  // EditToggleButtons
 app.component("UserProfileCard", UserProfileCard);  // UserProfileCard
+app.component("BaseButton", BaseButton);  // BaseButton
+app.component("Footer", Footer);  // Footer
 
 
 app.mount("#app");
