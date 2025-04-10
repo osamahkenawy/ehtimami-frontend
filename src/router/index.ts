@@ -584,10 +584,12 @@ const routes: RouteRecordRaw[] = [
         meta: { layout: 'auth' },
     },
     {
-        path: '/auth/boxed-password-reset',
-        name: 'boxed-password-reset',
-        component: () => import(/* webpackChunkName: "auth-boxed-password-reset" */ '../views/auth/boxed-password-reset.vue'),
+        path: '/auth/password-reset',
+        name: 'password-reset',
+        component: () => import(/* webpackChunkName: "auth-boxed-password-reset" */ '../views/auth/password-reset.vue'),
         meta: { layout: 'auth' },
+        props: route => ({ token: route.query.token }) // optional if using `useRoute()` inside the component
+
     },
     {
         path: '/auth/cover-login',
@@ -608,9 +610,9 @@ const routes: RouteRecordRaw[] = [
         meta: { layout: 'auth' },
     },
     {
-        path: '/auth/cover-password-reset',
-        name: 'cover-password-reset',
-        component: () => import(/* webpackChunkName: "auth-cover-password-reset" */ '../views/auth/cover-password-reset.vue'),
+        path: '/auth/forgot-password',
+        name: 'forgot-password',
+        component: () => import(/* webpackChunkName: "auth-cover-password-reset" */ '../views/auth/forgot-password.vue'),
         meta: { layout: 'auth' },
     },
 ];

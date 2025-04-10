@@ -127,7 +127,7 @@
                 :title="$t('back_to_login')"
                 :loading="false"
                 classes="!mt-4"
-                @click="router.push('/auth/login')"
+                @click="router.push('/ehtimami-signin')"
               />
             </div>
 
@@ -218,7 +218,7 @@ const submitForgotPassword = async () => {
       title: i18n.t("email_sent"),
       text: i18n.t("check_your_inbox"),
     });
-
+ 
     email.value = "";
   } catch (error: any) {
     Swal.fire({
