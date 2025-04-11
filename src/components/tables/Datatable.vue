@@ -98,9 +98,9 @@
               >
               
                 <ProfilePax
-                  :image="data.value?.profile?.avatar"
-                  :name="data.value?.user.firstName + ' ' + data.value?.user.lastName"
-                  :email="data.value?.user.email"
+                  :image="data.value?.user?.profile?.avatar"
+                  :name="data.value?.user?.firstName + ' ' + data.value?.user.lastName"
+                  :email="data.value?.user?.email"
                   :phone="data.value?.user.phone"
                   :address="data.value?.user?.profile?.address"
                   :gender="data.value?.user?.profile?.gender"

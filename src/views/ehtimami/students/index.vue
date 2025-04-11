@@ -60,7 +60,7 @@ const getActions = (student) => [
 
 const handleActionSelected = (student) => async (action: string) => {
   if (action === "view-details") {
-    router.push({ path: `/ehtimami/students/profile/${student.id}` });
+    router.push({ path: `/ehtimami/students/profile/${student.userId}` });
   } else if (action === "delete") {
     const confirm = await Swal.fire({
       icon: "warning",

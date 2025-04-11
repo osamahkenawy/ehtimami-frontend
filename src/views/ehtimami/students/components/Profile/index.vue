@@ -9,40 +9,47 @@
       <BreadCrumb :items="breadcrumbItems" />
       <button
         class="xl:hidden hover:text-primary"
-        @click="isShowMenu = !isShowMenu">
+        @click="isShowMenu = !isShowMenu"
+      >
         <icon-menu />
       </button>
     </div>
     <div
-      class="flex gap-5 relative h-fit sm:min-h-0 "
+      class="flex gap-5 relative h-fit sm:min-h-0"
       :class="{ 'min-h-[999px]': isShowMenu }"
     >
       <div
-        class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4  hidden xl:block overflow-hidden h-fit"
-        :class="isShowMenu && '!block !overflow-y-auto'">
+        class="panel p-4 flex-none max-w-xs w-full absolute xl:relative z-10 space-y-4 hidden xl:block overflow-hidden h-fit"
+        :class="isShowMenu && '!block !overflow-y-auto'"
+      >
         <div class="flex items-center justify-between">
-            <Chip
-              :content="selectedUser?.is_verified ? t('user.verified') : t('user.unverified')"
-              :textColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
-              :borderColor="selectedUser?.is_verified ? '#00ab55' : '#e7515a'"
-              :headerBackgroundColor="selectedUser?.is_verified ? '#e6f9f0' : '#ffecec'"
-              class="ltr:ml-auto rtl:mr-auto"
-            />
-          </div>
-        <div class="flex items-center" v-if="selectedUser">
-         
+          <Chip
+            :content="
+              selectedStudent?.is_verified
+                ? t('user.verified')
+                : t('user.unverified')
+            "
+            :textColor="selectedStudent?.is_verified ? '#00ab55' : '#e7515a'"
+            :borderColor="selectedStudent?.is_verified ? '#00ab55' : '#e7515a'"
+            :headerBackgroundColor="
+              selectedStudent?.is_verified ? '#e6f9f0' : '#ffecec'
+            "
+            class="ltr:ml-auto rtl:mr-auto"
+          />
+        </div>
+        <div class="flex items-center" v-if="selectedStudent">
           <UserProfileCard
-                  :image="selectedUser?.profile?.avatar"
-                  :name="selectedUser?.firstName + ' ' + selectedUser?.lastName"
-                  :gender="selectedUser?.profile?.gender"
-                  :first-name="selectedUser?.firstName"
-                  :last-name="selectedUser?.lastName"
-                  :email="selectedUser?.email"
-                  :phone="selectedUser?.phone"
-                  :dob="selectedUser?.profile?.birth_date"
-                  :address="selectedUser?.profile?.address"
-              />
-          </div>
+            :image="selectedStudent?.profile?.avatar"
+            :name="selectedStudent?.firstName + ' ' + selectedStudent?.lastName"
+            :gender="selectedStudent?.profile?.gender"
+            :first-name="selectedStudent?.firstName"
+            :last-name="selectedStudent?.lastName"
+            :email="selectedStudent?.email"
+            :phone="selectedStudent?.phone"
+            :dob="selectedStudent?.profile?.birth_date"
+            :address="selectedStudent?.profile?.address"
+          />
+        </div>
         <div class="h-px w-full dark:border-[#1b2e4b]"></div>
         <div class="!mt-0">
           <perfect-scrollbar
@@ -81,15 +88,22 @@
       <div class="panel p-0 flex-1 h-fit">
         <template v-if="activeSection === 'user-info'">
           <div class="p-6">
-            <ProfileDetails :user="selectedUser" @cancel="loadUserProfile"  @updated="loadUserProfile" />
+            <ProfileDetails
+              :user="selectedStudent"
+              @cancel="loadUserProfile"
+              @updated="loadUserProfile"
+            />
           </div>
         </template>
         <template v-else-if="activeSection === 'other-info'">
           <div class="p-6">
-            <OtherInformation :user="selectedUser" @cancel="loadUserProfile" @updated="loadUserProfile" />
+            <OtherInformation
+              :user="selectedStudent"
+              @cancel="loadUserProfile"
+              @updated="loadUserProfile"
+            />
           </div>
         </template>
-      
       </div>
     </div>
   </div>
@@ -99,7 +113,7 @@ import { ref, computed, onMounted, onBeforeMount, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 
 import { useI18n } from "vue-i18n";
-import { useUserStore } from "@/stores/users";
+import { useStudentStore } from "@/stores/students";
 import { useMeta } from "@/composables/use-meta";
 import ProfileDetails from "@/views/ehtimami/users/components/Profile/ProfileDetails.vue";
 import OtherInformation from "@/views/ehtimami/users/components/Profile/OtherInformation.vue";
@@ -114,15 +128,15 @@ const { t } = useI18n();
 const route = useRoute();
 
 useMeta({ title: "UserProfile" });
-const userStore = useUserStore();
-const selectedUser: any = ref(null);
+const userStore = useStudentStore();
+const selectedStudent: any = ref(null);
 
 const loadUserProfile = async () => {
-  const userId = Number(route.params.id);
-  if (!userId) return;
+  const studentId = Number(route.params.id);
+  if (!studentId) return;
 
   try {
-    selectedUser.value = await userStore.fetchUserById(userId);
+    selectedStudent.value = await userStore.fetchStudentById(studentId);
   } catch (err) {
     console.error("Failed to fetch user profile:", err);
   }
@@ -136,9 +150,7 @@ onBeforeMount(() => {
   loadUserProfile();
 });
 
-
 const isShowMenu = ref(false);
-
 
 const breadcrumbItems = computed(() => [
   { label: t("breadcrumb.home"), link: "/", icon: IconHome },
@@ -149,13 +161,11 @@ const breadcrumbItems = computed(() => [
 const activeSection = ref("user-info");
 
 const profileSections = computed(() => [
-{ id: "user-info", label: t("user.profileDetails"), icon: IconUser },
-{ id: "other-info", label: t("user.additionalDetails"), icon: IconOtherInfo },
+  { id: "user-info", label: t("user.profileDetails"), icon: IconUser },
+  { id: "other-info", label: t("user.additionalDetails"), icon: IconOtherInfo },
 ]);
 
 const selectSection = (sectionId: string) => {
   activeSection.value = sectionId;
 };
-
-
 </script>
