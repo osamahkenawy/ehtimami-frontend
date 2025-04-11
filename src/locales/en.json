@@ -423,11 +423,8 @@
    "profileDetails": "Profile Details",
    "additionalDetails": "Additional Details",
    "view_details": "View Details"
-
-
-
-
 },
+
   "verification": {
     "verify": "verify",
     "unverify": "unverify"
@@ -453,5 +450,6 @@
   "reset_password": "Reset Password",
   "passwords_do_not_match": "Passwords do not match.",
   "password_updated_successfully": "Your password has been updated successfully.",
-  "please_fill_all_fields": "Please fill in all fields."
+  "please_fill_all_fields": "Please fill in all fields.",
+  "students": "Students"
 }
