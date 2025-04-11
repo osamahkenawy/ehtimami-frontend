@@ -451,5 +451,6 @@
   "reset_password": "إعادة تعيين كلمة المرور",
   "passwords_do_not_match": "كلمتا المرور غير متطابقتين.",
   "password_updated_successfully": "تم تحديث كلمة المرور بنجاح.",
-  "please_fill_all_fields": "يرجى تعبئة جميع الحقول."
+  "please_fill_all_fields": "يرجى تعبئة جميع الحقول.",
+  "students": "الطلاب"
 }
