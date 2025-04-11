@@ -7,7 +7,7 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/auth/boxed-signin.vue'),
     meta: { layout: 'auth' },
   },
-  {
+  { 
     path: '/auth/boxed-signup',
     name: 'boxed-signup',
     component: () => import('@/views/auth/boxed-signup.vue'),
@@ -20,8 +20,8 @@ export default <RouteRecordRaw[]>[
     meta: { layout: 'auth' },
   },
   {
-    path: '/auth/password-reset',
-    name: 'password-reset',
+    path: '/auth/reset-password',
+    name: 'reset-password',
     component: () => import('@/views/auth/password-reset.vue'),
     meta: { layout: 'auth' },
     props: route => ({ token: route.query.token }),

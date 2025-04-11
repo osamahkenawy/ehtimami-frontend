@@ -74,6 +74,11 @@
                                         <icon-lock-dots :fill="true" />
                                     </span>
                                 </div>
+                                <div class="mt-2 text-end">
+                                    <router-link to="/auth/forgot-password" class="text-sm font-semibold text-primary hover:underline">
+                                        {{ $t('forgot_password') }}
+                                    </router-link>
+                                </div>
                             </div>
                          
                             <button type="button" @click="login" class="btn btn-dark !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">

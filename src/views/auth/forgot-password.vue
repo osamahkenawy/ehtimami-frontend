@@ -127,7 +127,7 @@
                 :title="$t('back_to_login')"
                 :loading="false"
                 classes="!mt-4"
-                @click="router.push('/ehtimami-signin')"
+                @click="router.push('/auth/ehtimami-signin')"
               />
             </div>
 

@@ -152,7 +152,7 @@
         text: i18n.t("password_updated_successfully"),
       });
   
-      router.push("/auth/login");
+      router.push("/auth/ehtimami-signin");
     } catch (error: any) {
       Swal.fire({
         icon: "error",
