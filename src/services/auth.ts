@@ -20,6 +20,20 @@ export const sendForgotPasswordEmail = async (email: string) => {
     return response.data;
 };
 
+export const resetPasswordWithToken = async (token: string, newPassword: string) => {
+    try {
+      const response = await axios.post(`${API_URL}/reset-password`, {
+        token,
+        newPassword,
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error("Reset password request failed:", error);
+      throw error;
+    }
+};
+
 export const logoutUser = () => {
     localStorage.removeItem('authToken');
 };

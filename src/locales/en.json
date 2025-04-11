@@ -441,5 +441,15 @@
   "email_sent": "Email Sent",
   "check_your_inbox": "Check your inbox for the reset link.",
   "something_went_wrong": "Something went wrong. Please try again.",
-  "enter_email_placeholder": "Enter Email"
+  "enter_email_placeholder": "Enter Email",
+  
+  "enter_new_password": "Enter your new password below.",
+  "new_password": "New Password",
+  "confirm_new_password": "Confirm New Password",
+  "new_password_placeholder": "Enter new password",
+  "confirm_new_password_placeholder": "Confirm your new password",
+  "reset_password": "Reset Password",
+  "passwords_do_not_match": "Passwords do not match.",
+  "password_updated_successfully": "Your password has been updated successfully.",
+  "please_fill_all_fields": "Please fill in all fields."
 }

@@ -170,7 +170,7 @@
             />
           </template>
           <template #nationality="data">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2" v-if="data.value.profile && data.value.profile.nationality">
               <div class="font-semibold">
                 <span>{{
                   getFlagForNationality(data.value.profile.nationality)
