@@ -20,27 +20,16 @@
           leave-from-class="transform opacity-100 scale-100"
           leave-to-class="transform opacity-0 scale-95"
         >
-          <div
-            class="dropdown-menu"
-            :style="dropdownStyle"
-            ref="dropdownRef"
-          >
-            <MenuItem
-              v-for="(action, index) in actions"
-              :key="index"
-              v-slot="{ active }"
-            >
-              <a
-                href="javascript:void(0);"
-                :class="[
-                  active ? 'bg-gray-100' : '',
-                  'block px-4 py-2 text-sm text-gray-700 cursor-pointer',
-                ]"
-                @click="triggerAction(action)"
+          <div class="dropdown-menu" :style="dropdownStyle" ref="dropdownRef">
+            <template v-for="(action, index) in actions" :key="index">
+              <button
+                type="button"
+                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                @click="() => triggerAction(action)"
               >
                 {{ action.label }}
-              </a>
-            </MenuItem>
+              </button>
+            </template>
           </div>
         </transition>
       </Teleport>
@@ -50,11 +39,7 @@
 
 <script lang="ts" setup>
 import { ref, nextTick } from "vue";
-import {
-  Menu,
-  MenuButton,
-  MenuItem
-} from "@headlessui/vue";
+import { Menu, MenuButton, MenuItem } from "@headlessui/vue";
 import IconHorizontalDots from "@/components/icon/icon-horizontal-dots.vue";
 import { onClickOutside } from "@vueuse/core";
 import { PropType } from "vue";
@@ -90,7 +75,6 @@ const toggleMenu = async () => {
     };
   }
 };
-
 
 const triggerAction = (action: { label: string; value: string }) => {
   isOpen.value = false;
