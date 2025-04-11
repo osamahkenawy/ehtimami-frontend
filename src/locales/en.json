@@ -451,5 +451,28 @@
   "passwords_do_not_match": "Passwords do not match.",
   "password_updated_successfully": "Your password has been updated successfully.",
   "please_fill_all_fields": "Please fill in all fields.",
-  "students": "Students"
+  "students": "Students",
+  "student": {
+    "student_no": "Student No",
+    "id": "ID",
+    "name": "Name",
+    "nationality": "Nationality",
+    "school_name": "School Name",
+    "is_verified": "Is Verified",
+    "section": "Section",
+    "grade": "Grade",
+    "class": "Class",
+    "action": "Action",
+    "view_details": "View Details",
+    "delete": "Delete",
+    "deleted": "Deleted!",
+    "delete_success": "Student has been deleted successfully.",
+    "delete_confirm_title": "Are you sure?",
+    "delete_confirm_text": "You will not be able to recover this student.",
+    "confirm_button": "Yes, delete it!",
+    "cancel_button": "Cancel",
+    "page_title": "Students",
+    "search_placeholder": "Search student...",
+    "no_data": "No students found"
+  }
 }

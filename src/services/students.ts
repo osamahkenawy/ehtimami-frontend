@@ -1,13 +1,13 @@
 import api from "./axiosInstance";
 import { toRaw, unref } from "vue";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/students`;
+const API_URL = `${import.meta.env.VITE_API_URL}/student`;
 
 /**
  * ✅ Get All Students
  */
 export const getAllStudents = async () => {
-  const res = await api.get(`${API_URL}/get-all-students`);
+  const res = await api.get(`${API_URL}/all`);
   return res.data;
 };
 
