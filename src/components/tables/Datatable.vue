@@ -533,4 +533,9 @@ const getRandomNumber = (min: number, max: number) => {
   overflow: visible;  /* ✅ This is crucial */
   z-index: 10;         /* Optional but helpful */
 }
+.datatable-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
 </style>
