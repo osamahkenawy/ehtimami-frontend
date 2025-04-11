@@ -3,6 +3,8 @@
   "footer_text": "Ehtimami All Rights Reserved.",
   "back_to_login": "Back to Login",
   "account_not_verified": "Your account is not verified yet. Please contact support.",
+  "invalid_credentials": "Invalid email or password.",
+   "forgot_password": "Forgot Password?",
     "dashboard": "Dashboard",
     "sales": "Sales",
     "analytics": "Analytics",

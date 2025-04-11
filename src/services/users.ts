@@ -21,20 +21,20 @@ export const getAllUsers = async () => {
  */
 export const getUserById = async (userId: number) => {
   try {
-    const response = await api.get(`${API_URL}/profile/${userId}`);
+    const response = await api.get(`${API_URL}/${userId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user by ID:", error);
     throw error;
   }
 };
-
+ 
 /**
  * ✅ Get User by Profile ID
  */
 export const getUserByProfileId = async (profileId: number) => {
   try {
-    const response = await api.get(`${API_URL}/profile/${profileId}`);
+    const response = await api.get(`${API_URL}/${profileId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user by profile ID:", error);
