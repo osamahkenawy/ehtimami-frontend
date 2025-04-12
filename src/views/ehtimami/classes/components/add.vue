@@ -332,29 +332,32 @@ import {
   ref,
   computed,
   onBeforeMount,
+  onBeforeUnmount,
   watch,
   nextTick,
-  onBeforeUnmount,
 } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 import Swal from "sweetalert2";
 import { useClassStore } from "@/stores/class";
 import { useTeacherStore } from "@/stores/teacher";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useMeta } from "@/composables/use-meta";
 
-useMeta({ title: "Add Class" });
+useMeta({ title: "Class Form" });
 
 const { t } = useI18n();
+const route = useRoute();
 const router = useRouter();
 const classStore = useClassStore();
 const teacherStore = useTeacherStore();
 
+const isEditMode = computed(() => !!route.params.id);
 const isSubmitting = ref(false);
+const teachers = ref<any[]>([]);
+
 const academicYearFrom = ref(new Date().getFullYear());
 const academicYearTo = ref(academicYearFrom.value + 1);
-const teachers = ref<any[]>([]);
 
 const schedule = ref({
   Monday: { enabled: false, from: "", to: "" },
@@ -364,6 +367,13 @@ const schedule = ref({
   Friday: { enabled: false, from: "", to: "" },
   Saturday: { enabled: false, from: "", to: "" },
   Sunday: { enabled: false, from: "", to: "" },
+});
+
+const errors = ref({
+  schoolId: "",
+  class_name: "",
+  gradeLevel: "",
+  schedule: {},
 });
 
 const scheduleDays = computed(() => ({
@@ -376,30 +386,32 @@ const scheduleDays = computed(() => ({
   Sunday: { label: t("days.sunday") },
 }));
 
-const errors = ref({
-  schoolId: "",
-  class_name: "",
-  gradeLevel: "",
-  schedule: {},
-});
+const yearOptions = computed(() =>
+  Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i)
+);
+
+const breadcrumbItems = computed(() => [
+  { label: t("breadcrumb.home"), link: "/", icon: IconHome },
+  { label: t("classes"), link: "/ehtimami/classes" },
+  {
+    label: isEditMode.value ? t("edit-class") : t("add-class"),
+  },
+]);
 
 const handleImageUpload = (data: { s3: string }) => {
   classStore.classData.class_logo = data.s3;
 };
 
-const breadcrumbItems = computed(() => [
-  { label: t("breadcrumb.home"), link: "/", icon: IconHome },
-  { label: t("classes"), link: "/ehtimami/classes" },
-  { label: t("add-class") },
-]);
-
-const yearOptions = computed(() =>
-  Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i)
-);
+const watchAcademicYear = () => {
+  watch([academicYearFrom, academicYearTo], ([from, to]) => {
+    classStore.classData.academic_year = `${from} - ${to}`;
+  });
+};
 
 const resetForm = () => {
   academicYearFrom.value = new Date().getFullYear();
   academicYearTo.value = academicYearFrom.value + 1;
+
   classStore.classData = {
     code: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`,
     name: "",
@@ -408,49 +420,136 @@ const resetForm = () => {
     semester: 1,
     academic_year: `${academicYearFrom.value} - ${academicYearTo.value}`,
     teaching_method: "in-person",
-    capacity: 0,
-    max_students: 0,
+    capacity: 1,
+    max_students: 1,
     roomNumber: "",
     class_logo: "",
     status: "active",
     schedule: {},
     start_time: "",
     end_time: "",
-    credits: 0,
+    credits: 1,
     startDate: "",
     endDate: "",
     schoolId: undefined,
     teacherId: undefined,
     studentIds: [],
   };
+
+  Object.keys(schedule.value).forEach((key) => {
+    schedule.value[key] = { enabled: false, from: "", to: "" };
+  });
 };
 
-onBeforeMount(() => {
-  classStore.fetchSchools();
-});
-onBeforeUnmount(() => {
-  resetForm();
-  teachers.value = [];
-});
+const cleanUpdatePayload = (data: any) => {
+  const {
+    id,
+    createdAt,
+    updatedAt,
+    teachers,
+    studentClasses,
+    mainStudents,
+    school,
+    ...allowedFields
+  } = data;
 
-watch(
-  () => classStore.classData.schoolId,
-  async (schoolId) => {
-    teachers.value = [];
+  if (allowedFields.schedule && typeof allowedFields.schedule === "object") {
+    allowedFields.schedule = JSON.stringify(allowedFields.schedule);
+  }
 
-    if (!schoolId) return;
-
-    await nextTick(); // 💡 Ensure reactivity flushes
-
+  if (allowedFields.days_of_week && typeof allowedFields.days_of_week === "string") {
     try {
-      const result = await teacherStore.fetchTeachersBySchoolId(schoolId);
-      teachers.value = Array.isArray(result) ? result : [];
-    } catch (error) {
-      console.error("Teacher fetch failed:", error);
+      allowedFields.days_of_week = JSON.parse(allowedFields.days_of_week);
+    } catch (e) {
+      allowedFields.days_of_week = [];
     }
-  },
-  { immediate: true } // 👈 this ensures it runs on initial mount too
-);
+  }
+
+  return allowedFields;
+};
+
+const loadClassForEdit = async () => {
+  try {
+    const response = await classStore.fetchClassById(Number(route.params.id));
+    const classInfo = response;
+    console.log("Fetched class data:", classInfo);
+
+    classStore.classData = {
+      ...classInfo,
+      teacherId: classInfo.teachers?.[0]?.teacherId || undefined,
+      academic_year: classInfo.academic_year,
+    };
+
+    const [from, to] = classInfo.academic_year.split(" - ");
+    academicYearFrom.value = parseInt(from);
+    academicYearTo.value = parseInt(to);
+
+    if (classInfo.schedule) {
+      const parsedSchedule = typeof classInfo.schedule === 'string'
+        ? JSON.parse(classInfo.schedule)
+        : classInfo.schedule;
+      for (const day in schedule.value) {
+        if (parsedSchedule[day]) {
+          const [fromTime, toTime] = parsedSchedule[day].split(" - ");
+          schedule.value[day].enabled = true;
+          schedule.value[day].from = fromTime;
+          schedule.value[day].to = toTime;
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Failed to load class for editing:", error);
+  }
+};
+
+const submitForm = async () => {
+  if (!validateForm()) return;
+
+  isSubmitting.value = true;
+
+  const toast = Swal.mixin({
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 3000,
+    customClass: { container: "toast" },
+  });
+
+  classStore.classData.max_students = classStore.classData.capacity;
+  classStore.classData.academic_year = `${academicYearFrom.value} - ${academicYearTo.value}`;
+
+  classStore.classData.schedule = Object.keys(schedule.value).reduce(
+    (acc, key) => {
+      acc[key] = schedule.value[key].enabled
+        ? `${schedule.value[key].from} - ${schedule.value[key].to}`
+        : "";
+      return acc;
+    },
+    {} as Record<string, string>
+  );
+
+  try {
+    if (isEditMode.value) {
+      const payload = cleanUpdatePayload(classStore.classData);
+      await classStore.updateClassData(Number(route.params.id), payload);
+      toast.fire({ icon: "success", title: t("class_form.updateSuccess") });
+    } else {
+      await classStore.createClass();
+      toast.fire({ icon: "success", title: t("class_form.successMessage") });
+    }
+
+    resetForm();
+    classStore.fetchClasses();
+    router.push("/ehtimami/classes");
+  } catch (error: any) {
+    toast.fire({
+      icon: "error",
+      title: error?.response?.data?.message || t("class_form.errorMessage"),
+    });
+  } finally {
+    isSubmitting.value = false;
+  }
+};
 
 const validateForm = () => {
   errors.value.schoolId = classStore.classData.schoolId
@@ -484,50 +583,41 @@ const validateForm = () => {
   );
 };
 
-const submitForm = async () => {
-  if (!validateForm()) return;
-
-  isSubmitting.value = true;
-
-  const toast: any = Swal.mixin({
-    toast: true,
-    position: "top",
-    showConfirmButton: false,
-    timer: 3000,
-    customClass: { container: "toast" },
-  });
-  classStore.classData.max_students = classStore.classData.capacity;
-
-  classStore.classData.schedule = Object.keys(schedule.value).reduce(
-    (acc, key) => {
-      acc[key] = schedule.value[key].enabled
-        ? `${schedule.value[key].from} - ${schedule.value[key].to}`
-        : "";
-      return acc;
-    },
-    {}
-  );
-
-  try {
-    await classStore.createClass();
-    toast.fire({ icon: "success", title: t("class_form.successMessage") });
-    resetForm();
-    classStore.fetchClasses();
-    router.push("/ehtimami/classes");
-  } catch (error: any) {
-    toast.fire({
-      icon: "error",
-      title: error?.response?.data?.message || t("class_form.errorMessage"),
-    });
-  } finally {
-    isSubmitting.value = false;
-  }
-};
-watch([academicYearFrom, academicYearTo], ([from, to]) => {
-  classStore.classData.academic_year = `${from} - ${to}`;
-});
 const cancelForm = () => {
   resetForm();
   router.push("/ehtimami/classes");
 };
+
+onBeforeMount(async () => {
+  await classStore.fetchSchools();
+
+  if (isEditMode.value) {
+    await loadClassForEdit();
+  }
+});
+
+onBeforeUnmount(() => {
+  resetForm();
+  teachers.value = [];
+});
+
+watchAcademicYear();
+
+watch(
+  () => classStore.classData.schoolId,
+  async (schoolId) => {
+    teachers.value = [];
+
+    if (!schoolId) return;
+    await nextTick();
+
+    try {
+      const result = await teacherStore.fetchTeachersBySchoolId(schoolId);
+      teachers.value = Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.error("Teacher fetch failed:", error);
+    }
+  },
+  { immediate: true }
+);
 </script>

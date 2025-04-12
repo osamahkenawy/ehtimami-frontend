@@ -259,7 +259,10 @@
    "room_number": "رقم الغرفة",
    "responsible_teacher": "المعلم المسؤول",
    "add-class": "إضافة فصل",
+   "edit-class": "تعديل الصف",
+  "update": "تحديث",
 "class_form": {
+  "updateSuccess": "تم تحديث الصف بنجاح!",
   "classInfo": "معلومات الصف",
   "semester": "الفصل الدراسي",
   "academic_year": "السنة الأكاديمية",

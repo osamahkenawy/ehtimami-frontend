@@ -27,6 +27,11 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/ehtimami/classes/components/add.vue'),
   },
   {
+    path: '/ehtimami/classes/edit/:id',
+    name: 'edit-class',
+    component: () => import('@/views/ehtimami/classes/components/add.vue'),
+  },
+  {
     path: '/ehtimami/teachers',
     name: 'teachers',
     component: () => import('@/views/ehtimami/teachers/index.vue'),

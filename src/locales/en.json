@@ -259,7 +259,10 @@
   "room_number": "Room Number",
   "responsible_teacher": "Responsible Teacher",
   "add-class": "Add Class",
+  "edit-class": "Edit Class",
+  "update": "Update",
 "class_form": {
+  "updateSuccess": "Class updated successfully!",
   "classInfo": "Class Info",
   "subject": "Subject",
   "semester": "Semester",

@@ -93,6 +93,8 @@ export const useClassStore = defineStore("class", () => {
     try {
       const response = await getClassById(code);
       classData.value = response.data as Class;
+      console.log('fetchClassById', response)
+      return response.data
     } catch (error) {
       console.error("Error fetching class by ID:", error);
     }
@@ -102,7 +104,7 @@ export const useClassStore = defineStore("class", () => {
     try {
       const sanitizedData = toRaw(classData.value);
       const response = await createNewClass(sanitizedData);
-      return response;
+      return response; 
     } catch (error) {
       console.error("Error creating new class:", error);
       throw error;
@@ -111,6 +113,7 @@ export const useClassStore = defineStore("class", () => {
 
   const updateClassData = async (code: number, data: Partial<Class>) => {
     try {
+      
       const response = await updateClass(code, data);
       return response;
     } catch (error) {

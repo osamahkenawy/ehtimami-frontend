@@ -57,7 +57,7 @@ const breadcrumbItems = computed(() => [
 const handleAddClickClass = (): void => {
   router.push("/ehtimami/classes/add");
 };
-
+ 
 // 📌 Localized Table Headers (Reactive)
 const headers = computed(() => [
   { field: "class_name", title: t("class_name") },
@@ -98,6 +98,7 @@ const handleActionSelected = (data: any) => async (action: string) => {
       console.log("Share action triggered");
       break;
     case "edit":
+      router.push(`/ehtimami/classes/edit/${data?.id}`);
       console.log("Edit action triggered");
       break;
     case "delete":
