@@ -37,7 +37,6 @@
 
             <div class="p-5">
               <div class="text-center">
-                <!-- <label for="code">{{ 'Class Picture' }}</label> -->
                 <div
                   v-tippy="$t('class_form.click_to_upload')"
                   class="inline-table text-center"
@@ -50,6 +49,7 @@
                   />
                 </div>
               </div>
+
               <div class="mt-4 flex gap-4">
                 <div class="w-1/2">
                   <label for="code">{{ $t("class_form.code") }}</label>
@@ -96,6 +96,7 @@
                   {{ errors.schoolId }}
                 </p>
               </div>
+
               <div class="mt-4 flex gap-4">
                 <div class="w-1/2">
                   <label for="gradeLevel">{{
@@ -123,7 +124,16 @@
                   </select>
                 </div>
               </div>
-
+              <div class="mt-4">
+                <label for="subject">{{ $t("class_form.subject") }}</label>
+                <input
+                  id="subject"
+                  v-model="classStore.classData.subject"
+                  type="text"
+                  class="form-input"
+                  :placeholder="$t('class_form.subject')"
+                />
+              </div>
               <div class="mt-4">
                 <label class="block">{{
                   $t("class_form.academic_year")
@@ -152,17 +162,35 @@
                   </select>
                 </div>
               </div>
+
+              <div class="mt-4">
+                <label for="teacherId">{{ $t("class_form.teacher") }}</label>
+                <select
+                  id="teacherId"
+                  v-model="classStore.classData.teacherId"
+                  class="form-select"
+                >
+                  <option value="" disabled>
+                    {{ $t("class_form.select_teacher") }}
+                  </option>
+                  <option
+                    v-for="teacher in teachers"
+                    :key="teacher.id"
+                    :value="teacher.id"
+                  >
+                    {{ teacher.firstName }} {{ teacher.lastName }}
+                  </option>
+                </select>
+              </div>
             </div>
           </div>
+
           <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
             <div
               class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
             >
               {{ $t("class_form.another_info") }}
             </div>
-            <!-- Add Here  -->
-            <!-- 1. teaching method  -->
-
             <div class="p-5">
               <div class="mt-4">
                 <label for="teaching_method">{{
@@ -180,13 +208,16 @@
                   <option value="hybrid">{{ $t("class_form.hybrid") }}</option>
                 </select>
               </div>
+
               <div class="mt-4 flex gap-4">
                 <div class="w-1/2">
                   <label for="capacity">{{ $t("class_form.capacity") }}</label>
                   <input
                     id="capacity"
-                    v-model="classStore.classData.capacity"
+                    v-model.number="classStore.classData.capacity"
+                    @input="classStore.classData.max_students = classStore.classData.capacity"
                     type="number"
+                    min="1"
                     class="form-input"
                     :placeholder="$t('class_form.capacity')"
                   />
@@ -220,13 +251,13 @@
         </form>
       </div>
 
-      <!-- Schedule Section in Table -->
       <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
         <div
           class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
         >
           {{ $t("class_form.class_schedule") }}
         </div>
+
         <div class="p-5">
           <div class="table-responsive">
             <table class="w-full border-collapse border border-gray-300">
@@ -252,9 +283,20 @@
                     {{ day.label }}
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
-                    <label class="switch">
-                      <input type="checkbox" v-model="schedule[key].enabled" />
-                      <span class="slider"></span>
+                    <label
+                      class="relative inline-flex items-center cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        v-model="schedule[key].enabled"
+                        class="sr-only peer"
+                      />
+                      <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"
+                      ></div>
+                      <div
+                        class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 transform peer-checked:translate-x-5"
+                      ></div>
                     </label>
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
@@ -283,40 +325,81 @@
       </div>
     </div>
   </div>
-</template> 
+</template>
 
 <script setup lang="ts">
-import { useMeta } from "@/composables/use-meta";
-import Swal from "sweetalert2";
-import { ref, computed, onBeforeMount } from "vue";
+import {
+  ref,
+  computed,
+  onBeforeMount,
+  watch,
+  nextTick,
+  onBeforeUnmount,
+} from "vue";
 import { useI18n } from "vue-i18n";
-import IconHome from "@/components/icon/icon-home.vue";
+import { useRouter } from "vue-router";
+import Swal from "sweetalert2";
 import { useClassStore } from "@/stores/class";
 import { useTeacherStore } from "@/stores/teacher";
-
-import { useRouter } from "vue-router";
+import IconHome from "@/components/icon/icon-home.vue";
+import { useMeta } from "@/composables/use-meta";
 
 useMeta({ title: "Add Class" });
 
 const { t } = useI18n();
+const router = useRouter();
 const classStore = useClassStore();
 const teacherStore = useTeacherStore();
 
 const isSubmitting = ref(false);
-const router = useRouter();
+const academicYearFrom = ref(new Date().getFullYear());
+const academicYearTo = ref(academicYearFrom.value + 1);
+const teachers = ref<any[]>([]);
+
+const schedule = ref({
+  Monday: { enabled: false, from: "", to: "" },
+  Tuesday: { enabled: false, from: "", to: "" },
+  Wednesday: { enabled: false, from: "", to: "" },
+  Thursday: { enabled: false, from: "", to: "" },
+  Friday: { enabled: false, from: "", to: "" },
+  Saturday: { enabled: false, from: "", to: "" },
+  Sunday: { enabled: false, from: "", to: "" },
+});
+
+const scheduleDays = computed(() => ({
+  Monday: { label: t("days.monday") },
+  Tuesday: { label: t("days.tuesday") },
+  Wednesday: { label: t("days.wednesday") },
+  Thursday: { label: t("days.thursday") },
+  Friday: { label: t("days.friday") },
+  Saturday: { label: t("days.saturday") },
+  Sunday: { label: t("days.sunday") },
+}));
+
+const errors = ref({
+  schoolId: "",
+  class_name: "",
+  gradeLevel: "",
+  schedule: {},
+});
+
+const handleImageUpload = (data: { s3: string }) => {
+  classStore.classData.class_logo = data.s3;
+};
+
 const breadcrumbItems = computed(() => [
   { label: t("breadcrumb.home"), link: "/", icon: IconHome },
   { label: t("classes"), link: "/ehtimami/classes" },
   { label: t("add-class") },
 ]);
-const currentYear = new Date().getFullYear();
-const yearOptions = Array.from({ length: 10 }, (_, i) => currentYear + i);
-const academicYearFrom = ref<number>(currentYear);
-const academicYearTo = ref<number>(currentYear + 1);
-const resetForm = () => {
-  academicYearFrom.value = currentYear;
-  academicYearTo.value = currentYear + 1;
 
+const yearOptions = computed(() =>
+  Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i)
+);
+
+const resetForm = () => {
+  academicYearFrom.value = new Date().getFullYear();
+  academicYearTo.value = academicYearFrom.value + 1;
   classStore.classData = {
     code: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`,
     name: "",
@@ -342,42 +425,33 @@ const resetForm = () => {
   };
 };
 
-const imageUrl = ref<string>("");
-
-onBeforeMount(() => { 
+onBeforeMount(() => {
   classStore.fetchSchools();
-
 });
-const errors = ref({
-  schoolId: "",
-  class_name: "",
-  gradeLevel: "",
-  schedule: {},
+onBeforeUnmount(() => {
+  resetForm();
+  teachers.value = [];
 });
 
-// ✅ Initialize schedule structure
-const schedule = ref({
-  Monday: { enabled: false, from: "", to: "" },
-  Tuesday: { enabled: false, from: "", to: "" },
-  Wednesday: { enabled: false, from: "", to: "" },
-  Thursday: { enabled: false, from: "", to: "" },
-  Friday: { enabled: false, from: "", to: "" },
-  Saturday: { enabled: false, from: "", to: "" },
-  Sunday: { enabled: false, from: "", to: "" },
-});
+watch(
+  () => classStore.classData.schoolId,
+  async (schoolId) => {
+    teachers.value = [];
 
-const scheduleDays = computed(() => ({
-  Monday: { label: t("days.monday") },
-  Tuesday: { label: t("days.tuesday") },
-  Wednesday: { label: t("days.wednesday") },
-  Thursday: { label: t("days.thursday") },
-  Friday: { label: t("days.friday") },
-  Saturday: { label: t("days.saturday") },
-  Sunday: { label: t("days.sunday") },
-}));
-const handleImageUpload = (data: { s3: string; base64: string }) => {
-  classStore.classData.class_logo = data.s3;
-};
+    if (!schoolId) return;
+
+    await nextTick(); // 💡 Ensure reactivity flushes
+
+    try {
+      const result = await teacherStore.fetchTeachersBySchoolId(schoolId);
+      teachers.value = Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.error("Teacher fetch failed:", error);
+    }
+  },
+  { immediate: true } // 👈 this ensures it runs on initial mount too
+);
+
 const validateForm = () => {
   errors.value.schoolId = classStore.classData.schoolId
     ? ""
@@ -414,6 +488,7 @@ const submitForm = async () => {
   if (!validateForm()) return;
 
   isSubmitting.value = true;
+
   const toast: any = Swal.mixin({
     toast: true,
     position: "top",
@@ -421,130 +496,38 @@ const submitForm = async () => {
     timer: 3000,
     customClass: { container: "toast" },
   });
-  const scheduleData = Object.keys(schedule.value).reduce((acc, key) => {
-    acc[key] = schedule.value[key].enabled
-      ? `${schedule.value[key].from} - ${schedule.value[key].to}`
-      : "";
-    return acc;
-  }, {});
+  classStore.classData.max_students = classStore.classData.capacity;
 
-  classStore.classData.schedule = scheduleData;
-  console.log("scheduleData", scheduleData);
+  classStore.classData.schedule = Object.keys(schedule.value).reduce(
+    (acc, key) => {
+      acc[key] = schedule.value[key].enabled
+        ? `${schedule.value[key].from} - ${schedule.value[key].to}`
+        : "";
+      return acc;
+    },
+    {}
+  );
+
   try {
     await classStore.createClass();
-    toast.fire({
-      icon: "success",
-      title: t("class_form.successMessage"),
-      padding: "10px 20px",
-    });
-    // ✅ Reset form and redirect
+    toast.fire({ icon: "success", title: t("class_form.successMessage") });
     resetForm();
     classStore.fetchClasses();
-    router.push("/ehtimami/classes"); // 🚀 Redirect to /ehtimami/schools
+    router.push("/ehtimami/classes");
   } catch (error: any) {
-    const errorMessage =
-      error?.response?.data?.message || t("class_form.errorMessage");
     toast.fire({
       icon: "error",
-      title: errorMessage,
-      padding: "10px 20px",
+      title: error?.response?.data?.message || t("class_form.errorMessage"),
     });
   } finally {
     isSubmitting.value = false;
   }
 };
-
+watch([academicYearFrom, academicYearTo], ([from, to]) => {
+  classStore.classData.academic_year = `${from} - ${to}`;
+});
 const cancelForm = () => {
   resetForm();
-  router.push("/ehtimami/classes"); // 🚀 Redirect on cancel
+  router.push("/ehtimami/classes");
 };
 </script>
-
-<style scoped>
-/* ✅ Ensures Each Row is a Flex Container */
-.schedule-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* ✅ Align Switch Button */
-.switch-container {
-  position: relative;
-  width: 50px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-}
-
-/* ✅ Ensure Time Picker is Next to Switch */
-.time-picker-container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* ✅ Custom Switch */
-.custom_switch {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.peer-checked ~ .bg-gray-300 {
-  background-color: #3b82f6;
-}
-
-.peer-checked ~ .absolute {
-  left: 75%;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 42px;
-  height: 22px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 22px;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #3b82f6;
-}
-
-input:checked + .slider:before {
-  transform: translateX(20px);
-}
-</style>
