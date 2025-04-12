@@ -8,53 +8,65 @@ import {
 } from "@/services/students";
 
 export interface Student {
+  id: number;
+  userId: number;
+  student_no: string;
+  grade: string;
+  section: string;
+  email: string;
+  phone?: string;
+  is_verified: boolean;
+  nationality?: string;
+  gender?: number;
+  address?: string;
+  bio?: string;
+  avatar?: string;
+  firstName: string;
+  lastName: string;
+  join_date?: string;
+  latitude?: number; // ✅ Add this
+  longitude?: number; // ✅ Add this
+
+  school?: {
+    id: number;
+    school_name: string;
+    school_logo?: string | null;
+    school_email?: string;
+    school_phone?: string;
+  };
+
+  studentClasses?: Array<{
+    studentId: number;
+    classId: number;
+    class: {
+      id: number;
+      name: string;
+      subject?: string;
+      roomNumber?: string;
+      academic_year?: string;
+      class_logo?: string | null;
+      status: string;
+    };
+  }>;
+
+  parents?: Array<{
     id: number;
     userId: number;
-    student_no: string;
-    grade: string;
-    section: string;
-    email: string;
-    phone?: string;
-    is_verified: boolean;
-    nationality?: string;
-    gender?: number;
-    address?: string;
-    bio?: string;
-    avatar?: string;
-    firstName: string;
-    lastName: string;
-    join_date?: string;
-    school?: {
+    user: {
       id: number;
-      school_name: string;
-      school_logo?: string | null;
-      school_email?: string;
-      school_phone?: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone?: string | null;
+      profile?: {
+        avatar?: string;
+        nationality?: string;
+      };
     };
-    studentClasses?: Array<{
-      class: {
-        id: number;
-        name: string;
-        subject?: string;
-        roomNumber?: string;
-        academic_year?: string;
-        class_logo?: string;
-        status: string;
-      };
-    }>;
-    parents?: Array<{
-      id: number;
-      user: {
-        id: number;
-        firstName: string;
-        lastName: string;
-        email: string;
-        profile?: {
-          avatar?: string;
-        };
-      };
-    }>;
-  }
+  }>;
+}
+
+
   
 export const useStudentStore = defineStore("students", () => {
   const students = ref<Student[]>([]);

@@ -1,7 +1,7 @@
 <template>
   <div class="mt-1 h-fit">
-    <div class="flex items-center justify-between mb-5 ltr:flex-row rtl:flex-row h-fit">
-      <h5 class="font-semibold text-lg dark:text-white-light">{{ t('user.editProfile') }}</h5>
+    <div class="flex items-center justify-between mb-5">
+      <h5 class="font-semibold text-lg dark:text-white-light">{{ t('student.edit_profile') }}</h5>
       <EditToggleButtons
         v-model="editMode"
         @save="handleSave"
@@ -10,74 +10,136 @@
       />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-fit">
-      <!-- First Name -->
-      <div class="flex flex-col">
-        <div class="flex">
-          <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-            {{ t('user.firstName') }}
-          </div>
-          <input
-            type="text"
-            v-model="form.firstName"
-            :placeholder="t('user.firstName')"
-            class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
-            :class="{ 'cursor-not-allowed': !editMode }"
-            :disabled="!editMode"
-          />
-        </div>
-        <span class="text-red-500 text-sm mt-1" v-if="errors.firstName">{{ t('user.firstNameRequired') }}</span>
-      </div>
-
-      <!-- Last Name -->
-      <div class="flex flex-col">
-        <div class="flex">
-          <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-            {{ t('user.lastName') }}
-          </div>
-          <input
-            type="text"
-            v-model="form.lastName"
-            :placeholder="t('user.lastName')"
-            class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
-            :class="{ 'cursor-not-allowed': !editMode }"
-            :disabled="!editMode"
-          />
-        </div>
-        <span class="text-red-500 text-sm mt-1" v-if="errors.lastName">{{ t('user.lastNameRequired') }}</span>
-      </div>
-
-      <!-- Email -->
-      <div class="flex">
-        <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-          {{ t('user.email') }}
-        </div>
-        <input
-          type="email"
-          v-model="form.email"
-          :placeholder="t('user.email')"
-          class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full cursor-not-allowed"
-          disabled
-        />
-      </div>
-
-      <!-- Phone -->
-      <div class="flex">
-        <div class="bg-[#eee] whitespace-nowrap flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">
-          {{ t('user.phone') }}
-        </div>
-        <input
-          type="tel"
-          v-model="form.phone"
-          :placeholder="t('user.phone')"
-          class="form-input ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full"
-          :class="{ 'cursor-not-allowed': !editMode }"
+    <!-- 1. Avatar + Gender -->
+    <div class="flex flex-col sm:flex-row gap-4 items-center justify-start mb-6">
+      <div class="w-full sm:w-[200px] text-center">
+        <FileUploader
+          v-model="form.avatar"
+          :label="t('avatar')"
+          platform="user-profile"
           :disabled="!editMode"
         />
       </div>
 
-      <!-- Location Picker -->
-      <div class="md:col-span-2 w-full">
+      <div class="w-full sm:w-[200px] text-center sm:text-left">
+        <label class="block text-sm font-semibold text-gray-700 dark:text-white mb-1">
+          {{ t("user.chooseGender") }}
+        </label>
+        <GenderSelection
+          v-model="form.gender"
+          :disabled="!editMode"
+          class="justify-center sm:justify-start"
+        />
+      </div>
+    </div>
+
+    <!-- 2. Student No + Verified -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="flex">
+        <div class="label-chip">{{ t('student.student_no') }}</div>
+        <input
+          type="text"
+          :value="props.user?.student_no"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+
+      <div class="flex">
+        <div class="label-chip">{{ t('student.verificationStatus') }}</div>
+        <input
+          type="text"
+          :value="props.user?.user?.is_verified ? t('student.verified') : t('student.unverified')"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+    </div>
+
+    <!-- 3. Contact Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="flex">
+        <div class="label-chip">{{ t('student.email') }}</div>
+        <input
+          type="email"
+          v-model="form.email"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+
+      <div class="flex">
+        <div class="label-chip">{{ t('student.phone') }}</div>
+        <input
+          type="tel"
+          v-model="form.phone"
+          :placeholder="t('student.phone')"
+          class="form-input input-style"
+          :disabled="!editMode"
+        />
+      </div>
+    </div>
+
+    <!-- 4. Birth Date + Join Date -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="flex">
+        <div class="label-chip">{{ t('student.dob') }}</div>
+        <input
+          type="text"
+          :value="props.user?.user?.profile?.birth_date?.split('T')[0] || '-'"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+
+      <div class="flex">
+        <div class="label-chip">{{ t('student.joinDate') }}</div>
+        <input
+          type="text"
+          :value="props.user?.user?.profile?.join_date?.split('T')[0] || '-'"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+    </div>
+
+    <!-- 5. Nationality + Marital Status -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="flex">
+        <div class="label-chip">{{ t('student.nationality') }}</div>
+        <input
+          type="text"
+          :value="props.user?.user?.profile?.nationality || '-'"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+
+      <div class="flex">
+        <div class="label-chip">{{ t('student.maritalStatus') }}</div>
+        <input
+          type="text"
+          :value="props.user?.user?.profile?.marital_status || '-'"
+          class="form-input input-style cursor-not-allowed"
+          disabled
+        />
+      </div>
+    </div>
+
+    <!-- 6. Bio -->
+    <div class="flex" style="margin-bottom: 20px;">
+      <div class="label-chip">
+            {{ t("user.bio") }}
+      </div>
+      <textarea
+        rows="4"
+        class="form-input input-style w-full cursor-not-allowed"
+        :value="props.user?.user?.profile?.bio || '-'"
+        disabled
+      />
+    </div>
+
+    <div class="md:col-span-2 w-full">
         <div class="w-full h-full overflow-hidden">
           <LocationPicker
             v-model="form.location"
@@ -88,34 +150,35 @@
           />
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Swal from "sweetalert2";
 import { ref, watch } from "vue";
-import LocationPicker from "./LocationPicker.vue";
-import type { User } from "@/types";
-import { useUserStore } from "@/stores/users";
 import { useI18n } from "vue-i18n";
+import LocationPicker from "./LocationPicker.vue";
+import { useStudentStore } from "@/stores/students";
 
 const { t } = useI18n();
-const userStore = useUserStore();
+const studentStore = useStudentStore();
 const editMode = ref(false);
-const props = defineProps<{ user: User | null }>();
+
+const props = defineProps<{ user: any | null }>();
 const emit = defineEmits<{
   (e: "cancel"): void;
   (e: "updated"): void;
 }>();
-const locationPickerKey = ref(0);
 
+const locationPickerKey = ref(0);
 
 const form = ref({
   firstName: "",
   lastName: "",
   email: "",
   phone: "",
+  gender: undefined,
+  avatar: "",
   location: {
     lat: 0,
     lng: 0,
@@ -131,15 +194,18 @@ const errors = ref({
 watch(
   () => props.user,
   (user) => {
-    if (user) {
-      form.value.firstName = user.firstName || "";
-      form.value.lastName = user.lastName || "";
-      form.value.email = user.email || "";
-      form.value.phone = user.phone || "";
+    if (user && user.user) {
+      const profile = user.user.profile || {};
+      form.value.firstName = user.user.firstName || "";
+      form.value.lastName = user.user.lastName || "";
+      form.value.email = user.user.email || "";
+      form.value.phone = user.user.phone || "";
+      form.value.avatar = profile.avatar || "";
+      form.value.gender = profile.gender;
       form.value.location = {
-        lat: user.profile?.latitude || 0,
-        lng: user.profile?.longitude || 0,
-        address: user.profile?.address || ""
+        lat: profile.latitude || 0,
+        lng: profile.longitude || 0,
+        address: profile.address || ""
       };
     }
   },
@@ -153,7 +219,7 @@ const validateForm = () => {
 };
 
 const handleSave = async () => {
-  if (!validateForm() || !props.user?.userId) return;
+  if (!validateForm() || !props.user?.user?.id) return;
 
   const toast: any = Swal.mixin({
     toast: true,
@@ -163,47 +229,44 @@ const handleSave = async () => {
     customClass: { container: "toast" },
   });
 
-  const userId = props.user.userId;
-
   try {
-    await userStore.updateProfile(userId, {
+    await studentStore.updateStudentInfo(props.user.user.id, {
       firstName: form.value.firstName,
       lastName: form.value.lastName,
       phone: form.value.phone,
-      address: form.value.location.address,
-      latitude: form.value.location.lat,
-      longitude: form.value.location.lng,
       email: form.value.email,
+      avatar: form.value.avatar,
+      gender: form.value.gender,
+      address: form.value.location.address,
+      location: {
+        lat: form.value.location.lat,
+        lng: form.value.location.lng,
+      },
     });
 
-    toast.fire({
-      icon: "success",
-      title: t("user.profileUpdated"),
-    });
-
+    toast.fire({ icon: "success", title: t("user.profileUpdated") });
     editMode.value = false;
     emit("updated");
   } catch (error: any) {
-    toast.fire({
-      icon: "error",
-      title: error?.response?.data?.message || t("user.profileUpdateFailed"),
-    });
+    toast.fire({ icon: "error", title: error?.response?.data?.message || t("user.profileUpdateFailed") });
   }
 };
 
-
 const handleCancel = () => {
-  if (props.user) {
-    form.value.firstName = props.user.firstName || "";
-    form.value.lastName = props.user.lastName || "";
-    form.value.email = props.user.email || "";
-    form.value.phone = props.user.phone || "";
+  const user = props.user?.user;
+  if (user) {
+    const profile = user.profile || {};
+    form.value.firstName = user.firstName || "";
+    form.value.lastName = user.lastName || "";
+    form.value.email = user.email || "";
+    form.value.phone = user.phone || "";
+    form.value.avatar = profile.avatar || "";
+    form.value.gender = profile.gender;
     form.value.location = {
-      lat: props.user.profile?.latitude || 0,
-      lng: props.user.profile?.longitude || 0,
-      address: props.user.profile?.address || ""
+      lat: profile.latitude || 0,
+      lng: profile.longitude || 0,
+      address: profile.address || ""
     };
-
     locationPickerKey.value++;
   }
 
@@ -211,3 +274,25 @@ const handleCancel = () => {
   emit("cancel");
 };
 </script>
+
+<style scoped>
+.label-chip {
+  background: #eee;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  font-weight: 600;
+  border: 1px solid #e0e6ed;
+  border-right: 0;
+  border-radius: 0.375rem 0 0 0.375rem;
+  min-width: 120px;
+}
+.input-style {
+  border-radius: 0 0.375rem 0.375rem 0;
+  padding: 0.625rem;
+  font-size: 1rem;
+  width: 100%;
+}
+</style>
