@@ -51,27 +51,31 @@
                 </div>
               </div>
               <div class="mt-4 flex gap-4">
-  <div class="w-1/2">
-    <label for="code">{{ $t("class_form.code") }}</label>
-    <input
-      id="code"
-      v-model="classStore.classData.code"
-      type="text"
-      class="form-input bg-gray-200 cursor-not-allowed"
-      disabled
-    />
-  </div>
-  <div class="w-1/2">
-    <label for="class_name">{{ $t("class_form.class_name") }}</label>
-    <input
-      id="class_name"
-      v-model="classStore.classData.name"
-      type="text"
-      class="form-input"
-    />
-    <p v-if="errors.class_name" class="text-red-500">{{ errors.class_name }}</p>
-  </div>
-</div>
+                <div class="w-1/2">
+                  <label for="code">{{ $t("class_form.code") }}</label>
+                  <input
+                    id="code"
+                    v-model="classStore.classData.code"
+                    type="text"
+                    class="form-input bg-gray-200 cursor-not-allowed"
+                    disabled
+                  />
+                </div>
+                <div class="w-1/2">
+                  <label for="class_name">{{
+                    $t("class_form.class_name")
+                  }}</label>
+                  <input
+                    id="class_name"
+                    v-model="classStore.classData.name"
+                    type="text"
+                    class="form-input"
+                  />
+                  <p v-if="errors.class_name" class="text-red-500">
+                    {{ errors.class_name }}
+                  </p>
+                </div>
+              </div>
 
               <div class="mt-4">
                 <label for="schoolId">{{ $t("class_form.school_name") }}</label>
@@ -94,14 +98,18 @@
               </div>
               <div class="mt-4 flex gap-4">
                 <div class="w-1/2">
-                  <label for="gradeLevel">{{ $t("class_form.gradeLevel") }}</label>
+                  <label for="gradeLevel">{{
+                    $t("class_form.gradeLevel")
+                  }}</label>
                   <input
                     id="gradeLevel"
                     v-model="classStore.classData.gradeLevel"
                     type="text"
                     class="form-input"
                   />
-                  <p v-if="errors.gradeLevel" class="text-red-500">{{ errors.gradeLevel }}</p>
+                  <p v-if="errors.gradeLevel" class="text-red-500">
+                    {{ errors.gradeLevel }}
+                  </p>
                 </div>
                 <div class="w-1/2">
                   <label for="semester">{{ $t("class_form.semester") }}</label>
@@ -157,39 +165,43 @@
 
             <div class="p-5">
               <div class="mt-4">
-                    <label for="teaching_method">{{ $t("class_form.teaching_method") }}</label>
-                    <select
-                      id="teaching_method"
-                      v-model="classStore.classData.teaching_method"
-                      class="form-select"
-                    >
-                      <option value="in-person">{{ $t("class_form.in_person") }}</option>
-                      <option value="online">{{ $t("class_form.online") }}</option>
-                      <option value="hybrid">{{ $t("class_form.hybrid") }}</option>
-                    </select>
-                  </div>
-                  <div class="mt-4 flex gap-4">
-  <div class="w-1/2">
-    <label for="capacity">{{ $t("class_form.capacity") }}</label>
-    <input
-      id="capacity"
-      v-model="classStore.classData.capacity"
-      type="number"
-      class="form-input"
-      :placeholder="$t('class_form.capacity')"
-    />
-  </div>
-  <div class="w-1/2">
-    <label for="credits">{{ $t("class_form.credits") }}</label>
-    <input
-      id="credits"
-      v-model="classStore.classData.credits"
-      type="number"
-      class="form-input"
-      :placeholder="$t('class_form.credits')"
-    />
-  </div>
-</div>
+                <label for="teaching_method">{{
+                  $t("class_form.teaching_method")
+                }}</label>
+                <select
+                  id="teaching_method"
+                  v-model="classStore.classData.teaching_method"
+                  class="form-select"
+                >
+                  <option value="in-person">
+                    {{ $t("class_form.in_person") }}
+                  </option>
+                  <option value="online">{{ $t("class_form.online") }}</option>
+                  <option value="hybrid">{{ $t("class_form.hybrid") }}</option>
+                </select>
+              </div>
+              <div class="mt-4 flex gap-4">
+                <div class="w-1/2">
+                  <label for="capacity">{{ $t("class_form.capacity") }}</label>
+                  <input
+                    id="capacity"
+                    v-model="classStore.classData.capacity"
+                    type="number"
+                    class="form-input"
+                    :placeholder="$t('class_form.capacity')"
+                  />
+                </div>
+                <div class="w-1/2">
+                  <label for="credits">{{ $t("class_form.credits") }}</label>
+                  <input
+                    id="credits"
+                    v-model="classStore.classData.credits"
+                    type="number"
+                    class="form-input"
+                    :placeholder="$t('class_form.credits')"
+                  />
+                </div>
+              </div>
 
               <div class="mt-4">
                 <label for="roomNumber">{{
@@ -271,7 +283,7 @@
       </div>
     </div>
   </div>
-</template>
+</template> 
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
@@ -280,12 +292,16 @@ import { ref, computed, onBeforeMount } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 import { useClassStore } from "@/stores/class";
+import { useTeacherStore } from "@/stores/teacher";
+
 import { useRouter } from "vue-router";
 
 useMeta({ title: "Add Class" });
 
 const { t } = useI18n();
 const classStore = useClassStore();
+const teacherStore = useTeacherStore();
+
 const isSubmitting = ref(false);
 const router = useRouter();
 const breadcrumbItems = computed(() => [
@@ -328,8 +344,9 @@ const resetForm = () => {
 
 const imageUrl = ref<string>("");
 
-onBeforeMount(() => {
+onBeforeMount(() => { 
   classStore.fetchSchools();
+
 });
 const errors = ref({
   schoolId: "",
