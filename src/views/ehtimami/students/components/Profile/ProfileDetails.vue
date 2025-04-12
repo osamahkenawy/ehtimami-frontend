@@ -1,7 +1,9 @@
 <template>
   <div class="mt-1 h-fit">
     <div class="flex items-center justify-between mb-5">
-      <h5 class="font-semibold text-lg dark:text-white-light">{{ t('student.edit_profile') }}</h5>
+      <h5 class="font-semibold text-lg dark:text-white-light">
+        {{ t("student.edit_profile") }}
+      </h5>
       <EditToggleButtons
         v-model="editMode"
         @save="handleSave"
@@ -11,7 +13,9 @@
     </div>
 
     <!-- 1. Avatar + Gender -->
-    <div class="flex flex-col sm:flex-row gap-4 items-center justify-start mb-6">
+    <div
+      class="flex flex-col sm:flex-row gap-4 items-center justify-start mb-6"
+    >
       <div class="w-full sm:w-[200px] text-center">
         <FileUploader
           v-model="form.avatar"
@@ -22,7 +26,9 @@
       </div>
 
       <div class="w-full sm:w-[200px] text-center sm:text-left">
-        <label class="block text-sm font-semibold text-gray-700 dark:text-white mb-1">
+        <label
+          class="block text-sm font-semibold text-gray-700 dark:text-white mb-1"
+        >
           {{ t("user.chooseGender") }}
         </label>
         <GenderSelection
@@ -36,7 +42,7 @@
     <!-- 2. Student No + Verified -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
-        <div class="label-chip">{{ t('student.student_no') }}</div>
+        <div class="label-chip">{{ t("student.student_no") }}</div>
         <input
           type="text"
           :value="props.user?.student_no"
@@ -45,21 +51,35 @@
         />
       </div>
 
-      <div class="flex">
-        <div class="label-chip">{{ t('student.verificationStatus') }}</div>
-        <input
-          type="text"
-          :value="props.user?.user?.is_verified ? t('student.verified') : t('student.unverified')"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+      <!-- Verified Toggle -->
+      <div class="flex items-center gap-2">
+        <label
+          class="text-sm font-medium text-gray-700 dark:text-white whitespace-nowrap"
+        >
+          {{ t("student.is_verified") }}
+        </label>
+        <label class="relative inline-flex items-center cursor-not-allowed">
+          <input
+            type="checkbox"
+            class="sr-only peer"
+            :checked="props.user?.user?.is_verified"
+            disabled
+          />
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 relative transition-all"
+          >
+            <div
+              class="absolute left-0.5 top-0.5 bg-white border border-gray-300 w-5 h-5 rounded-full transition-transform peer-checked:translate-x-full"
+            ></div>
+          </div>
+        </label>
       </div>
     </div>
 
     <!-- 3. Contact Info -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
-        <div class="label-chip">{{ t('student.email') }}</div>
+        <div class="label-chip">{{ t("student.email") }}</div>
         <input
           type="email"
           v-model="form.email"
@@ -69,7 +89,7 @@
       </div>
 
       <div class="flex">
-        <div class="label-chip">{{ t('student.phone') }}</div>
+        <div class="label-chip">{{ t("student.phone") }}</div>
         <input
           type="tel"
           v-model="form.phone"
@@ -83,7 +103,7 @@
     <!-- 4. Birth Date + Join Date -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
-        <div class="label-chip">{{ t('student.dob') }}</div>
+        <div class="label-chip">{{ t("student.dob") }}</div>
         <input
           type="text"
           :value="props.user?.user?.profile?.birth_date?.split('T')[0] || '-'"
@@ -93,7 +113,7 @@
       </div>
 
       <div class="flex">
-        <div class="label-chip">{{ t('student.joinDate') }}</div>
+        <div class="label-chip">{{ t("student.joinDate") }}</div>
         <input
           type="text"
           :value="props.user?.user?.profile?.join_date?.split('T')[0] || '-'"
@@ -106,7 +126,7 @@
     <!-- 5. Nationality + Marital Status -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
-        <div class="label-chip">{{ t('student.nationality') }}</div>
+        <div class="label-chip">{{ t("student.nationality") }}</div>
         <input
           type="text"
           :value="props.user?.user?.profile?.nationality || '-'"
@@ -116,7 +136,7 @@
       </div>
 
       <div class="flex">
-        <div class="label-chip">{{ t('student.maritalStatus') }}</div>
+        <div class="label-chip">{{ t("student.maritalStatus") }}</div>
         <input
           type="text"
           :value="props.user?.user?.profile?.marital_status || '-'"
@@ -127,9 +147,9 @@
     </div>
 
     <!-- 6. Bio -->
-    <div class="flex" style="margin-bottom: 20px;">
+    <div class="flex" style="margin-bottom: 20px">
       <div class="label-chip">
-            {{ t("user.bio") }}
+        {{ t("user.bio") }}
       </div>
       <textarea
         rows="4"
@@ -140,16 +160,16 @@
     </div>
 
     <div class="md:col-span-2 w-full">
-        <div class="w-full h-full overflow-hidden">
-          <LocationPicker
-            v-model="form.location"
-            :editMode="editMode"
-            :placeholder="t('user.location')"
-            height="400px"
-            :key="locationPickerKey"
-          />
-        </div>
+      <div class="w-full h-full overflow-hidden">
+        <LocationPicker
+          v-model="form.location"
+          :editMode="editMode"
+          :placeholder="t('user.location')"
+          height="400px"
+          :key="locationPickerKey"
+        />
       </div>
+    </div>
   </div>
 </template>
 
@@ -182,13 +202,13 @@ const form = ref({
   location: {
     lat: 0,
     lng: 0,
-    address: ""
-  }
+    address: "",
+  },
 });
 
 const errors = ref({
   firstName: "",
-  lastName: ""
+  lastName: "",
 });
 
 watch(
@@ -205,7 +225,7 @@ watch(
       form.value.location = {
         lat: profile.latitude || 0,
         lng: profile.longitude || 0,
-        address: profile.address || ""
+        address: profile.address || "",
       };
     }
   },
@@ -213,8 +233,10 @@ watch(
 );
 
 const validateForm = () => {
-  errors.value.firstName = form.value.firstName.trim() === "" ? t("user.firstNameRequired") : "";
-  errors.value.lastName = form.value.lastName.trim() === "" ? t("user.lastNameRequired") : "";
+  errors.value.firstName =
+    form.value.firstName.trim() === "" ? t("user.firstNameRequired") : "";
+  errors.value.lastName =
+    form.value.lastName.trim() === "" ? t("user.lastNameRequired") : "";
   return !errors.value.firstName && !errors.value.lastName;
 };
 
@@ -248,7 +270,10 @@ const handleSave = async () => {
     editMode.value = false;
     emit("updated");
   } catch (error: any) {
-    toast.fire({ icon: "error", title: error?.response?.data?.message || t("user.profileUpdateFailed") });
+    toast.fire({
+      icon: "error",
+      title: error?.response?.data?.message || t("user.profileUpdateFailed"),
+    });
   }
 };
 
@@ -265,7 +290,7 @@ const handleCancel = () => {
     form.value.location = {
       lat: profile.latitude || 0,
       lng: profile.longitude || 0,
-      address: profile.address || ""
+      address: profile.address || "",
     };
     locationPickerKey.value++;
   }
