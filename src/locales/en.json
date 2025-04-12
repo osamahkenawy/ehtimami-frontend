@@ -498,7 +498,19 @@
   "profileUpdated": "Profile updated successfully!",
   "profileUpdateFailed": "Failed to update profile.",
   "firstNameRequired": "First name is required",
-  "lastNameRequired": "Last name is required"
+  "lastNameRequired": "Last name is required",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "academicInformation": "Academic Information",
+  "schoolName": "School Name",
+  "currentClass": "Current Class",
+  "academicYear": "Academic Year",
+  "subject": "Subject",
+  "roomNumber": "Room Number",
+  "schedule": "Class Schedule",
+  "enrolledClasses": "Enrolled Classes",
+  "noClasses": "No enrolled classes",
+  "general": "General"
 }
 
 }

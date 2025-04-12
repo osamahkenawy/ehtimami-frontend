@@ -51,6 +51,39 @@
             />
       </div>
     </div>
+<!-- 3. First Name + Last Name -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+  <div class="flex flex-col">
+    <div class="flex">
+      <div class="label-chip">{{ t("student.first_name") }}</div>
+      <input
+        type="text"
+        v-model="form.firstName"
+        class="form-input input-style"
+        :placeholder="t('student.first_name')"
+        :disabled="!editMode"
+      />
+    </div>
+    <span class="text-red-500 text-sm mt-1" v-if="errors.firstName">
+      {{ errors.firstName }}
+    </span>
+  </div>
+  <div class="flex flex-col">
+    <div class="flex">
+      <div class="label-chip">{{ t("student.last_name") }}</div>
+      <input
+        type="text"
+        v-model="form.lastName"
+        class="form-input input-style"
+        :placeholder="t('student.last_name')"
+        :disabled="!editMode"
+      />
+    </div>
+    <span class="text-red-500 text-sm mt-1" v-if="errors.lastName">
+      {{ errors.lastName }}
+    </span>
+  </div>
+</div>
 
     <!-- 3. Contact Info -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -212,37 +245,36 @@ const validateForm = () => {
 
 const handleSave = async () => {
   if (!validateForm() || !props.user?.user?.id) return;
-  console.log("handleSave", form.value)
-  // try {
-  //   await studentStore.updateStudentInfo(props.user.user.id, {
-  //     firstName: form.value.firstName,
-  //     lastName: form.value.lastName,
-  //     phone: form.value.phone,
-  //     email: form.value.email,
-  //     avatar: form.value.avatar,
-  //     gender: form.value.gender,
-  //     is_verified: form.value.is_verified,
-  //     bio: form.value.bio,
-  //     nationality: form.value.nationality,
-  //     marital_status: form.value.marital_status,
-  //     join_date: form.value.join_date,
-  //     birth_date: form.value.birth_date,
-  //     address: form.value.location.address,
-  //     location: {
-  //       lat: form.value.location.lat,
-  //       lng: form.value.location.lng,
-  //     },
-  //   });
+  try {
+    await studentStore.updateStudentInfo(props.user.user.id, {
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      phone: form.value.phone,
+      email: form.value.email,
+      is_verified: form.value.is_verified,
+      profile: {
+        gender: form.value.gender,
+        bio: form.value.bio,
+        avatar: form.value.avatar,
+        nationality: form.value.nationality,
+        birth_date: form.value.birth_date,
+        join_date: form.value.join_date,
+        address: form.value.location.address,
+        latitude:  form.value.location.lat,
+        longitude: form.value.location.lng,
+      } as any
+    
+    });
 
-  //   Swal.fire({ icon: "success", title: t("student.profileUpdated") });
-  //   editMode.value = false;
-  //   emit("updated");
-  // } catch (error: any) {
-  //   Swal.fire({
-  //     icon: "error",
-  //     title: error?.response?.data?.message || t("student.profileUpdateFailed"),
-  //   });
-  // }
+    Swal.fire({ icon: "success", title: t("student.profileUpdated") });
+    editMode.value = false;
+    emit("updated");
+  } catch (error: any) {
+    Swal.fire({
+      icon: "error",
+      title: error?.response?.data?.message || t("student.profileUpdateFailed"),
+    });
+  }
 };
 
 const handleCancel = () => {
