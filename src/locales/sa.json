@@ -260,6 +260,13 @@
    "responsible_teacher": "المعلم المسؤول",
    "add-class": "إضافة فصل",
    "class_form": {
+    "teaching_method": "طريقة التدريس",
+    "academic_year": "السنة الدراسية",
+    "credits": "الساعات المعتمدة",
+    "in_person": "حضوري",
+    "online": "عن بعد",
+    "semester": "الفصل الدراسي",
+    "hybrid": "مختلط",
     "classInfo": "معلومات الصف",
     "class_schedule": "جدول الحصص",
      "code": "معرف الفصل",

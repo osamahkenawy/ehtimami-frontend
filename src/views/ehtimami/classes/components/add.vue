@@ -3,7 +3,11 @@
     <div class="flex justify-between items-center mb-4">
       <BreadCrumb :items="breadcrumbItems" />
       <div class="flex">
-        <button type="button" @click="cancelForm" class="btn btn-outline-primary">
+        <button
+          type="button"
+          @click="cancelForm"
+          class="btn btn-outline-primary"
+        >
           {{ $t("cancel") }}
         </button>
         <button
@@ -19,72 +23,174 @@
 
     <div class="flex flex-col lg:flex-row gap-6">
       <div class="xl:w-[30rem] w-full">
-        <form id="classForm" @submit.prevent="submitForm" class="w-full xl:mt-0 mt-6">
+        <form
+          id="classForm"
+          @submit.prevent="submitForm"
+          class="w-full xl:mt-0 mt-6"
+        >
           <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+            <div
+              class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
+            >
               {{ $t("class_form.classInfo") }}
             </div>
-           
-            <div class="p-5">  
-              <div  class="text-center">
-                <!-- <label for="code">{{ 'Class Picture' }}</label> -->
-                <div  v-tippy="$t('class_form.click_to_upload')" class="inline-table text-center"><FileUploader v-model="classStore.classData.class_logo" :label="$t('class_form.class_image')" platform="user-profile" @change="handleImageUpload" /></div>
 
+            <div class="p-5">
+              <div class="text-center">
+                <!-- <label for="code">{{ 'Class Picture' }}</label> -->
+                <div
+                  v-tippy="$t('class_form.click_to_upload')"
+                  class="inline-table text-center"
+                >
+                  <FileUploader
+                    v-model="classStore.classData.class_logo"
+                    :label="$t('class_form.class_image')"
+                    platform="user-profile"
+                    @change="handleImageUpload"
+                  />
+                </div>
               </div>
-              <div>
-                <label for="code">{{ $t("class_form.code") }}</label>
-                <input
-                  id="code"
-                  v-model="classStore.classData.code"
-                  type="text"
-                  class="form-input bg-gray-200 cursor-not-allowed"
-                  disabled
-                />
-              </div>
+              <div class="mt-4 flex gap-4">
+  <div class="w-1/2">
+    <label for="code">{{ $t("class_form.code") }}</label>
+    <input
+      id="code"
+      v-model="classStore.classData.code"
+      type="text"
+      class="form-input bg-gray-200 cursor-not-allowed"
+      disabled
+    />
+  </div>
+  <div class="w-1/2">
+    <label for="class_name">{{ $t("class_form.class_name") }}</label>
+    <input
+      id="class_name"
+      v-model="classStore.classData.name"
+      type="text"
+      class="form-input"
+    />
+    <p v-if="errors.class_name" class="text-red-500">{{ errors.class_name }}</p>
+  </div>
+</div>
 
               <div class="mt-4">
                 <label for="schoolId">{{ $t("class_form.school_name") }}</label>
-                <select id="schoolId" v-model="classStore.classData.schoolId" class="form-select">
-                  <option v-for="option in classStore.schools" :key="option.id" :value="option.id">
+                <select
+                  id="schoolId"
+                  v-model="classStore.classData.schoolId"
+                  class="form-select"
+                >
+                  <option
+                    v-for="option in classStore.schools"
+                    :key="option.id"
+                    :value="option.id"
+                  >
                     {{ option.school_name }}
                   </option>
                 </select>
-                <p v-if="errors.schoolId" class="text-red-500">{{ errors.schoolId }}</p>
+                <p v-if="errors.schoolId" class="text-red-500">
+                  {{ errors.schoolId }}
+                </p>
+              </div>
+              <div class="mt-4 flex gap-4">
+                <div class="w-1/2">
+                  <label for="gradeLevel">{{ $t("class_form.gradeLevel") }}</label>
+                  <input
+                    id="gradeLevel"
+                    v-model="classStore.classData.gradeLevel"
+                    type="text"
+                    class="form-input"
+                  />
+                  <p v-if="errors.gradeLevel" class="text-red-500">{{ errors.gradeLevel }}</p>
+                </div>
+                <div class="w-1/2">
+                  <label for="semester">{{ $t("class_form.semester") }}</label>
+                  <select
+                    id="semester"
+                    v-model="classStore.classData.semester"
+                    class="form-select"
+                  >
+                    <option :value="1">1</option>
+                    <option :value="2">2</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mt-4">
-                <label for="class_name">{{ $t("class_form.class_name") }}</label>
-                <input
-                  id="class_name"
-                  v-model="classStore.classData.name"
-                  type="text"
-                  class="form-input"
-                />
-                <p v-if="errors.class_name" class="text-red-500">{{ errors.class_name }}</p>
-              </div>
-
-              <div class="mt-4">
-                <label for="gradeLevel">{{ $t("class_form.gradeLevel") }}</label>
-                <input id="gradeLevel" v-model="classStore.classData.gradeLevel" type="text" class="form-input" />
-                <p v-if="errors.gradeLevel" class="text-red-500">{{ errors.gradeLevel }}</p>
+                <label class="block">{{
+                  $t("class_form.academic_year")
+                }}</label>
+                <div class="flex gap-2">
+                  <select v-model="academicYearFrom" class="form-select w-1/2">
+                    <option
+                      v-for="year in yearOptions"
+                      :key="year"
+                      :value="year"
+                    >
+                      {{ year }}
+                    </option>
+                  </select>
+                  <span class="self-center">-</span>
+                  <select v-model="academicYearTo" class="form-select w-1/2">
+                    <option
+                      v-for="year in yearOptions.filter(
+                        (y) => y > academicYearFrom
+                      )"
+                      :key="year"
+                      :value="year"
+                    >
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
           <div class="panel px-0 mt-4 flex-grow py-6 w-full lg:w-auto">
-            <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+            <div
+              class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
+            >
               {{ $t("class_form.another_info") }}
             </div>
+            <!-- Add Here  -->
+            <!-- 1. teaching method  -->
+
             <div class="p-5">
               <div class="mt-4">
-                <label for="capacity">{{ $t("class_form.capacity") }}</label>
-                <input
-                  id="capacity"
-                  v-model="classStore.classData.capacity"
-                  type="number"
-                  class="form-input"
-                  :placeholder="$t('class_form.capacity')"
-                />
-              </div>
+                    <label for="teaching_method">{{ $t("class_form.teaching_method") }}</label>
+                    <select
+                      id="teaching_method"
+                      v-model="classStore.classData.teaching_method"
+                      class="form-select"
+                    >
+                      <option value="in-person">{{ $t("class_form.in_person") }}</option>
+                      <option value="online">{{ $t("class_form.online") }}</option>
+                      <option value="hybrid">{{ $t("class_form.hybrid") }}</option>
+                    </select>
+                  </div>
+                  <div class="mt-4 flex gap-4">
+  <div class="w-1/2">
+    <label for="capacity">{{ $t("class_form.capacity") }}</label>
+    <input
+      id="capacity"
+      v-model="classStore.classData.capacity"
+      type="number"
+      class="form-input"
+      :placeholder="$t('class_form.capacity')"
+    />
+  </div>
+  <div class="w-1/2">
+    <label for="credits">{{ $t("class_form.credits") }}</label>
+    <input
+      id="credits"
+      v-model="classStore.classData.credits"
+      type="number"
+      class="form-input"
+      :placeholder="$t('class_form.credits')"
+    />
+  </div>
+</div>
+
               <div class="mt-4">
                 <label for="roomNumber">{{
                   $t("class_form.roomNumber")
@@ -104,7 +210,9 @@
 
       <!-- Schedule Section in Table -->
       <div class="panel px-0 flex-grow py-6 w-full lg:w-auto">
-        <div class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5">
+        <div
+          class="text-lg font-medium bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] p-5"
+        >
           {{ $t("class_form.class_schedule") }}
         </div>
         <div class="p-5">
@@ -112,15 +220,25 @@
             <table class="w-full border-collapse border border-gray-300">
               <thead>
                 <tr class="bg-gray-100">
-                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.day") }}</th>
-                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.active") }}</th>
-                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.start_time") }}</th>
-                  <th class="border border-gray-300 px-4 py-2">{{ $t("class_form.end_time") }}</th>
+                  <th class="border border-gray-300 px-4 py-2">
+                    {{ $t("class_form.day") }}
+                  </th>
+                  <th class="border border-gray-300 px-4 py-2">
+                    {{ $t("class_form.active") }}
+                  </th>
+                  <th class="border border-gray-300 px-4 py-2">
+                    {{ $t("class_form.start_time") }}
+                  </th>
+                  <th class="border border-gray-300 px-4 py-2">
+                    {{ $t("class_form.end_time") }}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(day, key) in scheduleDays" :key="key">
-                  <td class="border border-gray-300 px-4 py-2">{{ day.label }}</td>
+                  <td class="border border-gray-300 px-4 py-2">
+                    {{ day.label }}
+                  </td>
                   <td class="border border-gray-300 px-4 py-2">
                     <label class="switch">
                       <input type="checkbox" v-model="schedule[key].enabled" />
@@ -128,12 +246,22 @@
                     </label>
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
-                    <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].from" />
-                    <p v-if="errors.schedule[key]?.from" class="text-red-500">{{ errors.schedule[key].from }}</p>
+                    <TimePickerPopup
+                      v-if="schedule[key].enabled"
+                      v-model="schedule[key].from"
+                    />
+                    <p v-if="errors.schedule[key]?.from" class="text-red-500">
+                      {{ errors.schedule[key].from }}
+                    </p>
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
-                    <TimePickerPopup v-if="schedule[key].enabled" v-model="schedule[key].to" />
-                    <p v-if="errors.schedule[key]?.to" class="text-red-500">{{ errors.schedule[key].to }}</p>
+                    <TimePickerPopup
+                      v-if="schedule[key].enabled"
+                      v-model="schedule[key].to"
+                    />
+                    <p v-if="errors.schedule[key]?.to" class="text-red-500">
+                      {{ errors.schedule[key].to }}
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -147,7 +275,7 @@
 
 <script setup lang="ts">
 import { useMeta } from "@/composables/use-meta";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { ref, computed, onBeforeMount } from "vue";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
@@ -165,22 +293,39 @@ const breadcrumbItems = computed(() => [
   { label: t("classes"), link: "/ehtimami/classes" },
   { label: t("add-class") },
 ]);
+const currentYear = new Date().getFullYear();
+const yearOptions = Array.from({ length: 10 }, (_, i) => currentYear + i);
+const academicYearFrom = ref<number>(currentYear);
+const academicYearTo = ref<number>(currentYear + 1);
 const resetForm = () => {
+  academicYearFrom.value = currentYear;
+  academicYearTo.value = currentYear + 1;
+
   classStore.classData = {
-    code: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`, // Generate new unique ID
+    code: `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`,
     name: "",
     gradeLevel: "",
+    subject: "",
+    semester: 1,
+    academic_year: `${academicYearFrom.value} - ${academicYearTo.value}`,
+    teaching_method: "in-person",
     capacity: 0,
-    teacherId: null,
+    max_students: 0,
     roomNumber: "",
+    class_logo: "",
     status: "active",
     schedule: {},
+    start_time: "",
+    end_time: "",
+    credits: 0,
     startDate: "",
     endDate: "",
-    schoolId: null,
-   class_logo: ""
+    schoolId: undefined,
+    teacherId: undefined,
+    studentIds: [],
   };
 };
+
 const imageUrl = ref<string>("");
 
 onBeforeMount(() => {
@@ -217,9 +362,15 @@ const handleImageUpload = (data: { s3: string; base64: string }) => {
   classStore.classData.class_logo = data.s3;
 };
 const validateForm = () => {
-  errors.value.schoolId = classStore.classData.schoolId ? "" : t("errors.required");
-  errors.value.class_name = classStore.classData.name ? "" : t("errors.required");
-  errors.value.gradeLevel = classStore.classData.gradeLevel ? "" : t("errors.required");
+  errors.value.schoolId = classStore.classData.schoolId
+    ? ""
+    : t("errors.required");
+  errors.value.class_name = classStore.classData.name
+    ? ""
+    : t("errors.required");
+  errors.value.gradeLevel = classStore.classData.gradeLevel
+    ? ""
+    : t("errors.required");
 
   errors.value.schedule = {};
   Object.keys(schedule.value).forEach((key) => {
@@ -236,7 +387,8 @@ const validateForm = () => {
     !errors.value.class_name &&
     !errors.value.gradeLevel &&
     Object.keys(errors.value.schedule).every(
-      (day) => !errors.value.schedule[day]?.from && !errors.value.schedule[day]?.to
+      (day) =>
+        !errors.value.schedule[day]?.from && !errors.value.schedule[day]?.to
     )
   );
 };
@@ -246,37 +398,40 @@ const submitForm = async () => {
 
   isSubmitting.value = true;
   const toast: any = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            customClass: { container: 'toast' },
-        });
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 3000,
+    customClass: { container: "toast" },
+  });
   const scheduleData = Object.keys(schedule.value).reduce((acc, key) => {
-    acc[key] = schedule.value[key].enabled ? `${schedule.value[key].from} - ${schedule.value[key].to}` : "";
+    acc[key] = schedule.value[key].enabled
+      ? `${schedule.value[key].from} - ${schedule.value[key].to}`
+      : "";
     return acc;
   }, {});
 
   classStore.classData.schedule = scheduleData;
-  console.log("scheduleData", scheduleData)
+  console.log("scheduleData", scheduleData);
   try {
-    await classStore.createClass(); 
-        toast.fire({
-            icon: "success",
-            title: t("class_form.successMessage"),
-            padding: '10px 20px',
-        }); 
-         // ✅ Reset form and redirect
+    await classStore.createClass();
+    toast.fire({
+      icon: "success",
+      title: t("class_form.successMessage"),
+      padding: "10px 20px",
+    });
+    // ✅ Reset form and redirect
     resetForm();
     classStore.fetchClasses();
     router.push("/ehtimami/classes"); // 🚀 Redirect to /ehtimami/schools
   } catch (error: any) {
-    const errorMessage = error?.response?.data?.message || t("class_form.errorMessage");
-        toast.fire({
-            icon: "error",
-            title: errorMessage,
-            padding: '10px 20px',
-        });
+    const errorMessage =
+      error?.response?.data?.message || t("class_form.errorMessage");
+    toast.fire({
+      icon: "error",
+      title: errorMessage,
+      padding: "10px 20px",
+    });
   } finally {
     isSubmitting.value = false;
   }
@@ -287,7 +442,6 @@ const cancelForm = () => {
   router.push("/ehtimami/classes"); // 🚀 Redirect on cancel
 };
 </script>
-
 
 <style scoped>
 /* ✅ Ensures Each Row is a Flex Container */
@@ -377,4 +531,3 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 </style>
-

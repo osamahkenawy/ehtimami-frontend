@@ -261,6 +261,14 @@
   "add-class": "Add Class",
   "class_form": {
     "classInfo": "Class Info",
+    "semester": "Semester",
+    "academic_year": "Academic Year",
+    "teaching_method": "Teaching Method",
+    "in_person": "In-Person",
+    "credits": "Credits",
+    "online": "Online",
+    
+    "hybrid": "Hybrid",
     "class_schedule": "Class Schedule",
     "code": "Class Code",
     "school_name": "School Name",
