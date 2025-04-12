@@ -454,6 +454,7 @@
   "students": "Students",
 "student": {
   "student_no": "Student No",
+  "profile_overview": "Profile Overview",
   "id": "ID",
   "name": "Name",
   "firstName": "First Name",
@@ -478,6 +479,9 @@
   "section": "Section",
   "grade": "Grade",
   "gradeAndSection": "Grade & Section",
+  "single": "Single",
+  "married": "Married",
+  "divorced": "Divorced",
   "class": "Class",
   "action": "Action",
   "view_details": "View Details",
@@ -490,7 +494,11 @@
   "cancel_button": "Cancel",
   "page_title": "Students",
   "search_placeholder": "Search student...",
-  "no_data": "No students found"
+  "no_data": "No students found",
+  "profileUpdated": "Profile updated successfully!",
+  "profileUpdateFailed": "Failed to update profile.",
+  "firstNameRequired": "First name is required",
+  "lastNameRequired": "Last name is required"
 }
 
 }

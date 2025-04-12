@@ -2,7 +2,7 @@
   <div class="mt-1 h-fit">
     <div class="flex items-center justify-between mb-5">
       <h5 class="font-semibold text-lg dark:text-white-light">
-        {{ t("student.edit_profile") }}
+        {{ t("student.profile_overview") }}
       </h5>
       <EditToggleButtons
         v-model="editMode"
@@ -13,66 +13,42 @@
     </div>
 
     <!-- 1. Avatar + Gender -->
-    <div
-      class="flex flex-col sm:flex-row gap-4 items-center justify-start mb-6"
-    >
+    <div class="flex flex-col sm:flex-row gap-4 items-center justify-start mb-6">
       <div class="w-full sm:w-[200px] text-center">
         <FileUploader
           v-model="form.avatar"
           :label="t('avatar')"
-          platform="user-profile"
+          platform="student-profile"
           :disabled="!editMode"
         />
       </div>
-
       <div class="w-full sm:w-[200px] text-center sm:text-left">
-        <label
-          class="block text-sm font-semibold text-gray-700 dark:text-white mb-1"
-        >
-          {{ t("user.chooseGender") }}
+        <label class="block text-sm font-semibold text-gray-700 dark:text-white mb-1">
+          {{ t("student.chooseGender") }}
         </label>
         <GenderSelection
           v-model="form.gender"
           :disabled="!editMode"
           class="justify-center sm:justify-start"
         />
-      </div>
+      </div> 
     </div>
 
     <!-- 2. Student No + Verified -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
         <div class="label-chip">{{ t("student.student_no") }}</div>
-        <input
-          type="text"
-          :value="props.user?.student_no"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        <input type="text" :value="props.user?.student_no" class="form-input input-style cursor-not-allowed" disabled />
       </div>
-
-      <!-- Verified Toggle -->
       <div class="flex items-center gap-2">
-        <label
-          class="text-sm font-medium text-gray-700 dark:text-white whitespace-nowrap"
-        >
-          {{ t("student.is_verified") }}
-        </label>
-        <label class="relative inline-flex items-center cursor-not-allowed">
-          <input
-            type="checkbox"
-            class="sr-only peer"
-            :checked="props.user?.user?.is_verified"
-            disabled
-          />
-          <div
-            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 relative transition-all"
-          >
-            <div
-              class="absolute left-0.5 top-0.5 bg-white border border-gray-300 w-5 h-5 rounded-full transition-transform peer-checked:translate-x-full"
-            ></div>
-          </div>
-        </label>
+        <Chip
+              :content="form.is_verified ? 'Verified' : 'Unverified'"
+              :textColor="form.is_verified ? '#00ab55' : '#e7515a'"
+              :borderColor="form.is_verified ? '#00ab55' : '#e7515a'"
+              :headerBackgroundColor="
+                form.is_verified ? '#e6f9f0' : '#ffecec'
+              "
+            />
       </div>
     </div>
 
@@ -80,23 +56,11 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
         <div class="label-chip">{{ t("student.email") }}</div>
-        <input
-          type="email"
-          v-model="form.email"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        <input type="email" v-model="form.email" class="form-input input-style cursor-not-allowed" disabled />
       </div>
-
       <div class="flex">
         <div class="label-chip">{{ t("student.phone") }}</div>
-        <input
-          type="tel"
-          v-model="form.phone"
-          :placeholder="t('student.phone')"
-          class="form-input input-style"
-          :disabled="!editMode"
-        />
+        <input type="tel" v-model="form.phone" class="form-input input-style" :disabled="!editMode" />
       </div>
     </div>
 
@@ -104,22 +68,11 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
         <div class="label-chip">{{ t("student.dob") }}</div>
-        <input
-          type="text"
-          :value="props.user?.user?.profile?.birth_date?.split('T')[0] || '-'"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        <input type="date" v-model="form.birth_date" class="form-input input-style" :disabled="!editMode" />
       </div>
-
       <div class="flex">
         <div class="label-chip">{{ t("student.joinDate") }}</div>
-        <input
-          type="text"
-          :value="props.user?.user?.profile?.join_date?.split('T')[0] || '-'"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        <input type="date" v-model="form.join_date" class="form-input input-style" :disabled="!editMode" />
       </div>
     </div>
 
@@ -127,48 +80,57 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="flex">
         <div class="label-chip">{{ t("student.nationality") }}</div>
-        <input
-          type="text"
-          :value="props.user?.user?.profile?.nationality || '-'"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        <select
+          v-model="form.nationality"
+          :disabled="!editMode"
+          :class="[
+            'form-select ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full',
+            !editMode && 'cursor-not-allowed'
+          ]"
+        >
+          <option value="" disabled>{{ t('user.nationality') }}</option>
+          <option v-for="nation in nationalities" :key="nation.value" :value="nation.value">
+            {{ nation.flag }} {{ nation.text }}
+          </option>
+        </select>
       </div>
-
       <div class="flex">
-        <div class="label-chip">{{ t("student.maritalStatus") }}</div>
-        <input
-          type="text"
-          :value="props.user?.user?.profile?.marital_status || '-'"
-          class="form-input input-style cursor-not-allowed"
-          disabled
-        />
+        
+        <select
+            v-model="form.marital_status"
+            :disabled="!editMode"
+            :class="[
+              'form-select ltr:rounded-l-none rtl:rounded-r-none py-2.5 text-base w-full',
+              !editMode && 'cursor-not-allowed'
+            ]"
+          >
+            <option value="SINGLE">{{ t("student.single") }}</option>
+            <option value="MARRIED">{{ t("student.married") }}</option>
+            <option value="DIVORCED">{{ t("student.divorced") }}</option>
+          </select>
       </div>
     </div>
 
     <!-- 6. Bio -->
-    <div class="flex" style="margin-bottom: 20px">
-      <div class="label-chip">
-        {{ t("user.bio") }}
-      </div>
+    <div class="flex mb-6">
+      <div class="label-chip">{{ t("student.bio") }}</div>
       <textarea
         rows="4"
-        class="form-input input-style w-full cursor-not-allowed"
-        :value="props.user?.user?.profile?.bio || '-'"
-        disabled
+        v-model="form.bio"
+        class="form-input input-style w-full"
+        :disabled="!editMode"
       />
     </div>
 
+    <!-- 7. Address -->
     <div class="md:col-span-2 w-full">
-      <div class="w-full h-full overflow-hidden">
-        <LocationPicker
-          v-model="form.location"
-          :editMode="editMode"
-          :placeholder="t('user.location')"
-          height="400px"
-          :key="locationPickerKey"
-        />
-      </div>
+      <LocationPicker
+        v-model="form.location"
+        :editMode="editMode"
+        :placeholder="t('user.location')"
+        height="400px"
+        :key="locationPickerKey"
+      />
     </div>
   </div>
 </template>
@@ -177,18 +139,16 @@
 import Swal from "sweetalert2";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import LocationPicker from "./LocationPicker.vue";
 import { useStudentStore } from "@/stores/students";
+import LocationPicker from "./LocationPicker.vue";
+import { nationalities } from "@/fakeData/nationalityList";
 
 const { t } = useI18n();
 const studentStore = useStudentStore();
 const editMode = ref(false);
 
 const props = defineProps<{ user: any | null }>();
-const emit = defineEmits<{
-  (e: "cancel"): void;
-  (e: "updated"): void;
-}>();
+const emit = defineEmits<{ (e: "cancel"): void; (e: "updated"): void }>();
 
 const locationPickerKey = ref(0);
 
@@ -199,6 +159,12 @@ const form = ref({
   phone: "",
   gender: undefined,
   avatar: "",
+  is_verified: false,
+  birth_date: "",
+  join_date: "",
+  nationality: "",
+  marital_status: "",
+  bio: "",
   location: {
     lat: 0,
     lng: 0,
@@ -222,7 +188,13 @@ watch(
       form.value.phone = user.user.phone || "";
       form.value.avatar = profile.avatar || "";
       form.value.gender = profile.gender;
-      form.value.location = {
+      form.value.is_verified = user.user.is_verified;
+      form.value.birth_date = profile.birth_date?.split("T")[0] || "";
+      form.value.join_date = profile.join_date?.split("T")[0] || "";
+      form.value.nationality = profile.nationality || "";
+      form.value.marital_status = profile.marital_status || "";
+      form.value.bio = profile.bio || "";
+      form.value.location = { 
         lat: profile.latitude || 0,
         lng: profile.longitude || 0,
         address: profile.address || "",
@@ -233,60 +205,61 @@ watch(
 );
 
 const validateForm = () => {
-  errors.value.firstName =
-    form.value.firstName.trim() === "" ? t("user.firstNameRequired") : "";
-  errors.value.lastName =
-    form.value.lastName.trim() === "" ? t("user.lastNameRequired") : "";
+  errors.value.firstName = form.value.firstName.trim() === "" ? t("student.firstNameRequired") : "";
+  errors.value.lastName = form.value.lastName.trim() === "" ? t("student.lastNameRequired") : "";
   return !errors.value.firstName && !errors.value.lastName;
 };
 
 const handleSave = async () => {
   if (!validateForm() || !props.user?.user?.id) return;
+  console.log("handleSave", form.value)
+  // try {
+  //   await studentStore.updateStudentInfo(props.user.user.id, {
+  //     firstName: form.value.firstName,
+  //     lastName: form.value.lastName,
+  //     phone: form.value.phone,
+  //     email: form.value.email,
+  //     avatar: form.value.avatar,
+  //     gender: form.value.gender,
+  //     is_verified: form.value.is_verified,
+  //     bio: form.value.bio,
+  //     nationality: form.value.nationality,
+  //     marital_status: form.value.marital_status,
+  //     join_date: form.value.join_date,
+  //     birth_date: form.value.birth_date,
+  //     address: form.value.location.address,
+  //     location: {
+  //       lat: form.value.location.lat,
+  //       lng: form.value.location.lng,
+  //     },
+  //   });
 
-  const toast: any = Swal.mixin({
-    toast: true,
-    position: "top",
-    showConfirmButton: false,
-    timer: 3000,
-    customClass: { container: "toast" },
-  });
-
-  try {
-    await studentStore.updateStudentInfo(props.user.user.id, {
-      firstName: form.value.firstName,
-      lastName: form.value.lastName,
-      phone: form.value.phone,
-      email: form.value.email,
-      avatar: form.value.avatar,
-      // gender: form.value.gender,
-      // address: form.value.location.address,
-      // location: {
-      //   lat: form.value.location.lat,
-      //   lng: form.value.location.lng,
-      // },
-    });
-
-    toast.fire({ icon: "success", title: t("user.profileUpdated") });
-    editMode.value = false;
-    emit("updated");
-  } catch (error: any) {
-    toast.fire({
-      icon: "error",
-      title: error?.response?.data?.message || t("user.profileUpdateFailed"),
-    });
-  }
+  //   Swal.fire({ icon: "success", title: t("student.profileUpdated") });
+  //   editMode.value = false;
+  //   emit("updated");
+  // } catch (error: any) {
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: error?.response?.data?.message || t("student.profileUpdateFailed"),
+  //   });
+  // }
 };
 
 const handleCancel = () => {
-  const user = props.user?.user;
-  if (user) {
-    const profile = user.profile || {};
-    form.value.firstName = user.firstName || "";
-    form.value.lastName = user.lastName || "";
-    form.value.email = user.email || "";
-    form.value.phone = user.phone || "";
+  if (props.user && props.user.user) {
+    const profile = props.user.user.profile || {};
+    form.value.firstName = props.user.user.firstName || "";
+    form.value.lastName = props.user.user.lastName || "";
+    form.value.email = props.user.user.email || "";
+    form.value.phone = props.user.user.phone || "";
     form.value.avatar = profile.avatar || "";
     form.value.gender = profile.gender;
+    form.value.is_verified = props.user.user.is_verified;
+    form.value.birth_date = profile.birth_date?.split("T")[0] || "";
+    form.value.join_date = profile.join_date?.split("T")[0] || "";
+    form.value.nationality = profile.nationality || "";
+    form.value.marital_status = profile.marital_status || "";
+    form.value.bio = profile.bio || "";
     form.value.location = {
       lat: profile.latitude || 0,
       lng: profile.longitude || 0,
@@ -294,7 +267,6 @@ const handleCancel = () => {
     };
     locationPickerKey.value++;
   }
-
   editMode.value = false;
   emit("cancel");
 };
