@@ -7,8 +7,8 @@
           <img
             v-if="image"
             :src="image"
-            alt="User Image"
-            class="w-25 h-25 object-cover rounded-full border-4"
+            alt="User Image" 
+            class="object-cover rounded-full border-4 w-24 h-24"
             :class="genderBorderClass"
           />
           <span
@@ -21,8 +21,22 @@
         </div>
       </div>
 
-      <!-- Name -->
-      <p class="text-lg font-semibold mt-3">{{ fullName }}</p>
+      <!-- Name with Gender Icon -->
+      <p class="text-lg font-semibold mt-3 flex items-center gap-1">
+        {{ fullName }}
+        <img
+          v-if="gender === 1"
+          src="@/assets/images/staff/male.svg"
+          alt="Male"
+          class="w-4 h-4"
+        />
+        <img
+          v-else-if="gender === 2"
+          src="@/assets/images/staff/female.svg"
+          alt="Female"
+          class="w-4 h-4"
+        />
+      </p>
 
       <!-- Horizontal Icon Info Row -->
       <div class="flex items-center justify-center mt-4 ltr:space-x-3 rtl:space-x-reverse rtl:space-x-3">

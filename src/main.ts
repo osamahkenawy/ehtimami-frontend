@@ -27,7 +27,8 @@ import {
 } from "@/components"; // Import all components here
 import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
-
+import Multiselect from '@vueform/multiselect'
+import '@vueform/multiselect/themes/default.css'
 const app = createApp(App);
 
 // pinia store
@@ -103,6 +104,7 @@ app.component("EditToggleButtons", EditToggleButtons);  // EditToggleButtons
 app.component("UserProfileCard", UserProfileCard);  // UserProfileCard
 app.component("BaseButton", BaseButton);  // BaseButton
 app.component("Footer", Footer);  // Footer
+app.component("Multiselect", Multiselect);  // Multiselect
 
 
 app.mount("#app");

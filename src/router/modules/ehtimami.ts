@@ -27,6 +27,11 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/ehtimami/classes/components/add.vue'),
   },
   {
+    path: '/ehtimami/classes/edit/:id',
+    name: 'edit-class',
+    component: () => import('@/views/ehtimami/classes/components/add.vue'),
+  },
+  {
     path: '/ehtimami/teachers',
     name: 'teachers',
     component: () => import('@/views/ehtimami/teachers/index.vue'),
@@ -55,6 +60,16 @@ export default <RouteRecordRaw[]>[
     path: '/ehtimami/user/profile/:id',
     name: 'user-profile',
     component: () => import('@/views/ehtimami/users/components/Profile/index.vue'),
+  },
+  {
+    path: '/ehtimami/students',
+    name: 'students',
+    component: () => import('@/views/ehtimami/students/index.vue'),
+  },
+  {
+    path: '/ehtimami/students/profile/:id',
+    name: 'student-profile',
+    component: () => import('@/views/ehtimami/students/components/Profile/index.vue'),
   },
   {
     path: '/ehtimami/mailbox',

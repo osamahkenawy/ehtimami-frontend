@@ -82,6 +82,7 @@ export const useTeacherStore = defineStore("teacher", () => {
     try {
       const response = await getTeachersBySchoolId(schoolId);
       teachers.value = response.data as Teacher[];
+      return response.data
     } catch (error) {
       console.error("Error fetching teachers by school ID:", error);
     }

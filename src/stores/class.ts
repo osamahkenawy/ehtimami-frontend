@@ -10,7 +10,6 @@ import {
 } from "@/services/class";
 import { getAllSchools } from "@/services/school";
 
-// ✅ Define TypeScript Interfaces for Class and School
 interface School {
   id: number;
   school_name: string;
@@ -20,87 +19,101 @@ interface Class {
   code: string;
   name: string;
   gradeLevel: string;
-  capacity: number | null;
-  teacherId: number | null;
+  subject: string;
+  semester: number;
+  academic_year: string;
+  teaching_method: string;
+  capacity: number;
+  max_students: number; 
   roomNumber: string;
-  status: string;
-  schedule: Record<string, string>; // e.g., { Monday: "08:00 - 12:00", Tuesday: "" }
-  startDate: string | null;
-  endDate: string | null;
-  schoolId: number | null;
   class_logo: string | null;
+  status: string;
+  schedule: Record<string, string>;
+  start_time: string;
+  end_time: string;
+  credits: number;
+  startDate: string;
+  endDate: string;
+  schoolId: undefined;
+  teacherId: undefined;
+  studentIds: number[];
 }
 
 export const useClassStore = defineStore("class", () => {
-  // ✅ State
-  const classes = ref<Class[]>([]); // Store all classes with explicit typing
-  const schools = ref<School[]>([]); // Store all schools with explicit typing
+  const classes = ref<Class[]>([]);
+  const schools = ref<School[]>([]);
 
   const generateSchoolId = (): string => {
     return `EHT-CLASS-${Math.floor(1000 + Math.random() * 9000)}`;
   };
 
-  // ✅ Class Data (with correct types)
   const classData = ref<Class>({
     code: generateSchoolId(),
     name: "",
     gradeLevel: "",
+    subject: "",
+    semester: 1,
+    academic_year: "",
+    teaching_method: "in-person",
     capacity: 0,
-    teacherId: null,
+    max_students: 0,
     roomNumber: "",
+    class_logo: "",
     status: "active",
-    schedule: {}, // Initialize empty schedule
-    startDate: null,
-    endDate: null,
-    schoolId: null,
-    class_logo: ""
+    schedule: {},
+    start_time: "",
+    end_time: "",
+    credits: 0,
+    startDate: "",
+    endDate: "",
+    schoolId: undefined,
+    teacherId: undefined,
+    studentIds: [],
   });
 
-  // ✅ Fetch all classes
   const fetchClasses = async () => {
     try {
       const response = await getAllClasses();
-      classes.value = response.data as Class[]; // Ensure proper type assertion
+      classes.value = response.data as Class[];
     } catch (error) {
       console.error("Error fetching classes:", error);
     }
   };
 
-  // ✅ Fetch classes by school ID
   const fetchClassesBySchoolId = async (schoolId: number) => {
     try {
       const response = await getClassesBySchoolId(schoolId);
-      classes.value = response.data as Class[]; // Ensure proper type assertion
+      classes.value = response.data as Class[];
     } catch (error) {
       console.error("Error fetching classes by school ID:", error);
     }
   };
 
-  // ✅ Fetch a single class by ID
   const fetchClassById = async (code: number) => {
     try {
       const response = await getClassById(code);
-      classData.value = response.data as Class; // Ensure correct type assertion
+      classData.value = response.data as Class;
+      console.log('fetchClassById', response)
+      return response.data
     } catch (error) {
       console.error("Error fetching class by ID:", error);
     }
   };
 
-  // ✅ Create a new class (Ensure raw object is sent)
   const createClass = async () => {
     try {
-      const sanitizedData = toRaw(classData.value); // Remove Vue reactivity
+      const sanitizedData = toRaw(classData.value);
       const response = await createNewClass(sanitizedData);
-      return response;
+      return response; 
     } catch (error) {
       console.error("Error creating new class:", error);
       throw error;
     }
   };
 
-  // ✅ Update a class
   const updateClassData = async (code: number, data: Partial<Class>) => {
     try {
+      
       const response = await updateClass(code, data);
       return response;
     } catch (error) {
@@ -109,7 +122,6 @@ export const useClassStore = defineStore("class", () => {
     }
   };
 
-  // ✅ Delete a class
   const deleteClassData = async (code: number) => {
     try {
       const response = await deleteClass(code);
@@ -120,11 +132,10 @@ export const useClassStore = defineStore("class", () => {
     }
   };
 
-  // ✅ Fetch all schools
   const fetchSchools = async () => {
     try {
       const response = await getAllSchools();
-      schools.value = response.data as School[]; // Ensure proper type assertion
+      schools.value = response.data as School[];
     } catch (error) {
       console.error("Error fetching school list:", error);
     }

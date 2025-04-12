@@ -99,7 +99,9 @@ export const deleteTeacherByProfileId = async (profileId: number) => {
  */
 export const getTeachersBySchoolId = async (schoolId: number) => {
   try {
-    const response = await api.get(`${API_URL}/by-school`);
+    const response = await api.post(`${API_URL}/by-school`, {
+      schoolId: schoolId
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching teachers for school:", error);

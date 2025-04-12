@@ -47,6 +47,7 @@
           <template #userId="data">
             <strong class="text-info">#{{ data.value.userId }}</strong>
           </template>
+          
 
           <template #firstName="data">
             <div class="flex items-center gap-2">
@@ -77,7 +78,32 @@
                   :name="data.value?.firstName + ' ' + data.value?.lastName"
                   :email="data.value?.email"
                   :phone="data.value?.phone"
+                   :gender="data.value?.profile?.gender"
                   :address="data.value?.profile?.address"
+                />
+              </div>
+              <div v-else>-</div>
+            </div>
+          </template>
+          <template #student_name="data">
+            <div class="flex items-center gap-2">
+              <div
+                class="font-semibold"
+                v-if="
+                  data &&
+                  data.value &&
+                  data.value.userId &&
+                  data.value.user.id
+                "
+              >
+              
+                <ProfilePax
+                  :image="data.value?.user?.profile?.avatar"
+                  :name="data.value?.user?.firstName + ' ' + data.value?.user.lastName"
+                  :email="data.value?.user?.email"
+                  :phone="data.value?.user.phone"
+                  :address="data.value?.user?.profile?.address"
+                  :gender="data.value?.user?.profile?.gender"
                 />
               </div>
               <div v-else>-</div>
@@ -179,6 +205,17 @@
               </div>
             </div>
           </template>
+          <template #student_nationality="data">
+            <div class="flex items-center gap-2" v-if="data.value.user.profile && data.value.user.profile.nationality">
+              <div class="font-semibold">
+                <span>{{
+                  getFlagForNationality(data.value.user.profile.nationality)
+                }}</span>
+                {{ data.value.user.profile.nationality }}
+              </div>
+            </div>
+          </template>
+          
           <template #class_school_name="data">
             <div class="flex items-center gap-2">
               <div class="font-semibold">
@@ -298,6 +335,42 @@
               :class="`badge-outline-${randomStatusColor()}`"
               >{{ randomStatus() }}</span
             >
+          </template>
+
+
+          <!-- Students -->
+          <template #student_no="data">
+            <strong class="text-info">#{{ data.value.student_no }}</strong>
+          </template>
+          <template #student_school_name="data">
+            <div class="flex items-center gap-2">
+              <div class="font-semibold">
+                <div
+                  class="font-semibold"
+                  v-if="data && data.value && data.value.school.school_name"
+                >
+                  <ProfilePax
+                    :name="data.value.school.school_name"
+                    :image="data?.value?.school.school_logo || ''"
+                    :compLogo="true"
+                    :phone="data?.value?.school.school_phone"
+                    :email="data?.value?.school.school_email"
+                  />
+                </div>
+                <div v-else>-</div>
+              </div>
+            </div>
+          </template>
+          <template #student_is_verified="data">
+            <!-- {{ data.value }} -->
+            <Chip
+              :content="data.value?.user?.is_verified ? 'Verified' : 'Unverified'"
+              :textColor="data.value?.user?.is_verified ? '#00ab55' : '#e7515a'"
+              :borderColor="data.value?.user?.is_verified ? '#00ab55' : '#e7515a'"
+              :headerBackgroundColor="
+                data.value?.user?.is_verified ? '#e6f9f0' : '#ffecec'
+              "
+            />
           </template>
           <template #action="data">
             <slot name="action" :data="toRaw(data.value)"></slot>
