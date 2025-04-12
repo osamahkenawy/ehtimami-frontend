@@ -7,6 +7,33 @@ import {
   deleteStudent,
 } from "@/services/students";
 
+export interface StudentProfile {
+  id: number;
+  userId: number;
+  bio?: string;
+  avatar?: string;
+  profile_banner?: string | null;
+  middleName?: string;
+  nickname?: string;
+  occupation?: string;
+  company?: string | null;
+  website?: string;
+  social_links?: Record<string, string>;
+  preferences?: Record<string, any>;
+  interests?: string[];
+  marital_status?: string;
+  nationality?: string;
+  birth_date?: string;
+  join_date?: string;
+  gender?: number;
+  address?: string;
+  latitude?: number;
+  longitude?: number;
+  emergency_contacts?: { name: string; phone: string }[];
+  profile_visibility?: string;
+  updatedAt?: string;
+}
+
 export interface Student {
   id: number;
   userId: number;
@@ -16,16 +43,10 @@ export interface Student {
   email: string;
   phone?: string;
   is_verified: boolean;
-  nationality?: string;
-  gender?: number;
-  address?: string;
-  bio?: string;
   avatar?: string;
   firstName: string;
   lastName: string;
-  join_date?: string;
-  latitude?: number; // ✅ Add this
-  longitude?: number; // ✅ Add this
+  profile?: StudentProfile;
 
   school?: {
     id: number;

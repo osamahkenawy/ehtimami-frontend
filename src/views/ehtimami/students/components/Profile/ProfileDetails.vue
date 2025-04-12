@@ -258,12 +258,12 @@ const handleSave = async () => {
       phone: form.value.phone,
       email: form.value.email,
       avatar: form.value.avatar,
-      gender: form.value.gender,
-      address: form.value.location.address,
-      location: {
-        lat: form.value.location.lat,
-        lng: form.value.location.lng,
-      },
+      // gender: form.value.gender,
+      // address: form.value.location.address,
+      // location: {
+      //   lat: form.value.location.lat,
+      //   lng: form.value.location.lng,
+      // },
     });
 
     toast.fire({ icon: "success", title: t("user.profileUpdated") });
