@@ -261,8 +261,8 @@ const handleSignup = () => {
   if (form.password !== form.confirmPassword) {
     Swal.fire({
       icon: "error",
-      title: "Passwords do not match",
-      text: "Please make sure both password fields match.",
+      title: t("auth.passwordsDoNotMatch"),
+      text: t("auth.passwordMismatchMessage"),
     });
     return;
   }
@@ -276,7 +276,7 @@ const handleSignup = () => {
   };
 
   console.log("Submitting Signup Payload:", payload);
-  router.push("/");
+//   router.push("/");
 };
 
 const changeLanguage = (item: any) => {
