@@ -285,17 +285,34 @@
                         <Popper :placement="store.rtlClass === 'rtl' ? 'bottom-end' : 'bottom-start'" offsetDistance="8" class="!block">
                             <button type="button" class="relative group block">
                                 <img
+                                    v-if="user && user.profile && user.profile.avatar"
                                     class="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
                                     :src="user?.profile?.avatar" 
                                     alt="PF"
-                                />
+                                />  
+                                <span v-else class="flex justify-center items-center w-9 h-9 text-center rounded-full object-cover text-white bg-info text-lg">
+                                    {{nameChip}}
+                                    <span
+                                class="absolute ltr:right-0 rtl:left-0 bottom-0 w-2 h-2 rounded-full ring-2 ring-white dark:ring-white-dark bg-success"
+                            ></span>
+                                </span>
+
                             </button>
                             <template #content="{ close }">
                                 <ul class="text-dark dark:text-white-dark !py-0 w-[230px] font-semibold dark:text-white-light/90">
                                     <li>
                                         <div class="flex items-center px-4 py-4">
                                             <div class="flex-none">
-                                                <img class="rounded-md w-10 h-10 object-cover" :src="user?.profile?.avatar" alt="" />
+                                                <img
+                                                        v-if="user && user.profile && user.profile.avatar"
+                                                        class="w-10 h-10 rounded-full object-cover saturate-50 group-hover:saturate-100"
+                                                        :src="user?.profile?.avatar" 
+                                                        alt="PF"
+                                                    />  
+                                                    <span v-else class="flex justify-center items-center w-10 h-10 text-center rounded-full object-cover text-white bg-info text-lg">
+                                                        {{nameChip}}
+                                                     
+                                                    </span>
                                             </div>
                                             <div class="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 class="text-base">
@@ -333,11 +350,13 @@
                                         </router-link>
                                     </li>
                                     <li class="border-t border-white-light dark:border-white-light/10">
-                                        <router-link to="/auth/ehtimami-signin" class="text-danger !py-3" @click="close()">
+                                        <button
+                                            @click="handleLogout"
+                                            class="w-full text-left text-danger flex items-center !py-3"
+                                        >
                                             <icon-logout class="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
-
-                                            Sign Out
-                                        </router-link>
+                                            {{ $t('auth.signOut') }}
+                                        </button>
                                     </li>
                                 </ul>
                             </template>
@@ -352,6 +371,8 @@
 <script lang="ts" setup>
     import { ref, onMounted, computed, reactive, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
+    import { useAuthStore } from '@/stores/auth';
+    import { useRouter } from 'vue-router';
 
     import appSetting from '@/app-setting';
 
@@ -387,10 +408,19 @@
         i18n.locale = item.code;
         appSetting.toggleLanguage(item);
     };
+    const nameChip = computed(() => {
+    if (!user?.firstName || !user?.lastName) return '';
+    return `${user.firstName[0] || ''}${user.lastName[0] || ''}`.toUpperCase();
+    });
+    const authStore = useAuthStore();
+    const router = useRouter();
     const currentFlag = computed(() => {
         return `/assets/images/flags/${i18n.locale.toUpperCase()}.svg`;
     });
-
+    const handleLogout = () => {
+    authStore.logout(); // clears token & user
+    router.push('/auth/ehtimami-signin');
+    };
     const notifications = ref([
         {
             id: 1,

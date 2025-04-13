@@ -281,7 +281,8 @@
   "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
   "passwordMismatchMessage": "يرجى التأكد من تطابق كلمتي المرور.",
     "registrationFailed": "خطأ في التسجيل",
-  "unknownError": "حدث خطأ غير معروف. يرجى المحاولة لاحقًا."
+  "unknownError": "حدث خطأ غير معروف. يرجى المحاولة لاحقًا.",
+  "signOut": "تسجيل الخروج"
 },
 "class_form": {
   "updateSuccess": "تم تحديث الصف بنجاح!",
