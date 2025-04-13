@@ -15,6 +15,22 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
+export const registerUser = async (payload: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  roleIds: number[];
+}) => {
+  try {
+    const response = await axios.post(`${API_URL}/register`, payload);
+    return response.data;
+  } catch (error: any) {
+    console.error('Registration failed:', error);
+    throw error?.response?.data || { message: 'Registration error' };
+  }
+};
+
 export const sendForgotPasswordEmail = async (email: string) => {
   const response = await axios.post(`${API_URL}/forgot-password`, { email });
   return response.data;
