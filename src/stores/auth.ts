@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { loginUser } from '@/services/auth';
+import { loginUser , getRoles} from '@/services/auth';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import { useI18n } from 'vue-i18n';
@@ -60,6 +60,19 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
     };
+    const roles = ref<{ id: number; name: string }[]>([]);
+    const fetchRoles = async () => {
+        try {
+          const res = await getRoles();
+          if (res.status === 200 && Array.isArray(res.data)) {
+            roles.value = res.data;
+          }
+          return res.data;
+        } catch (err) {
+          console.error("Error fetching roles:", err);
+          throw err;
+        }
+      };
 
-    return { token, user, login, logout };
+    return { token, user, login, logout , fetchRoles, roles };
 });
