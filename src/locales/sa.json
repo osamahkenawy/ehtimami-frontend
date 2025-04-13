@@ -151,7 +151,7 @@
   "edit-chart": "تعديل المخطط",
   "login_success_title": "تم تسجيل الدخول بنجاح",
   "login_success_message": "لقد قمت بتسجيل الدخول بنجاح!",
-  "login_failed_title": "فشل تسجيل الدخول",
+  "login_failed_title": "خطأ تسجيل الدخول",
   "error_occurred": "حدث خطأ.",
   "try_again": "حاول مرة أخرى",
   "ok": "موافق",
@@ -225,7 +225,7 @@
     },
      "schoolId": "معرف المدرسة",
        "successMessage": "تمت إضافة المدرسة بنجاح!",
-    "errorMessage": "فشل في إضافة المدرسة. يرجى المحاولة مرة أخرى.",
+    "errorMessage": "خطأ في إضافة المدرسة. يرجى المحاولة مرة أخرى.",
      "school_image": "صورة المدرسة",
     "click_to_upload": "اضغط لرفع صورة جديدة للمدرسة"
   },
@@ -279,7 +279,9 @@
   "alreadyHaveAccount": "لديك حساب بالفعل؟",
   "signIn": "تسجيل الدخول",
   "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
-  "passwordMismatchMessage": "يرجى التأكد من تطابق كلمتي المرور."
+  "passwordMismatchMessage": "يرجى التأكد من تطابق كلمتي المرور.",
+    "registrationFailed": "خطأ في التسجيل",
+  "unknownError": "حدث خطأ غير معروف. يرجى المحاولة لاحقًا."
 },
 "class_form": {
   "updateSuccess": "تم تحديث الصف بنجاح!",
@@ -306,7 +308,7 @@
   "start_time": "وقت البدء",
   "end_time": "وقت الانتهاء",
   "successMessage": "تمت إضافة الصف بنجاح!",
-  "errorMessage": "فشل في إضافة الصف. الرجاء المحاولة مرة أخرى.",
+  "errorMessage": "خطأ في إضافة الصف. الرجاء المحاولة مرة أخرى.",
   "class_image": "صورة الصف",
   "click_to_upload": "انقر لتحميل صورة جديدة للصف",
   "teacher": "المعلم",
@@ -334,7 +336,7 @@
     "success_title": "تم التحديث!",
     "success_text": "تم تحديث حالة الفصل إلى {status}.",
     "error_title": "خطأ",
-    "error_text": "فشل تحديث حالة الفصل. يرجى المحاولة مرة أخرى."
+    "error_text": "خطأ تحديث حالة الفصل. يرجى المحاولة مرة أخرى."
   },
   "set_active": "تفعيل",
   "set_inactive": "إلغاء التفعيل",
@@ -346,7 +348,7 @@
     "success_title": "تم الحذف!",
     "success_text": "تم حذف الصف بنجاح.",
     "error_title": "خطأ",
-    "error_text": "فشل في حذف الصف. يرجى المحاولة مرة أخرى."
+    "error_text": "خطأ في حذف الصف. يرجى المحاولة مرة أخرى."
   },
   "teachers": "المعلمين",
   "add_teacher": "إضافة معلم",
@@ -362,7 +364,7 @@
     "success_title": "تم الحذف!",
     "success_text": "تم حذف المعلم بنجاح.",
     "error_title": "خطأ",
-    "error_text": "فشل في حذف المعلم."
+    "error_text": "خطأ في حذف المعلم."
   },
   "teacher_status": {
     "confirm_title": "تغيير حالة المعلم",
@@ -372,7 +374,7 @@
     "success_title": "تم التحديث!",
     "success_text": "تم تحديث حالة المعلم بنجاح.",
     "error_title": "خطأ",
-    "error_text": "فشل في تحديث حالة المعلم."
+    "error_text": "خطأ في تحديث حالة المعلم."
   },
   "add-teacher": "إضافة معلم",
   "teacher_form": {
@@ -424,7 +426,7 @@
     "verify_success_text": "تم تفعيل المستخدم بنجاح.",
     "unverify_success_text": "تم إلغاء تفعيل المستخدم بنجاح.",
     "verify_error_title": "خطأ",
-    "verify_error_text": "فشل في تحديث حالة التحقق.",
+    "verify_error_text": "خطأ في تحديث حالة التحقق.",
     "search_placeholder": "ابحث عن المستخدمين...",
     "no_data": "لا يوجد مستخدمين",
     "page_title": "المستخدمين",
@@ -437,7 +439,7 @@
     "save": "حفظ",
     "cancel": "إلغاء",
     "profileUpdated": "تم تحديث الملف الشخصي بنجاح!",
-    "profileUpdateFailed": "فشل في تحديث الملف الشخصي.",
+    "profileUpdateFailed": "خطأ في تحديث الملف الشخصي.",
     "firstNameRequired": "الاسم الأول مطلوب",
     "lastNameRequired": "اسم العائلة مطلوب",
     "otherInformation": "معلومات إضافية",

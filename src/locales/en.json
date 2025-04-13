@@ -199,7 +199,9 @@
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "SIGN IN",
     "passwordsDoNotMatch": "Passwords do not match",
-    "passwordMismatchMessage": "Please make sure both password fields match."
+    "passwordMismatchMessage": "Please make sure both password fields match.",
+    "registrationFailed": "Registration Failed",
+     "unknownError": "An unknown error occurred. Please try again later."
   },
   "school_form": {
     "schoolInfo": "School Info",
