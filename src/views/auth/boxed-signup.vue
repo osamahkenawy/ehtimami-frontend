@@ -200,11 +200,34 @@
                 </div>
   
                 <button
-                  type="submit"
-                  class="btn btn-dark !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
-                >
-                  {{ t('auth.register') }}
-                </button>
+                    type="submit"
+                    class="btn btn-dark !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)] flex justify-center items-center"
+                    :disabled="isLoading"
+                  >
+                    <svg
+                      v-if="isLoading"
+                      class="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                    <span v-else>{{ t('auth.register') }}</span>
+                  </button>
+
               </form>
   
               <!-- Footer -->
@@ -225,7 +248,7 @@
   </template>
   
 <script lang="ts" setup>
-import { computed, reactive, onMounted } from "vue";
+import { computed, reactive, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import appSetting from "@/app-setting";
 import { useRouter } from "vue-router";
@@ -246,6 +269,8 @@ const router = useRouter();
 const store = useAppStore();
 const authStore = useAuthStore();
 const i18n = reactive(useI18n());
+const isLoading = ref(false);
+
 const { t } = useI18n();
 
 const form = reactive({
@@ -254,10 +279,10 @@ const form = reactive({
   email: "",
   password: "",
   confirmPassword: "",
-  roleIds: [],
+  roleIds: [], 
 });
 
-const handleSignup = () => {
+const handleSignup = async () => {
   if (form.password !== form.confirmPassword) {
     Swal.fire({
       icon: "error",
@@ -266,6 +291,7 @@ const handleSignup = () => {
     });
     return;
   }
+  isLoading.value = true;
 
   const payload = {
     firstName: form.firstName,
@@ -274,6 +300,19 @@ const handleSignup = () => {
     password: form.password,
     roleIds: form.roleIds,
   };
+
+  try {
+    const success = await authStore.register(payload);
+    if (success) {
+      router.push("/auth/ehtimami-signin");
+    }
+  } catch (error) {
+    console.error("Signup error:", error);
+  } finally {
+    isLoading.value = false;
+  }
+
+  
 
   console.log("Submitting Signup Payload:", payload);
 //   router.push("/");

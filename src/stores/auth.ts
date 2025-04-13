@@ -8,6 +8,7 @@ import { useI18n } from "vue-i18n";
 export const useAuthStore = defineStore("auth", () => {
   const token = ref<string | null>(null);
   const user = ref<Record<string, any> | null>(null);
+  const roles = ref<{ id: number; name: string }[]>([]);
   const i18n = useI18n();
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -59,7 +60,6 @@ export const useAuthStore = defineStore("auth", () => {
     localStorage.removeItem("user");
   };
 
-  const roles = ref<{ id: number; name: string }[]>([]);
   const fetchRoles = async () => {
     try {
       const res = await getRoles();
@@ -82,7 +82,6 @@ export const useAuthStore = defineStore("auth", () => {
   }): Promise<boolean> => {
     try {
       const res = await registerUser(payload);
-
       if (res?.status === 201) {
         Swal.fire({
           icon: "success",
@@ -103,5 +102,13 @@ export const useAuthStore = defineStore("auth", () => {
     return false;
   };
 
-  return { token, user, login, logout, fetchRoles, roles, register };
+  return {
+    token,
+    user,
+    roles,
+    login,
+    logout,
+    fetchRoles,
+    register, // ✅ this was missing
+  };
 });
