@@ -29,7 +29,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       console.error("Unauthorized! Redirecting to login...");
       localStorage.removeItem("authToken");
-      window.location.href = "/login";
+      window.location.href = "/auth/ehtimami-signin";
     }
     return Promise.reject(error);
   }
