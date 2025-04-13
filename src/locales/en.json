@@ -201,7 +201,8 @@
     "passwordsDoNotMatch": "Passwords do not match",
     "passwordMismatchMessage": "Please make sure both password fields match.",
     "registrationFailed": "Registration Failed",
-     "unknownError": "An unknown error occurred. Please try again later."
+    "unknownError": "An unknown error occurred. Please try again later.",
+    "signOut": "Sign Out"
   },
   "school_form": {
     "schoolInfo": "School Info",
