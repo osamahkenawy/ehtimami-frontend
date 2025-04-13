@@ -254,10 +254,10 @@ const form = reactive({
   email: "",
   password: "",
   confirmPassword: "",
-  roleIds: [],
+  roleIds: [], 
 });
 
-const handleSignup = () => {
+const handleSignup = async () => {
   if (form.password !== form.confirmPassword) {
     Swal.fire({
       icon: "error",
@@ -266,7 +266,6 @@ const handleSignup = () => {
     });
     return;
   }
-
   const payload = {
     firstName: form.firstName,
     lastName: form.lastName,
@@ -274,6 +273,16 @@ const handleSignup = () => {
     password: form.password,
     roleIds: form.roleIds,
   };
+
+  try {
+    const success = await authStore.register(payload);
+    if (success) {
+      router.push("/auth/ehtimami-signin");
+    }
+  } catch (error) {
+    console.error("Signup error:", error);
+  }
+  
 
   console.log("Submitting Signup Payload:", payload);
 //   router.push("/");
