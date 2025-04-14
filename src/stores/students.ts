@@ -5,12 +5,13 @@ import {
   getStudentById,
   updateStudent,
   deleteStudent,
+  createStudent
 } from "@/services/students";
 
 export interface StudentProfile {
   id: number;
   userId: number;
-  bio?: string;
+  bio?: string; 
   avatar?: string;
   profile_banner?: string | null;
   middleName?: string;
@@ -46,6 +47,15 @@ export interface Student {
   avatar?: string;
   firstName: string;
   lastName: string;
+  admission_date?: string | Date;
+  previous_school?: string;
+  guardian_name?: string;
+  guardian_relation?: string;
+  guardian_contact?: string;
+  is_special_needs?: boolean;
+  learning_style?: string;
+  health_notes?: string;
+  student_category?: string;
   profile?: StudentProfile;
 
   school?: {
@@ -131,6 +141,16 @@ export const useStudentStore = defineStore("students", () => {
     }
   };
 
+  const createNewStudent = async (payload: any) => {
+    try {
+      const res = await createStudent(payload);
+      return res;
+    } catch (err) {
+      console.error("Error creating student:", err);
+      throw err;
+    }
+  };
+
   return {
     students,
     studentData,
@@ -138,5 +158,6 @@ export const useStudentStore = defineStore("students", () => {
     fetchStudentById,
     updateStudentInfo,
     deleteStudentById,
+    createNewStudent,
   };
 });
