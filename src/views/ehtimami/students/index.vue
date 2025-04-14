@@ -1,12 +1,15 @@
 <template>
   <div>
-    <BreadCrumb :items="breadcrumbItems" />
-    <Datatable
+    <div class="flex justify-between items-center mb-4">
+      <BreadCrumb :items="breadcrumbItems" />
+      <AddButton @click="handleAddStudent" :label="t('student.add_new_student')" />
+    </div>
+    <Datatable 
       :headers="headers"
       :data="students"
       :searchPlaceHolder="t('student.search_placeholder')"
       :searchFilter="true"
-      :noDataContent="t('student.no_data')"
+      :noDataContent="t('student.no_data')" 
     >
       <template #action="{ data }">
         <PopperActions
@@ -82,5 +85,9 @@ const handleActionSelected = (student) => async (action: string) => {
       });
     }
   }
+};
+
+const handleAddStudent = (): void => {
+  router.push("/ehtimami/classes/add");
 };
 </script>

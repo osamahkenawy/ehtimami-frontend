@@ -35,3 +35,9 @@ export const deleteStudent = async (studentId: number) => {
   const res = await api.delete(`${API_URL}/${studentId}`);
   return res.data;
 };
+
+export const createStudent = async (data: any) => {
+  const sanitized = JSON.parse(JSON.stringify(toRaw(unref(data))));
+  const res = await api.post(`${API_URL}`, sanitized);
+  return res.data;
+};

@@ -490,6 +490,7 @@
   "students": "Students",
 "student": {
   "student_no": "Student No",
+  "add_new_student": "Add New Student",
   "profile_overview": "Profile Overview",
   "id": "ID",
   "name": "Name",
