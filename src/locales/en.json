@@ -488,6 +488,8 @@
   "password_updated_successfully": "Your password has been updated successfully.",
   "please_fill_all_fields": "Please fill in all fields.",
   "students": "Students",
+  "add-student": "Add Student",
+  "edit-student": "Edit Student",
 "student": {
   "student_no": "Student No",
   "add_new_student": "Add New Student",
@@ -547,7 +549,13 @@
   "schedule": "Class Schedule",
   "enrolledClasses": "Enrolled Classes",
   "noClasses": "No enrolled classes",
-  "general": "General"
+  "general": "General",
+  "password": "Password",
+  "emailRequired": "Email is required",
+  "phoneRequired": "Phone is required",
+  "studentNumber": "Student Number",
+  "showPassword": "Show Password",
+  "hidePassword": "Hide Password"
 }
 
 }

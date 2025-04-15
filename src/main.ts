@@ -29,6 +29,8 @@ import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
 import Multiselect from '@vueform/multiselect'
 import '@vueform/multiselect/themes/default.css'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const app = createApp(App);
 
 // pinia store
