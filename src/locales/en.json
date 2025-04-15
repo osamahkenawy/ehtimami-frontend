@@ -491,6 +491,15 @@
   "add-student": "Add Student",
   "edit-student": "Edit Student",
 "student": {
+  "steps": {
+    "basicInfo": "Basic Info",
+    "academicDetails": "Academic Details",
+    "profileInfo": "Profile Info",
+    "contactInfo": "Contact Info",
+    "parents": "Parents",
+    "requiredDocuments": "Required Documents",
+    "onlinePresence": "Online Presence"
+  },
   "student_no": "Student No",
   "add_new_student": "Add New Student",
   "profile_overview": "Profile Overview",

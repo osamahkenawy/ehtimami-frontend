@@ -500,6 +500,15 @@
   "add-student": "إضافة طالب",
   "edit-student": "تعديل الطالب",
 "student": {
+  "steps": {
+    "basicInfo": "المعلومات الأساسية",
+    "academicDetails": "المعلومات الأكاديمية",
+    "profileInfo": "معلومات الملف الشخصي",
+    "contactInfo": "معلومات الاتصال",
+    "parents": "أولياء الأمور",
+    "requiredDocuments": "المستندات المطلوبة",
+    "onlinePresence": "الحضور عبر الإنترنت"
+  },
   "student_no": "رقم الطالب",
   "add_new_student": "إضافة طالب جديد",
   "profile_overview": "نظرة عامة على الملف الشخصي",

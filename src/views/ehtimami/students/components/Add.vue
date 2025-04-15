@@ -97,9 +97,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Step Content -->
-      <!-- Step Content in Centered Box -->
       <div class="mt-10 flex justify-center">
         <div
           class="w-full max-w-7xl bg-white rounded-lg shadow p-6 border border-gray-200"
@@ -109,25 +106,25 @@
           </div>
           <!-- Uncomment other steps as needed -->
           <!--
-    <div v-else-if="currentStep === 1">
-      <StepAcademicDetails v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 2">
-      <StepProfileInfo v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 3">
-      <StepContactInfo v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 4">
-      <StepParents v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 5">
-      <StepDocuments v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 6">
-      <StepOnlinePresence v-model="formPayload" />
-    </div>
-    -->
+            <div v-else-if="currentStep === 1">
+              <StepAcademicDetails v-model="formPayload" />
+            </div>
+            <div v-else-if="currentStep === 2">
+              <StepProfileInfo v-model="formPayload" />
+            </div>
+            <div v-else-if="currentStep === 3">
+              <StepContactInfo v-model="formPayload" />
+            </div>
+            <div v-else-if="currentStep === 4">
+              <StepParents v-model="formPayload" />
+            </div>
+            <div v-else-if="currentStep === 5">
+              <StepDocuments v-model="formPayload" />
+            </div>
+            <div v-else-if="currentStep === 6">
+              <StepOnlinePresence v-model="formPayload" />
+            </div>
+            -->
         </div>
       </div>
       {{ formPayload }}
@@ -209,13 +206,13 @@ onMounted(() => {
 const currentStep = ref(0);
 
 const steps = computed(() => [
-  { label: "Basic Info", icon: "fas fa-info-circle" },
-  { label: "Academic Details", icon: "fas fa-graduation-cap" },
-  { label: "Profile Info", icon: "fas fa-user" },
-  { label: "Contact Info", icon: "fas fa-address-book" },
-  { label: "Parents", icon: "fas fa-users" },
-  { label: "Required Documents", icon: "fas fa-file-alt" },
-  { label: "Online Presence", icon: "fas fa-globe" },
+{ label: t("student.steps.basicInfo"), icon: "fas fa-info-circle" },
+  { label: t("student.steps.academicDetails"), icon: "fas fa-graduation-cap" },
+  { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
+  { label: t("student.steps.contactInfo"), icon: "fas fa-address-book" },
+  { label: t("student.steps.parents"), icon: "fas fa-users" },
+  { label: t("student.steps.requiredDocuments"), icon: "fas fa-file-alt" },
+  { label: t("student.steps.onlinePresence"), icon: "fas fa-globe" }
 ]);
 
 const cancelForm = () => {
