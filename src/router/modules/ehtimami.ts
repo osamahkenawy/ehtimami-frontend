@@ -61,10 +61,16 @@ export default <RouteRecordRaw[]>[
     name: 'user-profile',
     component: () => import('@/views/ehtimami/users/components/Profile/index.vue'),
   },
+
   {
     path: '/ehtimami/students',
     name: 'students',
     component: () => import('@/views/ehtimami/students/index.vue'),
+  },
+  {
+    path: '/ehtimami/students/add-student',
+    name: 'add-student',
+    component: () => import('@/views/ehtimami/students/components/Add.vue'),
   },
   {
     path: '/ehtimami/students/profile/:id',

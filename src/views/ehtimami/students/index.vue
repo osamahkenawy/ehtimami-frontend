@@ -88,6 +88,7 @@ const handleActionSelected = (student) => async (action: string) => {
 };
 
 const handleAddStudent = (): void => {
-  router.push("/ehtimami/classes/add");
+  router.push("/ehtimami/students/add-student");
 };
 </script>
+ 
