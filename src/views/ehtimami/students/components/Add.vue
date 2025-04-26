@@ -47,11 +47,12 @@
               v-if="index !== 0"
               class="absolute flex items-center"
               :style="{
-  width: 'calc(100% - 2.5rem - 1rem)',
-  top: '50%',
-  [i18n.locale === 'sa' ? 'right' : 'left']: '0',
-  transform: i18n.locale === 'sa' ? 'translateX(50%)' : 'translateX(-50%)'
-}"
+                width: 'calc(100% - 2.5rem - 1rem)',
+                top: '50%',
+                [i18n.locale === 'sa' ? 'right' : 'left']: '0',
+                transform:
+                  i18n.locale === 'sa' ? 'translateX(50%)' : 'translateX(-50%)',
+              }"
             >
               <div class="w-full bg-gray-200 rounded flex-1">
                 <div
@@ -102,7 +103,16 @@
           class="w-full max-w-7xl bg-white rounded-lg shadow p-6 border border-gray-200"
         >
           <div v-if="currentStep === 0">
-            <StepBasicInfo v-if="currentStep === 0" v-model="formPayload" :ref="el => stepRefs[0] = el" />
+            <StepBasicInfo
+              v-model="formPayload"
+              :ref="(el) => (stepRefs[0] = el)"
+            />
+          </div>
+          <div v-else-if="currentStep === 1">
+            <StepAcademicDetails v-model="formPayload" />
+          </div>
+          <div v-else-if="currentStep === 2">
+            <StepProfileInfo v-model="formPayload.profile" />
           </div>
           <!-- Uncomment other steps as needed -->
           <!--
@@ -206,13 +216,13 @@ onMounted(() => {
 const currentStep = ref(0);
 
 const steps = computed(() => [
-{ label: t("student.steps.basicInfo"), icon: "fas fa-info-circle" },
+  { label: t("student.steps.basicInfo"), icon: "fas fa-info-circle" },
   { label: t("student.steps.academicDetails"), icon: "fas fa-graduation-cap" },
   { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
   { label: t("student.steps.contactInfo"), icon: "fas fa-address-book" },
   { label: t("student.steps.parents"), icon: "fas fa-users" },
   { label: t("student.steps.requiredDocuments"), icon: "fas fa-file-alt" },
-  { label: t("student.steps.onlinePresence"), icon: "fas fa-globe" }
+  { label: t("student.steps.onlinePresence"), icon: "fas fa-globe" },
 ]);
 
 const cancelForm = () => {
@@ -227,7 +237,7 @@ const nextStep = () => {
   if (stepComponent?.validate && !stepComponent.validate()) {
     return; // don't move forward if invalid
   }
-  console.log("next")
+  console.log("next");
   currentStep.value++;
 };
 </script>

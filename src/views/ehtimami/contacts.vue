@@ -5,13 +5,6 @@
             <div class="flex sm:flex-row flex-col sm:items-center sm:gap-3 gap-4 w-full sm:w-auto">
                 <div class="flex gap-3">
                     <div>
-                        <button type="button" class="btn btn-primary" @click="editUser()">
-                            <icon-user-plus class="ltr:mr-2 rtl:ml-2" />
-
-                            Add Contact
-                        </button>
-                    </div>
-                    <div>
                         <button
                             type="button"
                             class="btn btn-outline-primary p-2"

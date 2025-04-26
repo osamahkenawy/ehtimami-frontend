@@ -29,6 +29,8 @@ import VueTelInput from 'vue3-tel-input'
 import 'vue3-tel-input/dist/vue3-tel-input.css'
 import Multiselect from '@vueform/multiselect'
 import '@vueform/multiselect/themes/default.css'
+import VueMultiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const app = createApp(App);
@@ -107,6 +109,7 @@ app.component("UserProfileCard", UserProfileCard);  // UserProfileCard
 app.component("BaseButton", BaseButton);  // BaseButton
 app.component("Footer", Footer);  // Footer
 app.component("Multiselect", Multiselect);  // Multiselect
+app.component("VueMultiselect", VueMultiselect);  // VueMultiselect
 
 
 app.mount("#app");
