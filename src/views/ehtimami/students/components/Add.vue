@@ -193,7 +193,7 @@ const formPayload = ref({
     nationality: "",
     birth_date: "",
     join_date: "",
-    gender: null,
+    gender: 1,
     address: "",
     latitude: null,
     longitude: null,
