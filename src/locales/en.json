@@ -501,6 +501,7 @@
     "onlinePresence": "Online Presence"
   },
   "religion": "Religion",
+  "emergency_contact_warning": "Please fill out name and phone before adding another contact",
   "birth_date": "Birth Date",
   "join_date": "Join Date",
   "profile_visibility": "Profile Visibility",

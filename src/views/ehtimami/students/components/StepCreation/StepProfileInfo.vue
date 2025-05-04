@@ -30,6 +30,7 @@
         <label class="form-label">{{ $t("student.firstName") }}</label>
         <input v-model="modelValue.firstName" type="text" class="form-input" />
       </div>
+
       <div>
         <label class="form-label">{{ $t("student.lastName") }}</label>
         <input v-model="modelValue.lastName" type="text" class="form-input" />
@@ -51,6 +52,7 @@
           class="flex-1"
         />
       </div>
+
       <!-- Nationality & Religion -->
       <div>
         <label class="form-label">{{ $t("student.nationality") }}</label>
@@ -65,6 +67,7 @@
           </option>
         </select>
       </div>
+
       <div>
         <label class="form-label">{{ $t("student.religion") }}</label>
         <input
@@ -81,6 +84,7 @@
           v-model="modelValue.profile.birth_date"
           type="date"
           class="form-input"
+          :max="today"
         />
       </div>
       <div>
@@ -237,8 +241,12 @@ import { nationalities } from "@/fakeData/nationalityList";
 
 const { t } = useI18n();
 const toast = useToast();
+const today = new Date().toISOString().split("T")[0];
 
 const props = defineProps<{ modelValue: any }>();
+if (!props.modelValue.profile.join_date) {
+  props.modelValue.profile.join_date = today;
+}
 const emit = defineEmits(["update:modelValue"]);
 
 const interestsInput = ref("");
@@ -268,10 +276,8 @@ const updatePhone = (index: number, value: string | Event) => {
 const addEmergencyContact = () => {
   const last = props.modelValue.profile.emergency_contacts.slice(-1)[0];
   if (!last.name || !last.phone) {
-    toast(
-      "Please fill out name and phone before adding another contact",
-      "warning"
-    );
+    toast(t("student.emergency_contact_warning"), "warning");
+
     return;
   }
   props.modelValue.profile.emergency_contacts.push({ name: "", phone: "" });
