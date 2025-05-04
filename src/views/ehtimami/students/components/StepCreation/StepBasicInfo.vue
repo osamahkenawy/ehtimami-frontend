@@ -130,7 +130,7 @@ const validate = () => {
   return valid;
 };
 
-defineExpose({ validate });
+// defineExpose({ validate });
 
 const showPassword = ref(false);
 const togglePassword = () => {

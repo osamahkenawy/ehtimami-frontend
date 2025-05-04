@@ -42,16 +42,16 @@
       <div class="flex">
         <div v-for="(step, index) in steps" :key="index" class="w-1/4">
           <div class="relative mb-2">
-            <!-- progress line -->
             <div
               v-if="index !== 0"
               class="absolute flex items-center"
               :style="{
-  width: 'calc(100% - 2.5rem - 1rem)',
-  top: '50%',
-  [i18n.locale === 'sa' ? 'right' : 'left']: '0',
-  transform: i18n.locale === 'sa' ? 'translateX(50%)' : 'translateX(-50%)'
-}"
+                width: 'calc(100% - 2.5rem - 1rem)',
+                top: '50%',
+                [i18n.locale === 'sa' ? 'right' : 'left']: '0',
+                transform:
+                  i18n.locale === 'sa' ? 'translateX(50%)' : 'translateX(-50%)',
+              }"
             >
               <div class="w-full bg-gray-200 rounded flex-1">
                 <div
@@ -68,7 +68,6 @@
               </div>
             </div>
 
-            <!-- circle -->
             <div
               :class="[
                 'w-10 h-10 mx-auto rounded-full flex items-center justify-center',
@@ -97,40 +96,30 @@
           </div>
         </div>
       </div>
-
-      <!-- Step Content -->
-      <!-- Step Content in Centered Box -->
       <div class="mt-10 flex justify-center">
         <div
           class="w-full max-w-7xl bg-white rounded-lg shadow p-6 border border-gray-200"
         >
           <div v-if="currentStep === 0">
-            <StepBasicInfo v-if="currentStep === 0" v-model="formPayload" :ref="el => stepRefs[0] = el" />
+            <StepProfileInfo v-model="formPayload" :ref="(el) => (stepRefs[0] = el)" />
           </div>
-          <!-- Uncomment other steps as needed -->
-          <!--
-    <div v-else-if="currentStep === 1">
-      <StepAcademicDetails v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 2">
-      <StepProfileInfo v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 3">
-      <StepContactInfo v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 4">
-      <StepParents v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 5">
-      <StepDocuments v-model="formPayload" />
-    </div>
-    <div v-else-if="currentStep === 6">
-      <StepOnlinePresence v-model="formPayload" />
-    </div>
-    -->
+          <div v-else-if="currentStep === 1">
+            <StepAcademicDetails v-model="formPayload" />
+          </div>
+          <!-- <div v-else-if="currentStep === 2">
+            <StepContactInfo v-model="formPayload" />
+          </div> -->
+          <!-- <div v-else-if="currentStep === 3">
+            <StepParents v-model="formPayload" />
+          </div>
+          <div v-else-if="currentStep === 4">
+            <StepDocuments v-model="formPayload" />
+          </div>
+          <div v-else-if="currentStep === 5">
+            <StepOnlinePresence v-model="formPayload" />
+          </div> -->
         </div>
       </div>
-      {{ formPayload }}
     </div>
   </div>
 </template>
@@ -141,13 +130,13 @@ import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
 
-import StepBasicInfo from "./StepCreation/StepBasicInfo.vue";
 import StepAcademicDetails from "./StepCreation/StepAcademicDetails.vue";
 import StepProfileInfo from "./StepCreation/StepProfileInfo.vue";
-import StepContactInfo from "./StepCreation/StepContactInfo.vue";
-import StepParents from "./StepCreation/StepParents.vue";
-import StepDocuments from "./StepCreation/StepDocuments.vue";
-import StepOnlinePresence from "./StepCreation/StepOnlinePresence.vue";
+// import StepContactInfo from "./StepCreation/StepContactInfo.vue";
+// import StepParents from "./StepCreation/StepParents.vue";
+// import StepDocuments from "./StepCreation/StepDocuments.vue";
+// import StepOnlinePresence from "./StepCreation/StepOnlinePresence.vue";
+
 const i18n = reactive(useI18n());
 const { t } = useI18n();
 const route = useRoute();
@@ -161,7 +150,7 @@ const formPayload = ref({
   email: "",
   phone: "",
   password: "",
-  student_no: "",
+  student_no: "STD-00001",
   grade: "",
   section: "",
   schoolId: null,
@@ -186,12 +175,13 @@ const formPayload = ref({
     nationality: "",
     birth_date: "",
     join_date: "",
-    gender: null,
+    gender: 1,
     address: "",
     latitude: null,
     longitude: null,
     emergency_contacts: [{ name: "", phone: "" }],
     profile_visibility: "school-only",
+    user_language: "en",
   },
 });
 
@@ -202,20 +192,21 @@ const breadcrumbItems = computed(() => [
     label: isEditMode.value ? t("edit-student") : t("add-student"),
   },
 ]);
+
 onMounted(() => {
-  // optional: initialize to match steps length
   stepRefs.value = new Array(steps.value.length).fill(null);
 });
+
 const currentStep = ref(0);
 
 const steps = computed(() => [
-  { label: "Basic Info", icon: "fas fa-info-circle" },
-  { label: "Academic Details", icon: "fas fa-graduation-cap" },
-  { label: "Profile Info", icon: "fas fa-user" },
-  { label: "Contact Info", icon: "fas fa-address-book" },
-  { label: "Parents", icon: "fas fa-users" },
-  { label: "Required Documents", icon: "fas fa-file-alt" },
-  { label: "Online Presence", icon: "fas fa-globe" },
+  { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
+  { label: t("student.steps.academicDetails"), icon: "fas fa-graduation-cap" },
+  // { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
+  // { label: t("student.steps.contactInfo"), icon: "fas fa-address-book" },
+  { label: t("student.steps.parents"), icon: "fas fa-users" },
+  { label: t("student.steps.requiredDocuments"), icon: "fas fa-file-alt" },
+  { label: t("student.steps.onlinePresence"), icon: "fas fa-globe" },
 ]);
 
 const cancelForm = () => {
@@ -225,12 +216,12 @@ const cancelForm = () => {
 const confirmMethod = () => {
   alert("Form submitted!");
 };
+
 const nextStep = () => {
   const stepComponent = stepRefs.value[currentStep.value];
   if (stepComponent?.validate && !stepComponent.validate()) {
-    return; // don't move forward if invalid
+    return;
   }
-  console.log("next")
   currentStep.value++;
 };
 </script>
