@@ -509,8 +509,19 @@
     "requiredDocuments": "المستندات المطلوبة",
     "onlinePresence": "الحضور عبر الإنترنت"
   },
+  "enterStudentAddress": "أدخل عنوان الطالب",
     "religion": "الديانة",
     "select_religion": "اختر الديانة",
+    "select_relation": "اختر العلاقة",
+    "relations": {
+      "father": "الأب",
+      "mother": "الأم",
+      "brother": "الأخ",
+      "sister": "الأخت",
+      "friend": "صديق",
+      "spouse": "الزوج/الزوجة",
+      "other": "أخرى"
+    },
     "emergency_contact_warning": "يرجى تعبئة الاسم ورقم الهاتف قبل إضافة جهة اتصال أخرى",
     "birth_date": "تاريخ الميلاد",
     "join_date": "تاريخ الانضمام",

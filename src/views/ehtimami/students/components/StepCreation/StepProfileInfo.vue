@@ -3,7 +3,6 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Avatar and Gender -->
       <div class="col-span-1">
-        <label class="form-label">{{ $t("student.avatar") }}</label>
         <div class="flex items-center gap-4">
           <div class="w-28 h-28 relative overflow-hidden rounded-full">
             <FileUploader
@@ -22,18 +21,45 @@
       <!-- First Name & Last Name -->
       <div>
         <label class="form-label">{{ $t("student.firstName") }}</label>
-        <input v-model="modelValue.firstName" type="text" class="form-input" />
+        <input
+          v-model="modelValue.firstName"
+          type="text"
+          class="form-input"
+          @blur="validateFirstName(modelValue.firstName)"
+          :class="{ 'border-red-500': firstNameError }"
+        />
+        <p v-if="firstNameError" class="text-red-500 text-sm mt-1">
+          {{ firstNameError }}
+        </p>
       </div>
 
       <div>
         <label class="form-label">{{ $t("student.lastName") }}</label>
-        <input v-model="modelValue.lastName" type="text" class="form-input" />
+        <input
+          v-model="modelValue.lastName"
+          type="text"
+          class="form-input"
+          @blur="validateLastName(modelValue.lastName)"
+          :class="{ 'border-red-500': lastNameError }"
+        />
+        <p v-if="lastNameError" class="text-red-500 text-sm mt-1">
+          {{ lastNameError }}
+        </p>
       </div>
 
       <!-- Email & Phone -->
       <div>
         <label class="form-label">{{ $t("student.email") }}</label>
-        <input v-model="modelValue.email" type="email" class="form-input" />
+        <input
+          v-model="modelValue.email"
+          type="email"
+          class="form-input"
+          :class="{ 'border-red-500': emailError }"
+          @blur="validateEmail(modelValue.email)"
+        />
+        <p v-if="emailError" class="text-red-500 text-sm mt-1">
+          {{ emailError }}
+        </p>
       </div>
       <div>
         <label class="form-label">{{ $t("student.phone") }}</label>
@@ -65,15 +91,15 @@
       <div>
         <label class="form-label">{{ $t("student.religion") }}</label>
         <select v-model="modelValue.profile.religion" class="form-select">
-      <option value="" disabled>{{ $t("student.select_religion") }}</option>
-      <option
-        v-for="religion in religionList"
-        :key="religion.name"
-        :value="religion.name"
-      > 
-        {{ religion.symbol }} {{ religion.name }}
-      </option>
-    </select>
+          <option value="" disabled>{{ $t("student.select_religion") }}</option>
+          <option
+            v-for="religion in religionList"
+            :key="religion.name"
+            :value="religion.name"
+          >
+            {{ religion.symbol }} {{ religion.name }}
+          </option>
+        </select>
       </div>
 
       <!-- Dates -->
@@ -98,11 +124,7 @@
       <!-- Address -->
       <div class="col-span-2">
         <label class="form-label">{{ $t("student.address") }}</label>
-        <input
-          v-model="modelValue.profile.address"
-          class="form-input w-full"
-          placeholder="Address"
-        />
+        <LocationSearchInput :placeholder="$t('student.enterStudentAddress')" @update:location="handleLocationSelected" />
       </div>
 
       <!-- Visibility & Language -->
@@ -126,7 +148,7 @@
       </div>
 
       <!-- Nickname & Middle Name -->
-      <div>
+      <!-- <div>
         <label class="form-label">{{ $t("student.nickname") }}</label>
         <input
           v-model="modelValue.profile.nickname"
@@ -142,7 +164,7 @@
           class="form-input"
           placeholder="Middle Name"
         />
-      </div>
+      </div> -->
 
       <!-- Occupation & Website -->
       <div>
@@ -201,6 +223,16 @@
             class="form-input flex-1"
             placeholder="Name"
           />
+          <select v-model="contact.relation" class="form-select flex-1">
+      <option value="" disabled>{{ $t("student.select_relation") }}</option>
+      <option value="father">{{ $t("student.relations.father") }}</option>
+      <option value="mother">{{ $t("student.relations.mother") }}</option>
+      <option value="brother">{{ $t("student.relations.brother") }}</option>
+      <option value="sister">{{ $t("student.relations.sister") }}</option>
+      <option value="friend">{{ $t("student.relations.friend") }}</option>
+      <option value="spouse">{{ $t("student.relations.spouse") }}</option>
+      <option value="other">{{ $t("student.relations.other") }}</option>
+    </select>
           <vue-tel-input
             class="flex-1"
             mode="international"
@@ -238,8 +270,18 @@ import { useI18n } from "vue-i18n";
 import { useToast } from "@/composables/user-toast";
 import { nationalities } from "@/fakeData/nationalityList";
 import { religionList } from "@/fakeData/religionList";
+import { useValidation } from "@/composables/use-validation";
+import LocationSearchInput from "@/components/ui/LocationSearchInput.vue";
+const {
+  emailError,
+  validateEmail,
+  firstNameError,
+  lastNameError,
+  validateFirstName,
+  validateLastName,
+} = useValidation();
 
-const { t} = useI18n();
+const { t } = useI18n();
 const toast = useToast();
 const today = new Date().toISOString().split("T")[0];
 
@@ -254,7 +296,12 @@ const interestsInput = ref("");
 const handleImageUpload = (data: { s3: string; base64: string }) => {
   props.modelValue.profile.avatar = data.s3;
 };
-
+const handleLocationSelected = ({ address, latitude, longitude }) => {
+  // console.log("handleLocationSelected", address , latitude , longitude)
+  props.modelValue.profile.address = address;
+  props.modelValue.profile.latitude = latitude;
+  props.modelValue.profile.longitude = longitude;
+};
 const addInterest = () => {
   const value = interestsInput.value.trim();
   if (value && !props.modelValue.profile.interests.includes(value)) {
@@ -280,7 +327,7 @@ const addEmergencyContact = () => {
 
     return;
   }
-  props.modelValue.profile.emergency_contacts.push({ name: "", phone: "" });
+  props.modelValue.profile.emergency_contacts.push({ name: "",relation: "", phone: "" });
 };
 
 const removeEmergencyContact = (index: number) => {
