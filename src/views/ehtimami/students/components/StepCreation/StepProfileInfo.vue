@@ -19,12 +19,6 @@
         </div>
       </div>
       <div></div>
-      <!-- Student No -->
-      <!-- <div class="col-span-2">
-        <label class="form-label">{{ $t("student.student_no") }}</label>
-        <input v-model="modelValue.student_no" type="text" class="form-input" disabled />
-      </div> -->
-
       <!-- First Name & Last Name -->
       <div>
         <label class="form-label">{{ $t("student.firstName") }}</label>
@@ -70,11 +64,16 @@
 
       <div>
         <label class="form-label">{{ $t("student.religion") }}</label>
-        <input
-          v-model="modelValue.profile.religion"
-          class="form-input"
-          placeholder="Religion"
-        />
+        <select v-model="modelValue.profile.religion" class="form-select">
+      <option value="" disabled>{{ $t("student.select_religion") }}</option>
+      <option
+        v-for="religion in religionList"
+        :key="religion.name"
+        :value="religion.name"
+      > 
+        {{ religion.symbol }} {{ religion.name }}
+      </option>
+    </select>
       </div>
 
       <!-- Dates -->
@@ -238,8 +237,9 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useToast } from "@/composables/user-toast";
 import { nationalities } from "@/fakeData/nationalityList";
+import { religionList } from "@/fakeData/religionList";
 
-const { t } = useI18n();
+const { t} = useI18n();
 const toast = useToast();
 const today = new Date().toISOString().split("T")[0];
 

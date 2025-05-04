@@ -497,10 +497,11 @@
     "profileInfo": "Profile Info",
     "contactInfo": "Contact Info",
     "parents": "Parents",
-    "requiredDocuments": "Required Documents",
+    "requiredDocuments": "Required Documents", 
     "onlinePresence": "Online Presence"
   },
   "religion": "Religion",
+  "select_religion": "Select Religion",
   "emergency_contact_warning": "Please fill out name and phone before adding another contact",
   "birth_date": "Birth Date",
   "join_date": "Join Date",

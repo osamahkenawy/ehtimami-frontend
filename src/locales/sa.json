@@ -510,6 +510,7 @@
     "onlinePresence": "الحضور عبر الإنترنت"
   },
     "religion": "الديانة",
+    "select_religion": "اختر الديانة",
     "emergency_contact_warning": "يرجى تعبئة الاسم ورقم الهاتف قبل إضافة جهة اتصال أخرى",
     "birth_date": "تاريخ الميلاد",
     "join_date": "تاريخ الانضمام",
