@@ -23,6 +23,7 @@ import {
   EditToggleButtons,
   UserProfileCard,
   BaseButton,
+  LocationSearchInput,
   Footer
 } from "@/components"; // Import all components here
 import VueTelInput from 'vue3-tel-input'
@@ -110,6 +111,6 @@ app.component("BaseButton", BaseButton);  // BaseButton
 app.component("Footer", Footer);  // Footer
 app.component("Multiselect", Multiselect);  // Multiselect
 app.component("VueMultiselect", VueMultiselect);  // VueMultiselect
-
+app.component("LocationSearchInput", LocationSearchInput);  // LocationSearchInput
 
 app.mount("#app");

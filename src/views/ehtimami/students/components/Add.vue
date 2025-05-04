@@ -106,6 +106,9 @@
           <div v-else-if="currentStep === 1">
             <StepAcademicDetails v-model="formPayload" />
           </div>
+          <div v-else-if="currentStep === 2">
+            <StepParents v-model="formPayload" />
+          </div>
           <!-- <div v-else-if="currentStep === 2">
             <StepContactInfo v-model="formPayload" />
           </div> -->
@@ -132,8 +135,9 @@ import IconHome from "@/components/icon/icon-home.vue";
 
 import StepAcademicDetails from "./StepCreation/StepAcademicDetails.vue";
 import StepProfileInfo from "./StepCreation/StepProfileInfo.vue";
+import StepParents from "./StepCreation/StepParents.vue";
+
 // import StepContactInfo from "./StepCreation/StepContactInfo.vue";
-// import StepParents from "./StepCreation/StepParents.vue";
 // import StepDocuments from "./StepCreation/StepDocuments.vue";
 // import StepOnlinePresence from "./StepCreation/StepOnlinePresence.vue";
 

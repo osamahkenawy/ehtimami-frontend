@@ -3,7 +3,7 @@
 // Re-exporting all components to be globally available
 export { default as LocationMap } from './maps/LocationMap.vue';
 export { default as Livemap } from './maps/livemap/Livemap.vue';
-export { default as UAEPlate } from './plates/UAEPlate.vue';
+export { default as UAEPlate } from '@/components/plates/UaePlate.vue';
 export { default as BreadCrumb } from './BreadCrumb.vue';
 export { default as Datatable } from './tables/Datatable.vue';
 export { default as ShadowCard } from './HeaderCards/ShadowCard.vue';
@@ -24,3 +24,4 @@ export { default as EditToggleButtons } from './ui/EditToggleButtons.vue'; // Ed
 export { default as UserProfileCard } from './ui/UserProfileCard.vue'; // UserProfileCard
 export { default as BaseButton } from './ui/BaseButton.vue'; // BaseButton
 export { default as Footer } from './layout/Footer.vue'; // Footer
+export { default as LocationSearchInput } from './ui/LocationSearchInput.vue'; // Location Search Input
