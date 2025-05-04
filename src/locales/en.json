@@ -504,6 +504,7 @@
   "religion": "Religion",
   "select_religion": "Select Religion",
   "emergency_contact_warning": "Please fill out name and phone before adding another contact",
+  "emergency_contact_warning_step": "Please provide at least one emergency contact with a name and phone number",
   "select_relation": "Select Relation",
   "relations": {
     "father": "Father",

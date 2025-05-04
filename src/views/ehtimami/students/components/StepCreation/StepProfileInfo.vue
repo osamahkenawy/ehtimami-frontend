@@ -124,7 +124,10 @@
       <!-- Address -->
       <div class="col-span-2">
         <label class="form-label">{{ $t("student.address") }}</label>
-        <LocationSearchInput :placeholder="$t('student.enterStudentAddress')" @update:location="handleLocationSelected" />
+        <LocationSearchInput
+          :placeholder="$t('student.enterStudentAddress')"
+          @update:location="handleLocationSelected"
+        />
       </div>
 
       <!-- Visibility & Language -->
@@ -224,15 +227,19 @@
             placeholder="Name"
           />
           <select v-model="contact.relation" class="form-select flex-1">
-      <option value="" disabled>{{ $t("student.select_relation") }}</option>
-      <option value="father">{{ $t("student.relations.father") }}</option>
-      <option value="mother">{{ $t("student.relations.mother") }}</option>
-      <option value="brother">{{ $t("student.relations.brother") }}</option>
-      <option value="sister">{{ $t("student.relations.sister") }}</option>
-      <option value="friend">{{ $t("student.relations.friend") }}</option>
-      <option value="spouse">{{ $t("student.relations.spouse") }}</option>
-      <option value="other">{{ $t("student.relations.other") }}</option>
-    </select>
+            <option value="" disabled>
+              {{ $t("student.select_relation") }}
+            </option>
+            <option value="father">{{ $t("student.relations.father") }}</option>
+            <option value="mother">{{ $t("student.relations.mother") }}</option>
+            <option value="brother">
+              {{ $t("student.relations.brother") }}
+            </option>
+            <option value="sister">{{ $t("student.relations.sister") }}</option>
+            <option value="friend">{{ $t("student.relations.friend") }}</option>
+            <option value="spouse">{{ $t("student.relations.spouse") }}</option>
+            <option value="other">{{ $t("student.relations.other") }}</option>
+          </select>
           <vue-tel-input
             class="flex-1"
             mode="international"
@@ -272,6 +279,8 @@ import { nationalities } from "@/fakeData/nationalityList";
 import { religionList } from "@/fakeData/religionList";
 import { useValidation } from "@/composables/use-validation";
 import LocationSearchInput from "@/components/ui/LocationSearchInput.vue";
+import { defineExpose } from "vue";
+
 const {
   emailError,
   validateEmail,
@@ -327,12 +336,53 @@ const addEmergencyContact = () => {
 
     return;
   }
-  props.modelValue.profile.emergency_contacts.push({ name: "",relation: "", phone: "" });
+  props.modelValue.profile.emergency_contacts.push({
+    name: "",
+    relation: "",
+    phone: "",
+  });
 };
 
 const removeEmergencyContact = (index: number) => {
   props.modelValue.profile.emergency_contacts.splice(index, 1);
 };
+
+const validate = (): boolean => {
+  let valid = true;
+
+  // Validate first name
+  if (!props.modelValue.firstName || props.modelValue.firstName.trim() === "") {
+    validateFirstName(props.modelValue.firstName); // will set firstNameError
+    valid = false;
+  }
+
+  // Validate last name
+  if (!props.modelValue.lastName || props.modelValue.lastName.trim() === "") {
+    validateLastName(props.modelValue.lastName); // will set lastNameError
+    valid = false;
+  }
+
+  // Validate email
+  if (!props.modelValue.email || props.modelValue.email.trim() === "") {
+    validateEmail(props.modelValue.email); // will set emailError
+    valid = false;
+  }
+
+  // Validate emergency contacts
+  const contacts = props.modelValue.profile.emergency_contacts;
+  const hasValidContact = contacts?.some(
+    (c: any) => c.name?.trim() && c.phone?.trim()
+  );
+
+  if (!hasValidContact) { 
+    toast(t("student.emergency_contact_warning_step"), "warning");
+    valid = false;
+  }
+
+  return valid;
+};
+
+defineExpose({ validate });
 </script>
 
 <style scoped>

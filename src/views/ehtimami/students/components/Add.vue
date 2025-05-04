@@ -31,7 +31,7 @@
               v-else
               @click="confirmMethod"
               class="btn btn-success ltr:ml-2 rtl:mr-2"
-            >
+            > 
               Done
             </button>
           </div>
