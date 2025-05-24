@@ -612,6 +612,63 @@
 "recentRegistrations": "Recent Registrations",
 "lastSixMonths": "Last 6 months",
 "classUtilization": "Class Capacity Utilization",
-"basedOnEnrollment": "Based on current enrollment"
+"basedOnEnrollment": "Based on current enrollment",
+"dashboard_cards": {
+  "users": {
+    "title": "Ehtimami Users",
+    "badge": "+ {count} users last month",
+    "description": "Total registered users in Ehtimami"
+  },
+  "students": {
+    "title": "Ehtimami Students",
+    "badge": "+ {count} special needs",
+    "description": "Total registered students in Ehtimami"
+  },
+  "schools": {
+    "title": "Schools",
+    "badge": "{count} full classes",
+    "description": "Total registered schools in Ehtimami"
+  },
+  "teachers": {
+    "title": "Teachers",
+    "badge": "{count} without classes",
+    "description": "Total registered teachers in Ehtimami"
+  },
+  "parents": {
+    "title": "Parents",
+    "badge": "{count} students without parents",
+    "description": "Total registered parents in Ehtimami"
+  }
+},
+"dashboard_charts": {
+  "studentsPerSchools": {
+    "title": "Students Per Schools",
+    "subtitle": "Updated recently"
+  },
+  "teachersPerSchools": {
+    "title": "Teachers Per Schools",
+    "subtitle": "Updated recently"
+  },
+  "recentRegistrations": {
+    "title": "Recent Registrations",
+    "subtitle": "Last 6 months",
+    "xaxis": "Month",
+    "yaxis": "Users Count",
+    "csv": {
+      "month": "Month",
+      "count": "Users Registered"
+    }
+  },
+  "classUtilization": {
+    "title": "Class Capacity Utilization",
+    "subtitle": "Based on current enrollment",
+    "xaxis": "Class Name",
+    "yaxis": "Utilization (%)",
+    "csv": {
+      "className": "Class Name",
+      "utilization": "Utilization (%)"
+    }
+  }
+}
 
 }

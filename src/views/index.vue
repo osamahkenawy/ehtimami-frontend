@@ -8,10 +8,10 @@
         class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 mb-6 text-white"
       >
         <!-- Users Visit -->
-        <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
+        <div class="panel bg-cyan-700">
           <div class="flex justify-between">
             <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">
-              Ehtimami Users
+              {{ t('dashboard_cards.users.title')  }}
             </div>
           </div>
           <div class="flex items-center mt-5">
@@ -19,20 +19,21 @@
               {{ cards.totalUsers ?? 0 }}
             </div>
             <div class="badge bg-white/30">
-              + {{ cards.usersLastMonth ?? 0 }} users last month
+              {{ t('dashboard_cards.users.badge', { count: cards.usersLastMonth ?? 0 }) }}
+
             </div>
           </div>
           <div class="flex items-center font-semibold mt-5">
             <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-            Total registered users in Ehtimami
+            {{ t('dashboard_cards.users.description')  }}
           </div>
         </div>
 
         <!-- Students -->
-        <div class="panel bg-gradient-to-r from-violet-500 to-violet-400">
-          <div class="flex justify-between">
+        <div class="panel bg-violet-700">
+                  <div class="flex justify-between">
             <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">
-              Ehtimami Students
+              {{ t('dashboard_cards.students.title')  }}
             </div>
           </div>
           <div class="flex items-center mt-5">
@@ -40,69 +41,70 @@
               {{ cards.totalStudents }}
             </div>
             <div class="badge bg-white/30">
-              + {{ cards.specialNeedsStudents }} special needs
+              {{ t('dashboard_cards.students.badge', { count: cards.specialNeedsStudents ?? 0 }) }}
             </div>
           </div>
           <div class="flex items-center font-semibold mt-5">
             <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-            Total registered students in Ehtimami
+            {{ t('dashboard_cards.students.description')  }}
           </div>
         </div>
 
         <!-- Schools -->
-        <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
+        <div class="panel bg-blue-700">
           <div class="flex justify-between">
-            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">Schools</div>
+            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold"> {{ t('dashboard_cards.schools.title')  }}</div>
           </div>
           <div class="flex items-center mt-5">
             <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">
               {{ cards.totalSchools }}
             </div>
             <div class="badge bg-white/30">
-              {{ cards.fullClasses }} full classes
+              {{ t('dashboard_cards.schools.badge', { count: cards.fullClasses ?? 0 }) }}
             </div>
           </div>
           <div class="flex items-center font-semibold mt-5">
             <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-            Total registered schools in Ehtimami
+            {{ t('dashboard_cards.schools.description')  }}
           </div>
         </div>
 
         <!-- Teachers -->
-        <div class="panel bg-gradient-to-r from-indigo-500 to-indigo-400">
+        <div class="panel bg-indigo-700">
           <div class="flex justify-between">
-            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">Teachers</div>
+            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">{{ t('dashboard_cards.teachers.title')  }}</div>
           </div>
           <div class="flex items-center mt-5">
             <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">
               {{ cards.totalTeachers }}
             </div>
             <div class="badge bg-white/30">
-              {{ cards.teachersWithoutClasses }} without classes
+              {{ t('dashboard_cards.teachers.badge', { count: cards.teachersWithoutClasses ?? 0 }) }}
+
             </div>
           </div>
           <div class="flex items-center font-semibold mt-5">
             <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-            Total registered teachers in Ehtimami
+            {{ t('dashboard_cards.teachers.description')  }}
           </div>
         </div>
 
         <!-- Parents -->
-        <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
+        <div class="panel bg-pink-700">
           <div class="flex justify-between">
-            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold">Parents</div>
+            <div class="ltr:mr-1 rtl:ml-1 text-md font-semibold"> {{ t('dashboard_cards.parents.title')  }}</div>
           </div>
           <div class="flex items-center mt-5">
             <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">
               {{ cards.totalParents }}
             </div>
             <div class="badge bg-white/30">
-              {{ cards.studentsWithoutParents }} students without parents
+              {{ t('dashboard_cards.parents.badge', { count: cards.studentsWithoutParents ?? 0 }) }}
             </div>
           </div>
           <div class="flex items-center font-semibold mt-5">
             <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-            Total registered parents in Ehtimami
+            {{ t('dashboard_cards.parents.description')  }}
           </div>
         </div>
       </div>
@@ -113,8 +115,8 @@
           <div class="panel overflow-hidden">
             <div class="flex items-center justify-between">
               <div>
-                <div class="text-lg font-bold">Students Per Schools</div>
-                <div class="text-success">Updated recently</div>
+                <div class="text-lg font-bold"> {{ t('dashboard_charts.studentsPerSchools.title')  }}</div>
+                <div class="text-success">{{ t('dashboard_charts.studentsPerSchools.subtitle')  }}</div>
               </div>
             </div>
             <div class="relative mt-10">
@@ -143,8 +145,8 @@
         <div class="panel overflow-hidden">
             <div class="flex items-center justify-between">
               <div>
-                <div class="text-lg font-bold">Teachers Per Schools</div>
-                <div class="text-success">Updated recently</div>
+                <div class="text-lg font-bold"> {{ t('dashboard_charts.teachersPerSchools.title')  }}</div>
+                <div class="text-success">{{ t('dashboard_charts.teachersPerSchools.subtitle')  }}</div>
               </div>
             </div>
             <div class="relative mt-10">
@@ -171,8 +173,8 @@
           <div class="panel overflow-hidden">
             <div class="flex items-center justify-between mb-4">
               <div>
-                <div class="text-lg font-bold">Recent Registrations</div>
-                <div class="text-success">Last 6 months</div>
+                <div class="text-lg font-bold"> {{ t('dashboard_charts.recentRegistrations.title')  }}</div>
+                <div class="text-success">{{ t('dashboard_charts.recentRegistrations.subtitle')  }}</div>
               </div>
             </div>
             <apexchart
@@ -187,8 +189,8 @@
         <div class="panel overflow-hidden">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <div class="text-lg font-bold">Class Capacity Utilization</div>
-              <div class="text-warning">Based on current enrollment</div>
+              <div class="text-lg font-bold"> {{ t('dashboard_charts.classUtilization.title')  }}</div>
+              <div class="text-success">{{ t('dashboard_charts.classUtilization.subtitle')  }}</div>
             </div>
           </div>
           <apexchart
@@ -288,8 +290,8 @@ const utilizationChart = computed(() => ({
     csv: {
       filename: "class_utilization",
       columnDelimiter: ",",
-      headerCategory: "Class Name",
-      headerValue: "Utilization (%)",
+      headerCategory: t("dashboard_charts.classUtilization.csv.className"),
+      headerValue: t("dashboard_charts.classUtilization.csv.utilization"),
       dateFormatter(timestamp) {
         return new Date(timestamp).toLocaleDateString();
       }
@@ -304,6 +306,7 @@ const utilizationChart = computed(() => ({
   xaxis: {
     categories: dashboardStore.classUtilization.map(c => c.className),
     labels: {
+      text: t("dashboard_charts.classUtilization.xaxis"),
       rotate: -45, // tilt for better readability
       style: {
         fontSize: "12px"
@@ -317,7 +320,7 @@ const utilizationChart = computed(() => ({
   },
   yaxis: {
     title: {
-      text: "Utilization (%)",
+      text: t("dashboard_charts.classUtilization.yaxis"),
       style: {
         fontSize: "12px",
         fontWeight: 600
@@ -369,159 +372,47 @@ const recentLineChart = computed(() => ({
     height: 300,
     type: "line",
     toolbar: {
-  show: true,
-  export: {
-    csv: {
-      filename: "recent_registrations",
-      columnDelimiter: ",",
-      headerCategory: "Month",
-      headerValue: "Users Registered",
-      dateFormatter(timestamp) {
-        return new Date(timestamp).toLocaleDateString();
+      show: true,
+      export: {
+        csv: {
+          filename: "recent_registrations",
+          columnDelimiter: ",",
+          headerCategory: t("dashboard_charts.recentRegistrations.csv.month"),
+          headerValue: t("dashboard_charts.recentRegistrations.csv.count"),
+          dateFormatter(timestamp) {
+            return new Date(timestamp).toLocaleDateString()
+          }
+        }
       }
-    }
-  }
-},
+    },
     zoom: { enabled: false },
   },
   xaxis: {
     categories: dashboardStore.recentRegistrations.map(item => item.month),
-  },
-  stroke: {
-    curve: "smooth",
-  },
-  yaxis: {
     title: {
-      text: "Users Count",
+      text: t("dashboard_charts.recentRegistrations.xaxis"), // optional x-axis label
       style: {
         fontSize: "12px",
         fontWeight: 600
       }
     }
   },
+  yaxis: {
+    title: {
+      text: t("dashboard_charts.recentRegistrations.yaxis"),
+      style: {
+        fontSize: "12px",
+        fontWeight: 600
+      }
+    }
+  },
+  stroke: {
+    curve: "smooth",
+  },
   colors: ["#00ab55"],
   dataLabels: { enabled: false },
   legend: { position: "bottom" },
-}));
-
-// bitcoin
-const bitcoin = computed(() => {
-  return {
-    chart: {
-      height: 45,
-      type: "line",
-      sparkline: {
-        enabled: true,
-      },
-    },
-    stroke: {
-      width: 2,
-    },
-    markers: {
-      size: 0,
-    },
-    colors: ["#00ab55"],
-    grid: {
-      padding: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-      },
-    },
-    tooltip: {
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: (val: any) => {
-            return "";
-          },
-        },
-      },
-    },
-    responsive: [
-      {
-        breakPoint: 576,
-        options: {
-          chart: {
-            height: 95,
-          },
-          grid: {
-            padding: {
-              top: 45,
-              bottom: 0,
-              left: 0,
-            },
-          },
-        },
-      },
-    ],
-  };
-});
-
-const bitcoinSeries = ref([
-  {
-    data: [21, 9, 36, 12, 44, 25, 59, 41, 25, 66],
-  },
-]);
-
-// ethereum
-const ethereum = computed(() => {
-  return {
-    chart: {
-      height: 45,
-      type: "line",
-      sparkline: {
-        enabled: true,
-      },
-    },
-    stroke: {
-      width: 2,
-    },
-    markers: {
-      size: 0,
-    },
-    colors: ["#e7515a"],
-    grid: {
-      padding: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-      },
-    },
-    tooltip: {
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: (val: any) => {
-            return "";
-          },
-        },
-      },
-    },
-    responsive: [
-      {
-        breakPoint: 576,
-        options: {
-          chart: {
-            height: 95,
-          },
-          grid: {
-            padding: {
-              top: 45,
-              bottom: 0,
-              left: 0,
-            },
-          },
-        },
-      },
-    ],
-  };
-});
-
+}))
 
 
 </script>
