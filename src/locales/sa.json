@@ -523,6 +523,7 @@
       "other": "أخرى"
     },
     "emergency_contact_warning": "يرجى تعبئة الاسم ورقم الهاتف قبل إضافة جهة اتصال أخرى",
+    "emergency_contact_warning_step": "يرجى إدخال جهة اتصال واحدة على الأقل للطوارئ تحتوي على الاسم ورقم الهاتف",
     "birth_date": "تاريخ الميلاد",
     "join_date": "تاريخ الانضمام",
     "profile_visibility": "خصوصية الملف الشخصي",
@@ -604,6 +605,77 @@
   "studentNumber": "رقم الطالب",
   "showPassword": "عرض كلمة المرور",
   "hidePassword": "إخفاء كلمة المرور"
+},
+
+"usersLastMonth": "+ {count} مستخدم الشهر الماضي",
+"specialNeeds": "+ {count} من ذوي الاحتياجات الخاصة",
+"fullClasses": "{count} صف مكتمل",
+"teachersWithoutClasses": "{count} بدون صفوف",
+"parents": "أولياء الأمور",
+"studentsWithoutParents": "{count} طلاب بدون أولياء أمور",
+"studentsPerSchool": "الطلاب حسب المدرسة",
+"teachersPerSchool": "المعلمين حسب المدرسة",
+"updatedRecently": "تم التحديث مؤخرًا",
+"recentRegistrations": "التسجيلات الحديثة",
+"lastSixMonths": "آخر 6 أشهر",
+"classUtilization": "نسبة استخدام الصفوف",
+"basedOnEnrollment": "استنادًا إلى التسجيل الحالي",
+"dashboard_cards": {
+  "users": {
+    "title": "مستخدمو اهتمامي",
+    "badge": "+ {count} مستخدمين الشهر الماضي",
+    "description": "إجمالي المستخدمين المسجلين في اهتمامي"
+  },
+  "students": {
+    "title": "طلاب اهتمامي",
+    "badge": "+ {count} احتياجات خاصة",
+    "description": "إجمالي الطلاب المسجلين في اهتمامي"
+  },
+  "schools": {
+    "title": "المدارس",
+    "badge": "{count} فصول مكتملة",
+    "description": "إجمالي المدارس المسجلة في اهتمامي"
+  },
+  "teachers": {
+    "title": "المعلمون",
+    "badge": "{count} بدون فصول",
+    "description": "إجمالي المعلمين المسجلين في اهتمامي"
+  },
+  "parents": {
+    "title": "أولياء الأمور",
+    "badge": "{count} طلاب بدون أولياء أمور",
+    "description": "إجمالي أولياء الأمور المسجلين في اهتمامي"
+  }
+},
+"dashboard_charts": {
+  "studentsPerSchools": {
+    "title": "الطلاب لكل مدرسة",
+    "subtitle": "تم التحديث مؤخرًا"
+  },
+  "teachersPerSchools": {
+    "title": "المعلمون لكل مدرسة",
+    "subtitle": "تم التحديث مؤخرًا"
+  },
+  "recentRegistrations": {
+    "title": "التسجيلات الحديثة",
+    "subtitle": "آخر 6 أشهر",
+    "xaxis": "الشهر",
+    "yaxis": "عدد المستخدمين",
+    "csv": {
+      "month": "الشهر",
+      "count": "المستخدمين المسجلين"
+    }
+  },
+  "classUtilization": {
+    "title": "استخدام سعة الفصول",
+    "subtitle": "استنادًا إلى التسجيل الحالي",
+    "xaxis": "اسم الصف",
+    "yaxis": "نسبة الاستخدام",
+    "csv": {
+      "className": "اسم الصف",
+      "utilization": "نسبة الاستخدام"
+    }
+  }
 }
 
 }
