@@ -605,6 +605,20 @@
   "studentNumber": "رقم الطالب",
   "showPassword": "عرض كلمة المرور",
   "hidePassword": "إخفاء كلمة المرور"
-}
+},
+
+"usersLastMonth": "+ {count} مستخدم الشهر الماضي",
+"specialNeeds": "+ {count} من ذوي الاحتياجات الخاصة",
+"fullClasses": "{count} صف مكتمل",
+"teachersWithoutClasses": "{count} بدون صفوف",
+"parents": "أولياء الأمور",
+"studentsWithoutParents": "{count} طلاب بدون أولياء أمور",
+"studentsPerSchool": "الطلاب حسب المدرسة",
+"teachersPerSchool": "المعلمين حسب المدرسة",
+"updatedRecently": "تم التحديث مؤخرًا",
+"recentRegistrations": "التسجيلات الحديثة",
+"lastSixMonths": "آخر 6 أشهر",
+"classUtilization": "نسبة استخدام الصفوف",
+"basedOnEnrollment": "استنادًا إلى التسجيل الحالي"
 
 }

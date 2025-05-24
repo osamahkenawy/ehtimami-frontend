@@ -596,6 +596,22 @@
   "studentNumber": "Student Number",
   "showPassword": "Show Password",
   "hidePassword": "Hide Password"
-}
+},
+
+"usersLastMonth": "+ {count} users last month",
+
+"specialNeeds": "+ {count} special needs",
+
+"fullClasses": "{count} full classes",
+"teachersWithoutClasses": "{count} without classes",
+"parents": "Parents",
+"studentsWithoutParents": "{count} students without parents",
+"studentsPerSchool": "Students Per Schools",
+"teachersPerSchool": "Teachers Per Schools",
+"updatedRecently": "Updated recently",
+"recentRegistrations": "Recent Registrations",
+"lastSixMonths": "Last 6 months",
+"classUtilization": "Class Capacity Utilization",
+"basedOnEnrollment": "Based on current enrollment"
 
 }
