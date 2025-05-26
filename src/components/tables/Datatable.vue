@@ -47,8 +47,13 @@
           <template #userId="data">
             <strong class="text-info">#{{ data.value.userId }}</strong>
           </template>
+          <template #roleId="data">
+            <strong class="text-info">#{{ data.value.id }}</strong>
+          </template>
+          <template #role_users_count="data">
+            <strong class="text-info">{{ data.value._count?.users || 0 }}</strong>
+          </template>
           
-
           <template #firstName="data">
             <div class="flex items-center gap-2">
               <img
@@ -184,6 +189,15 @@
               <div v-else>-</div>
             </div>
           </template>
+          <template #role_is_verified="data">
+            <!-- {{ data.value }} -->
+            <Chip
+              :content="'Verified'"
+              :textColor="'#00ab55'"
+              :borderColor="'#00ab55'"
+              :headerBackgroundColor="'#e6f9f0'"
+            />
+          </template>
           <template #is_verified="data">
             <!-- {{ data.value }} -->
             <Chip
@@ -223,6 +237,14 @@
               </div>
             </div>
           </template>
+          <template #role_name="data">
+            <div class="flex items-center gap-2">
+              <div class="font-semibold">
+                {{ beautifyRoleName(data.value.name) }}
+              </div>
+            </div>
+          </template>
+
 
           <template #school_address="{ value }">
             <div class="flex items-center gap-2">
@@ -533,7 +555,12 @@ const getFlagForNationality = (nationality: string): string => {
   );
   return match?.flag || "🌐"; // fallback globe emoji
 };
-
+const beautifyRoleName = (role: string): string => {
+  return role
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
 const chart_options = computed(() => {
   let option = {
     chart: { sparkline: { enabled: true } },

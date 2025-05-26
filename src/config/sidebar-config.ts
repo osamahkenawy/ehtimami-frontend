@@ -66,6 +66,12 @@ export const sidebarItems: SidebarItem[] = [
         route: '/ehtimami/user',
         roles: ['admin']
     },
+    { 
+        label: 'roles.page_title',
+        icon: 'hmeglqrg',
+        route: '/ehtimami/roles',
+        roles: ['admin']
+    },
     {
         label: 'students',
         icon: 'oawexsca',

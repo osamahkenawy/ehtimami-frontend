@@ -469,6 +469,33 @@
 
 
   },
+  "roles": {
+  "page_title": "الأدوار",
+  "search_placeholder": "ابحث عن دور...",
+  "id": "المعرف",
+  "name": "اسم الدور",
+  "users_count": "عدد المستخدمين",
+  "is_verified": "تم التحقق",
+  "verified": "تم التحقق",
+  "unverified": "لم يتم التحقق",
+  "action": "الإجراء",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "verify": "تحقق",
+  "unverify": "إلغاء التحقق",
+  "verify_confirm_title": "هل أنت متأكد؟",
+  "verify_confirm_text": "أنت على وشك التحقق من هذا الدور.",
+  "unverify_confirm_text": "أنت على وشك إلغاء التحقق من هذا الدور.",
+  "confirm_button": "نعم، تأكيد",
+  "cancel_button": "إلغاء",
+  "verify_success_title": "تم بنجاح",
+  "verify_success_text": "تم التحقق من الدور بنجاح.",
+  "unverify_success_text": "تم إلغاء التحقق من الدور بنجاح.",
+  "verify_error_title": "خطأ",
+  "verify_error_text": "فشل في تحديث حالة التحقق من الدور.",
+  "no_data": "لا توجد أدوار متاحة"
+},
+"add_role": "إضافة دور جديد",
   "verification": {
     "verify": "تحقق",
     "unverify": "إلغاء التحقق"
