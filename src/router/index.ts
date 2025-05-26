@@ -15,6 +15,7 @@ import dragndropRoutes from '@/router/modules/dragndrop';
 import tablesRoutes from '@/router/modules/tables';
 import formsRoutes from '@/router/modules/forms';
 import usersRoutes from '@/router/modules/users';
+import rolesRoutes from '@/router/modules/roles';
 import pagesRoutes from '@/router/modules/pages';
 import authRoutes from '@/router/modules/auth';
 
@@ -27,11 +28,12 @@ const routes: RouteRecordRaw[] = [
   ...elementsRoutes,
   ...chartsRoutes,
   ...widgetsRoutes,
-  ...iconsRoutes,
+  ...iconsRoutes, 
   ...dragndropRoutes,
   ...tablesRoutes,
   ...formsRoutes,
   ...usersRoutes,
+  ...rolesRoutes,
   ...pagesRoutes,
   ...authRoutes,
 ];

@@ -460,7 +460,33 @@
    "additionalDetails": "Additional Details",
    "view_details": "View Details"
 },
-
+"roles": {
+  "page_title": "Roles",
+  "search_placeholder": "Search Role...",
+  "id": "ID",
+  "name": "Role Name",
+  "users_count": "Users Count",
+  "is_verified": "Verified",
+  "verified": "Verified",
+  "unverified": "Unverified",
+  "action": "Action",
+  "edit": "Edit",
+  "delete": "Delete",
+  "verify": "Verify",
+  "unverify": "Unverify",
+  "verify_confirm_title": "Are you sure?",
+  "verify_confirm_text": "You are about to verify this role.",
+  "unverify_confirm_text": "You are about to unverify this role.",
+  "confirm_button": "Yes, confirm",
+  "cancel_button": "Cancel",
+  "verify_success_title": "Success",
+  "verify_success_text": "Role has been verified successfully.",
+  "unverify_success_text": "Role has been unverified successfully.",
+  "verify_error_title": "Error",
+  "verify_error_text": "Failed to update role verification status.",
+  "no_data": "No roles available"
+},
+"add_role": "Add New Role",
   "verification": {
     "verify": "verify",
     "unverify": "unverify"
