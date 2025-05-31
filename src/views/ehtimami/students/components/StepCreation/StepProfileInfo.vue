@@ -25,6 +25,7 @@
           v-model="modelValue.firstName"
           type="text"
           class="form-input"
+          :placeholder="$t('student.placeholders.firstName')"
           @blur="validateFirstName(modelValue.firstName)"
           :class="{ 'border-red-500': firstNameError }"
         />
@@ -32,13 +33,13 @@
           {{ firstNameError }}
         </p>
       </div>
-
       <div>
         <label class="form-label">{{ $t("student.lastName") }}</label>
         <input
           v-model="modelValue.lastName"
           type="text"
           class="form-input"
+          :placeholder="$t('student.placeholders.lastName')"
           @blur="validateLastName(modelValue.lastName)"
           :class="{ 'border-red-500': lastNameError }"
         />
@@ -47,13 +48,14 @@
         </p>
       </div>
 
-      <!-- Email & Phone -->
+      <!-- Email -->
       <div>
         <label class="form-label">{{ $t("student.email") }}</label>
         <input
           v-model="modelValue.email"
           type="email"
           class="form-input"
+          :placeholder="$t('student.placeholders.email')"
           :class="{ 'border-red-500': emailError }"
           @blur="validateEmail(modelValue.email)"
         />
@@ -149,69 +151,23 @@
           <option value="ar">Arabic</option>
         </select>
       </div>
-
-      <!-- Nickname & Middle Name -->
-      <!-- <div>
-        <label class="form-label">{{ $t("student.nickname") }}</label>
-        <input
-          v-model="modelValue.profile.nickname"
-          class="form-input"
-          placeholder="Nickname"
-        />
-      </div>
-
+      <!-- Health Notes -->
       <div>
-        <label class="form-label">{{ $t("student.middleName") }}</label>
-        <input
-          v-model="modelValue.profile.middleName"
+        <label class="form-label">{{ $t("student.health_notes") }}</label>
+        <textarea
+          v-model="modelValue.health_notes"
           class="form-input"
-          placeholder="Middle Name"
-        />
-      </div> -->
-
-      <!-- Occupation & Website -->
-      <div>
-        <label class="form-label">{{ $t("student.occupation") }}</label>
-        <input
-          v-model="modelValue.profile.occupation"
-          class="form-input"
-          placeholder="Occupation"
-        />
+          :placeholder="$t('student.placeholders.healthNotes')"
+          rows="3"
+        ></textarea>
       </div>
-
-      <div>
-        <label class="form-label">{{ $t("student.website") }}</label>
+      <div class="flex items-center gap-2">
+        <label class="form-label">{{ $t("student.is_special_needs") }}</label>
         <input
-          v-model="modelValue.profile.website"
-          class="form-input"
-          placeholder="Website"
+          type="checkbox"
+          v-model="modelValue.is_special_needs"
+          class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
         />
-      </div>
-      <!-- Interests -->
-      <div class="col-span-2">
-        <label class="form-label">{{ $t("student.interests") }}</label>
-        <input
-          v-model="interestsInput"
-          class="form-input"
-          placeholder="Press Enter to add interest"
-          @keyup.enter.prevent="addInterest"
-        />
-        <div class="mt-2 flex flex-wrap gap-2">
-          <span
-            v-for="(interest, index) in modelValue.profile.interests"
-            :key="index"
-            class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm flex items-center gap-2"
-          >
-            {{ interest }}
-            <button
-              type="button"
-              @click="removeInterest(index)"
-              class="text-red-600"
-            >
-              ×
-            </button>
-          </span>
-        </div>
       </div>
       <!-- Emergency Contacts -->
       <div class="col-span-2">
@@ -224,7 +180,7 @@
           <input
             v-model="contact.name"
             class="form-input flex-1"
-            placeholder="Name"
+            :placeholder="$t('student.placeholders.contactName')"
           />
           <select v-model="contact.relation" class="form-select flex-1">
             <option value="" disabled>
@@ -241,13 +197,14 @@
             <option value="other">{{ $t("student.relations.other") }}</option>
           </select>
           <vue-tel-input
-            class="flex-1"
+            v-model="contact.phone"
             mode="international"
             :default-country="'AE'"
             :preferred-countries="['AE', 'SA', 'EG']"
             :auto-format="true"
-            v-model="contact.phone"
             @input="(value) => updatePhone(index, value)"
+            :inputOptions="{ placeholder: $t('student.placeholders.phone') }"
+            class="flex-1"
           />
           <button
             v-if="modelValue.profile.emergency_contacts.length > 1"
@@ -374,12 +331,13 @@ const validate = (): boolean => {
     (c: any) => c.name?.trim() && c.phone?.trim()
   );
 
-  if (!hasValidContact) { 
+  if (!hasValidContact) {
     toast(t("student.emergency_contact_warning_step"), "warning");
     valid = false;
   }
 
   return valid;
+  // return true
 };
 
 defineExpose({ validate });

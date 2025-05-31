@@ -1,6 +1,12 @@
 {
   "site_name": "Ehtimami School Management System",
   "footer_text": "Ehtimami All Rights Reserved.",
+  "common": {
+  "cancel": "Cancel",
+  "previous": "Previous",
+  "next": "Next",
+  "done": "Done"
+},
   "back_to_login": "Back to Login",
   "account_not_verified": "Your account is not verified yet. Please contact support.",
   "invalid_credentials": "Invalid email or password.",
@@ -517,15 +523,52 @@
   "add-student": "Add Student",
   "edit-student": "Edit Student",
 "student": {
+  "profileUpdateFailedAlt": "Failed to create the student profile. Please try again!",
+
   "steps": {
     "basicInfo": "Basic Info",
     "academicDetails": "Academic Details",
     "profileInfo": "Profile Info",
     "contactInfo": "Contact Info",
     "parents": "Parents",
-    "requiredDocuments": "Required Documents", 
+    "requiredDocuments": "Required Documents",
     "onlinePresence": "Online Presence"
   },
+  "learning_style": "Learning Style",
+  "learning_styles": {
+    "visual": "Visual",
+    "auditory": "Auditory",
+    "kinesthetic": "Kinesthetic"
+  },
+  "student_category": "Student Category",
+  "categories": {
+    "regular": "Regular",
+    "special": "Special"
+  },
+    "parentInfo": "Parent Information",
+  "parentContactWarning": "Please fill in first name and phone before adding another parent",
+  "parentContactWarningStep": "Please add at least one parent contact with first name and phone",
+  "placeholders": {
+    "firstName": "Enter first name",
+    "lastName": "Enter last name",
+    "email": "Enter email address",
+    "healthNotes": "Any health notes or medical conditions",
+    "contactName": "Emergency contact name",
+    "phone": "Enter phone number",
+    "chooseSchool": "Choose school",
+    "class": "Select classes",
+    "grade": "Enter grade",
+    "section": "Enter section",
+    "parentFirstName": "Parent first name",
+    "parentLastName": "Parent last name",
+    "parentEmail": "Parent email",
+    "parentPhone": "Parent phone number"
+    
+  },
+  "gradeRequired": "Grade is required",
+  "sectionRequired": "Section is required",
+  "schoolRequired": "School is required",
+  "classRequired": "At least one class is required",
   "enterStudentAddress": "Enter Student Address",
   "religion": "Religion",
   "select_religion": "Select Religion",
@@ -621,7 +664,9 @@
   "phoneRequired": "Phone is required",
   "studentNumber": "Student Number",
   "showPassword": "Show Password",
-  "hidePassword": "Hide Password"
+  "hidePassword": "Hide Password",
+  "health_notes": "Health Notes",
+  "is_special_needs": "Is Special Needs"
 },
 
 "usersLastMonth": "+ {count} users last month",
