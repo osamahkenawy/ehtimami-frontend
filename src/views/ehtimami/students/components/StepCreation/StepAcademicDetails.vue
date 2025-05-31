@@ -1,19 +1,24 @@
 <template>
   <form autocomplete="off">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
       <!-- School Dropdown -->
       <div>
         <label class="form-label">{{ $t("student.school") }}</label>
         <select v-model="modelValue.schoolId" class="form-input">
           <option :value="null" disabled>
-            {{ $t("student.chooseSchool") }}
+            {{ $t("student.placeholders.chooseSchool") }}
           </option>
-          <option v-for="school in schools" :key="school.id" :value="school.id">
+          <option
+            v-for="school in schools"
+            :key="school.id"
+            :value="school.id"
+          >
             {{ school.school_name }}
           </option>
         </select>
         <p v-if="errors.schoolId" class="text-red-600 text-sm mt-1">
-          {{ $t("student.schoolRequired") }}
+          {{ errors.schoolId }}
         </p>
       </div>
 
@@ -28,30 +33,60 @@
           :clear-on-select="false"
           track-by="id"
           label="name"
-          placeholder="Select classes"
+          :placeholder="$t('student.placeholders.class')"
         />
         <p v-if="errors.classIds" class="text-red-600 text-sm mt-1">
-          {{ $t("student.classRequired") }}
+          {{ errors.classIds }}
         </p>
       </div>
+
 
       <!-- Grade Input -->
       <div>
         <label class="form-label">{{ $t("student.grade") }}</label>
-        <input v-model="modelValue.grade" type="text" class="form-input" />
+        <input
+          v-model="modelValue.grade"
+          type="text"
+          class="form-input"
+          :placeholder="$t('student.placeholders.grade')"
+        />
         <p v-if="errors.grade" class="text-red-600 text-sm mt-1">
-          {{ $t("student.gradeRequired") }}
+          {{ errors.grade }}
         </p>
       </div>
 
-      <!-- Section Input -->
+    <!-- Section Input -->
       <div>
         <label class="form-label">{{ $t("student.section") }}</label>
-        <input v-model="modelValue.section" type="text" class="form-input" />
+        <input
+          v-model="modelValue.section"
+          type="text"
+          class="form-input"
+          :placeholder="$t('student.placeholders.section')"
+        />
         <p v-if="errors.section" class="text-red-600 text-sm mt-1">
-          {{ $t("student.sectionRequired") }}
+          {{ errors.section }}
         </p>
       </div>
+
+      <!-- Student Category -->
+          <div>
+            <label class="form-label">{{ $t("student.student_category") }}</label>
+            <select v-model="modelValue.student_category" class="form-input">
+              <option value="Regular">{{ $t("student.categories.regular") }}</option>
+              <option value="Special">{{ $t("student.categories.special") }}</option>
+            </select>
+          </div>
+
+          <!-- Learning Style -->
+          <div>
+            <label class="form-label">{{ $t("student.learning_style") }}</label>
+            <select v-model="modelValue.learning_style" class="form-input">
+              <option value="Visual">{{ $t("student.learning_styles.visual") }}</option>
+              <option value="Auditory">{{ $t("student.learning_styles.auditory") }}</option>
+              <option value="Kinesthetic">{{ $t("student.learning_styles.kinesthetic") }}</option>
+            </select>
+          </div>
     </div>
   </form>
 </template>
@@ -78,7 +113,9 @@ const props = defineProps<{
     grade: string;
     section: string;
     schoolId: string | number | null;
-    classIds: number[];
+    classIds: string[]; // ✅ now string[] if you're using codes
+    student_category: string;
+    learning_style: string;
   };
 }>();
 
@@ -116,11 +153,10 @@ watch(
 
     await classStore.fetchClassesBySchoolId(Number(schoolId));
 
-    const validIds = activeClassOptions.value.map(c => c.id);
-    const filtered = (props.modelValue.classIds || []).filter(id =>
-      validIds.includes(id)
-    );
-
+    const validCodes = activeClassOptions.value.map(c => c.code);
+    const filtered = (props.modelValue.classIds || []).filter(code =>
+  validCodes.includes(code)
+);
     emit("update:modelValue", {
       ...props.modelValue,
       classIds: filtered,

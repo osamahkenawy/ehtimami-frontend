@@ -9,14 +9,14 @@
             @click="cancelForm"
             class="btn btn-outline-danger"
           >
-            Cancel
+            {{ $t("common.cancel") }}
           </button>
           <button
             v-else
             @click="currentStep--"
             class="btn btn-outline-secondary"
           >
-            Previous
+            {{ $t("common.previous") }}
           </button>
 
           <div class="ml-auto">
@@ -25,22 +25,23 @@
               @click="nextStep"
               class="btn btn-primary"
             >
-              Next
+              {{ $t("common.next") }}
             </button>
             <button
               v-else
               @click="confirmMethod"
               class="btn btn-success ltr:ml-2 rtl:mr-2"
-            > 
-              Done
+            >
+              {{ $t("common.done") }}
             </button>
           </div>
         </div>
+
       </div>
     </div>
     <div class="panel">
       <div class="flex">
-        <div v-for="(step, index) in steps" :key="index" class="w-1/4">
+        <div v-for="(step, index) in steps" :key="index" class="w-1/3">
           <div class="relative mb-2">
             <div
               v-if="index !== 0"
@@ -54,8 +55,9 @@
               }"
             >
               <div class="w-full bg-gray-200 rounded flex-1">
+                <!-- 🔵 Updated: bg-primary instead of bg-green-300 -->
                 <div
-                  class="bg-green-300 py-1 rounded transition-all duration-300"
+                  class="bg-primary py-1 rounded transition-all duration-300"
                   :style="{
                     width:
                       currentStep > index
@@ -72,9 +74,9 @@
               :class="[
                 'w-10 h-10 mx-auto rounded-full flex items-center justify-center',
                 currentStep > index
-                  ? 'bg-green-700 text-white'
+                  ? 'bg-primary text-white'
                   : currentStep === index
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-white border-2 border-gray-200 text-gray-600',
               ]"
             >
@@ -83,17 +85,17 @@
           </div>
 
           <div
-            :class="[
-              'text-xs text-center md:text-base',
-              currentStep === index
-                ? 'text-blue-600'
-                : currentStep > index
-                ? 'text-green-700'
-                : 'text-gray-500',
-            ]"
-          >
-            {{ step.label }}
-          </div>
+  :class="[
+    'text-xs text-center md:text-base',
+    currentStep === index
+      ? 'text-primary'
+      : currentStep > index
+      ? 'text-primary'
+      : 'text-gray-500',
+  ]"
+>
+  {{ step.label }}
+</div>
         </div>
       </div>
       <div class="mt-10 flex justify-center">
@@ -109,18 +111,7 @@
           <div v-else-if="currentStep === 2">
             <StepParents v-model="formPayload" />
           </div>
-          <!-- <div v-else-if="currentStep === 2">
-            <StepContactInfo v-model="formPayload" />
-          </div> -->
-          <!-- <div v-else-if="currentStep === 3">
-            <StepParents v-model="formPayload" />
-          </div>
-          <div v-else-if="currentStep === 4">
-            <StepDocuments v-model="formPayload" />
-          </div>
-          <div v-else-if="currentStep === 5">
-            <StepOnlinePresence v-model="formPayload" />
-          </div> -->
+
         </div>
       </div>
     </div>
@@ -132,10 +123,12 @@ import { ref, computed, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import IconHome from "@/components/icon/icon-home.vue";
+import { useToast } from "@/composables/user-toast";
 
 import StepAcademicDetails from "./StepCreation/StepAcademicDetails.vue";
 import StepProfileInfo from "./StepCreation/StepProfileInfo.vue";
 import StepParents from "./StepCreation/StepParents.vue";
+import { useStudentStore } from "@/stores/students";
 
 // import StepContactInfo from "./StepCreation/StepContactInfo.vue";
 // import StepDocuments from "./StepCreation/StepDocuments.vue";
@@ -147,6 +140,7 @@ const route = useRoute();
 const router = useRouter();
 const isEditMode = computed(() => !!route.params.id);
 const stepRefs = ref<any[]>([]);
+  const toast = useToast();
 
 const formPayload = ref({
   firstName: "",
@@ -160,6 +154,8 @@ const formPayload = ref({
   schoolId: null,
   classIds: [],
   parentUserIds: [],
+  student_category: "Regular",  // ✅ Added
+  learning_style: "Visual",     // ✅ Added
   profile: {
     bio: "",
     avatar: "",
@@ -187,7 +183,18 @@ const formPayload = ref({
     profile_visibility: "school-only",
     user_language: "en",
   },
+  parentInfo: [
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      relationship: "",
+    },
+  ],
 });
+const studentStore = useStudentStore();
+
 
 const breadcrumbItems = computed(() => [
   { label: t("breadcrumb.home"), link: "/", icon: IconHome },
@@ -206,20 +213,43 @@ const currentStep = ref(0);
 const steps = computed(() => [
   { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
   { label: t("student.steps.academicDetails"), icon: "fas fa-graduation-cap" },
-  // { label: t("student.steps.profileInfo"), icon: "fas fa-user" },
-  // { label: t("student.steps.contactInfo"), icon: "fas fa-address-book" },
   { label: t("student.steps.parents"), icon: "fas fa-users" },
-  { label: t("student.steps.requiredDocuments"), icon: "fas fa-file-alt" },
-  { label: t("student.steps.onlinePresence"), icon: "fas fa-globe" },
 ]);
 
 const cancelForm = () => {
   window.location.href = "/ehtimami/students";
 };
 
-const confirmMethod = () => {
-  alert("Form submitted!");
+const postStudentData = async () => {
+  // Copy the payload
+  const payloadToSend = JSON.parse(JSON.stringify(formPayload.value));
+
+  // Transform `classIds` to just an array of IDs
+  if (payloadToSend.classIds && payloadToSend.classIds.length) {
+    payloadToSend.classIds = payloadToSend.classIds.map((cls: any) => cls.id);
+  }
+
+  try {
+    const res = await studentStore.createNewStudent(payloadToSend);
+    toast("✅ " + t("profileUpdated"), "success");
+    // Redirect to student listing page
+    router.push("/ehtimami/students");
+  } catch (error) {
+    console.error("Error creating student:", error);
+    toast("❌ " + t("profileUpdateFailed"), "error");
+  }
 };
+
+const confirmMethod = () => {
+  const stepComponent = stepRefs.value[currentStep.value];
+  if (stepComponent?.validate && !stepComponent.validate()) {
+    return;
+  }
+
+  // 🔵 Submit the data once all validations pass
+  postStudentData();
+};
+
 
 const nextStep = () => {
   const stepComponent = stepRefs.value[currentStep.value];
